@@ -8,10 +8,13 @@
  * - stdio.h -> manipulacao de arquivos
  * - stdint.h -> tipos de inteiro com mesmo tamanho (em bytes) em varios sistemas
  * 
+ * Por razoes de deteccao de erro e simplicidade, as funcoes desta biblioteca nao consideram o caso do ponteiro do arquivo
+ * estar nulo
+ * 
  */
 
-#ifndef CABCL_UTILS
-#define CABCL_UTILS
+#ifndef CABCL_UTILS_H
+#define CABCL_UTILS_H
 
 #include <stdio.h>
 #include <stdint.h>
@@ -49,7 +52,7 @@ int64_t get_topo(FILE *fp);
  * 
  * RETORNA: Retorna 0 quando a funcao termina com sucesso. Senao -1 e retornado
  */
-int update_topo(int64_t topo, FILE *fp);
+int set_topo(int64_t topo, FILE *fp);
 
 /**
  * Recupera o valor do campo 'proxByteOffset' do cabecalho de um arquivo binario (criado por este programa)
@@ -63,7 +66,7 @@ int64_t get_prox_byte_offset(FILE *fp);
  * 
  * RETORNA: Retorna 0 quando a funcao termina com sucesso. Senao -1 e retornado
  */
-int update_prox_byte_offset(int64_t prox_byte_offset, FILE *fp);
+int set_prox_byte_offset(int64_t prox_byte_offset, FILE *fp);
 
 /**
  * Recupera o valor do campo 'nroRegArq' do cabecalho de um arquivo binario (criado por este programa)
@@ -80,13 +83,6 @@ int32_t get_nro_reg_arq(FILE *fp);
 int inc_nro_reg_arq(int32_t n, FILE *fp);
 
 /**
- * Decrementa em n o valor do campo 'nroRegArq'
- * 
- * RETORNA: Retorna 0 quando a funcao termina com sucesso. Senao -1 e retornado
- */
-int dec_nro_reg_arq(int32_t n, FILE *fp);
-
-/**
  * Recupera o valor do campo 'nroRegRem' do cabecalho de um arquivo binario (criado por este programa)
  * 
  * RETORNA: int32_t -> int com 32 bits (4 bytes)
@@ -99,12 +95,5 @@ int32_t get_nro_reg_rem(FILE *fp);
  * RETORNA: Retorna 0 quando a funcao termina com sucesso. Senao -1 e retornado
  */
 int inc_nro_reg_rem(int32_t n, FILE *fp);
-
-/**
- * Decrementa em n o valor do campo 'nroRegRem'
- * 
- * RETORNA: Retorna 0 quando a funcao termina com sucesso. Senao -1 e retornado
- */
-int dec_nro_reg_rem(int32_t n, FILE *fp);
 
 #endif
