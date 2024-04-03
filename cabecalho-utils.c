@@ -12,7 +12,6 @@
 #define PROXBYTE_OFFSET 9
 #define NRO_REGARQ_OFFSET 17
 #define NRO_REGREM_OFFSET 21
-#define HEADER_END_OFFSET 25
 
 
 // Valores padrao

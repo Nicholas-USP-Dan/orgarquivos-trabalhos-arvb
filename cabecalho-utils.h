@@ -19,6 +19,8 @@
 #include <stdio.h>
 #include <stdint.h>
 
+#define HEADER_END_OFFSET 25
+
 /**
  * Inicializa um novo cabecalho em um arquivo binario
  * 
