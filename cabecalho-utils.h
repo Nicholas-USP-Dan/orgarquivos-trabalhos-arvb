@@ -19,6 +19,13 @@
 #include <stdio.h>
 #include <stdint.h>
 
+// Lista de offsets dos campos do cabecalho (campos estaticos)
+
+#define STATUS_OFFSET 0
+#define TOPO_OFFSET 1
+#define PROXBYTE_OFFSET 9
+#define NRO_REGARQ_OFFSET 17
+#define NRO_REGREM_OFFSET 21
 #define HEADER_END_OFFSET 25
 
 /**
