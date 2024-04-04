@@ -5,33 +5,26 @@
 #include <stdint.h>
 
 /**
- * Atribui um char (string de 1 byte) a uma posicao no arquivo
+ * Atribui um char (string de 1 byte) no espaco apontado no arquivo
  */
-int set_campoc(const unsigned char val, const long offset, const int whence, FILE *fp);
+int set_campoc(const unsigned char c, FILE *fp);
 
 /**
- * Atribui um inteiro de 32 bits (4 bytes) a uma posicao no arquivo
+ * Atribui um inteiro de 32 bits (4 bytes) no espaco apontado no arquivo
  */
-int set_campo32(const int32_t val, const long offset, const int whence, FILE *fp);
+int set_campo32(const int32_t val, FILE *fp);
 
 /**
- * Atribui um inteiro de 64 bits (8 bytes) a uma posicao no arquivo
+ * Atribui um inteiro de 64 bits (8 bytes) no espaco apontado no arquivo
  */
-int set_campo64(const int64_t val, const long offset, const int whence, FILE *fp);
+int set_campo64(const int64_t val, FILE *fp);
 
 /**
- * Recupera um char (string de 1 byte) em uma posicao no arquivo
+ * Atribui uma string e seu tamanho no espaco apontado no arquivo
+ * 
+ * RETORNA: Retorna a quantidade de bytes ocupados pelo campo (incluindo o campo de tamanho)
+ * Retorna -1 caso ocorra algum erro
  */
-unsigned char get_campoc(const unsigned char errval, const long offset, const int whence, FILE *fp);
-
-/**
- * Recupera um inteiro de 32 bits (4 bytes) a uma posicao no arquivo
- */
-int32_t get_campo32(const int32_t errval, const long offset, const int whence, FILE *fp);
-
-/**
- * Recupera um inteiro de 64 bits (8 bytes) a uma posicao no arquivo
- */
-int64_t get_campo64(const int64_t errval, const long offset, const int whence, FILE *fp);
+int32_t set_campo_str(const char *str, FILE *fp);
 
 #endif

@@ -5,31 +5,16 @@
 #include "cabecalho-utils.h"
 #include "campo-utils.h"
 
-// Valores padrao
-
-#define DEFAULT_STATUS '0'
-#define DEFAULT_TOPO -1
-#define DEFAULT_PROXBYTE 0
-#define DEFAULT_NRO_REGARQ 0
-#define DEFAULT_NRO_REGREM DEFAULT_NRO_REGARQ
-
-int inicializar_cabecalho(FILE *fp){
+int initialize_cabecalho(const unsigned char status, const int64_t topo, const int64_t prox_byte_offset, const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp){
     if(fseek(fp, 0, SEEK_SET) == -1){
         return -1;
     }
-
-    // Atribuicao dos valores padroes para o arquivo
     
-    unsigned char zchar = DEFAULT_STATUS;
-    int64_t minus = DEFAULT_TOPO;
-    int64_t z64 = DEFAULT_PROXBYTE;
-    int32_t z32 = DEFAULT_NRO_REGARQ;
-    
-    fwrite(&zchar, sizeof(unsigned char), 1, fp); // status
-    fwrite(&minus, sizeof(int64_t), 1, fp); // topo
-    fwrite(&z64, sizeof(int64_t), 1, fp); // proxByteOffset
-    fwrite(&z32, sizeof(int32_t), 1, fp); // nroRegArq
-    fwrite(&z32, sizeof(int32_t), 1, fp); // nroRegRem
+    fwrite(&status, 1, 1, fp);
+    fwrite(&topo, 8, 1, fp);
+    fwrite(&prox_byte_offset, 8, 1, fp);
+    fwrite(&nro_regarq, 4, 1, fp);
+    fwrite(&nro_regrem, 4, 1, fp);
 
     if(ftell(fp) != HEADER_END_OFFSET){ // Verifica se todos os bytes foram escritos
         return -1;
@@ -39,47 +24,53 @@ int inicializar_cabecalho(FILE *fp){
 }
 
 unsigned char get_status(FILE *fp){
-    return get_campoc('$', STATUS_OFFSET, SEEK_SET, fp);
+    unsigned char res;
+
+    if(fread(&res, 1, 1, fp) != sizeof(unsigned char)){
+        return '0';
+    }
+    
+    return res;
 }
 
-int set_status(unsigned char b, FILE *fp){
-    return set_campoc(b, STATUS_OFFSET, SEEK_SET, fp);
+int set_status(unsigned char c, FILE *fp){
+    return set_campoc(c, fp);
 }
 
-int64_t get_topo(FILE *fp){
-    return get_campo64(-1, TOPO_OFFSET, SEEK_SET, fp);
-}
+// int64_t get_topo(FILE *fp){
+//     return get_campo64(-1, TOPO_OFFSET, SEEK_SET, fp);
+// }
 
-int set_topo(int64_t topo, FILE *fp){
-    return set_campo64(topo, TOPO_OFFSET, SEEK_SET, fp);
-}
+// int set_topo(int64_t topo, FILE *fp){
+//     return set_campo64(topo, TOPO_OFFSET, SEEK_SET, fp);
+// }
 
-int64_t get_prox_byte_offset(FILE *fp){
-    return get_campo64(0, PROXBYTE_OFFSET, SEEK_SET, fp);
-}
+// int64_t get_prox_byte_offset(FILE *fp){
+//     return get_campo64(0, PROXBYTE_OFFSET, SEEK_SET, fp);
+// }
 
-int set_prox_byte_offset(int64_t prox_byte_offset, FILE *fp){
-    return set_campo64(prox_byte_offset, PROXBYTE_OFFSET, SEEK_SET, fp);
-}
+// int set_prox_byte_offset(int64_t prox_byte_offset, FILE *fp){
+//     return set_campo64(prox_byte_offset, PROXBYTE_OFFSET, SEEK_SET, fp);
+// }
 
-int32_t get_nro_reg_arq(FILE *fp){
-    return get_campo32(0, NRO_REGARQ_OFFSET, SEEK_SET, fp);
-}
+// int32_t get_nro_reg_arq(FILE *fp){
+//     return get_campo32(0, NRO_REGARQ_OFFSET, SEEK_SET, fp);
+// }
 
-int inc_nro_reg_arq(int32_t n, FILE *fp){
-    int32_t new_val = get_nro_reg_arq(fp) + n;
-    return set_campo32(new_val, -4, SEEK_CUR, fp); /* A funcao get leva o ponteiro do arquivo logo apos o nro, entao o decremento de 4
-                                                    * leva o ponteiro de volta na posicao do nro
-                                                    */
-}
+// int inc_nro_reg_arq(int32_t n, FILE *fp){
+//     int32_t new_val = get_nro_reg_arq(fp) + n;
+//     return set_campo32(new_val, -4, SEEK_CUR, fp); /* A funcao get leva o ponteiro do arquivo logo apos o nro, entao o decremento de 4
+//                                                     * leva o ponteiro de volta na posicao do nro
+//                                                     */
+// }
 
-int32_t get_nro_reg_rem(FILE *fp){
-    return get_campo32(0, NRO_REGREM_OFFSET, SEEK_SET, fp);
-}
+// int32_t get_nro_reg_rem(FILE *fp){
+//     return get_campo32(0, NRO_REGREM_OFFSET, SEEK_SET, fp);
+// }
 
-int inc_nro_reg_rem(int32_t n, FILE *fp){
-    int32_t new_val = get_nro_reg_rem(fp) + n;
-    return set_campo32(new_val, -4, SEEK_CUR, fp); /* A funcao get leva o ponteiro do arquivo logo apos o nro, entao o decremento de 4
-                                                    * leva o ponteiro de volta na posicao do nro
-                                                    */
-}
+// int inc_nro_reg_rem(int32_t n, FILE *fp){
+//     int32_t new_val = get_nro_reg_rem(fp) + n;
+//     return set_campo32(new_val, -4, SEEK_CUR, fp); /* A funcao get leva o ponteiro do arquivo logo apos o nro, entao o decremento de 4
+//                                                     * leva o ponteiro de volta na posicao do nro
+//                                                     */
+// }

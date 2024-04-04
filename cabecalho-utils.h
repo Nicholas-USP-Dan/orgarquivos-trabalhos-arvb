@@ -33,7 +33,7 @@
  * 
  * RETORNA: Retorna 0 quando a funcao termina com sucesso. Senao -1 e retornado
  */
-int inicializar_cabecalho(FILE *fp);
+int initialize_cabecalho(const unsigned char status, const int64_t topo, const int64_t prox_byte_offset, const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp);
 
 /**
  * Recupera o valor do campo 'status' do cabecalho de um arquivo binario (criado por este programa)
@@ -43,7 +43,7 @@ int inicializar_cabecalho(FILE *fp);
 unsigned char get_status(FILE *fp);
 
 /**
- * Atribui um novo valor para o campo 'status'
+ * Atribui um novo valor para o campo 'status' (sem mover o ponteiro)
  * 
  * RETORNA: Retorna 0 quando a funcao termina com sucesso. Senao -1 e retornado
  */
