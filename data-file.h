@@ -3,6 +3,14 @@
 
 #define COLUMN_NAMES "id,idade,nomeJogador,nacionalidade,nomeClube"
 
+typedef struct _jogador {
+    int32_t id;
+    int32_t idade;
+    char *nome_jog;
+    char *nac;
+    char *nome_clube;
+} JOGADOR;
+
 /**
  * Funcao da funcionalidade 1
  * 
@@ -13,7 +21,7 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
 /**
  * Funcao da funcionalidade 2
  */
-int select_fields_from_data_file(const char *input_filename);
+int select_data_file(const char *input_filename);
 
 /**
  * Funcao da funcionalidade 3
