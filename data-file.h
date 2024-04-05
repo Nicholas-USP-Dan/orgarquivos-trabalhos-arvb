@@ -6,9 +6,9 @@
 typedef struct _jogador {
     int32_t id;
     int32_t idade;
-    char *nome_jog;
+    char *nome;
     char *nac;
-    char *nome_clube;
+    char *clube;
 } JOGADOR;
 
 /**
