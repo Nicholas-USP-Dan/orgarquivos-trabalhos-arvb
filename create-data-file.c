@@ -161,7 +161,7 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
     }
 
     fseek(data_bfile_fptr, 0, SEEK_SET);
-    initialize_cabecalho('1', -1, 0, reg_count, 0, data_bfile_fptr);
+    initialize_cabecalho('1', -1, 0, reg_count, HEADER_END_OFFSET, data_bfile_fptr);
 
     fclose(csv_data_fptr);
     fclose(data_bfile_fptr);

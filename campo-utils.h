@@ -10,9 +10,9 @@
 #define BUFFER_SIZE 200
 
 /**
- * Offset dos campos estaticos de um registro
+ * Offset logo apos os campos estaticos de um registro
  */
-#define STATIC_FIELDS_REG_END_OFFSET 25
+#define STATIC_REG_END_OFFSET 25
 
 /**
  * Atribui um char (string de 1 byte) no espaco apontado no arquivo
