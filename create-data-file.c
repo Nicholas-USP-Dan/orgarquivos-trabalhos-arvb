@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <inttypes.h>
 
 #include "data-file.h"
 
@@ -10,7 +11,9 @@
 
 #define BUFFER_SIZE 200
 
-static char* get_campo_str(char **start_ptr, const char delim){
+#define TRIM_NEWLINE(str) str[strcspn(str, "\n")] = 0
+
+static char* get_token_str(char **start_ptr, const char delim){
     if((*start_ptr) == NULL){
         return NULL;
     }
@@ -39,6 +42,7 @@ static int add_reg_bfile(JOGADOR j, FILE *data_bfile_fptr){
 
     long reg_size_fpos = ftell(data_bfile_fptr);
     fseek(data_bfile_fptr, 4, SEEK_CUR); // Pular o campo do tamanho
+    reg_size += 4;
 
     // O que fazer com o prox?? Garanto que o registro sempre vai ser adicionado no final?
     // No momento estou considerando que prox sempre fica nulo
@@ -55,7 +59,9 @@ static int add_reg_bfile(JOGADOR j, FILE *data_bfile_fptr){
 
     reg_size += size_aux_nome + size_aux_nac + size_aux_clube;
 
-    fseek(data_bfile_fptr, -(reg_size-5), SEEK_CUR);
+    printf("%" PRId32 "\n", reg_size);
+
+    fseek(data_bfile_fptr, -(reg_size-1), SEEK_CUR);
     fwrite(&reg_size, 4, 1, data_bfile_fptr);
 
     fseek(data_bfile_fptr, reg_size-5, SEEK_CUR);
@@ -91,35 +97,35 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
 
     int32_t reg_count = 0;
 
-    // while(1){
-    //     char line_buff[BUFFER_SIZE];
-    //     fgets(line_buff, sizeof(char) * BUFFER_SIZE, csv_data_fptr);
+    while(1){
+        char line_buff[BUFFER_SIZE];
+        fgets(line_buff, sizeof(char) * BUFFER_SIZE, csv_data_fptr);
 
-    //     if(feof(csv_data_fptr)){
-    //         break;
-    //     }
+        if(feof(csv_data_fptr)){
+            break;
+        }
 
-    //     line_buff[strcspn(line_buff, "\n")] = 0;
+        TRIM_NEWLINE(line_buff);
 
-    //     char *start_ptr = line_buff;
+        char *start_ptr = line_buff;
 
-    //     for(int i = 0; i < 5; i++){
-    //         char *token = get_campo_str(&start_ptr, ',');
-    //         printf("%s\n", token);
-    //     }
+        for(int i = 0; i < 5; i++){
+            char *token = get_token_str(&start_ptr, ',');
+            printf("%s\n", token);
+        }
         
-    //     reg_count++;
-    // }
+        reg_count++;
+    }
 
     JOGADOR h = {
         .id = 80,
-        .idade = 23,
-        .nome_jog = "Armando",
-        .nac = "",
+        .idade = 30,
+        .nome_jog = "Arthur",
+        .nac = "Brazil",
         .nome_clube = "Santos"
     };
 
-    add_reg_bfile(h ,data_bfile_fptr);
+    add_reg_bfile(h, data_bfile_fptr);
 
     fseek(data_bfile_fptr, 0, SEEK_SET);
     initialize_cabecalho('1', -1, HEADER_END_OFFSET, reg_count, 0, data_bfile_fptr);
