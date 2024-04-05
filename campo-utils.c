@@ -34,12 +34,10 @@ int32_t set_campo_str(const char *str, FILE *fp){
         return -1;
     }
     
-    if(len <= 0){
-        return 4;
-    }
-
-    if(fwrite(str, sizeof(char), len, fp) != len){
-        return -1;
+    if(len > 0){
+        if(fwrite(str, sizeof(char), len, fp) != len){
+            return -1;
+        }
     }
 
     return 4 + len;
