@@ -18,9 +18,9 @@ static char* get_token_str(char **start_ptr, const char delim){
         return NULL;
     }
     
-    char *token = malloc(BUFFER_SIZE * sizeof(char));
+    char *token = calloc(BUFFER_SIZE/2, sizeof(char));
 
-    char *end_token = strchr((*start_ptr), ',');
+    char *end_token = strchr((*start_ptr), delim);
     if(end_token != NULL){
         strncpy(token, (*start_ptr), end_token-(*start_ptr));
         (*start_ptr) = end_token+1;
@@ -33,10 +33,51 @@ static char* get_token_str(char **start_ptr, const char delim){
     return token;
 }
 
+static JOGADOR process_jogador(char *line){
+    JOGADOR j_out;
+    j_out.id = 10;
+    char *line_ptr = line;
+    int32_t len;
+
+    char *id_str = get_token_str(&line_ptr, ',');
+    // Poderia verificar tambem, mas sei que sempre havera um id
+    sscanf(id_str, "%" PRId32, &j_out.id);
+    free(id_str);
+    
+    char *idade_str = get_token_str(&line_ptr, ',');
+    if(strcmp(idade_str, "") != 0){
+        sscanf(idade_str, "%" PRId32, &j_out.idade);
+    }
+    else{
+        j_out.idade = -1;
+    }
+    free(idade_str);
+
+    char *nome_str = get_token_str(&line_ptr, ',');
+    len = strlen(nome_str);
+    j_out.nome = (char *)malloc(len+1);
+    strcpy(j_out.nome, nome_str);
+    free(nome_str);
+
+    char *nac_str = get_token_str(&line_ptr, ',');
+    len = strlen(nac_str);
+    j_out.nac = (char *)malloc(len+1);
+    strcpy(j_out.nac, nac_str);
+    free(nac_str);
+
+    char *clube_str = get_token_str(&line_ptr, ',');
+    len = strlen(clube_str);
+    j_out.clube = (char *)malloc(len+1);
+    strcpy(j_out.clube, clube_str);
+    free(clube_str);
+
+    return j_out;
+}
+
 /**
  * Função local que acrescenta um registro no arquivo de data binario
  */
-static int add_reg_bfile(JOGADOR j, FILE *data_bfile_fptr){
+static int add_reg_bfile(const JOGADOR j, FILE *data_bfile_fptr){
     int32_t reg_size = 0;
     set_campoc('0', data_bfile_fptr); reg_size += 1;
 
@@ -53,13 +94,11 @@ static int add_reg_bfile(JOGADOR j, FILE *data_bfile_fptr){
 
     // Estou atribuindo o tamanho de cada campo em uma variavel para um futuro tratamento de erro
 
-    int32_t size_aux_nome = set_campo_str(j.nome_jog, data_bfile_fptr);
+    int32_t size_aux_nome = set_campo_str(j.nome, data_bfile_fptr);
     int32_t size_aux_nac = set_campo_str(j.nac, data_bfile_fptr);
-    int32_t size_aux_clube = set_campo_str(j.nome_clube, data_bfile_fptr);
+    int32_t size_aux_clube = set_campo_str(j.clube, data_bfile_fptr);
 
     reg_size += size_aux_nome + size_aux_nac + size_aux_clube;
-
-    printf("%" PRId32 "\n", reg_size);
 
     fseek(data_bfile_fptr, -(reg_size-1), SEEK_CUR);
     fwrite(&reg_size, 4, 1, data_bfile_fptr);
@@ -67,6 +106,12 @@ static int add_reg_bfile(JOGADOR j, FILE *data_bfile_fptr){
     fseek(data_bfile_fptr, reg_size-5, SEEK_CUR);
 
     return 0;
+}
+
+static void free_jogador(JOGADOR *j){
+    free(j->nome);
+    free(j->nac);
+    free(j->clube);
 }
 
 int create_data_file_from_csv(const char *input_filename, const char *output_filename){
@@ -81,7 +126,8 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
         return -1;
     }
 
-    set_status('0', data_bfile_fptr);
+    // Atribuição do status
+    set_campoc('0', data_bfile_fptr);
 
     fseek(data_bfile_fptr, HEADER_END_OFFSET-1, SEEK_CUR);
 
@@ -107,29 +153,18 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
 
         TRIM_NEWLINE(line_buff);
 
-        char *start_ptr = line_buff;
+        JOGADOR j = process_jogador(line_buff);
+        add_reg_bfile(j, data_bfile_fptr);
+        free_jogador(&j);
 
-        for(int i = 0; i < 5; i++){
-            char *token = get_token_str(&start_ptr, ',');
-            printf("%s\n", token);
-        }
-        
         reg_count++;
     }
 
-    JOGADOR h = {
-        .id = 80,
-        .idade = 30,
-        .nome_jog = "Arthur",
-        .nac = "Brazil",
-        .nome_clube = "Santos"
-    };
-
-    add_reg_bfile(h, data_bfile_fptr);
-
     fseek(data_bfile_fptr, 0, SEEK_SET);
-    initialize_cabecalho('1', -1, HEADER_END_OFFSET, reg_count, 0, data_bfile_fptr);
+    initialize_cabecalho('1', -1, 0, reg_count, 0, data_bfile_fptr);
 
     fclose(csv_data_fptr);
     fclose(data_bfile_fptr);
+
+    return 0;
 }
