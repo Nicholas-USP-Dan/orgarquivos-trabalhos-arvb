@@ -127,7 +127,7 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
     // Atribuição do status
     set_campoc('0', data_bfile_fptr);
 
-    // Pular campo tamanhoRegistro
+    // Pular cabecalho
     fseek(data_bfile_fptr, HEADER_END_OFFSET-1, SEEK_CUR);
 
     // Ler a primeira linha do arquivo .csv (colunas)
