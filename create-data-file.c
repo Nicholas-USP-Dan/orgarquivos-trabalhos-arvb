@@ -33,7 +33,6 @@ static char* get_token_str(char **start_ptr, const char delim){
 
 static JOGADOR process_jogador(char *line){
     JOGADOR j_out;
-    j_out.id = 10;
     char *line_ptr = line;
     int32_t len;
 
@@ -133,7 +132,7 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
     // Ler a primeira linha do arquivo .csv (colunas)
     char columns[BUFFER_SIZE];
     fgets(columns, BUFFER_SIZE, csv_data_fptr);
-    columns[strcspn(columns, "\n")] = 0;
+    TRIM_NEWLINE(columns);
 
     if(strcmp(columns, COLUMN_NAMES) != 0){ // As colunas do csv nao condiz com o exercicio
         fclose(csv_data_fptr);
