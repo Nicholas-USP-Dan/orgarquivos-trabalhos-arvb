@@ -28,19 +28,22 @@ int set_campo64(const int64_t val, FILE *fp){
     return 0;
 }
 
-int32_t set_campo_str(const char *str, FILE *fp){
+int set_campo_str(const char *str, int32_t *campo_len, FILE *fp){
     int32_t len = strlen(str);
     if(fwrite(&len, 4, 1, fp) != 1){
+        (*campo_len) = 0;
         return -1;
     }
     
     if(len > 0){
         if(fwrite(str, sizeof(char), len, fp) != len){
+            (*campo_len) = 0;
             return -1;
         }
     }
 
-    return 4 + len;
+    (*campo_len) = 4 + len;
+    return 0;
 }
 
 // unsigned char get_campoc(const unsigned char errval, const long offset, const int whence, FILE *fp){

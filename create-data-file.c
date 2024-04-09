@@ -91,12 +91,11 @@ static int add_reg_bfile(const JOGADOR j, FILE *data_bfile_fptr){
 
     // Estou atribuindo o tamanho de cada campo em uma variavel para um futuro tratamento de erro
 
-    int32_t size_aux_nome = set_campo_str(j.nome, data_bfile_fptr);
-    int32_t size_aux_nac = set_campo_str(j.nac, data_bfile_fptr);
-    int32_t size_aux_clube = set_campo_str(j.clube, data_bfile_fptr);
-
-    reg_size += size_aux_nome + size_aux_nac + size_aux_clube;
-
+    int32_t size_aux = 0;
+    set_campo_str(j.nome, &size_aux, data_bfile_fptr); reg_size += size_aux;
+    set_campo_str(j.nac, &size_aux, data_bfile_fptr); reg_size += size_aux;
+    set_campo_str(j.clube, &size_aux, data_bfile_fptr); reg_size += size_aux;
+    
     fseek(data_bfile_fptr, -(reg_size-1), SEEK_CUR);
     fwrite(&reg_size, 4, 1, data_bfile_fptr);
 

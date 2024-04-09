@@ -35,6 +35,6 @@ int set_campo64(const int64_t val, FILE *fp);
  * RETORNA: Retorna a quantidade de bytes ocupados pelo campo (incluindo o campo de tamanho)
  * Retorna -1 caso ocorra algum erro
  */
-int32_t set_campo_str(const char *str, FILE *fp);
+int set_campo_str(const char *str, int32_t *campo_len, FILE *fp);
 
 #endif
