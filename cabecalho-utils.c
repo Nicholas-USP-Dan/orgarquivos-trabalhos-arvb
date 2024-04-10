@@ -17,3 +17,9 @@ int initialize_cabecalho(const unsigned char status, const int64_t topo, const i
 
     return 0;
 }
+
+int check_status(FILE *fp){
+    char status;
+    fread(&status, 1, 1, fp);
+    return status == '1';
+}
