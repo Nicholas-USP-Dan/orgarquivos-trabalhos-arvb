@@ -5,10 +5,6 @@
 #include "cabecalho-utils.h"
 
 int initialize_cabecalho(const unsigned char status, const int64_t topo, const int64_t prox_byte_offset, const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp){
-    if(fseek(fp, 0, SEEK_SET) == -1){
-        return -1;
-    }
-    
     fwrite(&status, 1, 1, fp);
     fwrite(&topo, 8, 1, fp);
     fwrite(&prox_byte_offset, 8, 1, fp);
