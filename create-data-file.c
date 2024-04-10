@@ -126,7 +126,7 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
     set_campoc('0', data_bfile_fptr);
 
     // Pular cabecalho
-    fseek(data_bfile_fptr, HEADER_END_OFFSET-1, SEEK_CUR);
+    fseek(data_bfile_fptr, HEADER_END_OFFSET, SEEK_SET);
 
     // Ler a primeira linha do arquivo .csv (colunas)
     char columns[BUFFER_SIZE];
