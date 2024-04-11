@@ -13,6 +13,10 @@ typedef struct _jogador {
 
 void free_jogador(JOGADOR *j);
 
+void print_jogador(JOGADOR j);
+
+JOGADOR read_jogador_data(FILE *fptr);
+
 /**
  * Funcao da funcionalidade 1
  * 
@@ -28,6 +32,4 @@ int select_data_file(const char *input_filename);
 /**
  * Funcao da funcionalidade 3
  */
-int filter_data_file(const char *input_filename);
-
-void print_jogador(JOGADOR j);
+int filter_data_file(const int n, const char *input_filename);
