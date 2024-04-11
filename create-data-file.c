@@ -104,12 +104,6 @@ static int add_reg_bfile(const JOGADOR j, FILE *data_bfile_fptr){
     return 0;
 }
 
-static void free_jogador(JOGADOR *j){
-    free(j->nome);
-    free(j->nac);
-    free(j->clube);
-}
-
 int create_data_file_from_csv(const char *input_filename, const char *output_filename){
     FILE *csv_data_fptr;
     if((csv_data_fptr = fopen(input_filename, "r")) == NULL){
