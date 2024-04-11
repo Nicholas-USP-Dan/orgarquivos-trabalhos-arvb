@@ -30,6 +30,8 @@ int main(){
         case '3':
             scanf("%s", input_filename);
             scanf("%d", &n);
+
+            filter_data_file(n, input_filename);
             break;
         default:
             fprintf(stderr, "Funcionalidade invalida.\n");
