@@ -14,6 +14,14 @@
  */
 #define STATIC_REG_END_OFFSET 25
 
+unsigned char get_campoc(FILE *fp);
+
+int32_t get_campo32(FILE *fp);
+
+int64_t get_campo64(FILE *fp);
+
+char* get_campo_str(FILE *fp);
+
 /**
  * Atribui um char (string de 1 byte) no espaco apontado no arquivo
  */
