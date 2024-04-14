@@ -38,6 +38,8 @@ static JOGADOR read_query(unsigned int *mask){
     int m;
     scanf("%d", &m);
 
+    (*mask) = 0;
+
     for(int i = 0; i < m; i++){
         char campo[BUFFER_SIZE];
         scanf("%s", campo);
@@ -88,13 +90,14 @@ int filter_data_file(const int n, const char *input_filename){
     }
 
     for(int i = 0; i < n; i++){
-        unsigned int mask = 0;
+        unsigned int mask;
         JOGADOR j_query = read_query(&mask);
 
         printf("Busca %d\n\n", i+1);
 
         int32_t filter_count = 0;
 
+        // Ler quantidade de registros existentes para parar de ler objetos removidos
         fseek(fptr, HEADER_END_OFFSET, SEEK_SET);
 
         while(1){
@@ -114,7 +117,7 @@ int filter_data_file(const int n, const char *input_filename){
                 continue;
             }
 
-            // Pular tamanhoRegistro Prox
+            // Pular tamanhoRegistro e Prox
             fseek(fptr, 12, SEEK_CUR);
 
             j = read_jogador_data(fptr);
