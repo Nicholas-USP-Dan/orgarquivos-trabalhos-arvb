@@ -10,6 +10,9 @@
 #include "cabecalho-utils.h"
 #include "campo-utils.h"
 
+/**
+ * Instancia de um jogador vazio/nulo
+ */
 static const JOGADOR jNil = {
     .id = -1,
     .idade = -1,
@@ -18,6 +21,9 @@ static const JOGADOR jNil = {
     .clube = ""
 };
 
+/**
+ * Array com todos os nomes dos campos para realizar a filtragem
+ */
 static const char *CAMPO_LIST[5] = {
     "id",
     "idade",
@@ -26,20 +32,30 @@ static const char *CAMPO_LIST[5] = {
     "nomeClube"
 };
 
+/**
+ * Funcao para a filtragem de um bit em um bitmask
+ */
 static int bitmask(unsigned int mask, int bit){
     return (mask & (1 << bit)) >> bit;
 }
 
 /**
- * Le uma linha (do stdin) e retorna um jogador com todos os dados da busca definidos; os campos nao procurados ficam vazios
+ * Le uma linha (do stdin) e retorna um jogador com todos os dados da busca definidos; os campos nao procurados ficam vazios;
+ * Este jogador representa os campos da filtragem
+ * 
+ * Alem disso a funcao atribui uma mascara (bitmask) para a filtragem, em que o bit representando um campo e atribuido como 1;
+ * 
+ * Esta configuracao traz a verificacao mais eficiente dos campos a serem filtrados
  */
 static JOGADOR read_query(unsigned int *mask){
     JOGADOR j_query = jNil;
+    // Quantidade de campos a serem lidos
     int m;
     scanf("%d", &m);
 
     (*mask) = 0;
 
+    // Ler o conjunto nomeCampo e valorCampo, atribuir o campo no jogador "filtro" junto com o bit da mascara correspondente
     for(int i = 0; i < m; i++){
         char campo[BUFFER_SIZE];
         scanf("%s", campo);
@@ -79,6 +95,7 @@ static JOGADOR read_query(unsigned int *mask){
 }
 
 int filter_data_file(const int n, const char *input_filename){
+    // Abra o arquivo no modo leitura binaria
     FILE *fptr = fopen(input_filename, "rb");
     if(fptr == NULL){
         return -1;
@@ -89,8 +106,10 @@ int filter_data_file(const int n, const char *input_filename){
         return -1;
     }
 
+    // Loop para fazer n buscas
     for(int i = 0; i < n; i++){
         unsigned int mask;
+        // Leitura dos criteriso de busca e atribuicao do jogador "filtro"
         JOGADOR j_query = read_query(&mask);
 
         printf("Busca %d\n\n", i+1);
@@ -103,11 +122,10 @@ int filter_data_file(const int n, const char *input_filename){
         int32_t nro_reg;
         fread(&nro_reg, 4, 1, fptr);
 
+        // Pular o cabecalho
         fseek(fptr, HEADER_END_OFFSET, SEEK_SET);
 
-        while(reg_count < nro_reg){
-            JOGADOR j;
-
+        while(reg_count < nro_reg){ // Le registros ate ler todos os registros validos
             unsigned char rem = get_campoc(fptr);
 
             if(feof(fptr)){
@@ -125,15 +143,16 @@ int filter_data_file(const int n, const char *input_filename){
             // Pular tamanhoRegistro e Prox
             fseek(fptr, 12, SEEK_CUR);
 
-            j = read_jogador_data(fptr);
+            JOGADOR j = read_jogador_data(fptr);
 
+            // Valor booleano que guarda se o registro passou no filtro
             int filter = (!bitmask(mask, 0) || j_query.id == j.id) && 
                          (!bitmask(mask, 1) || j_query.idade == j.idade) && 
                          (!bitmask(mask, 2) || strcmp(j_query.nome, j.nome) == 0) && 
                          (!bitmask(mask, 3) || strcmp(j_query.nac, j.nac) == 0) && 
                          (!bitmask(mask, 4) || strcmp(j_query.clube, j.clube) == 0);
 
-            if(filter){
+            if(filter){ // Registro passou pelo filtro
                 filter_count++;
 
                 print_jogador(j);
@@ -145,6 +164,7 @@ int filter_data_file(const int n, const char *input_filename){
             reg_count++;
         }
 
+        // Imprimir: "Registro inexistente." caso nenhum registro passar pelo filtro
         if(filter_count <= 0){
             printf("Registro inexistente.\n\n");
         }

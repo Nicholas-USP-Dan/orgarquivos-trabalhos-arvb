@@ -9,8 +9,14 @@
 #include "cabecalho-utils.h"
 #include "campo-utils.h"
 
+/**
+ * Remove o caracter newline ('\n') de uma string
+ */
 #define TRIM_NEWLINE(str) str[strcspn(str, "\n")] = 0
 
+/**
+ * Implementacao semelhante da funcao strtok com leitura de campos vazios
+ */
 static char* get_token_str(char **start_ptr, const char delim){
     if((*start_ptr) == NULL){
         return NULL;
@@ -31,10 +37,16 @@ static char* get_token_str(char **start_ptr, const char delim){
     return token;
 }
 
+/**
+ * Processa uma linha extraida de um arquivo .csv (string com tokens separadas por ',') e 
+ * retorna uma variavel do tipo JOGADOR com os dados preenchidos
+ */
 static JOGADOR process_jogador(char *line){
     JOGADOR j_out;
     char *line_ptr = line;
     int32_t len;
+
+    // ADICIONAR FUNCIONALIDADE PARA LER .CSV
 
     char *id_str = get_token_str(&line_ptr, ',');
     // Poderia verificar tambem, mas sei que sempre havera um id
@@ -82,34 +94,35 @@ static int add_reg_bfile(const JOGADOR j, FILE *data_bfile_fptr){
     fseek(data_bfile_fptr, 4, SEEK_CUR); // Pular o campo do tamanho
     reg_size += 4;
 
-    // O que fazer com o prox?? Garanto que o registro sempre vai ser adicionado no final?
-    // No momento estou considerando que prox sempre fica nulo
-
-    set_campo64(-1, data_bfile_fptr); reg_size += 8;
-    set_campo32(j.id, data_bfile_fptr); reg_size += 4;
-    set_campo32(j.idade, data_bfile_fptr); reg_size += 4;
+    set_campo64(-1, data_bfile_fptr); reg_size += 8; // Atribuicao do campo Prox
+    set_campo32(j.id, data_bfile_fptr); reg_size += 4; // Atribuicao do campo id
+    set_campo32(j.idade, data_bfile_fptr); reg_size += 4; // Atribuicao do campo idade
 
     // Estou atribuindo o tamanho de cada campo em uma variavel para um futuro tratamento de erro
 
     int32_t size_aux = 0;
-    set_campo_str(j.nome, &size_aux, data_bfile_fptr); reg_size += size_aux;
-    set_campo_str(j.nac, &size_aux, data_bfile_fptr); reg_size += size_aux;
-    set_campo_str(j.clube, &size_aux, data_bfile_fptr); reg_size += size_aux;
+    set_campo_str(j.nome, &size_aux, data_bfile_fptr); reg_size += size_aux; // Atribuicao do campo tamNomeJog e nomeJogador
+    set_campo_str(j.nac, &size_aux, data_bfile_fptr); reg_size += size_aux; // Atribuicao do campo tamNacionalidade e nacionalidade
+    set_campo_str(j.clube, &size_aux, data_bfile_fptr); reg_size += size_aux; // Atribuicao do campo tamNomeClube e nomeClube
     
+    // Voltar no campo tamanhoRegistro e atribuir o valor correto no campo
     fseek(data_bfile_fptr, -(reg_size-1), SEEK_CUR);
     fwrite(&reg_size, 4, 1, data_bfile_fptr);
 
+    // Ir para o fim do registro
     fseek(data_bfile_fptr, reg_size-5, SEEK_CUR);
 
     return 0;
 }
 
 int create_data_file_from_csv(const char *input_filename, const char *output_filename){
+    // Abrir o arquivo .csv no modo leitura
     FILE *csv_data_fptr;
     if((csv_data_fptr = fopen(input_filename, "r")) == NULL){
         return -1;
     }
 
+    // Abrir o arquivo de dados binario no modo escrita binaria
     FILE *data_bfile_fptr;
     if((data_bfile_fptr = fopen(output_filename, "wb")) == NULL){
         fclose(csv_data_fptr);
@@ -127,15 +140,18 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
     fgets(columns, BUFFER_SIZE, csv_data_fptr);
     TRIM_NEWLINE(columns);
 
-    if(strcmp(columns, COLUMN_NAMES) != 0){ // As colunas do csv nao condiz com o exercicio
+    // Verifica se as colunas do .csv correspondem ao do projeto
+    if(strcmp(columns, COLUMN_NAMES) != 0){
         fclose(csv_data_fptr);
         fclose(data_bfile_fptr);
         return -1; // Posso retornar 1 para indicar um erro lógico, não de saída
     }
 
+    // Contador da quantidade de registros
     int32_t reg_count = 0;
 
     while(1){
+        // Ler linha no csv
         char line_buff[BUFFER_SIZE];
         fgets(line_buff, sizeof(char) * BUFFER_SIZE, csv_data_fptr);
 
@@ -145,6 +161,7 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
 
         TRIM_NEWLINE(line_buff);
 
+        // Processa a linha do csv e coloca o jogador no arquivo binario
         JOGADOR j = process_jogador(line_buff);
         add_reg_bfile(j, data_bfile_fptr);
         free_jogador(&j);
@@ -152,10 +169,11 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
         reg_count++;
     }
 
+    // Pega o valor do proxByteOffset (campo do cabecalho do arquivo)
     int64_t prox_byte_offset = ftell(data_bfile_fptr);
     
+    // Atribuicao do cabecalho
     fseek(data_bfile_fptr, 0, SEEK_SET);
-    
     initialize_cabecalho('1', -1, prox_byte_offset, reg_count, 0, data_bfile_fptr);
 
     fclose(csv_data_fptr);

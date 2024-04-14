@@ -27,12 +27,15 @@
 #define HEADER_END_OFFSET 25
 
 /**
- * Inicializa um novo cabecalho em um arquivo binario
+ * Inicializa um novo cabecalho em um arquivo de dados binario
  * 
  * RETORNA: Retorna 0 quando a funcao termina com sucesso. Senao -1 e retornado
  */
 int initialize_cabecalho(const unsigned char status, const int64_t topo, const int64_t prox_byte_offset, const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp);
 
+/**
+ * Funcao que verifica o status de um arquivo de dados binario
+ */
 int check_status(FILE *fp);
 
 #endif
