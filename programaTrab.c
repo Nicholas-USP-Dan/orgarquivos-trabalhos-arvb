@@ -17,11 +17,13 @@ int main(){
             scanf("%s", input_filename);
             scanf("%s", output_filename);
             int ret = create_data_file_from_csv(input_filename, output_filename);
+            
             if(ret != 0){
                 fprintf(stderr, "Falha no processamento do arquivo.\n");
             }
             else{
                 binarioNaTela(output_filename);
+                printf("\n");
             }
             break;
         case '2':
