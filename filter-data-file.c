@@ -95,12 +95,17 @@ int filter_data_file(const int n, const char *input_filename){
 
         printf("Busca %d\n\n", i+1);
 
+        int32_t reg_count = 0;
         int32_t filter_count = 0;
 
         // Ler quantidade de registros existentes para parar de ler objetos removidos
+        fseek(fptr, NRO_REGARQ_OFFSET, SEEK_SET);
+        int32_t nro_reg;
+        fread(&nro_reg, 4, 1, fptr);
+
         fseek(fptr, HEADER_END_OFFSET, SEEK_SET);
 
-        while(1){
+        while(reg_count < nro_reg){
             JOGADOR j;
 
             unsigned char rem = get_campoc(fptr);
@@ -136,6 +141,8 @@ int filter_data_file(const int n, const char *input_filename){
             }
 
             free_jogador(&j);
+
+            reg_count++;
         }
 
         if(filter_count <= 0){
