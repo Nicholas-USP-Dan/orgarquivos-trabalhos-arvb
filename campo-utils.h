@@ -1,7 +1,6 @@
 #ifndef CAMP_UTILS_H
 #define CAMP_UTILS_H
 
-#include <stdio.h>
 #include <stdint.h>
 
 /**

@@ -14,7 +14,6 @@
 #ifndef CABCL_UTILS_H
 #define CABCL_UTILS_H
 
-#include <stdio.h>
 #include <stdint.h>
 
 // Lista de offsets dos campos do cabecalho (campos estaticos)
