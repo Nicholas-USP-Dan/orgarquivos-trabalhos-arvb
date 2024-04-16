@@ -1,13 +1,18 @@
-/** 
- * INTERFACE DE FUNCIONALIDADES DO CABECALHO
+/**
+ * @file cabecalho-utils.h
+ * @brief Header file para funcionalidades do cabeçalho.
  * 
  * Este arquivo contem as declaracoes de funcoes dedicadas a manipulacao do cabecalho do arquivo de dados como especificado
- * no trabalho introdutorio da disciplina de Organizacao de Arquivos
+ * no trabalho introdutório da disciplina de Organizacao de Arquivos.
  * 
- * Bibliotecas utilizadas por esta interface:
- * - stdio.h -> manipulacao de arquivos
- * - stdint.h -> tipos de inteiro com mesmo tamanho (em bytes) em varios sistemas
+ * ESTRUTURA DO CABEÇALHO:
  * 
+ * | status (1 byte) |  topo (8 bytes) | proxByteOffset (8 bytes) | nroRegArq (4 bytes) | nroRegRem (4 bytes) |
+ * 
+ * @authors Nicholas Eiti Dan; N°USP: 14600749
+ * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ * 
+ * @version 1.0
  * 
  */
 
@@ -26,14 +31,34 @@
 #define HEADER_END_OFFSET 25
 
 /**
- * Inicializa um novo cabecalho em um arquivo de dados binario
+ * @brief Inicializa um novo cabecalho em um arquivo de dados binario.
  * 
- * RETORNA: Retorna 0 quando a funcao termina com sucesso. Senao -1 e retornado
+ * @details Como a função é composta unicamente pela função fwrite, é possível ler o 
+ * stderr para a identificação de erro.
+ * 
+ * @param [in] status Valor a ser inserido no campo status.
+ * @param [in] topo Valor a ser inserido no campo topo.
+ * @param [in] prox_byte_offset Valor a ser inserido no campo proxByteOffset.
+ * @param [in] nro_regarq Valor a ser inserido no campo nroRegArq.
+ * @param [in] nro_regrem Valor a ser inserido no campo nroRegRem.
+ * @param fp Ponteiro do arquivo binário de dados.
+ * 
+ * @retval 0 Operação realizada com sucesso.
+ * @retval -1 Houve uma falha durante a execução da funcionalidade.
  */
-int initialize_cabecalho(const unsigned char status, const int64_t topo, const int64_t prox_byte_offset, const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp);
+int initialize_cabecalho(const unsigned char status, const int64_t topo, const int64_t prox_byte_offset, 
+const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp);
 
 /**
- * Funcao que verifica o status de um arquivo de dados binario
+ * @brief Funcao que verifica o status de um arquivo de dados binario
+ * 
+ * @param fp Ponteiro do arquivo binário de dados.
+ * 
+ * @retval 1 Status do arquivo é válido (status = '1')
+ * @retval 0 Status do arquivo não é válido
+ * 
+ * @note A função não reposiciona o ponteiro para o offset do status, então o ponteiro 
+ * deve estar na posição correta (STATUS_OFFSET).
  */
 int check_status(FILE *fp);
 

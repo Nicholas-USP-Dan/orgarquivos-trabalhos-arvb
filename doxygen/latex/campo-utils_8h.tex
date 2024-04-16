@@ -1,0 +1,139 @@
+\doxysection{Referência do Arquivo campo-\/utils.h}
+\hypertarget{campo-utils_8h}{}\label{campo-utils_8h}\index{campo-\/utils.h@{campo-\/utils.h}}
+
+
+Header file para funcionalidades dos campos de um registro.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Gráfico de dependência de inclusões para campo-\/utils.h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=163pt]{campo-utils_8h__incl}
+\end{center}
+\end{figure}
+Este grafo mostra quais arquivos estão direta ou indiretamente relacionados com esse arquivo\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{campo-utils_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Definições e Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{campo-utils_8h_a6b20d41d6252e9871430c242cb1a56e7}{BUFFER\+\_\+\+SIZE}}~200
+\item 
+\#define \mbox{\hyperlink{campo-utils_8h_af4c4548211744bce41230fefb07abb2d}{STATIC\+\_\+\+REG\+\_\+\+END\+\_\+\+OFFSET}}~25
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{campo-utils_8h_ab7fd74557648625c1572b40cab3e5ea1}\label{campo-utils_8h_ab7fd74557648625c1572b40cab3e5ea1} 
+unsigned char {\bfseries get\+\_\+campoc} (FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+\Hypertarget{campo-utils_8h_a6015c405517d39d697494a8228637b2b}\label{campo-utils_8h_a6015c405517d39d697494a8228637b2b} 
+int32\+\_\+t {\bfseries get\+\_\+campo32} (FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+\Hypertarget{campo-utils_8h_ac6e3f63071f3667052c9f8bd7c9b67bf}\label{campo-utils_8h_ac6e3f63071f3667052c9f8bd7c9b67bf} 
+int64\+\_\+t {\bfseries get\+\_\+campo64} (FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+\Hypertarget{campo-utils_8h_a802b51b6639a25d30e78404f74aa1971}\label{campo-utils_8h_a802b51b6639a25d30e78404f74aa1971} 
+char \texorpdfstring{$\ast$}{*} {\bfseries get\+\_\+campo\+\_\+str} (FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+int \mbox{\hyperlink{campo-utils_8h_ab3c7d0592e7067813cfb080adedac130}{set\+\_\+campoc}} (const unsigned char c, FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+int \mbox{\hyperlink{campo-utils_8h_aa971299104287e7b7c41c3b166012d8c}{set\+\_\+campo32}} (const int32\+\_\+t val, FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+int \mbox{\hyperlink{campo-utils_8h_af4bd9c700c809b2a550a063f289df15e}{set\+\_\+campo64}} (const int64\+\_\+t val, FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+int \mbox{\hyperlink{campo-utils_8h_add8877213d85fc5ba7f550ee1605f9b8}{set\+\_\+campo\+\_\+str}} (const char \texorpdfstring{$\ast$}{*}str, int32\+\_\+t \texorpdfstring{$\ast$}{*}campo\+\_\+len, FILE \texorpdfstring{$\ast$}{*}fp)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Header file para funcionalidades dos campos de um registro. 
+
+Este arquivo contém as declarações de várias utilidades para ler e escrever campos de um registro em um arquivo binário de dados.
+
+\begin{DoxyAuthor}{Autores}
+Nicholas Eiti Dan; N°\+USP\+: 14600749 
+
+Laura Neri Thomaz da Silva; N°\+USP\+: 13673221
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Versão}
+1.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Definições e macros}
+\Hypertarget{campo-utils_8h_a6b20d41d6252e9871430c242cb1a56e7}\label{campo-utils_8h_a6b20d41d6252e9871430c242cb1a56e7} 
+\index{campo-\/utils.h@{campo-\/utils.h}!BUFFER\_SIZE@{BUFFER\_SIZE}}
+\index{BUFFER\_SIZE@{BUFFER\_SIZE}!campo-\/utils.h@{campo-\/utils.h}}
+\doxysubsubsection{\texorpdfstring{BUFFER\_SIZE}{BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define BUFFER\+\_\+\+SIZE~200}
+
+Tamanho alocado aos buffers de chars \Hypertarget{campo-utils_8h_af4c4548211744bce41230fefb07abb2d}\label{campo-utils_8h_af4c4548211744bce41230fefb07abb2d} 
+\index{campo-\/utils.h@{campo-\/utils.h}!STATIC\_REG\_END\_OFFSET@{STATIC\_REG\_END\_OFFSET}}
+\index{STATIC\_REG\_END\_OFFSET@{STATIC\_REG\_END\_OFFSET}!campo-\/utils.h@{campo-\/utils.h}}
+\doxysubsubsection{\texorpdfstring{STATIC\_REG\_END\_OFFSET}{STATIC\_REG\_END\_OFFSET}}
+{\footnotesize\ttfamily \#define STATIC\+\_\+\+REG\+\_\+\+END\+\_\+\+OFFSET~25}
+
+Offset logo apos os campos estaticos de um registro 
+
+\doxysubsection{Funções}
+\Hypertarget{campo-utils_8h_ab3c7d0592e7067813cfb080adedac130}\label{campo-utils_8h_ab3c7d0592e7067813cfb080adedac130} 
+\index{campo-\/utils.h@{campo-\/utils.h}!set\_campoc@{set\_campoc}}
+\index{set\_campoc@{set\_campoc}!campo-\/utils.h@{campo-\/utils.h}}
+\doxysubsubsection{\texorpdfstring{set\_campoc()}{set\_campoc()}}
+{\footnotesize\ttfamily int set\+\_\+campoc (\begin{DoxyParamCaption}\item[{const unsigned char}]{c,  }\item[{FILE \texorpdfstring{$\ast$}{*}}]{fp }\end{DoxyParamCaption})}
+
+Atribui um char (string de 1 byte) no espaco apontado no arquivo Esse é o diagrama das funções que utilizam essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{campo-utils_8h_ab3c7d0592e7067813cfb080adedac130_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{campo-utils_8h_aa971299104287e7b7c41c3b166012d8c}\label{campo-utils_8h_aa971299104287e7b7c41c3b166012d8c} 
+\index{campo-\/utils.h@{campo-\/utils.h}!set\_campo32@{set\_campo32}}
+\index{set\_campo32@{set\_campo32}!campo-\/utils.h@{campo-\/utils.h}}
+\doxysubsubsection{\texorpdfstring{set\_campo32()}{set\_campo32()}}
+{\footnotesize\ttfamily int set\+\_\+campo32 (\begin{DoxyParamCaption}\item[{const int32\+\_\+t}]{val,  }\item[{FILE \texorpdfstring{$\ast$}{*}}]{fp }\end{DoxyParamCaption})}
+
+Atribui um inteiro de 32 bits (4 bytes) no espaco apontado no arquivo Esse é o diagrama das funções que utilizam essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{campo-utils_8h_aa971299104287e7b7c41c3b166012d8c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{campo-utils_8h_af4bd9c700c809b2a550a063f289df15e}\label{campo-utils_8h_af4bd9c700c809b2a550a063f289df15e} 
+\index{campo-\/utils.h@{campo-\/utils.h}!set\_campo64@{set\_campo64}}
+\index{set\_campo64@{set\_campo64}!campo-\/utils.h@{campo-\/utils.h}}
+\doxysubsubsection{\texorpdfstring{set\_campo64()}{set\_campo64()}}
+{\footnotesize\ttfamily int set\+\_\+campo64 (\begin{DoxyParamCaption}\item[{const int64\+\_\+t}]{val,  }\item[{FILE \texorpdfstring{$\ast$}{*}}]{fp }\end{DoxyParamCaption})}
+
+Atribui um inteiro de 64 bits (8 bytes) no espaco apontado no arquivo Esse é o diagrama das funções que utilizam essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{campo-utils_8h_af4bd9c700c809b2a550a063f289df15e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{campo-utils_8h_add8877213d85fc5ba7f550ee1605f9b8}\label{campo-utils_8h_add8877213d85fc5ba7f550ee1605f9b8} 
+\index{campo-\/utils.h@{campo-\/utils.h}!set\_campo\_str@{set\_campo\_str}}
+\index{set\_campo\_str@{set\_campo\_str}!campo-\/utils.h@{campo-\/utils.h}}
+\doxysubsubsection{\texorpdfstring{set\_campo\_str()}{set\_campo\_str()}}
+{\footnotesize\ttfamily int set\+\_\+campo\+\_\+str (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str,  }\item[{int32\+\_\+t \texorpdfstring{$\ast$}{*}}]{campo\+\_\+len,  }\item[{FILE \texorpdfstring{$\ast$}{*}}]{fp }\end{DoxyParamCaption})}
+
+Atribui uma string e seu tamanho no espaco apontado no arquivo
+
+RETORNA\+: Retorna a quantidade de bytes ocupados pelo campo (incluindo o campo de tamanho) Retorna -\/1 caso ocorra algum erro Esse é o diagrama das funções que utilizam essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{campo-utils_8h_add8877213d85fc5ba7f550ee1605f9b8_icgraph}
+\end{center}
+\end{figure}

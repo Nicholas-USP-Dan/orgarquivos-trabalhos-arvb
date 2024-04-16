@@ -1,0 +1,384 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Trabalho Prático Introdutório: Referência do Arquivo create-data-file.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Trabalho Prático Introdutório<span id="projectnumber">&#160;1</span>
+   </div>
+   <div id="projectbrief">Implementação dos conhecimentos aprendidos na disciplina Organização de Arquivos para a manipulação de um arquivo de dados.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Definições e Macros</a> &#124;
+<a href="#func-members">Funções</a>  </div>
+  <div class="headertitle"><div class="title">Referência do Arquivo create-data-file.c</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Implementação da funcionalidade 1 do trabalho definido.  
+<a href="#details">Mais...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;inttypes.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="data-file_8h_source.html">data-file.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="cabecalho-utils_8h_source.html">cabecalho-utils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="campo-utils_8h_source.html">campo-utils.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependência de inclusões para create-data-file.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="create-data-file_8c__incl.png" border="0" usemap="#acreate-data-file_8c" alt=""/></div>
+<map name="acreate-data-file_8c" id="acreate-data-file_8c">
+<area shape="rect" title="Implementação da funcionalidade 1 do trabalho definido." alt="" coords="273,5,407,31"/>
+<area shape="rect" title=" " alt="" coords="5,79,72,104"/>
+<area shape="poly" title=" " alt="" coords="291,33,86,81,85,76,289,28"/>
+<area shape="rect" title=" " alt="" coords="97,79,167,104"/>
+<area shape="poly" title=" " alt="" coords="307,33,180,77,178,72,306,28"/>
+<area shape="rect" title=" " alt="" coords="191,79,262,104"/>
+<area shape="poly" title=" " alt="" coords="323,33,258,74,255,69,320,28"/>
+<area shape="rect" title=" " alt="" coords="525,152,595,177"/>
+<area shape="poly" title=" " alt="" coords="336,32,323,67,322,86,329,102,340,112,357,121,405,136,512,155,511,161,404,141,355,126,337,116,324,106,317,87,318,66,331,30"/>
+<area shape="rect" title=" " alt="" coords="338,79,425,104"/>
+<area shape="poly" title=" " alt="" coords="349,30,370,65,365,68,345,32"/>
+<area shape="rect" href="data-file_8h.html" title="Header file para as funcionalidades relacionadas aos arquivos binarios de dado." alt="" coords="449,79,537,104"/>
+<area shape="poly" title=" " alt="" coords="366,28,457,70,455,75,364,33"/>
+<area shape="rect" href="cabecalho-utils_8h.html" title="Header file para funcionalidades do cabeçalho." alt="" coords="561,79,695,104"/>
+<area shape="poly" title=" " alt="" coords="387,28,569,73,568,78,386,33"/>
+<area shape="rect" href="campo-utils_8h.html" title="Header file para funcionalidades dos campos de um registro." alt="" coords="719,79,830,104"/>
+<area shape="poly" title=" " alt="" coords="407,27,706,76,705,81,406,33"/>
+<area shape="poly" title=" " alt="" coords="506,103,542,140,538,144,502,106"/>
+<area shape="poly" title=" " alt="" coords="619,106,583,144,579,140,615,102"/>
+<area shape="poly" title=" " alt="" coords="741,107,609,150,607,145,739,101"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Definições e Macros</h2></td></tr>
+<tr class="memitem:a2cb51aeffc1b8f1567ea18cc98bcf056" id="r_a2cb51aeffc1b8f1567ea18cc98bcf056"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="create-data-file_8c.html#a2cb51aeffc1b8f1567ea18cc98bcf056">TRIM_NEWLINE</a>(str)&#160;&#160;&#160;str[strcspn(str, &quot;\n&quot;)] = 0</td></tr>
+<tr class="separator:a2cb51aeffc1b8f1567ea18cc98bcf056"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funções</h2></td></tr>
+<tr class="memitem:a8c55858981bf8d739e5df168501a0e30" id="r_a8c55858981bf8d739e5df168501a0e30"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="create-data-file_8c.html#a8c55858981bf8d739e5df168501a0e30">get_token_str</a> (char **start_ptr, const char delim)</td></tr>
+<tr class="separator:a8c55858981bf8d739e5df168501a0e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa04740e56c666ac3504978d1f2b3cb51" id="r_aa04740e56c666ac3504978d1f2b3cb51"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="data-file_8h.html#a2321b8fd26b048beaed90d709e28c764">JOGADOR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="create-data-file_8c.html#aa04740e56c666ac3504978d1f2b3cb51">process_jogador</a> (char *line)</td></tr>
+<tr class="separator:aa04740e56c666ac3504978d1f2b3cb51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe7ef1f48612ab0a6c2bcc59952286e1" id="r_abe7ef1f48612ab0a6c2bcc59952286e1"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="create-data-file_8c.html#abe7ef1f48612ab0a6c2bcc59952286e1">add_reg_bfile</a> (const <a class="el" href="data-file_8h.html#a2321b8fd26b048beaed90d709e28c764">JOGADOR</a> j, FILE *data_bfile_fptr)</td></tr>
+<tr class="separator:abe7ef1f48612ab0a6c2bcc59952286e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b5abf123912c019bea5e88f24ebe1a4" id="r_a6b5abf123912c019bea5e88f24ebe1a4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="create-data-file_8c.html#a6b5abf123912c019bea5e88f24ebe1a4">create_data_file_from_csv</a> (const char *input_filename, const char *output_filename)</td></tr>
+<tr class="separator:a6b5abf123912c019bea5e88f24ebe1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Implementação da funcionalidade 1 do trabalho definido. </p>
+<dl class="section author"><dt>Autores</dt><dd>Nicholas Eiti Dan; N°USP: 14600749 </dd>
+<dd>
+Laura Neri Thomaz da Silva; N°USP: 13673221 </dd></dl>
+<dl class="section version"><dt>Versão</dt><dd>1.0 </dd></dl>
+</div><h2 class="groupheader">Definições e macros</h2>
+<a id="a2cb51aeffc1b8f1567ea18cc98bcf056" name="a2cb51aeffc1b8f1567ea18cc98bcf056"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cb51aeffc1b8f1567ea18cc98bcf056">&#9670;&#160;</a></span>TRIM_NEWLINE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TRIM_NEWLINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">str</td><td>)</td>
+          <td>&#160;&#160;&#160;str[strcspn(str, &quot;\n&quot;)] = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Remove o caracter newline ('<br  />
+') de uma string </p>
+
+</div>
+</div>
+<h2 class="groupheader">Funções</h2>
+<a id="a8c55858981bf8d739e5df168501a0e30" name="a8c55858981bf8d739e5df168501a0e30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c55858981bf8d739e5df168501a0e30">&#9670;&#160;</a></span>get_token_str()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static char * get_token_str </td>
+          <td>(</td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>start_ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char&#160;</td>
+          <td class="paramname"><em>delim</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Implementacao semelhante da funcao strtok com leitura de campos vazios </p>
+<div class="dynheader">
+Esse é o diagrama das funções que utilizam essa função:</div>
+<div class="dyncontent">
+<div class="center"><img src="create-data-file_8c_a8c55858981bf8d739e5df168501a0e30_icgraph.png" border="0" usemap="#acreate-data-file_8c_a8c55858981bf8d739e5df168501a0e30_icgraph" alt=""/></div>
+<map name="acreate-data-file_8c_a8c55858981bf8d739e5df168501a0e30_icgraph" id="acreate-data-file_8c_a8c55858981bf8d739e5df168501a0e30_icgraph">
+<area shape="rect" title=" " alt="" coords="423,5,533,31"/>
+<area shape="rect" href="create-data-file_8c.html#aa04740e56c666ac3504978d1f2b3cb51" title=" " alt="" coords="247,5,375,31"/>
+<area shape="poly" title=" " alt="" coords="409,21,375,21,375,15,409,15"/>
+<area shape="rect" href="create-data-file_8c.html#a6b5abf123912c019bea5e88f24ebe1a4" title=" " alt="" coords="5,5,199,31"/>
+<area shape="poly" title=" " alt="" coords="233,21,199,21,199,15,233,15"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa04740e56c666ac3504978d1f2b3cb51" name="aa04740e56c666ac3504978d1f2b3cb51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa04740e56c666ac3504978d1f2b3cb51">&#9670;&#160;</a></span>process_jogador()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="data-file_8h.html#a2321b8fd26b048beaed90d709e28c764">JOGADOR</a> process_jogador </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>line</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Processa uma linha extraida de um arquivo .csv (string com tokens separadas por ',') e retorna uma variavel do tipo JOGADOR com os dados preenchidos </p>
+<div class="dynheader">
+Este é o diagrama das funções utilizadas por essa função:</div>
+<div class="dyncontent">
+<div class="center"><img src="create-data-file_8c_aa04740e56c666ac3504978d1f2b3cb51_cgraph.png" border="0" usemap="#acreate-data-file_8c_aa04740e56c666ac3504978d1f2b3cb51_cgraph" alt=""/></div>
+<map name="acreate-data-file_8c_aa04740e56c666ac3504978d1f2b3cb51_cgraph" id="acreate-data-file_8c_aa04740e56c666ac3504978d1f2b3cb51_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,133,31"/>
+<area shape="rect" href="create-data-file_8c.html#a8c55858981bf8d739e5df168501a0e30" title=" " alt="" coords="181,5,292,31"/>
+<area shape="poly" title=" " alt="" coords="133,15,167,15,167,21,133,21"/>
+</map>
+</div>
+<div class="dynheader">
+Esse é o diagrama das funções que utilizam essa função:</div>
+<div class="dyncontent">
+<div class="center"><img src="create-data-file_8c_aa04740e56c666ac3504978d1f2b3cb51_icgraph.png" border="0" usemap="#acreate-data-file_8c_aa04740e56c666ac3504978d1f2b3cb51_icgraph" alt=""/></div>
+<map name="acreate-data-file_8c_aa04740e56c666ac3504978d1f2b3cb51_icgraph" id="acreate-data-file_8c_aa04740e56c666ac3504978d1f2b3cb51_icgraph">
+<area shape="rect" title=" " alt="" coords="247,5,375,31"/>
+<area shape="rect" href="create-data-file_8c.html#a6b5abf123912c019bea5e88f24ebe1a4" title=" " alt="" coords="5,5,199,31"/>
+<area shape="poly" title=" " alt="" coords="233,21,199,21,199,15,233,15"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="abe7ef1f48612ab0a6c2bcc59952286e1" name="abe7ef1f48612ab0a6c2bcc59952286e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe7ef1f48612ab0a6c2bcc59952286e1">&#9670;&#160;</a></span>add_reg_bfile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int add_reg_bfile </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="data-file_8h.html#a2321b8fd26b048beaed90d709e28c764">JOGADOR</a>&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>data_bfile_fptr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Função local que acrescenta um registro no arquivo de data binario </p>
+<div class="dynheader">
+Este é o diagrama das funções utilizadas por essa função:</div>
+<div class="dyncontent">
+<div class="center"><img src="create-data-file_8c_abe7ef1f48612ab0a6c2bcc59952286e1_cgraph.png" border="0" usemap="#acreate-data-file_8c_abe7ef1f48612ab0a6c2bcc59952286e1_cgraph" alt=""/></div>
+<map name="acreate-data-file_8c_abe7ef1f48612ab0a6c2bcc59952286e1_cgraph" id="acreate-data-file_8c_abe7ef1f48612ab0a6c2bcc59952286e1_cgraph">
+<area shape="rect" title=" " alt="" coords="5,80,115,105"/>
+<area shape="rect" href="campo-utils_8c.html#aa971299104287e7b7c41c3b166012d8c" title=" " alt="" coords="167,5,276,31"/>
+<area shape="poly" title=" " alt="" coords="85,78,162,40,175,34,177,39,164,44,87,82"/>
+<area shape="rect" href="campo-utils_8c.html#af4bd9c700c809b2a550a063f289df15e" title=" " alt="" coords="167,55,276,80"/>
+<area shape="poly" title=" " alt="" coords="115,81,152,75,153,81,115,87"/>
+<area shape="rect" href="campo-utils_8c.html#add8877213d85fc5ba7f550ee1605f9b8" title=" " alt="" coords="163,104,280,129"/>
+<area shape="poly" title=" " alt="" coords="115,98,150,103,149,109,115,103"/>
+<area shape="rect" href="campo-utils_8c.html#ab3c7d0592e7067813cfb080adedac130" title=" " alt="" coords="171,153,271,179"/>
+<area shape="poly" title=" " alt="" coords="89,103,164,138,180,145,177,150,162,143,87,108"/>
+</map>
+</div>
+<div class="dynheader">
+Esse é o diagrama das funções que utilizam essa função:</div>
+<div class="dyncontent">
+<div class="center"><img src="create-data-file_8c_abe7ef1f48612ab0a6c2bcc59952286e1_icgraph.png" border="0" usemap="#acreate-data-file_8c_abe7ef1f48612ab0a6c2bcc59952286e1_icgraph" alt=""/></div>
+<map name="acreate-data-file_8c_abe7ef1f48612ab0a6c2bcc59952286e1_icgraph" id="acreate-data-file_8c_abe7ef1f48612ab0a6c2bcc59952286e1_icgraph">
+<area shape="rect" title=" " alt="" coords="247,5,356,31"/>
+<area shape="rect" href="create-data-file_8c.html#a6b5abf123912c019bea5e88f24ebe1a4" title=" " alt="" coords="5,5,199,31"/>
+<area shape="poly" title=" " alt="" coords="233,21,199,21,199,15,233,15"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6b5abf123912c019bea5e88f24ebe1a4" name="a6b5abf123912c019bea5e88f24ebe1a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b5abf123912c019bea5e88f24ebe1a4">&#9670;&#160;</a></span>create_data_file_from_csv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int create_data_file_from_csv </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>input_filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>output_filename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funcao da funcionalidade 1 - Criar um arquivo binario de dados a partir de um arquivo de dados .csv</p>
+<p>RETORNA: Retorna 0 qundo o arquivo é criado com sucesso, caso nao retorna -1 </p>
+<div class="dynheader">
+Este é o diagrama das funções utilizadas por essa função:</div>
+<div class="dyncontent">
+<div class="center"><img src="create-data-file_8c_a6b5abf123912c019bea5e88f24ebe1a4_cgraph.png" border="0" usemap="#acreate-data-file_8c_a6b5abf123912c019bea5e88f24ebe1a4_cgraph" alt=""/></div>
+<map name="acreate-data-file_8c_a6b5abf123912c019bea5e88f24ebe1a4_cgraph" id="acreate-data-file_8c_a6b5abf123912c019bea5e88f24ebe1a4_cgraph">
+<area shape="rect" title=" " alt="" coords="5,204,199,229"/>
+<area shape="rect" href="create-data-file_8c.html#abe7ef1f48612ab0a6c2bcc59952286e1" title=" " alt="" coords="267,103,377,128"/>
+<area shape="poly" title=" " alt="" coords="128,201,246,145,277,131,279,136,248,150,130,206"/>
+<area shape="rect" href="campo-utils_8c.html#ab3c7d0592e7067813cfb080adedac130" title=" " alt="" coords="454,153,554,179"/>
+<area shape="poly" title=" " alt="" coords="169,201,246,189,440,168,441,173,247,194,170,207"/>
+<area shape="rect" href="data-file-utils_8c.html#a6f910d734dfbd064b1836f4757411e54" title=" " alt="" coords="270,204,374,229"/>
+<area shape="poly" title=" " alt="" coords="199,214,256,214,256,219,199,219"/>
+<area shape="rect" href="cabecalho-utils_8c.html#a2a6576cd4998e82d20db96fb20fcbc0c" title="Inicializa um novo cabecalho em um arquivo de dados binario." alt="" coords="247,253,397,279"/>
+<area shape="poly" title=" " alt="" coords="160,227,252,248,251,253,159,232"/>
+<area shape="rect" href="create-data-file_8c.html#aa04740e56c666ac3504978d1f2b3cb51" title=" " alt="" coords="258,303,386,328"/>
+<area shape="poly" title=" " alt="" coords="126,227,181,257,248,289,265,296,263,301,246,294,178,262,124,232"/>
+<area shape="rect" href="campo-utils_8c.html#aa971299104287e7b7c41c3b166012d8c" title=" " alt="" coords="449,5,559,31"/>
+<area shape="poly" title=" " alt="" coords="341,100,387,71,444,40,456,34,458,39,447,44,390,76,344,105"/>
+<area shape="rect" href="campo-utils_8c.html#af4bd9c700c809b2a550a063f289df15e" title=" " alt="" coords="449,55,559,80"/>
+<area shape="poly" title=" " alt="" coords="370,100,441,81,442,86,372,105"/>
+<area shape="rect" href="campo-utils_8c.html#add8877213d85fc5ba7f550ee1605f9b8" title=" " alt="" coords="445,104,563,129"/>
+<area shape="poly" title=" " alt="" coords="377,113,432,113,432,119,377,118"/>
+<area shape="poly" title=" " alt="" coords="369,126,445,147,444,152,368,131"/>
+<area shape="rect" href="create-data-file_8c.html#a8c55858981bf8d739e5df168501a0e30" title=" " alt="" coords="449,303,559,328"/>
+<area shape="poly" title=" " alt="" coords="386,313,435,313,435,318,386,318"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

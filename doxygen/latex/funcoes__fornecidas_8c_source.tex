@@ -1,0 +1,74 @@
+\doxysection{funcoes\+\_\+fornecidas.\+c}
+\hypertarget{funcoes__fornecidas_8c_source}{}\label{funcoes__fornecidas_8c_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <ctype.h>}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}funcoes\_fornecidas.h"{}}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00008}00008\ \textcolor{keywordtype}{void}\ binarioNaTela(\textcolor{keywordtype}{char}\ *nomeArquivoBinario)\ \{\ \textcolor{comment}{/*\ Você\ não\ precisa\ entender\ o\ código\ dessa\ função.\ */}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00010}00010\ \ \ \ \ \textcolor{comment}{/*\ Use\ essa\ função\ para\ comparação\ no\ run.codes.\ Lembre-\/se\ de\ ter\ fechado\ (fclose)\ o\ arquivo\ anteriormente.}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00011}00011\ \textcolor{comment}{\ \ \ \ *\ \ Ela\ vai\ abrir\ de\ novo\ para\ leitura\ e\ depois\ fechar\ (você\ não\ vai\ perder\ pontos\ por\ isso\ se\ usar\ ela).\ */}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00013}00013\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ i,\ cs;}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00014}00014\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *mb;}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00015}00015\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ fl;}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00016}00016\ \ \ \ \ FILE\ *fs;}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00017}00017\ \ \ \ \ \textcolor{keywordflow}{if}(nomeArquivoBinario\ ==\ NULL\ ||\ !(fs\ =\ fopen(nomeArquivoBinario,\ \textcolor{stringliteral}{"{}rb"{}})))\ \{}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00018}00018\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}ERRO\ AO\ ESCREVER\ O\ BINARIO\ NA\ TELA\ (função\ binarioNaTela):\ não\ foi\ possível\ abrir\ o\ arquivo\ que\ me\ passou\ para\ leitura.\ Ele\ existe\ e\ você\ tá\ passando\ o\ nome\ certo?\ Você\ lembrou\ de\ fechar\ ele\ com\ fclose\ depois\ de\ usar?\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00020}00020\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00021}00021\ \ \ \ \ fseek(fs,\ 0,\ SEEK\_END);}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00022}00022\ \ \ \ \ fl\ =\ ftell(fs);}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00023}00023\ \ \ \ \ fseek(fs,\ 0,\ SEEK\_SET);}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00024}00024\ \ \ \ \ mb\ =\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *)\ malloc(fl);}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00025}00025\ \ \ \ \ fread(mb,\ 1,\ fl,\ fs);}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00027}00027\ \ \ \ \ cs\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00028}00028\ \ \ \ \ \textcolor{keywordflow}{for}(i\ =\ 0;\ i\ <\ fl;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00029}00029\ \ \ \ \ \ \ \ \ cs\ +=\ (\textcolor{keywordtype}{unsigned}\ long)\ mb[i];}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00030}00030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00031}00031\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%lf\(\backslash\)n"{}},\ (cs\ /\ (\textcolor{keywordtype}{double})\ 100));}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00032}00032\ \ \ \ \ free(mb);}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00033}00033\ \ \ \ \ fclose(fs);}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00034}00034\ \}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00036}00036\ \textcolor{keywordtype}{void}\ scan\_quote\_string(\textcolor{keywordtype}{char}\ *str)\ \{}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00038}00038\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00039}00039\ \textcolor{comment}{\ \ \ \ *\ \ \ Use\ essa\ função\ para\ ler\ um\ campo\ string\ delimitado\ entre\ aspas\ ("{}).}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00040}00040\ \textcolor{comment}{\ \ \ \ *\ \ \ Chame\ ela\ na\ hora\ que\ for\ ler\ tal\ campo.\ Por\ exemplo:}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00041}00041\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00042}00042\ \textcolor{comment}{\ \ \ \ *\ \ \ A\ entrada\ está\ da\ seguinte\ forma:}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00043}00043\ \textcolor{comment}{\ \ \ \ *\ \ \ \ \ \ \ nomeDoCampo\ "{}MARIA\ DA\ SILVA"{}}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00044}00044\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00045}00045\ \textcolor{comment}{\ \ \ \ *\ \ \ Para\ ler\ isso\ para\ as\ strings\ já\ alocadas\ str1\ e\ str2\ do\ seu\ programa,\ você\ faz:}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00046}00046\ \textcolor{comment}{\ \ \ \ *\ \ \ \ \ \ \ scanf("{}\%s"{},\ str1);\ //\ Vai\ salvar\ nomeDoCampo\ em\ str1}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00047}00047\ \textcolor{comment}{\ \ \ \ *\ \ \ \ \ \ \ scan\_quote\_string(str2);\ //\ Vai\ salvar\ MARIA\ DA\ SILVA\ em\ str2\ (sem\ as\ aspas)}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00048}00048\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00049}00049\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00051}00051\ \ \ \ \ \textcolor{keywordtype}{char}\ R;}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{while}((R\ =\ getchar())\ !=\ EOF\ \&\&\ isspace(R));\ \textcolor{comment}{//\ ignorar\ espaços,\ \(\backslash\)r,\ \(\backslash\)n...}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00055}00055\ \ \ \ \ \textcolor{keywordflow}{if}(R\ ==\ \textcolor{charliteral}{'N'}\ ||\ R\ ==\ \textcolor{charliteral}{'n'})\ \{\ \textcolor{comment}{//\ campo\ NULO}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00056}00056\ \ \ \ \ \ \ \ \ getchar();\ getchar();\ getchar();\ \textcolor{comment}{//\ ignorar\ o\ "{}ULO"{}\ de\ NULO.}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00057}00057\ \ \ \ \ \ \ \ \ strcpy(str,\ \textcolor{stringliteral}{"{}"{}});\ \textcolor{comment}{//\ copia\ string\ vazia}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00058}00058\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(R\ ==\ \textcolor{charliteral}{'\(\backslash\)"{}'})\ \{}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(scanf(\textcolor{stringliteral}{"{}\%[\string^\(\backslash\)"{}]"{}},\ str)\ !=\ 1)\ \{\ \textcolor{comment}{//\ ler\ até\ o\ fechamento\ das\ aspas}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ strcpy(str,\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00062}00062\ \ \ \ \ \ \ \ \ getchar();\ \textcolor{comment}{//\ ignorar\ aspas\ fechando}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00063}00063\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(R\ !=\ EOF)\{\ \textcolor{comment}{//\ vc\ tá\ tentando\ ler\ uma\ string\ que\ não\ tá\ entre\ aspas!\ Fazer\ leitura\ normal\ \%s\ então,\ pois\ deve\ ser\ algum\ inteiro\ ou\ algo\ assim...}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00064}00064\ \ \ \ \ \ \ \ \ str[0]\ =\ R;}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00065}00065\ \ \ \ \ \ \ \ \ scanf(\textcolor{stringliteral}{"{}\%s"{}},\ \&str[1]);}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00066}00066\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{\ \textcolor{comment}{//\ EOF}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ strcpy(str,\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{funcoes__fornecidas_8c_source_l00069}00069\ \}}
+
+\end{DoxyCode}

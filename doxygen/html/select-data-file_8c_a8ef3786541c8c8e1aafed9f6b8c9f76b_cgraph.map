@@ -1,0 +1,17 @@
+<map id="select_data_file" name="select_data_file">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,104,129,129"/>
+<area shape="rect" id="Node000002" href="$cabecalho-utils_8c.html#a80c63329b0a3e5ca9a3caf61f2fcbf1e" title="Funcao que verifica o status de um arquivo de dados binario." alt="" coords="195,5,302,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,102,124,71,176,40,190,33,192,38,179,44,127,76,86,106"/>
+<area shape="rect" id="Node000003" href="$data-file-utils_8c.html#a6f910d734dfbd064b1836f4757411e54" title=" " alt="" coords="197,55,301,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="114,101,187,81,189,86,115,107"/>
+<area shape="rect" id="Node000004" href="$campo-utils_8c.html#ab7fd74557648625c1572b40cab3e5ea1" title=" " alt="" coords="198,104,299,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="130,114,184,114,184,119,130,119"/>
+<area shape="rect" id="Node000005" href="$data-file-utils_8c.html#ac9b1f74f8a2fb5b6f69e9280365a3bac" title=" " alt="" coords="195,153,303,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="115,127,189,147,187,152,114,132"/>
+<area shape="rect" id="Node000006" href="$data-file-utils_8c.html#a2285fb0ccb50c92d981ecee51f9ed594" title=" " alt="" coords="177,203,320,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="86,127,127,157,179,188,195,195,193,200,176,192,124,161,83,132"/>
+<area shape="rect" id="Node000007" href="$campo-utils_8c.html#a6015c405517d39d697494a8228637b2b" title=" " alt="" coords="372,177,483,203"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="320,203,358,197,359,202,320,208"/>
+<area shape="rect" id="Node000008" href="$campo-utils_8c.html#a802b51b6639a25d30e78404f74aa1971" title=" " alt="" coords="368,227,487,252"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="320,222,354,227,354,232,320,228"/>
+</map>

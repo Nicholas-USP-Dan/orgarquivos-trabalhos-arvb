@@ -1,0 +1,176 @@
+\doxysection{create-\/data-\/file.c}
+\hypertarget{create-data-file_8c_source}{}\label{create-data-file_8c_source}\mbox{\hyperlink{create-data-file_8c}{Ir para a documentação desse arquivo.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <inttypes.h>}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{data-file_8h}{data-\/file.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{cabecalho-utils_8h}{cabecalho-\/utils.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{campo-utils_8h}{campo-\/utils.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00026}\mbox{\hyperlink{create-data-file_8c_a2cb51aeffc1b8f1567ea18cc98bcf056}{00026}}\ \textcolor{preprocessor}{\#define\ TRIM\_NEWLINE(str)\ str[strcspn(str,\ "{}\(\backslash\)n"{})]\ =\ 0}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00031}00031\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}*\ get\_token\_str(\textcolor{keywordtype}{char}\ **start\_ptr,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ delim)\{}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{if}((*start\_ptr)\ ==\ NULL)\{}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00034}00034\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00035}00035\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00036}00036\ \ \ \ \ \textcolor{keywordtype}{char}\ *token\ =\ calloc(\mbox{\hyperlink{campo-utils_8h_a6b20d41d6252e9871430c242cb1a56e7}{BUFFER\_SIZE}}/2,\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00038}00038\ \ \ \ \ \textcolor{keywordtype}{char}\ *end\_token\ =\ strchr((*start\_ptr),\ delim);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{if}(end\_token\ !=\ NULL)\{}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00040}00040\ \ \ \ \ \ \ \ \ strncpy(token,\ (*start\_ptr),\ end\_token-\/(*start\_ptr));}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00041}00041\ \ \ \ \ \ \ \ \ (*start\_ptr)\ =\ end\_token+1;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00044}00044\ \ \ \ \ \ \ \ \ strcpy(token,\ (*start\_ptr));}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00045}00045\ \ \ \ \ \ \ \ \ (*start\_ptr)\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00048}00048\ \ \ \ \ \textcolor{keywordflow}{return}\ token;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00055}00055\ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct__jogador}{JOGADOR}}\ process\_jogador(\textcolor{keywordtype}{char}\ *line)\{}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00056}00056\ \ \ \ \ \mbox{\hyperlink{struct__jogador}{JOGADOR}}\ j\_out;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00057}00057\ \ \ \ \ \textcolor{keywordtype}{char}\ *line\_ptr\ =\ line;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00058}00058\ \ \ \ \ int32\_t\ len;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ ADICIONAR\ FUNCIONALIDADE\ PARA\ LER\ .CSV}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00062}00062\ \ \ \ \ \textcolor{keywordtype}{char}\ *id\_str\ =\ get\_token\_str(\&line\_ptr,\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00063}00063\ \ \ \ \ \textcolor{comment}{//\ Poderia\ verificar\ tambem,\ mas\ sei\ que\ sempre\ havera\ um\ id}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00064}00064\ \ \ \ \ sscanf(id\_str,\ \textcolor{stringliteral}{"{}\%"{}}\ PRId32,\ \&j\_out.\mbox{\hyperlink{struct__jogador_af676b94e303cdfdb2b454760b95d4e11}{id}});}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00065}00065\ \ \ \ \ free(id\_str);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00066}00066\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00067}00067\ \ \ \ \ \textcolor{keywordtype}{char}\ *idade\_str\ =\ get\_token\_str(\&line\_ptr,\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00068}00068\ \ \ \ \ \textcolor{keywordflow}{if}(strcmp(idade\_str,\ \textcolor{stringliteral}{"{}"{}})\ !=\ 0)\{}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ sscanf(idade\_str,\ \textcolor{stringliteral}{"{}\%"{}}\ PRId32,\ \&j\_out.\mbox{\hyperlink{struct__jogador_a8adcfe8098ef47167d9bcb90d0fb3333}{idade}});}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00070}00070\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00071}00071\ \ \ \ \ \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ j\_out.\mbox{\hyperlink{struct__jogador_a8adcfe8098ef47167d9bcb90d0fb3333}{idade}}\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00073}00073\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00074}00074\ \ \ \ \ free(idade\_str);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00076}00076\ \ \ \ \ \textcolor{keywordtype}{char}\ *nome\_str\ =\ get\_token\_str(\&line\_ptr,\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00077}00077\ \ \ \ \ len\ =\ strlen(nome\_str);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00078}00078\ \ \ \ \ j\_out.\mbox{\hyperlink{struct__jogador_a8427987f0d50325dffa8b57aa0d38108}{nome}}\ =\ (\textcolor{keywordtype}{char}\ *)malloc(len+1);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00079}00079\ \ \ \ \ strcpy(j\_out.\mbox{\hyperlink{struct__jogador_a8427987f0d50325dffa8b57aa0d38108}{nome}},\ nome\_str);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00080}00080\ \ \ \ \ free(nome\_str);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00082}00082\ \ \ \ \ \textcolor{keywordtype}{char}\ *nac\_str\ =\ get\_token\_str(\&line\_ptr,\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00083}00083\ \ \ \ \ len\ =\ strlen(nac\_str);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00084}00084\ \ \ \ \ j\_out.\mbox{\hyperlink{struct__jogador_a1238c1b3f73f6167be24cf663fc92cd6}{nac}}\ =\ (\textcolor{keywordtype}{char}\ *)malloc(len+1);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00085}00085\ \ \ \ \ strcpy(j\_out.\mbox{\hyperlink{struct__jogador_a1238c1b3f73f6167be24cf663fc92cd6}{nac}},\ nac\_str);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00086}00086\ \ \ \ \ free(nac\_str);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00088}00088\ \ \ \ \ \textcolor{keywordtype}{char}\ *clube\_str\ =\ get\_token\_str(\&line\_ptr,\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00089}00089\ \ \ \ \ len\ =\ strlen(clube\_str);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00090}00090\ \ \ \ \ j\_out.\mbox{\hyperlink{struct__jogador_a9f0752f580dab3b4d1f333e42e68840e}{clube}}\ =\ (\textcolor{keywordtype}{char}\ *)malloc(len+1);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00091}00091\ \ \ \ \ strcpy(j\_out.\mbox{\hyperlink{struct__jogador_a9f0752f580dab3b4d1f333e42e68840e}{clube}},\ clube\_str);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00092}00092\ \ \ \ \ free(clube\_str);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00094}00094\ \ \ \ \ \textcolor{keywordflow}{return}\ j\_out;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00095}00095\ \}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00100}00100\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ add\_reg\_bfile(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct__jogador}{JOGADOR}}\ j,\ FILE\ *data\_bfile\_fptr)\{}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00101}00101\ \ \ \ \ int32\_t\ reg\_size\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00102}00102\ \ \ \ \ \mbox{\hyperlink{campo-utils_8c_ab3c7d0592e7067813cfb080adedac130}{set\_campoc}}(\textcolor{charliteral}{'0'},\ data\_bfile\_fptr);\ reg\_size\ +=\ 1;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00104}00104\ \ \ \ \ \textcolor{keywordtype}{long}\ reg\_size\_fpos\ =\ ftell(data\_bfile\_fptr);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00105}00105\ \ \ \ \ fseek(data\_bfile\_fptr,\ 4,\ SEEK\_CUR);\ \textcolor{comment}{//\ Pular\ o\ campo\ do\ tamanho}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00106}00106\ \ \ \ \ reg\_size\ +=\ 4;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00108}00108\ \ \ \ \ \mbox{\hyperlink{campo-utils_8c_af4bd9c700c809b2a550a063f289df15e}{set\_campo64}}(-\/1,\ data\_bfile\_fptr);\ reg\_size\ +=\ 8;\ \textcolor{comment}{//\ Atribuicao\ do\ campo\ Prox}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00109}00109\ \ \ \ \ \mbox{\hyperlink{campo-utils_8c_aa971299104287e7b7c41c3b166012d8c}{set\_campo32}}(j.\mbox{\hyperlink{struct__jogador_af676b94e303cdfdb2b454760b95d4e11}{id}},\ data\_bfile\_fptr);\ reg\_size\ +=\ 4;\ \textcolor{comment}{//\ Atribuicao\ do\ campo\ id}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00110}00110\ \ \ \ \ \mbox{\hyperlink{campo-utils_8c_aa971299104287e7b7c41c3b166012d8c}{set\_campo32}}(j.\mbox{\hyperlink{struct__jogador_a8adcfe8098ef47167d9bcb90d0fb3333}{idade}},\ data\_bfile\_fptr);\ reg\_size\ +=\ 4;\ \textcolor{comment}{//\ Atribuicao\ do\ campo\ idade}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00112}00112\ \ \ \ \ \textcolor{comment}{//\ Estou\ atribuindo\ o\ tamanho\ de\ cada\ campo\ em\ uma\ variavel\ para\ um\ futuro\ tratamento\ de\ erro}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00114}00114\ \ \ \ \ int32\_t\ size\_aux\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00115}00115\ \ \ \ \ \mbox{\hyperlink{campo-utils_8c_add8877213d85fc5ba7f550ee1605f9b8}{set\_campo\_str}}(j.\mbox{\hyperlink{struct__jogador_a8427987f0d50325dffa8b57aa0d38108}{nome}},\ \&size\_aux,\ data\_bfile\_fptr);\ reg\_size\ +=\ size\_aux;\ \textcolor{comment}{//\ Atribuicao\ do\ campo\ tamNomeJog\ e\ nomeJogador}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00116}00116\ \ \ \ \ \mbox{\hyperlink{campo-utils_8c_add8877213d85fc5ba7f550ee1605f9b8}{set\_campo\_str}}(j.\mbox{\hyperlink{struct__jogador_a1238c1b3f73f6167be24cf663fc92cd6}{nac}},\ \&size\_aux,\ data\_bfile\_fptr);\ reg\_size\ +=\ size\_aux;\ \textcolor{comment}{//\ Atribuicao\ do\ campo\ tamNacionalidade\ e\ nacionalidade}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00117}00117\ \ \ \ \ \mbox{\hyperlink{campo-utils_8c_add8877213d85fc5ba7f550ee1605f9b8}{set\_campo\_str}}(j.\mbox{\hyperlink{struct__jogador_a9f0752f580dab3b4d1f333e42e68840e}{clube}},\ \&size\_aux,\ data\_bfile\_fptr);\ reg\_size\ +=\ size\_aux;\ \textcolor{comment}{//\ Atribuicao\ do\ campo\ tamNomeClube\ e\ nomeClube}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00118}00118\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00119}00119\ \ \ \ \ \textcolor{comment}{//\ Voltar\ no\ campo\ tamanhoRegistro\ e\ atribuir\ o\ valor\ correto\ no\ campo}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00120}00120\ \ \ \ \ fseek(data\_bfile\_fptr,\ -\/(reg\_size-\/1),\ SEEK\_CUR);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00121}00121\ \ \ \ \ fwrite(\&reg\_size,\ 4,\ 1,\ data\_bfile\_fptr);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00123}00123\ \ \ \ \ \textcolor{comment}{//\ Ir\ para\ o\ fim\ do\ registro}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00124}00124\ \ \ \ \ fseek(data\_bfile\_fptr,\ reg\_size-\/5,\ SEEK\_CUR);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00126}00126\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00127}00127\ \}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00129}\mbox{\hyperlink{create-data-file_8c_a6b5abf123912c019bea5e88f24ebe1a4}{00129}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{create-data-file_8c_a6b5abf123912c019bea5e88f24ebe1a4}{create\_data\_file\_from\_csv}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *input\_filename,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *output\_filename)\{}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00130}00130\ \ \ \ \ \textcolor{comment}{//\ Abrir\ o\ arquivo\ .csv\ no\ modo\ leitura}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00131}00131\ \ \ \ \ FILE\ *csv\_data\_fptr;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00132}00132\ \ \ \ \ \textcolor{keywordflow}{if}((csv\_data\_fptr\ =\ fopen(input\_filename,\ \textcolor{stringliteral}{"{}r"{}}))\ ==\ NULL)\{}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00134}00134\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00136}00136\ \ \ \ \ \textcolor{comment}{//\ Abrir\ o\ arquivo\ de\ dados\ binario\ no\ modo\ escrita\ binaria}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00137}00137\ \ \ \ \ FILE\ *data\_bfile\_fptr;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00138}00138\ \ \ \ \ \textcolor{keywordflow}{if}((data\_bfile\_fptr\ =\ fopen(output\_filename,\ \textcolor{stringliteral}{"{}wb"{}}))\ ==\ NULL)\{}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00139}00139\ \ \ \ \ \ \ \ \ fclose(csv\_data\_fptr);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00141}00141\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00143}00143\ \ \ \ \ \textcolor{comment}{//\ Atribuição\ do\ status}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00144}00144\ \ \ \ \ \mbox{\hyperlink{campo-utils_8c_ab3c7d0592e7067813cfb080adedac130}{set\_campoc}}(\textcolor{charliteral}{'0'},\ data\_bfile\_fptr);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00146}00146\ \ \ \ \ \textcolor{comment}{//\ Pular\ cabecalho}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00147}00147\ \ \ \ \ fseek(data\_bfile\_fptr,\ HEADER\_END\_OFFSET,\ SEEK\_SET);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00149}00149\ \ \ \ \ \textcolor{comment}{//\ Ler\ a\ primeira\ linha\ do\ arquivo\ .csv\ (colunas)}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00150}00150\ \ \ \ \ \textcolor{keywordtype}{char}\ columns[\mbox{\hyperlink{campo-utils_8h_a6b20d41d6252e9871430c242cb1a56e7}{BUFFER\_SIZE}}];}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00151}00151\ \ \ \ \ fgets(columns,\ \mbox{\hyperlink{campo-utils_8h_a6b20d41d6252e9871430c242cb1a56e7}{BUFFER\_SIZE}},\ csv\_data\_fptr);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00152}00152\ \ \ \ \ \mbox{\hyperlink{create-data-file_8c_a2cb51aeffc1b8f1567ea18cc98bcf056}{TRIM\_NEWLINE}}(columns);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00154}00154\ \ \ \ \ \textcolor{comment}{//\ Verifica\ se\ as\ colunas\ do\ .csv\ correspondem\ ao\ do\ projeto}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00155}00155\ \ \ \ \ \textcolor{keywordflow}{if}(strcmp(columns,\ \mbox{\hyperlink{data-file_8h_a0cdcabc76f88ad07c6508509d47a1dd9}{COLUMN\_NAMES}})\ !=\ 0)\{}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ fclose(csv\_data\_fptr);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ fclose(data\_bfile\_fptr);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;\ \textcolor{comment}{//\ Posso\ retornar\ 1\ para\ indicar\ um\ erro\ lógico,\ não\ de\ saída}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00159}00159\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00161}00161\ \ \ \ \ \textcolor{comment}{//\ Contador\ da\ quantidade\ de\ registros}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00162}00162\ \ \ \ \ int32\_t\ reg\_count\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00164}00164\ \ \ \ \ \textcolor{keywordflow}{while}(1)\{}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Ler\ linha\ no\ csv}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00166}00166\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ line\_buff[\mbox{\hyperlink{campo-utils_8h_a6b20d41d6252e9871430c242cb1a56e7}{BUFFER\_SIZE}}];}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00167}00167\ \ \ \ \ \ \ \ \ fgets(line\_buff,\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char})\ *\ \mbox{\hyperlink{campo-utils_8h_a6b20d41d6252e9871430c242cb1a56e7}{BUFFER\_SIZE}},\ csv\_data\_fptr);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(feof(csv\_data\_fptr))\{}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{create-data-file_8c_a2cb51aeffc1b8f1567ea18cc98bcf056}{TRIM\_NEWLINE}}(line\_buff);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Processa\ a\ linha\ do\ csv\ e\ coloca\ o\ jogador\ no\ arquivo\ binario}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct__jogador}{JOGADOR}}\ j\ =\ process\_jogador(line\_buff);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00177}00177\ \ \ \ \ \ \ \ \ add\_reg\_bfile(j,\ data\_bfile\_fptr);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{data-file-utils_8c_a6f910d734dfbd064b1836f4757411e54}{free\_jogador}}(\&j);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ reg\_count++;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00181}00181\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00183}00183\ \ \ \ \ \textcolor{comment}{//\ Pega\ o\ valor\ do\ proxByteOffset\ (campo\ do\ cabecalho\ do\ arquivo)}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00184}00184\ \ \ \ \ int64\_t\ prox\_byte\_offset\ =\ ftell(data\_bfile\_fptr);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00185}00185\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00186}00186\ \ \ \ \ \textcolor{comment}{//\ Atribuicao\ do\ cabecalho}}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00187}00187\ \ \ \ \ fseek(data\_bfile\_fptr,\ 0,\ SEEK\_SET);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00188}00188\ \ \ \ \ \mbox{\hyperlink{cabecalho-utils_8c_a2a6576cd4998e82d20db96fb20fcbc0c}{initialize\_cabecalho}}(\textcolor{charliteral}{'1'},\ -\/1,\ prox\_byte\_offset,\ reg\_count,\ 0,\ data\_bfile\_fptr);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00190}00190\ \ \ \ \ fclose(csv\_data\_fptr);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00191}00191\ \ \ \ \ fclose(data\_bfile\_fptr);}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00193}00193\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{create-data-file_8c_source_l00194}00194\ \}}
+
+\end{DoxyCode}

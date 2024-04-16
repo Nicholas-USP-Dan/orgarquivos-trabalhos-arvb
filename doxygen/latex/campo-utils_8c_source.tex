@@ -1,0 +1,86 @@
+\doxysection{campo-\/utils.c}
+\hypertarget{campo-utils_8c_source}{}\label{campo-utils_8c_source}\mbox{\hyperlink{campo-utils_8c}{Ir para a documentação desse arquivo.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{campo-utils_8h}{campo-\/utils.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00021}00021\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ get\_campoc(FILE\ *fp)\{}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00022}00022\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ c\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00023}00023\ \ \ \ \ fread(\&c,\ 1,\ 1,\ fp);}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00025}00025\ \ \ \ \ \textcolor{keywordflow}{return}\ c;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00026}00026\ \}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00028}00028\ int32\_t\ get\_campo32(FILE\ *fp)\{}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00029}00029\ \ \ \ \ int32\_t\ n\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00030}00030\ \ \ \ \ fread(\&n,\ 4,\ 1,\ fp);}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{return}\ n;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00033}00033\ \}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00035}00035\ int64\_t\ get\_campo64(FILE\ *fp)\{}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00036}00036\ \ \ \ \ int64\_t\ n\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00037}00037\ \ \ \ \ fread(\&n,\ 8,\ 1,\ fp);}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{return}\ n;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00040}00040\ \}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00042}00042\ \textcolor{keywordtype}{char}*\ get\_campo\_str(FILE\ *fp)\{}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00043}00043\ \ \ \ \ int32\_t\ size;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00044}00044\ \ \ \ \ fread(\&size,\ 4,\ 1,\ fp);}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00046}00046\ \ \ \ \ \textcolor{keywordtype}{char}\ *str\ =\ malloc(\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char})\ *\ (size+1));}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00047}00047\ \ \ \ \ fread(str,\ 1,\ size,\ fp);}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00048}00048\ \ \ \ \ str[size]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{return}\ str;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00051}00051\ \}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00053}\mbox{\hyperlink{campo-utils_8c_ab3c7d0592e7067813cfb080adedac130}{00053}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{campo-utils_8c_ab3c7d0592e7067813cfb080adedac130}{set\_campoc}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ c,\ FILE\ *fp)\{}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{if}(fwrite(\&c,\ 1,\ 1,\ fp)\ !=\ 1)\{\ \textcolor{comment}{//\ Tenta\ escrever\ os\ bytes\ na\ posicao\ colocada}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00057}00057\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00059}00059\ \}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00061}\mbox{\hyperlink{campo-utils_8c_aa971299104287e7b7c41c3b166012d8c}{00061}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{campo-utils_8c_aa971299104287e7b7c41c3b166012d8c}{set\_campo32}}(\textcolor{keyword}{const}\ int32\_t\ val,\ FILE\ *fp)\{}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00062}00062\ \ \ \ \ \textcolor{keywordflow}{if}(fwrite(\&val,\ 4,\ 1,\ fp)\ !=\ 1)\{\ \textcolor{comment}{//\ Tenta\ escrever\ os\ bytes\ na\ posicao\ colocada}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00064}00064\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00065}00065\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00066}00066\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00067}00067\ \}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00069}\mbox{\hyperlink{campo-utils_8c_af4bd9c700c809b2a550a063f289df15e}{00069}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{campo-utils_8c_af4bd9c700c809b2a550a063f289df15e}{set\_campo64}}(\textcolor{keyword}{const}\ int64\_t\ val,\ FILE\ *fp)\{}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00070}00070\ \ \ \ \ \textcolor{keywordflow}{if}(fwrite(\&val,\ 8,\ 1,\ fp)\ !=\ 1)\{\ \textcolor{comment}{//\ Tenta\ escrever\ os\ bytes\ na\ posicao\ colocada}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00073}00073\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00075}00075\ \}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00077}\mbox{\hyperlink{campo-utils_8c_add8877213d85fc5ba7f550ee1605f9b8}{00077}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{campo-utils_8c_add8877213d85fc5ba7f550ee1605f9b8}{set\_campo\_str}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *str,\ int32\_t\ *campo\_len,\ FILE\ *fp)\{}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00078}00078\ \ \ \ \ int32\_t\ len\ =\ strlen(str);}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00079}00079\ \ \ \ \ \textcolor{keywordflow}{if}(fwrite(\&len,\ 4,\ 1,\ fp)\ !=\ 1)\{\ \textcolor{comment}{//\ Tenta\ escrever\ os\ bytes\ na\ posicao\ colocada}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ (*campo\_len)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00082}00082\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00083}00083\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00084}00084\ \ \ \ \ \textcolor{keywordflow}{if}(len\ >\ 0)\{}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(fwrite(str,\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}),\ len,\ fp)\ !=\ len)\{\ \textcolor{comment}{//\ Tenta\ escrever\ os\ bytes\ na\ posicao\ colocada}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ (*campo\_len)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00089}00089\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00091}00091\ \ \ \ \ (*campo\_len)\ =\ 4\ +\ len;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00092}00092\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{campo-utils_8c_source_l00093}00093\ \}}
+
+\end{DoxyCode}

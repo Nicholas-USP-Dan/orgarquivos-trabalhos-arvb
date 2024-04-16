@@ -1,0 +1,19 @@
+<map id="data&#45;file&#45;utils.c" name="data&#45;file&#45;utils.c">
+<area shape="rect" id="Node000001" title="Source file de algumas utilidades gerais do arquivo binário de dados." alt="" coords="269,5,389,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,72,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="282,33,86,81,85,76,281,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="97,79,167,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="299,33,178,76,176,71,297,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="191,79,262,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="314,33,256,73,253,68,311,28"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="286,79,373,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="332,31,332,65,327,65,327,31"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="469,152,539,177"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="345,29,481,141,478,145,342,33"/>
+<area shape="rect" id="Node000007" href="$campo-utils_8h.html" title="Header file para funcionalidades dos campos de um registro." alt="" coords="449,79,559,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="358,28,464,71,462,76,356,33"/>
+<area shape="rect" id="Node000008" href="$data-file_8h.html" title="Header file para as funcionalidades relacionadas aos arquivos binarios de dado." alt="" coords="584,79,672,104"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="378,28,571,74,570,79,377,33"/>
+<area shape="poly" id="edge7_Node000007_Node000006" title=" " alt="" coords="507,104,507,138,501,138,501,104"/>
+<area shape="poly" id="edge9_Node000008_Node000006" title=" " alt="" coords="609,106,537,147,535,143,607,102"/>
+</map>

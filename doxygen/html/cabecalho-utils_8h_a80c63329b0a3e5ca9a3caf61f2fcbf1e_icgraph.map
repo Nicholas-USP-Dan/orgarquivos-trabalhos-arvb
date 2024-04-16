@@ -1,0 +1,9 @@
+<map id="check_status" name="check_status">
+<area shape="rect" id="Node000001" title="Funcao que verifica o status de um arquivo de dados binario." alt="" coords="177,67,284,92"/>
+<area shape="rect" id="Node000002" href="$filter-data-file_8c.html#a4adb3bdcf5bcd67236c4ec5fc766712f" title=" " alt="" coords="10,29,125,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,67,123,57,124,52,165,62"/>
+<area shape="rect" id="Node000003" href="$select-data-file_8c.html#a8ef3786541c8c8e1aafed9f6b8c9f76b" title=" " alt="" coords="5,103,129,128"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="165,97,126,105,125,100,164,91"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="96,19,87,11,67,8,50,10,41,15,40,20,45,28,40,31,34,21,37,11,49,5,67,3,90,6,99,15"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="96,92,87,84,67,81,50,83,41,88,40,94,45,101,40,104,34,94,37,85,49,78,67,76,90,79,99,88"/>
+</map>
