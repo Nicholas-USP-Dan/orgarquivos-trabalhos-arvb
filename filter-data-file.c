@@ -162,6 +162,10 @@ int filter_data_file(const int n, const char *input_filename){
             free_jogador(&j);
 
             reg_count++;
+
+            if(bitmask(mask, 0) && j_query.id == j.id)){
+                break;
+            }
         }
 
         // Imprimir: "Registro inexistente." caso nenhum registro passar pelo filtro
