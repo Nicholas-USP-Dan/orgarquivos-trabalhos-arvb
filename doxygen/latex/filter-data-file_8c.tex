@@ -1,0 +1,140 @@
+\doxysection{Referência do Arquivo filter-\/data-\/file.c}
+\hypertarget{filter-data-file_8c}{}\label{filter-data-file_8c}\index{filter-\/data-\/file.c@{filter-\/data-\/file.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$inttypes.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}data-\/file.\+h"{}}\newline
+{\ttfamily \#include "{}funcoes\+\_\+fornecidas.\+h"{}}\newline
+{\ttfamily \#include "{}cabecalho-\/utils.\+h"{}}\newline
+{\ttfamily \#include "{}campo-\/utils.\+h"{}}\newline
+Gráfico de dependência de inclusões para filter-\/data-\/file.c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{filter-data-file_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{filter-data-file_8c_a13e7ac7a07911bb4f49b35c359cb22b9}{bitmask}} (unsigned int mask, int bit)
+\item 
+static \mbox{\hyperlink{data-file_8h_a2321b8fd26b048beaed90d709e28c764}{JOGADOR}} \mbox{\hyperlink{filter-data-file_8c_a16a8c9a4394fefc4cc5e8c031d174546}{read\+\_\+query}} (unsigned int \texorpdfstring{$\ast$}{*}mask)
+\item 
+int \mbox{\hyperlink{filter-data-file_8c_a4adb3bdcf5bcd67236c4ec5fc766712f}{filter\+\_\+data\+\_\+file}} (const int n, const char \texorpdfstring{$\ast$}{*}input\+\_\+filename)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+static const \mbox{\hyperlink{data-file_8h_a2321b8fd26b048beaed90d709e28c764}{JOGADOR}} \mbox{\hyperlink{filter-data-file_8c_ace891dd6227608ab2c541cf1b80c3108}{j\+Nil}}
+\item 
+static const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{filter-data-file_8c_a1f8abe01815f0150b56d97a5b3b646f3}{CAMPO\+\_\+\+LIST}} \mbox{[}5\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Funções}
+\Hypertarget{filter-data-file_8c_a13e7ac7a07911bb4f49b35c359cb22b9}\label{filter-data-file_8c_a13e7ac7a07911bb4f49b35c359cb22b9} 
+\index{filter-\/data-\/file.c@{filter-\/data-\/file.c}!bitmask@{bitmask}}
+\index{bitmask@{bitmask}!filter-\/data-\/file.c@{filter-\/data-\/file.c}}
+\doxysubsubsection{\texorpdfstring{bitmask()}{bitmask()}}
+{\footnotesize\ttfamily static int bitmask (\begin{DoxyParamCaption}\item[{unsigned int}]{mask,  }\item[{int}]{bit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Funcao para a filtragem de um bit em um bitmask Esse é o diagrama das funções que utilizam essa função\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=335pt]{filter-data-file_8c_a13e7ac7a07911bb4f49b35c359cb22b9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{filter-data-file_8c_a16a8c9a4394fefc4cc5e8c031d174546}\label{filter-data-file_8c_a16a8c9a4394fefc4cc5e8c031d174546} 
+\index{filter-\/data-\/file.c@{filter-\/data-\/file.c}!read\_query@{read\_query}}
+\index{read\_query@{read\_query}!filter-\/data-\/file.c@{filter-\/data-\/file.c}}
+\doxysubsubsection{\texorpdfstring{read\_query()}{read\_query()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{data-file_8h_a2321b8fd26b048beaed90d709e28c764}{JOGADOR}} read\+\_\+query (\begin{DoxyParamCaption}\item[{unsigned int \texorpdfstring{$\ast$}{*}}]{mask }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Le uma linha (do stdin) e retorna um jogador com todos os dados da busca definidos; os campos nao procurados ficam vazios; Este jogador representa os campos da filtragem
+
+Alem disso a funcao atribui uma mascara (bitmask) para a filtragem, em que o bit representando um campo e atribuido como 1;
+
+Esta configuracao traz a verificacao mais eficiente dos campos a serem filtrados Este é o diagrama das funções utilizadas por essa função\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{filter-data-file_8c_a16a8c9a4394fefc4cc5e8c031d174546_cgraph}
+\end{center}
+\end{figure}
+Esse é o diagrama das funções que utilizam essa função\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{filter-data-file_8c_a16a8c9a4394fefc4cc5e8c031d174546_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{filter-data-file_8c_a4adb3bdcf5bcd67236c4ec5fc766712f}\label{filter-data-file_8c_a4adb3bdcf5bcd67236c4ec5fc766712f} 
+\index{filter-\/data-\/file.c@{filter-\/data-\/file.c}!filter\_data\_file@{filter\_data\_file}}
+\index{filter\_data\_file@{filter\_data\_file}!filter-\/data-\/file.c@{filter-\/data-\/file.c}}
+\doxysubsubsection{\texorpdfstring{filter\_data\_file()}{filter\_data\_file()}}
+{\footnotesize\ttfamily int filter\+\_\+data\+\_\+file (\begin{DoxyParamCaption}\item[{const int}]{n,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{input\+\_\+filename }\end{DoxyParamCaption})}
+
+Funcao da funcionalidade 3 -\/ Filtra os registros validos (nao removidos) de um arquivo binario de dados
+
+Se realiza n pesquisar, cada uma sendo rotulada como Busca x Este é o diagrama das funções utilizadas por essa função\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{filter-data-file_8c_a4adb3bdcf5bcd67236c4ec5fc766712f_cgraph}
+\end{center}
+\end{figure}
+Esse é o diagrama das funções que utilizam essa função\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{filter-data-file_8c_a4adb3bdcf5bcd67236c4ec5fc766712f_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variáveis}
+\Hypertarget{filter-data-file_8c_ace891dd6227608ab2c541cf1b80c3108}\label{filter-data-file_8c_ace891dd6227608ab2c541cf1b80c3108} 
+\index{filter-\/data-\/file.c@{filter-\/data-\/file.c}!jNil@{jNil}}
+\index{jNil@{jNil}!filter-\/data-\/file.c@{filter-\/data-\/file.c}}
+\doxysubsubsection{\texorpdfstring{jNil}{jNil}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{data-file_8h_a2321b8fd26b048beaed90d709e28c764}{JOGADOR}} j\+Nil\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ .id\ =\ -\/1,}
+\DoxyCodeLine{\ \ \ \ .idade\ =\ -\/1,}
+\DoxyCodeLine{\ \ \ \ .nome\ =\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\ \ \ \ .nac\ =\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{\ \ \ \ .clube\ =\ \textcolor{stringliteral}{"{}"{}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+Instancia de um jogador vazio/nulo \Hypertarget{filter-data-file_8c_a1f8abe01815f0150b56d97a5b3b646f3}\label{filter-data-file_8c_a1f8abe01815f0150b56d97a5b3b646f3} 
+\index{filter-\/data-\/file.c@{filter-\/data-\/file.c}!CAMPO\_LIST@{CAMPO\_LIST}}
+\index{CAMPO\_LIST@{CAMPO\_LIST}!filter-\/data-\/file.c@{filter-\/data-\/file.c}}
+\doxysubsubsection{\texorpdfstring{CAMPO\_LIST}{CAMPO\_LIST}}
+{\footnotesize\ttfamily const char\texorpdfstring{$\ast$}{*} CAMPO\+\_\+\+LIST\mbox{[}5\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}id"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}idade"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}nomeJogador"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}nacionalidade"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}nomeClube"{}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+Array com todos os nomes dos campos para realizar a filtragem 

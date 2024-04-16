@@ -1,0 +1,179 @@
+\doxysection{Referência do Arquivo data-\/file.h}
+\hypertarget{data-file_8h}{}\label{data-file_8h}\index{data-\/file.h@{data-\/file.h}}
+
+
+Header file para as funcionalidades relacionadas aos arquivos binarios de dado.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Gráfico de dependência de inclusões para data-\/file.h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=146pt]{data-file_8h__incl}
+\end{center}
+\end{figure}
+Este grafo mostra quais arquivos estão direta ou indiretamente relacionados com esse arquivo\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{data-file_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Estruturas de Dados}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct__jogador}{\+\_\+jogador}}
+\begin{DoxyCompactList}\small\item\em Estrutura que contém os dados de um jogador, pode representar um registro no arquivo de dados. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Definições e Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{data-file_8h_a0cdcabc76f88ad07c6508509d47a1dd9}{COLUMN\+\_\+\+NAMES}}~"{}id,idade,nome\+Jogador,nacionalidade,nome\+Clube"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Definições de Tipos}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{data-file_8h_a2321b8fd26b048beaed90d709e28c764}\label{data-file_8h_a2321b8fd26b048beaed90d709e28c764} 
+typedef struct \mbox{\hyperlink{struct__jogador}{\+\_\+jogador}} {\bfseries JOGADOR}
+\begin{DoxyCompactList}\small\item\em Tipo da estrutura representando os dados de um jogador. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{data-file_8h_a6f910d734dfbd064b1836f4757411e54}{free\+\_\+jogador}} (\mbox{\hyperlink{data-file_8h_a2321b8fd26b048beaed90d709e28c764}{JOGADOR}} \texorpdfstring{$\ast$}{*}j)
+\item 
+void \mbox{\hyperlink{data-file_8h_ac9b1f74f8a2fb5b6f69e9280365a3bac}{print\+\_\+jogador}} (\mbox{\hyperlink{data-file_8h_a2321b8fd26b048beaed90d709e28c764}{JOGADOR}} j)
+\item 
+\mbox{\hyperlink{data-file_8h_a2321b8fd26b048beaed90d709e28c764}{JOGADOR}} \mbox{\hyperlink{data-file_8h_a2285fb0ccb50c92d981ecee51f9ed594}{read\+\_\+jogador\+\_\+data}} (FILE \texorpdfstring{$\ast$}{*}fptr)
+\item 
+int \mbox{\hyperlink{data-file_8h_a6b5abf123912c019bea5e88f24ebe1a4}{create\+\_\+data\+\_\+file\+\_\+from\+\_\+csv}} (const char \texorpdfstring{$\ast$}{*}input\+\_\+filename, const char \texorpdfstring{$\ast$}{*}output\+\_\+filename)
+\item 
+int \mbox{\hyperlink{data-file_8h_a8ef3786541c8c8e1aafed9f6b8c9f76b}{select\+\_\+data\+\_\+file}} (const char \texorpdfstring{$\ast$}{*}input\+\_\+filename)
+\item 
+int \mbox{\hyperlink{data-file_8h_a4adb3bdcf5bcd67236c4ec5fc766712f}{filter\+\_\+data\+\_\+file}} (const int n, const char \texorpdfstring{$\ast$}{*}input\+\_\+filename)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Header file para as funcionalidades relacionadas aos arquivos binarios de dado. 
+
+Este arquivo contém as declarações das funcionalidades exigidas pelo Trabalho Prático Introdutório como especificado na disciplina Organização de Arquivos.
+
+\begin{DoxyNote}{Observação}
+Cada implementação está separada em um arquivo diferente para diminuir a linhas de código de cada arquivo,
+\end{DoxyNote}
+\begin{DoxyAuthor}{Autores}
+Nicholas Eiti Dan; N°\+USP\+: 14600749 
+
+Laura Neri Thomaz da Silva; N°\+USP\+: 13673221 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Versão}
+1.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Definições e macros}
+\Hypertarget{data-file_8h_a0cdcabc76f88ad07c6508509d47a1dd9}\label{data-file_8h_a0cdcabc76f88ad07c6508509d47a1dd9} 
+\index{data-\/file.h@{data-\/file.h}!COLUMN\_NAMES@{COLUMN\_NAMES}}
+\index{COLUMN\_NAMES@{COLUMN\_NAMES}!data-\/file.h@{data-\/file.h}}
+\doxysubsubsection{\texorpdfstring{COLUMN\_NAMES}{COLUMN\_NAMES}}
+{\footnotesize\ttfamily \#define COLUMN\+\_\+\+NAMES~"{}id,idade,nome\+Jogador,nacionalidade,nome\+Clube"{}}
+
+Nome das colunas como registrado no Trabalho Introdutório de Organização de Arquivos 
+
+\doxysubsection{Funções}
+\Hypertarget{data-file_8h_a6f910d734dfbd064b1836f4757411e54}\label{data-file_8h_a6f910d734dfbd064b1836f4757411e54} 
+\index{data-\/file.h@{data-\/file.h}!free\_jogador@{free\_jogador}}
+\index{free\_jogador@{free\_jogador}!data-\/file.h@{data-\/file.h}}
+\doxysubsubsection{\texorpdfstring{free\_jogador()}{free\_jogador()}}
+{\footnotesize\ttfamily void free\+\_\+jogador (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{data-file_8h_a2321b8fd26b048beaed90d709e28c764}{JOGADOR}} \texorpdfstring{$\ast$}{*}}]{j }\end{DoxyParamCaption})}
+
+Limpa a memria alocada por um jogador (strings) Esse é o diagrama das funções que utilizam essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{data-file_8h_a6f910d734dfbd064b1836f4757411e54_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{data-file_8h_ac9b1f74f8a2fb5b6f69e9280365a3bac}\label{data-file_8h_ac9b1f74f8a2fb5b6f69e9280365a3bac} 
+\index{data-\/file.h@{data-\/file.h}!print\_jogador@{print\_jogador}}
+\index{print\_jogador@{print\_jogador}!data-\/file.h@{data-\/file.h}}
+\doxysubsubsection{\texorpdfstring{print\_jogador()}{print\_jogador()}}
+{\footnotesize\ttfamily void print\+\_\+jogador (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{data-file_8h_a2321b8fd26b048beaed90d709e28c764}{JOGADOR}}}]{j }\end{DoxyParamCaption})}
+
+Funcao que imprime um jogador de acordo com os requisitos do projeto Esse é o diagrama das funções que utilizam essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=290pt]{data-file_8h_ac9b1f74f8a2fb5b6f69e9280365a3bac_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{data-file_8h_a2285fb0ccb50c92d981ecee51f9ed594}\label{data-file_8h_a2285fb0ccb50c92d981ecee51f9ed594} 
+\index{data-\/file.h@{data-\/file.h}!read\_jogador\_data@{read\_jogador\_data}}
+\index{read\_jogador\_data@{read\_jogador\_data}!data-\/file.h@{data-\/file.h}}
+\doxysubsubsection{\texorpdfstring{read\_jogador\_data()}{read\_jogador\_data()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{data-file_8h_a2321b8fd26b048beaed90d709e28c764}{JOGADOR}} read\+\_\+jogador\+\_\+data (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{fptr }\end{DoxyParamCaption})}
+
+Le um registro em fptr e atribui os valores na variavel JOGADOR Esse é o diagrama das funções que utilizam essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{data-file_8h_a2285fb0ccb50c92d981ecee51f9ed594_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{data-file_8h_a6b5abf123912c019bea5e88f24ebe1a4}\label{data-file_8h_a6b5abf123912c019bea5e88f24ebe1a4} 
+\index{data-\/file.h@{data-\/file.h}!create\_data\_file\_from\_csv@{create\_data\_file\_from\_csv}}
+\index{create\_data\_file\_from\_csv@{create\_data\_file\_from\_csv}!data-\/file.h@{data-\/file.h}}
+\doxysubsubsection{\texorpdfstring{create\_data\_file\_from\_csv()}{create\_data\_file\_from\_csv()}}
+{\footnotesize\ttfamily int create\+\_\+data\+\_\+file\+\_\+from\+\_\+csv (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{input\+\_\+filename,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{output\+\_\+filename }\end{DoxyParamCaption})}
+
+Funcao da funcionalidade 1 -\/ Criar um arquivo binario de dados a partir de um arquivo de dados .csv
+
+RETORNA\+: Retorna 0 qundo o arquivo é criado com sucesso, caso nao retorna -\/1 Este é o diagrama das funções utilizadas por essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{data-file_8h_a6b5abf123912c019bea5e88f24ebe1a4_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{data-file_8h_a8ef3786541c8c8e1aafed9f6b8c9f76b}\label{data-file_8h_a8ef3786541c8c8e1aafed9f6b8c9f76b} 
+\index{data-\/file.h@{data-\/file.h}!select\_data\_file@{select\_data\_file}}
+\index{select\_data\_file@{select\_data\_file}!data-\/file.h@{data-\/file.h}}
+\doxysubsubsection{\texorpdfstring{select\_data\_file()}{select\_data\_file()}}
+{\footnotesize\ttfamily int select\+\_\+data\+\_\+file (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{input\+\_\+filename }\end{DoxyParamCaption})}
+
+Funcao da funcionalidade 2 -\/ Imprime todos os registros validos (nao removidos) de um arquivo binario de dados Este é o diagrama das funções utilizadas por essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{data-file_8h_a8ef3786541c8c8e1aafed9f6b8c9f76b_cgraph}
+\end{center}
+\end{figure}
+Esse é o diagrama das funções que utilizam essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=173pt]{data-file_8h_a8ef3786541c8c8e1aafed9f6b8c9f76b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{data-file_8h_a4adb3bdcf5bcd67236c4ec5fc766712f}\label{data-file_8h_a4adb3bdcf5bcd67236c4ec5fc766712f} 
+\index{data-\/file.h@{data-\/file.h}!filter\_data\_file@{filter\_data\_file}}
+\index{filter\_data\_file@{filter\_data\_file}!data-\/file.h@{data-\/file.h}}
+\doxysubsubsection{\texorpdfstring{filter\_data\_file()}{filter\_data\_file()}}
+{\footnotesize\ttfamily int filter\+\_\+data\+\_\+file (\begin{DoxyParamCaption}\item[{const int}]{n,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{input\+\_\+filename }\end{DoxyParamCaption})}
+
+Funcao da funcionalidade 3 -\/ Filtra os registros validos (nao removidos) de um arquivo binario de dados
+
+Se realiza n pesquisar, cada uma sendo rotulada como Busca x Este é o diagrama das funções utilizadas por essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=309pt]{data-file_8h_a4adb3bdcf5bcd67236c4ec5fc766712f_cgraph}
+\end{center}
+\end{figure}
+Esse é o diagrama das funções que utilizam essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{data-file_8h_a4adb3bdcf5bcd67236c4ec5fc766712f_icgraph}
+\end{center}
+\end{figure}

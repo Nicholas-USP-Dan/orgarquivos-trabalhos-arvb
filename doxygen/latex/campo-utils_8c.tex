@@ -1,0 +1,114 @@
+\doxysection{Referência do Arquivo campo-\/utils.c}
+\hypertarget{campo-utils_8c}{}\label{campo-utils_8c}\index{campo-\/utils.c@{campo-\/utils.c}}
+
+
+Source file para as funcionalidades dos campos de um registro.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}campo-\/utils.\+h"{}}\newline
+Gráfico de dependência de inclusões para campo-\/utils.c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{campo-utils_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{campo-utils_8c_ab7fd74557648625c1572b40cab3e5ea1}\label{campo-utils_8c_ab7fd74557648625c1572b40cab3e5ea1} 
+unsigned char {\bfseries get\+\_\+campoc} (FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+\Hypertarget{campo-utils_8c_a6015c405517d39d697494a8228637b2b}\label{campo-utils_8c_a6015c405517d39d697494a8228637b2b} 
+int32\+\_\+t {\bfseries get\+\_\+campo32} (FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+\Hypertarget{campo-utils_8c_ac6e3f63071f3667052c9f8bd7c9b67bf}\label{campo-utils_8c_ac6e3f63071f3667052c9f8bd7c9b67bf} 
+int64\+\_\+t {\bfseries get\+\_\+campo64} (FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+\Hypertarget{campo-utils_8c_a802b51b6639a25d30e78404f74aa1971}\label{campo-utils_8c_a802b51b6639a25d30e78404f74aa1971} 
+char \texorpdfstring{$\ast$}{*} {\bfseries get\+\_\+campo\+\_\+str} (FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+int \mbox{\hyperlink{campo-utils_8c_ab3c7d0592e7067813cfb080adedac130}{set\+\_\+campoc}} (const unsigned char c, FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+int \mbox{\hyperlink{campo-utils_8c_aa971299104287e7b7c41c3b166012d8c}{set\+\_\+campo32}} (const int32\+\_\+t val, FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+int \mbox{\hyperlink{campo-utils_8c_af4bd9c700c809b2a550a063f289df15e}{set\+\_\+campo64}} (const int64\+\_\+t val, FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+int \mbox{\hyperlink{campo-utils_8c_add8877213d85fc5ba7f550ee1605f9b8}{set\+\_\+campo\+\_\+str}} (const char \texorpdfstring{$\ast$}{*}str, int32\+\_\+t \texorpdfstring{$\ast$}{*}campo\+\_\+len, FILE \texorpdfstring{$\ast$}{*}fp)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Source file para as funcionalidades dos campos de um registro. 
+
+Alguma descrição específica sobre o arquivo...
+
+\begin{DoxyAuthor}{Autores}
+Nicholas Eiti Dan; N°\+USP\+: 14600749 
+
+Laura Neri Thomaz da Silva; N°\+USP\+: 13673221
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Versão}
+1.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Funções}
+\Hypertarget{campo-utils_8c_ab3c7d0592e7067813cfb080adedac130}\label{campo-utils_8c_ab3c7d0592e7067813cfb080adedac130} 
+\index{campo-\/utils.c@{campo-\/utils.c}!set\_campoc@{set\_campoc}}
+\index{set\_campoc@{set\_campoc}!campo-\/utils.c@{campo-\/utils.c}}
+\doxysubsubsection{\texorpdfstring{set\_campoc()}{set\_campoc()}}
+{\footnotesize\ttfamily int set\+\_\+campoc (\begin{DoxyParamCaption}\item[{const unsigned char}]{c,  }\item[{FILE \texorpdfstring{$\ast$}{*}}]{fp }\end{DoxyParamCaption})}
+
+Atribui um char (string de 1 byte) no espaco apontado no arquivo Esse é o diagrama das funções que utilizam essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{campo-utils_8c_ab3c7d0592e7067813cfb080adedac130_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{campo-utils_8c_aa971299104287e7b7c41c3b166012d8c}\label{campo-utils_8c_aa971299104287e7b7c41c3b166012d8c} 
+\index{campo-\/utils.c@{campo-\/utils.c}!set\_campo32@{set\_campo32}}
+\index{set\_campo32@{set\_campo32}!campo-\/utils.c@{campo-\/utils.c}}
+\doxysubsubsection{\texorpdfstring{set\_campo32()}{set\_campo32()}}
+{\footnotesize\ttfamily int set\+\_\+campo32 (\begin{DoxyParamCaption}\item[{const int32\+\_\+t}]{val,  }\item[{FILE \texorpdfstring{$\ast$}{*}}]{fp }\end{DoxyParamCaption})}
+
+Atribui um inteiro de 32 bits (4 bytes) no espaco apontado no arquivo Esse é o diagrama das funções que utilizam essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{campo-utils_8c_aa971299104287e7b7c41c3b166012d8c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{campo-utils_8c_af4bd9c700c809b2a550a063f289df15e}\label{campo-utils_8c_af4bd9c700c809b2a550a063f289df15e} 
+\index{campo-\/utils.c@{campo-\/utils.c}!set\_campo64@{set\_campo64}}
+\index{set\_campo64@{set\_campo64}!campo-\/utils.c@{campo-\/utils.c}}
+\doxysubsubsection{\texorpdfstring{set\_campo64()}{set\_campo64()}}
+{\footnotesize\ttfamily int set\+\_\+campo64 (\begin{DoxyParamCaption}\item[{const int64\+\_\+t}]{val,  }\item[{FILE \texorpdfstring{$\ast$}{*}}]{fp }\end{DoxyParamCaption})}
+
+Atribui um inteiro de 64 bits (8 bytes) no espaco apontado no arquivo Esse é o diagrama das funções que utilizam essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{campo-utils_8c_af4bd9c700c809b2a550a063f289df15e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{campo-utils_8c_add8877213d85fc5ba7f550ee1605f9b8}\label{campo-utils_8c_add8877213d85fc5ba7f550ee1605f9b8} 
+\index{campo-\/utils.c@{campo-\/utils.c}!set\_campo\_str@{set\_campo\_str}}
+\index{set\_campo\_str@{set\_campo\_str}!campo-\/utils.c@{campo-\/utils.c}}
+\doxysubsubsection{\texorpdfstring{set\_campo\_str()}{set\_campo\_str()}}
+{\footnotesize\ttfamily int set\+\_\+campo\+\_\+str (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str,  }\item[{int32\+\_\+t \texorpdfstring{$\ast$}{*}}]{campo\+\_\+len,  }\item[{FILE \texorpdfstring{$\ast$}{*}}]{fp }\end{DoxyParamCaption})}
+
+Atribui uma string e seu tamanho no espaco apontado no arquivo
+
+RETORNA\+: Retorna a quantidade de bytes ocupados pelo campo (incluindo o campo de tamanho) Retorna -\/1 caso ocorra algum erro Esse é o diagrama das funções que utilizam essa função\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{campo-utils_8c_add8877213d85fc5ba7f550ee1605f9b8_icgraph}
+\end{center}
+\end{figure}

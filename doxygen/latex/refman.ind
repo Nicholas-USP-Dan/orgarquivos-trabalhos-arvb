@@ -1,0 +1,151 @@
+\begin{theindex}
+
+  \item {\_jogador}, \hyperpage{7}
+    \subitem {clube}, \hyperpage{8}
+    \subitem {id}, \hyperpage{7}
+    \subitem {idade}, \hyperpage{7}
+    \subitem {nac}, \hyperpage{8}
+    \subitem {nome}, \hyperpage{8}
+
+  \indexspace
+
+  \item {add\_reg\_bfile}
+    \subitem {create-\/data-\/file.c}, \hyperpage{23}
+
+  \indexspace
+
+  \item {binarioNaTela}
+    \subitem {funcoes\_fornecidas.c}, \hyperpage{34}
+    \subitem {funcoes\_fornecidas.h}, \hyperpage{35}
+  \item {BUFFER\_SIZE}
+    \subitem {campo-\/utils.h}, \hyperpage{19}
+
+  \indexspace
+
+  \item {cabecalho-\/utils.c}, \hyperpage{9}
+    \subitem {check\_status}, \hyperpage{11}
+    \subitem {initialize\_cabecalho}, \hyperpage{10}
+  \item {cabecalho-\/utils.h}, \hyperpage{11}
+    \subitem {check\_status}, \hyperpage{14}
+    \subitem {initialize\_cabecalho}, \hyperpage{13}
+  \item {campo-\/utils.c}, \hyperpage{15}
+    \subitem {set\_campo32}, \hyperpage{16}
+    \subitem {set\_campo64}, \hyperpage{16}
+    \subitem {set\_campo\_str}, \hyperpage{17}
+    \subitem {set\_campoc}, \hyperpage{16}
+  \item {campo-\/utils.h}, \hyperpage{17}
+    \subitem {BUFFER\_SIZE}, \hyperpage{19}
+    \subitem {set\_campo32}, \hyperpage{19}
+    \subitem {set\_campo64}, \hyperpage{19}
+    \subitem {set\_campo\_str}, \hyperpage{20}
+    \subitem {set\_campoc}, \hyperpage{19}
+    \subitem {STATIC\_REG\_END\_OFFSET}, \hyperpage{19}
+  \item {check\_status}
+    \subitem {cabecalho-\/utils.c}, \hyperpage{11}
+    \subitem {cabecalho-\/utils.h}, \hyperpage{14}
+  \item {clube}
+    \subitem {\_jogador}, \hyperpage{8}
+  \item {COLUMN\_NAMES}
+    \subitem {data-\/file.h}, \hyperpage{28}
+  \item {create-\/data-\/file.c}, \hyperpage{21}
+    \subitem {add\_reg\_bfile}, \hyperpage{23}
+    \subitem {create\_data\_file\_from\_csv}, \hyperpage{23}
+    \subitem {get\_token\_str}, \hyperpage{22}
+    \subitem {process\_jogador}, \hyperpage{22}
+    \subitem {TRIM\_NEWLINE}, \hyperpage{22}
+  \item {create\_data\_file\_from\_csv}
+    \subitem {create-\/data-\/file.c}, \hyperpage{23}
+    \subitem {data-\/file.h}, \hyperpage{30}
+
+  \indexspace
+
+  \item {data-\/file-\/utils.c}, \hyperpage{24}
+    \subitem {free\_jogador}, \hyperpage{25}
+    \subitem {print\_jogador}, \hyperpage{25}
+    \subitem {read\_jogador\_data}, \hyperpage{26}
+  \item {data-\/file.h}, \hyperpage{26}
+    \subitem {COLUMN\_NAMES}, \hyperpage{28}
+    \subitem {create\_data\_file\_from\_csv}, \hyperpage{30}
+    \subitem {filter\_data\_file}, \hyperpage{31}
+    \subitem {free\_jogador}, \hyperpage{29}
+    \subitem {print\_jogador}, \hyperpage{29}
+    \subitem {read\_jogador\_data}, \hyperpage{29}
+    \subitem {select\_data\_file}, \hyperpage{30}
+
+  \indexspace
+
+  \item {filter\_data\_file}
+    \subitem {data-\/file.h}, \hyperpage{31}
+  \item {free\_jogador}
+    \subitem {data-\/file-\/utils.c}, \hyperpage{25}
+    \subitem {data-\/file.h}, \hyperpage{29}
+  \item {funcoes\_fornecidas.c}, \hyperpage{33}
+    \subitem {binarioNaTela}, \hyperpage{34}
+  \item {funcoes\_fornecidas.h}, \hyperpage{35}
+    \subitem {binarioNaTela}, \hyperpage{35}
+
+  \indexspace
+
+  \item {get\_token\_str}
+    \subitem {create-\/data-\/file.c}, \hyperpage{22}
+
+  \indexspace
+
+  \item {id}
+    \subitem {\_jogador}, \hyperpage{7}
+  \item {idade}
+    \subitem {\_jogador}, \hyperpage{7}
+  \item {initialize\_cabecalho}
+    \subitem {cabecalho-\/utils.c}, \hyperpage{10}
+    \subitem {cabecalho-\/utils.h}, \hyperpage{13}
+
+  \indexspace
+
+  \item {nac}
+    \subitem {\_jogador}, \hyperpage{8}
+  \item {nome}
+    \subitem {\_jogador}, \hyperpage{8}
+
+  \indexspace
+
+  \item {orgarquivos-\/trabalhos}, \hyperpage{1}
+
+  \indexspace
+
+  \item {print\_jogador}
+    \subitem {data-\/file-\/utils.c}, \hyperpage{25}
+    \subitem {data-\/file.h}, \hyperpage{29}
+  \item {process\_jogador}
+    \subitem {create-\/data-\/file.c}, \hyperpage{22}
+
+  \indexspace
+
+  \item {read\_jogador\_data}
+    \subitem {data-\/file-\/utils.c}, \hyperpage{26}
+    \subitem {data-\/file.h}, \hyperpage{29}
+
+  \indexspace
+
+  \item {select\_data\_file}
+    \subitem {data-\/file.h}, \hyperpage{30}
+  \item {set\_campo32}
+    \subitem {campo-\/utils.c}, \hyperpage{16}
+    \subitem {campo-\/utils.h}, \hyperpage{19}
+  \item {set\_campo64}
+    \subitem {campo-\/utils.c}, \hyperpage{16}
+    \subitem {campo-\/utils.h}, \hyperpage{19}
+  \item {set\_campo\_str}
+    \subitem {campo-\/utils.c}, \hyperpage{17}
+    \subitem {campo-\/utils.h}, \hyperpage{20}
+  \item {set\_campoc}
+    \subitem {campo-\/utils.c}, \hyperpage{16}
+    \subitem {campo-\/utils.h}, \hyperpage{19}
+  \item {STATIC\_REG\_END\_OFFSET}
+    \subitem {campo-\/utils.h}, \hyperpage{19}
+
+  \indexspace
+
+  \item {TRIM\_NEWLINE}
+    \subitem {create-\/data-\/file.c}, \hyperpage{22}
+
+\end{theindex}

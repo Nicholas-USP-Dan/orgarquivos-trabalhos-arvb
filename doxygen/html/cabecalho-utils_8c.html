@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Trabalho Prático Introdutório: Referência do Arquivo cabecalho-utils.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Trabalho Prático Introdutório<span id="projectnumber">&#160;1</span>
+   </div>
+   <div id="projectbrief">Implementação dos conhecimentos aprendidos na disciplina Organização de Arquivos para a manipulação de um arquivo de dados.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funções</a>  </div>
+  <div class="headertitle"><div class="title">Referência do Arquivo cabecalho-utils.c</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Source file para as funcionalidades do cabeçalho.  
+<a href="#details">Mais...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="cabecalho-utils_8h_source.html">cabecalho-utils.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependência de inclusões para cabecalho-utils.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="cabecalho-utils_8c__incl.png" border="0" usemap="#acabecalho-utils_8c" alt=""/></div>
+<map name="acabecalho-utils_8c" id="acabecalho-utils_8c">
+<area shape="rect" title="Source file para as funcionalidades do cabeçalho." alt="" coords="43,5,175,31"/>
+<area shape="rect" title=" " alt="" coords="5,79,72,104"/>
+<area shape="poly" title=" " alt="" coords="100,33,62,71,58,67,96,29"/>
+<area shape="rect" title=" " alt="" coords="126,152,197,177"/>
+<area shape="poly" title=" " alt="" coords="115,30,137,103,152,138,147,141,132,105,110,32"/>
+<area shape="rect" href="cabecalho-utils_8h.html" title="Header file para funcionalidades do cabeçalho." alt="" coords="147,79,280,104"/>
+<area shape="poly" title=" " alt="" coords="128,28,186,68,183,73,125,33"/>
+<area shape="poly" title=" " alt="" coords="207,106,180,142,176,139,203,103"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funções</h2></td></tr>
+<tr class="memitem:a2a6576cd4998e82d20db96fb20fcbc0c" id="r_a2a6576cd4998e82d20db96fb20fcbc0c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cabecalho-utils_8c.html#a2a6576cd4998e82d20db96fb20fcbc0c">initialize_cabecalho</a> (const unsigned char status, const int64_t topo, const int64_t prox_byte_offset, const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp)</td></tr>
+<tr class="memdesc:a2a6576cd4998e82d20db96fb20fcbc0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa um novo cabecalho em um arquivo de dados binario.  <br /></td></tr>
+<tr class="separator:a2a6576cd4998e82d20db96fb20fcbc0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80c63329b0a3e5ca9a3caf61f2fcbf1e" id="r_a80c63329b0a3e5ca9a3caf61f2fcbf1e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cabecalho-utils_8c.html#a80c63329b0a3e5ca9a3caf61f2fcbf1e">check_status</a> (FILE *fp)</td></tr>
+<tr class="memdesc:a80c63329b0a3e5ca9a3caf61f2fcbf1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcao que verifica o status de um arquivo de dados binario.  <br /></td></tr>
+<tr class="separator:a80c63329b0a3e5ca9a3caf61f2fcbf1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Source file para as funcionalidades do cabeçalho. </p>
+<dl class="section author"><dt>Autores</dt><dd>Nicholas Eiti Dan; N°USP: 14600749 </dd>
+<dd>
+Laura Neri Thomaz da Silva; N°USP: 13673221</dd></dl>
+<dl class="section version"><dt>Versão</dt><dd>1.0 </dd></dl>
+</div><h2 class="groupheader">Funções</h2>
+<a id="a2a6576cd4998e82d20db96fb20fcbc0c" name="a2a6576cd4998e82d20db96fb20fcbc0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a6576cd4998e82d20db96fb20fcbc0c">&#9670;&#160;</a></span>initialize_cabecalho()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int initialize_cabecalho </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned char&#160;</td>
+          <td class="paramname"><em>status</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int64_t&#160;</td>
+          <td class="paramname"><em>topo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int64_t&#160;</td>
+          <td class="paramname"><em>prox_byte_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>nro_regarq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>nro_regrem</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>fp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inicializa um novo cabecalho em um arquivo de dados binario. </p>
+<p>Como a função é composta unicamente pela função fwrite, é possível ler o stderr para a identificação de erro.</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">status</td><td>Valor a ser inserido no campo status. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">topo</td><td>Valor a ser inserido no campo topo. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">prox_byte_offset</td><td>Valor a ser inserido no campo proxByteOffset. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nro_regarq</td><td>Valor a ser inserido no campo nroRegArq. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nro_regrem</td><td>Valor a ser inserido no campo nroRegRem. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">fp</td><td>Ponteiro do arquivo binário de dados.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores Retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>Operação realizada com sucesso. </td></tr>
+    <tr><td class="paramname">-1</td><td>Houve uma falha durante a execução da funcionalidade. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Esse é o diagrama das funções que utilizam essa função:</div>
+<div class="dyncontent">
+<div class="center"><img src="cabecalho-utils_8c_a2a6576cd4998e82d20db96fb20fcbc0c_icgraph.png" border="0" usemap="#acabecalho-utils_8c_a2a6576cd4998e82d20db96fb20fcbc0c_icgraph" alt=""/></div>
+<map name="acabecalho-utils_8c_a2a6576cd4998e82d20db96fb20fcbc0c_icgraph" id="acabecalho-utils_8c_a2a6576cd4998e82d20db96fb20fcbc0c_icgraph">
+<area shape="rect" title="Inicializa um novo cabecalho em um arquivo de dados binario." alt="" coords="247,5,397,31"/>
+<area shape="rect" href="create-data-file_8c.html#a6b5abf123912c019bea5e88f24ebe1a4" title=" " alt="" coords="5,5,199,31"/>
+<area shape="poly" title=" " alt="" coords="233,21,199,21,199,15,233,15"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a80c63329b0a3e5ca9a3caf61f2fcbf1e" name="a80c63329b0a3e5ca9a3caf61f2fcbf1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80c63329b0a3e5ca9a3caf61f2fcbf1e">&#9670;&#160;</a></span>check_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int check_status </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>fp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcao que verifica o status de um arquivo de dados binario. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro do arquivo binário de dados.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores Retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">1</td><td>Status do arquivo é válido (status = '1') </td></tr>
+    <tr><td class="paramname">0</td><td>Status do arquivo não é válido</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Observação</dt><dd>A função não reposiciona o ponteiro para o offset do status, então o ponteiro deve estar na posição correta (STATUS_OFFSET). </dd></dl>
+<div class="dynheader">
+Esse é o diagrama das funções que utilizam essa função:</div>
+<div class="dyncontent">
+<div class="center"><img src="cabecalho-utils_8c_a80c63329b0a3e5ca9a3caf61f2fcbf1e_icgraph.png" border="0" usemap="#acabecalho-utils_8c_a80c63329b0a3e5ca9a3caf61f2fcbf1e_icgraph" alt=""/></div>
+<map name="acabecalho-utils_8c_a80c63329b0a3e5ca9a3caf61f2fcbf1e_icgraph" id="acabecalho-utils_8c_a80c63329b0a3e5ca9a3caf61f2fcbf1e_icgraph">
+<area shape="rect" title="Funcao que verifica o status de um arquivo de dados binario." alt="" coords="177,67,284,92"/>
+<area shape="rect" href="filter-data-file_8c.html#a4adb3bdcf5bcd67236c4ec5fc766712f" title=" " alt="" coords="10,29,125,55"/>
+<area shape="poly" title=" " alt="" coords="163,67,123,57,124,52,165,62"/>
+<area shape="rect" href="select-data-file_8c.html#a8ef3786541c8c8e1aafed9f6b8c9f76b" title=" " alt="" coords="5,103,129,128"/>
+<area shape="poly" title=" " alt="" coords="165,97,126,105,125,100,164,91"/>
+<area shape="poly" title=" " alt="" coords="96,19,87,11,67,8,50,10,41,15,40,20,45,28,40,31,34,21,37,11,49,5,67,3,90,6,99,15"/>
+<area shape="poly" title=" " alt="" coords="96,92,87,84,67,81,50,83,41,88,40,94,45,101,40,104,34,94,37,85,49,78,67,76,90,79,99,88"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

@@ -1,0 +1,57 @@
+\doxysection{programa\+Trab.\+c}
+\hypertarget{programaTrab_8c_source}{}\label{programaTrab_8c_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{data-file_8h}{data-\/file.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}funcoes\_fornecidas.h"{}}}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00006}00006\ \textcolor{keywordtype}{int}\ main()\{}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00007}00007\ \ \ \ \ \textcolor{comment}{//\ Le\ um\ caractere\ no\ stdin\ para\ verificar\ qual\ operacao\ realizar}}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00008}00008\ \ \ \ \ \textcolor{keywordtype}{char}\ op;}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00009}00009\ \ \ \ \ scanf(\textcolor{stringliteral}{"{}\%c"{}},\ \&op);}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00011}00011\ \ \ \ \ \textcolor{comment}{//\ Ramificacao\ para\ cada\ operacao}}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00012}00012\ \ \ \ \ \textcolor{keywordflow}{switch}(op)\{}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00013}00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ input\_filename[200];}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00014}00014\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ output\_filename[200];}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00015}00015\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n;}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ ret;}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'1'}:}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ scanf(\textcolor{stringliteral}{"{}\%s"{}},\ input\_filename);}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ scanf(\textcolor{stringliteral}{"{}\%s"{}},\ output\_filename);}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ ret\ =\ \mbox{\hyperlink{create-data-file_8c_a6b5abf123912c019bea5e88f24ebe1a4}{create\_data\_file\_from\_csv}}(input\_filename,\ output\_filename);}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(ret\ !=\ 0)\{}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stdout,\ \textcolor{stringliteral}{"{}Falha\ no\ processamento\ do\ arquivo.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ binarioNaTela(output\_filename);}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'2'}:}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ scanf(\textcolor{stringliteral}{"{}\%s"{}},\ input\_filename);}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ ret\ =\ \mbox{\hyperlink{data-file_8h_a8ef3786541c8c8e1aafed9f6b8c9f76b}{select\_data\_file}}(input\_filename);}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(ret\ !=\ 0)\{}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stdout,\ \textcolor{stringliteral}{"{}Falha\ no\ processamento\ do\ arquivo.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'3'}:}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ scanf(\textcolor{stringliteral}{"{}\%s"{}},\ input\_filename);}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ scanf(\textcolor{stringliteral}{"{}\%d"{}},\ \&n);}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ ret\ =\ \mbox{\hyperlink{data-file_8h_a4adb3bdcf5bcd67236c4ec5fc766712f}{filter\_data\_file}}(n,\ input\_filename);}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(ret\ !=\ 0)\{}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stdout,\ \textcolor{stringliteral}{"{}Falha\ no\ processamento\ do\ arquivo.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};\ }
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stdout,\ \textcolor{stringliteral}{"{}Funcionalidade\ invalida.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00051}00051\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{programaTrab_8c_source_l00052}00052\ \}}
+
+\end{DoxyCode}

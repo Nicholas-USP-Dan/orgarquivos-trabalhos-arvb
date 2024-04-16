@@ -1,0 +1,46 @@
+\doxysection{data-\/file-\/utils.c}
+\hypertarget{data-file-utils_8c_source}{}\label{data-file-utils_8c_source}\mbox{\hyperlink{data-file-utils_8c}{Ir para a documentação desse arquivo.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <inttypes.h>}}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{campo-utils_8h}{campo-\/utils.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{data-file_8h}{data-\/file.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00023}\mbox{\hyperlink{data-file-utils_8c_a6f910d734dfbd064b1836f4757411e54}{00023}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{data-file-utils_8c_a6f910d734dfbd064b1836f4757411e54}{free\_jogador}}(\mbox{\hyperlink{struct__jogador}{JOGADOR}}\ *j)\{}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00024}00024\ \ \ \ \ free(j-\/>\mbox{\hyperlink{struct__jogador_a8427987f0d50325dffa8b57aa0d38108}{nome}});}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00025}00025\ \ \ \ \ free(j-\/>\mbox{\hyperlink{struct__jogador_a1238c1b3f73f6167be24cf663fc92cd6}{nac}});}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00026}00026\ \ \ \ \ free(j-\/>\mbox{\hyperlink{struct__jogador_a9f0752f580dab3b4d1f333e42e68840e}{clube}});}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00027}00027\ \}}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00029}\mbox{\hyperlink{data-file-utils_8c_ac9b1f74f8a2fb5b6f69e9280365a3bac}{00029}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{data-file-utils_8c_ac9b1f74f8a2fb5b6f69e9280365a3bac}{print\_jogador}}(\mbox{\hyperlink{struct__jogador}{JOGADOR}}\ j)\{}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00030}00030\ \ \ \ \ \textcolor{comment}{//\ printf("{}ID\ do\ Jogador:\ \%"{}\ PRId32\ "{}\(\backslash\)n"{},\ j.id);}}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00032}00032\ \ \ \ \ \textcolor{comment}{//\ printf("{}Idade\ do\ Jogador:\ \%"{}\ PRId32\ "{}\(\backslash\)n"{},\ j.idade);}}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00034}00034\ \ \ \ \ \textcolor{keywordtype}{char}\ *nome\ =\ strcmp(j.\mbox{\hyperlink{struct__jogador_a8427987f0d50325dffa8b57aa0d38108}{nome}},\ \textcolor{stringliteral}{"{}"{}})\ !=\ 0\ ?\ j.\mbox{\hyperlink{struct__jogador_a8427987f0d50325dffa8b57aa0d38108}{nome}}\ :\ \textcolor{stringliteral}{"{}SEM\ DADO"{}};}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00035}00035\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Nome\ do\ Jogador:\ \%s\(\backslash\)n"{}},\ nome);}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00037}00037\ \ \ \ \ \textcolor{keywordtype}{char}\ *nac\ =\ strcmp(j.\mbox{\hyperlink{struct__jogador_a1238c1b3f73f6167be24cf663fc92cd6}{nac}},\ \textcolor{stringliteral}{"{}"{}})\ !=\ 0\ ?\ j.\mbox{\hyperlink{struct__jogador_a1238c1b3f73f6167be24cf663fc92cd6}{nac}}\ :\ \textcolor{stringliteral}{"{}SEM\ DADO"{}};}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00038}00038\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Nacionalidade\ do\ Jogador:\ \%s\(\backslash\)n"{}},\ nac);}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00040}00040\ \ \ \ \ \textcolor{keywordtype}{char}\ *clube\ =\ strcmp(j.\mbox{\hyperlink{struct__jogador_a9f0752f580dab3b4d1f333e42e68840e}{clube}},\ \textcolor{stringliteral}{"{}"{}})\ !=\ 0\ ?\ j.\mbox{\hyperlink{struct__jogador_a9f0752f580dab3b4d1f333e42e68840e}{clube}}\ :\ \textcolor{stringliteral}{"{}SEM\ DADO"{}};}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00041}00041\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Clube\ do\ Jogador:\ \%s\(\backslash\)n"{}},\ clube);}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00042}00042\ \}}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00044}\mbox{\hyperlink{data-file-utils_8c_a2285fb0ccb50c92d981ecee51f9ed594}{00044}}\ \mbox{\hyperlink{struct__jogador}{JOGADOR}}\ \mbox{\hyperlink{data-file-utils_8c_a2285fb0ccb50c92d981ecee51f9ed594}{read\_jogador\_data}}(FILE\ *fptr)\{}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00045}00045\ \ \ \ \ \mbox{\hyperlink{struct__jogador}{JOGADOR}}\ j;}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00046}00046\ \ \ \ \ j.\mbox{\hyperlink{struct__jogador_af676b94e303cdfdb2b454760b95d4e11}{id}}\ =\ get\_campo32(fptr);}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00047}00047\ \ \ \ \ j.\mbox{\hyperlink{struct__jogador_a8adcfe8098ef47167d9bcb90d0fb3333}{idade}}\ =\ get\_campo32(fptr);}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00048}00048\ \ \ \ \ j.\mbox{\hyperlink{struct__jogador_a8427987f0d50325dffa8b57aa0d38108}{nome}}\ =\ get\_campo\_str(fptr);}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00049}00049\ \ \ \ \ j.\mbox{\hyperlink{struct__jogador_a1238c1b3f73f6167be24cf663fc92cd6}{nac}}\ =\ get\_campo\_str(fptr);}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00050}00050\ \ \ \ \ j.\mbox{\hyperlink{struct__jogador_a9f0752f580dab3b4d1f333e42e68840e}{clube}}\ =\ get\_campo\_str(fptr);}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{return}\ j;}
+\DoxyCodeLine{\Hypertarget{data-file-utils_8c_source_l00053}00053\ \}}
+
+\end{DoxyCode}

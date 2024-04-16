@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Trabalho Prático Introdutório: Código-Fonte de data-file.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Trabalho Prático Introdutório<span id="projectnumber">&#160;1</span>
+   </div>
+   <div id="projectbrief">Implementação dos conhecimentos aprendidos na disciplina Organização de Arquivos para a manipulação de um arquivo de dados.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">data-file.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="data-file_8h.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#ifndef DATA_FILE_H</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#define DATA_FILE_H</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#define COLUMN_NAMES &quot;id,idade,nomeJogador,nacionalidade,nomeClube&quot; </span></div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="struct__jogador.html">   29</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct__jogador.html">_jogador</a> {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="struct__jogador.html#af676b94e303cdfdb2b454760b95d4e11">   30</a></span>    int32_t <a class="code hl_variable" href="struct__jogador.html#af676b94e303cdfdb2b454760b95d4e11">id</a>; </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="struct__jogador.html#a8adcfe8098ef47167d9bcb90d0fb3333">   31</a></span>    int32_t <a class="code hl_variable" href="struct__jogador.html#a8adcfe8098ef47167d9bcb90d0fb3333">idade</a>; </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="struct__jogador.html#a8427987f0d50325dffa8b57aa0d38108">   32</a></span>    <span class="keywordtype">char</span> *<a class="code hl_variable" href="struct__jogador.html#a8427987f0d50325dffa8b57aa0d38108">nome</a>; </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="struct__jogador.html#a1238c1b3f73f6167be24cf663fc92cd6">   33</a></span>    <span class="keywordtype">char</span> *<a class="code hl_variable" href="struct__jogador.html#a1238c1b3f73f6167be24cf663fc92cd6">nac</a>; </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="struct__jogador.html#a9f0752f580dab3b4d1f333e42e68840e">   34</a></span>    <span class="keywordtype">char</span> *<a class="code hl_variable" href="struct__jogador.html#a9f0752f580dab3b4d1f333e42e68840e">clube</a>; </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>};</div>
+</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="data-file_8h.html#a2321b8fd26b048beaed90d709e28c764">   41</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="struct__jogador.html">_jogador</a> <a class="code hl_struct" href="struct__jogador.html">JOGADOR</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keywordtype">void</span> <a class="code hl_function" href="data-file_8h.html#a6f910d734dfbd064b1836f4757411e54">free_jogador</a>(<a class="code hl_struct" href="struct__jogador.html">JOGADOR</a> *j);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keywordtype">void</span> <a class="code hl_function" href="data-file_8h.html#ac9b1f74f8a2fb5b6f69e9280365a3bac">print_jogador</a>(<a class="code hl_struct" href="struct__jogador.html">JOGADOR</a> j);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><a class="code hl_struct" href="struct__jogador.html">JOGADOR</a> <a class="code hl_function" href="data-file_8h.html#a2285fb0ccb50c92d981ecee51f9ed594">read_jogador_data</a>(FILE *fptr);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keywordtype">int</span> <a class="code hl_function" href="data-file_8h.html#a6b5abf123912c019bea5e88f24ebe1a4">create_data_file_from_csv</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *input_filename, <span class="keyword">const</span> <span class="keywordtype">char</span> *output_filename);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keywordtype">int</span> <a class="code hl_function" href="data-file_8h.html#a8ef3786541c8c8e1aafed9f6b8c9f76b">select_data_file</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *input_filename);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keywordtype">int</span> <a class="code hl_function" href="data-file_8h.html#a4adb3bdcf5bcd67236c4ec5fc766712f">filter_data_file</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> n, <span class="keyword">const</span> <span class="keywordtype">char</span> *input_filename);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="adata-file_8h_html_a2285fb0ccb50c92d981ecee51f9ed594"><div class="ttname"><a href="data-file_8h.html#a2285fb0ccb50c92d981ecee51f9ed594">read_jogador_data</a></div><div class="ttdeci">JOGADOR read_jogador_data(FILE *fptr)</div><div class="ttdef"><b>Definição</b> data-file-utils.c:44</div></div>
+<div class="ttc" id="adata-file_8h_html_a4adb3bdcf5bcd67236c4ec5fc766712f"><div class="ttname"><a href="data-file_8h.html#a4adb3bdcf5bcd67236c4ec5fc766712f">filter_data_file</a></div><div class="ttdeci">int filter_data_file(const int n, const char *input_filename)</div><div class="ttdef"><b>Definição</b> filter-data-file.c:97</div></div>
+<div class="ttc" id="adata-file_8h_html_a6b5abf123912c019bea5e88f24ebe1a4"><div class="ttname"><a href="data-file_8h.html#a6b5abf123912c019bea5e88f24ebe1a4">create_data_file_from_csv</a></div><div class="ttdeci">int create_data_file_from_csv(const char *input_filename, const char *output_filename)</div><div class="ttdef"><b>Definição</b> create-data-file.c:129</div></div>
+<div class="ttc" id="adata-file_8h_html_a6f910d734dfbd064b1836f4757411e54"><div class="ttname"><a href="data-file_8h.html#a6f910d734dfbd064b1836f4757411e54">free_jogador</a></div><div class="ttdeci">void free_jogador(JOGADOR *j)</div><div class="ttdef"><b>Definição</b> data-file-utils.c:23</div></div>
+<div class="ttc" id="adata-file_8h_html_a8ef3786541c8c8e1aafed9f6b8c9f76b"><div class="ttname"><a href="data-file_8h.html#a8ef3786541c8c8e1aafed9f6b8c9f76b">select_data_file</a></div><div class="ttdeci">int select_data_file(const char *input_filename)</div><div class="ttdef"><b>Definição</b> select-data-file.c:13</div></div>
+<div class="ttc" id="adata-file_8h_html_ac9b1f74f8a2fb5b6f69e9280365a3bac"><div class="ttname"><a href="data-file_8h.html#ac9b1f74f8a2fb5b6f69e9280365a3bac">print_jogador</a></div><div class="ttdeci">void print_jogador(JOGADOR j)</div><div class="ttdef"><b>Definição</b> data-file-utils.c:29</div></div>
+<div class="ttc" id="astruct__jogador_html"><div class="ttname"><a href="struct__jogador.html">_jogador</a></div><div class="ttdoc">Estrutura que contém os dados de um jogador, pode representar um registro no arquivo de dados.</div><div class="ttdef"><b>Definição</b> data-file.h:29</div></div>
+<div class="ttc" id="astruct__jogador_html_a1238c1b3f73f6167be24cf663fc92cd6"><div class="ttname"><a href="struct__jogador.html#a1238c1b3f73f6167be24cf663fc92cd6">_jogador::nac</a></div><div class="ttdeci">char * nac</div><div class="ttdef"><b>Definição</b> data-file.h:33</div></div>
+<div class="ttc" id="astruct__jogador_html_a8427987f0d50325dffa8b57aa0d38108"><div class="ttname"><a href="struct__jogador.html#a8427987f0d50325dffa8b57aa0d38108">_jogador::nome</a></div><div class="ttdeci">char * nome</div><div class="ttdef"><b>Definição</b> data-file.h:32</div></div>
+<div class="ttc" id="astruct__jogador_html_a8adcfe8098ef47167d9bcb90d0fb3333"><div class="ttname"><a href="struct__jogador.html#a8adcfe8098ef47167d9bcb90d0fb3333">_jogador::idade</a></div><div class="ttdeci">int32_t idade</div><div class="ttdef"><b>Definição</b> data-file.h:31</div></div>
+<div class="ttc" id="astruct__jogador_html_a9f0752f580dab3b4d1f333e42e68840e"><div class="ttname"><a href="struct__jogador.html#a9f0752f580dab3b4d1f333e42e68840e">_jogador::clube</a></div><div class="ttdeci">char * clube</div><div class="ttdef"><b>Definição</b> data-file.h:34</div></div>
+<div class="ttc" id="astruct__jogador_html_af676b94e303cdfdb2b454760b95d4e11"><div class="ttname"><a href="struct__jogador.html#af676b94e303cdfdb2b454760b95d4e11">_jogador::id</a></div><div class="ttdeci">int32_t id</div><div class="ttdef"><b>Definição</b> data-file.h:30</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>
