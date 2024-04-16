@@ -13,13 +13,14 @@ int main(){
         char input_filename[200];
         char output_filename[200];
         int n;
+        int ret;
         case '1':
             scanf("%s", input_filename);
             scanf("%s", output_filename);
-            int ret = create_data_file_from_csv(input_filename, output_filename);
+            ret = create_data_file_from_csv(input_filename, output_filename);
             
             if(ret != 0){
-                fprintf(stderr, "Falha no processamento do arquivo.\n");
+                fprintf(stdout, "Falha no processamento do arquivo.\n");
             }
             else{
                 binarioNaTela(output_filename);
@@ -33,10 +34,14 @@ int main(){
             scanf("%s", input_filename);
             scanf("%d", &n);
 
-            filter_data_file(n, input_filename);
-            break;
+            ret = filter_data_file(n, input_filename);
+
+            if(ret != 0){
+                fprintf(stdout, "Falha no processamento do arquivo.\n");
+            }
+            break; 
         default:
-            fprintf(stderr, "Funcionalidade invalida.\n");
+            fprintf(stdout, "Funcionalidade invalida.\n");
             break;
     }
 }
