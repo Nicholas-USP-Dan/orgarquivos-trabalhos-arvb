@@ -109,7 +109,7 @@ int filter_data_file(const int n, const char *input_filename){
     // Loop para fazer n buscas
     for(int i = 0; i < n; i++){
         unsigned int mask;
-        // Leitura dos criteriso de busca e atribuicao do jogador "filtro"
+        // Leitura dos criterios de busca e atribuicao do jogador "filtro"
         JOGADOR j_query = read_query(&mask);
 
         printf("Busca %d\n\n", i+1);
