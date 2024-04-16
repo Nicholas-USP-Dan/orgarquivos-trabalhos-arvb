@@ -1,17 +1,44 @@
+/**
+ * @file data-file.h
+ * @brief Header file para as funcionalidades relacionadas aos arquivos binarios de dado.
+ * 
+ * Este arquivo contém as declarações das funcionalidades exigidas pelo Trabalho Prático Introdutório como especificado
+ * na disciplina Organização de Arquivos.
+ * 
+ * @note Cada implementação está separada em um arquivo diferente para diminuir a linhas de código de cada arquivo,
+ * 
+ * @authors Nicholas Eiti Dan; N°USP: 14600749
+ * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ * @version 1.0
+ */
+
+#ifndef DATA_FILE_H
+#define DATA_FILE_H
+
 #include <stdint.h>
 
-#define COLUMN_NAMES "id,idade,nomeJogador,nacionalidade,nomeClube"
+#define COLUMN_NAMES "id,idade,nomeJogador,nacionalidade,nomeClube" /**< Nome das colunas como registrado no Trabalho Introdutório
+de Organização de Arquivos */
 
 /**
- * Tipo da estrutura representando os dados de um jogador;
+ * @brief Estrutura que contém os dados de um jogador, pode representar um registro no arquivo de dados.
+ * 
+ * @note As strings contidas dentro da estrutura terminam com '\0' para compatibilidade do processamento pelas funções
+ * da biblioteca string.h
  */
-typedef struct _jogador {
-    int32_t id;
-    int32_t idade;
-    char *nome;
-    char *nac;
-    char *clube;
-} JOGADOR;
+struct _jogador {
+    int32_t id; /**< id do jogador (32 bits ou 4 bytes) */
+    int32_t idade; /**< idade do jogador (32 bits ou 4 bytes) */
+    char *nome; /**< nome do jogador (string terminada em char nulo de tamanho variável)*/
+    char *nac; /**< nacionalidade do jogador (string terminada em char nulo de tamanho variável)*/
+    char *clube; /**< clube do jogador (string terminada em char nulo de tamanho variável)*/
+};
+
+/**
+ * @brief Tipo da estrutura representando os dados de um jogador
+ * 
+ */
+typedef struct _jogador JOGADOR;
 
 /**
  * Limpa a memria alocada por um jogador (strings) 
@@ -46,3 +73,5 @@ int select_data_file(const char *input_filename);
  * Se realiza n pesquisar, cada uma sendo rotulada como Busca x
  */
 int filter_data_file(const int n, const char *input_filename);
+
+#endif

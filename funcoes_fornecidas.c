@@ -1,3 +1,14 @@
+/**
+ * @file funcoes_fornecidas.c
+ * @brief Source file de funções fornecidas para o projeto
+ * 
+ * Arquivo disponibilizado na página da disciplina do run.codes pela Professora Cristina.
+ * 
+ * @author Cristina Dutra de Aguiar (cdac@icmc.usp.br)
+ * @version 1.0
+ * 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

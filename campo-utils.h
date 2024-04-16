@@ -1,3 +1,15 @@
+/**
+ * @file campo-utils.h
+ * @brief Header file para funcionalidades dos campos de um registro.
+ * 
+ * Este arquivo contém as declarações de várias utilidades para ler e escrever campos de um registro em um arquivo binário de dados.
+ * 
+ * @authors Nicholas Eiti Dan; N°USP: 14600749
+ * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ * 
+ * @version 1.0
+ */
+
 #ifndef CAMP_UTILS_H
 #define CAMP_UTILS_H
 
