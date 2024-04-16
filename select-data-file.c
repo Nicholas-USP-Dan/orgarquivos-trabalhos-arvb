@@ -64,7 +64,7 @@ int select_data_file(const char *input_filename){
     if(nro_reg <= 0){
         printf("Registro inexistente.\n\n");
     }
-
+    
     fclose(fptr);
     return 0;
 }

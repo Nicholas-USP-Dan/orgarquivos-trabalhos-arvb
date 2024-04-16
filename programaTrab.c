@@ -29,6 +29,7 @@ int main(){
             break;
         case '2':
             scanf("%s", input_filename);
+            select_data_file(input_filename);
             break;
         case '3':
             scanf("%s", input_filename);
