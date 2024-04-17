@@ -1,3 +1,17 @@
+/**
+ * @file select-data-file.c
+ * @brief Implementação da funcionalidade 2 como definida no projeto
+ * 
+ * Nesta funcionalidade, o programa recebe um arquivo binário com dados de jogadores,
+ * e imprime na tela o nome, nacionalidade e clube de cada um dos jogadores
+ * 
+ * @authors Nicholas Eiti Dan; N°USP: 14600749
+ * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ * 
+ * @version 1.0
+ * 
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
