@@ -4,6 +4,9 @@
  * 
  * Este arquivo contém as declarações de várias utilidades para ler e escrever campos de um registro em um arquivo binário de dados.
  * 
+ * @note Quando uma função desta biblioteca no geral retorna -1, isso significa que houve um erro durante a execução de uma das funções
+ * nativas do stdio, logo é possível extrair o erro obtido através da variável errno.
+ * 
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
  * 
@@ -16,43 +19,91 @@
 #include <stdint.h>
 
 /**
- * Tamanho alocado aos buffers de chars
+ * @brief Tamanho das strings alocadas de tamanho não conhecido (ex. strings para leitura de dados)
  */
 #define BUFFER_SIZE 200
 
 /**
- * Offset logo apos os campos estaticos de um registro
+ * @brief Função lê um campo de char (string de 1 byte) na posição apontada no arquivo.
+ * 
+ * @param fp Ponteiro para o arquivo binário de dados.
+ * @return [unsigned char] Retorna o valor lido pela função.
  */
-#define STATIC_REG_END_OFFSET 25
-
 unsigned char get_campoc(FILE *fp);
 
+/**
+ * @brief Função que lê um campo de int de 32 bits (4 bytes) na posição apontada no arquivo.
+ * 
+ * @param fp Ponteiro para o arquivo binário de dados
+ * @return [int32_t] Retorna o valor lido pela função
+ */
 int32_t get_campo32(FILE *fp);
 
+/**
+ * @brief Função que lê um campo de int de 64 bits (8 bytes) na posição apontada no arquivo.
+ * 
+ * @param fp Ponteiro para o arquivo binário de dados.
+ * @return [int64_t] Retorna o valor lido pela função.
+ */
 int64_t get_campo64(FILE *fp);
 
+/**
+ * @brief Função que lê um campo de string (tamanho variável) na posição apontada pelo arquivo.
+ * 
+ * @details Todas as strings no arquivo binário possuem seu tamanho escrito antes delas, assim essa função
+ * lê este tamanho, aloca dinamicamente um espaço com tamanho+1 (para o caractere nulo) para a string, 
+ * e escreve neste espaço a string na posição apontada no arquivo.
+ * 
+ * @param fp Ponteiro para o arquivo binário de dados
+ * @return [char*] Retorna uma string alocada dinamicamente com charactere nulo no fim.
+ */
 char* get_campo_str(FILE *fp);
 
 /**
- * Atribui um char (string de 1 byte) no espaco apontado no arquivo
+ * @brief Atribui um char (string de 1 byte) no espaço apontado no arquivo.
+ * 
+ * @param c Char a ser inserido.
+ * @param fp Ponteiro para o arquivo binário de dados.
+ * 
+ * @retval -1 Houve uma falha durante a atribuição do char no arquivo.
+ * @retval 0 Atribuição realizada com sucesso.
  */
 int set_campoc(const unsigned char c, FILE *fp);
 
 /**
- * Atribui um inteiro de 32 bits (4 bytes) no espaco apontado no arquivo
+ * @brief Atribui um inteiro de 32 bits (4 bytes) no espaço apontado no arquivo.
+ * 
+ * @param val Inteiro de 4 bytes a ser inserido.
+ * @param fp Ponteiro para o arquivo binário de dados.
+ * 
+ * @retval -1 Houve uma falha durante a atribuição do char no arquivo.
+ * @retval 0 Atribuição realizada com sucesso.
  */
 int set_campo32(const int32_t val, FILE *fp);
 
 /**
- * Atribui um inteiro de 64 bits (8 bytes) no espaco apontado no arquivo
+ * @brief Atribui um inteiro de 64 bits (8 bytes) no espaço apontado no arquivo.
+ * 
+ * @param val Inteiro de 8 bytes a ser inserido.
+ * @param fp Ponteiro para o arquivo binário de dados.
+ * 
+ * @retval -1 Houve uma falha durante a atribuição do char no arquivo.
+ * @retval 0 Atribuição realizada com sucesso.
  */
 int set_campo64(const int64_t val, FILE *fp);
 
 /**
- * Atribui uma string e seu tamanho no espaco apontado no arquivo
+ * @brief Atribui uma string (de tamanho variável) no espaço apontado no arquivo.
  * 
- * RETORNA: Retorna a quantidade de bytes ocupados pelo campo (incluindo o campo de tamanho)
- * Retorna -1 caso ocorra algum erro
+ * @details Além de escrever a string em si, a função escreve o comprimento da string no arquivo, 
+ * assim tirando a necessidade do caractere nulo no fim da string.
+ * 
+ * @param str String a ser inserida no campo.
+ * @param [out] campo_len Referência de uma variável para registrar o tamanho ocupado pelo campo (comprimento + string).
+ * @param fp Ponteiro para o arquivo binário de dados.
+ * 
+ * @retval -1 Houve uma falha durante a atribuição do char no arquivo.
+ * @retval 0 Atribuição realizada com sucesso.
  */
 int set_campo_str(const char *str, int32_t *campo_len, FILE *fp);
 

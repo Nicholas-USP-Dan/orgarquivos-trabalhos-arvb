@@ -1,7 +1,0 @@
-<map id="data&#45;file.h" name="data&#45;file.h">
-<area shape="rect" id="Node000001" title="Header file para as funcionalidades relacionadas aos arquivos binarios de dado." alt="" coords="103,5,191,31"/>
-<area shape="rect" id="Node000002" href="$create-data-file_8c.html" title="Implementação da funcionalidade 1 do trabalho definido." alt="" coords="5,79,139,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,42,86,80,82,77,123,38"/>
-<area shape="rect" id="Node000003" href="$data-file-utils_8c.html" title="Source file de algumas utilidades gerais do arquivo binário de dados." alt="" coords="163,79,283,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,38,212,76,208,80,167,42"/>
-</map>

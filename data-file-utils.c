@@ -2,8 +2,6 @@
  * @file data-file-utils.c
  * @brief Source file de algumas utilidades gerais do arquivo binário de dados
  * 
- * Alguma descrição específica sobre o arquivo...
- * 
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
  * 
@@ -15,7 +13,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <inttypes.h>
-#include <stdint.h>
 
 #include "campo-utils.h"
 #include "data-file.h"
@@ -43,6 +40,7 @@ void print_jogador(JOGADOR j){
 
 JOGADOR read_jogador_data(FILE *fptr){
     JOGADOR j;
+
     j.id = get_campo32(fptr);
     j.idade = get_campo32(fptr);
     j.nome = get_campo_str(fptr);

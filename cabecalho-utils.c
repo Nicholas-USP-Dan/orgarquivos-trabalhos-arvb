@@ -10,12 +10,12 @@
  */
 
 #include <stdio.h>
-#include <stdint.h>
 
 #include "cabecalho-utils.h"
 
 int initialize_cabecalho(const unsigned char status, const int64_t topo, const int64_t prox_byte_offset, 
 const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp){
+    // Escrita dos campos no arquivo binário
     fwrite(&status, 1, 1, fp);
     fwrite(&topo, 8, 1, fp);
     fwrite(&prox_byte_offset, 8, 1, fp);
