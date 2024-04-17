@@ -1,9 +1,0 @@
-<map id="read_jogador_data" name="read_jogador_data">
-<area shape="rect" id="Node000001" title=" " alt="" coords="177,67,320,92"/>
-<area shape="rect" id="Node000002" href="$filter-data-file_8c.html#a4adb3bdcf5bcd67236c4ec5fc766712f" title=" " alt="" coords="10,29,125,55"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,66,125,56,126,51,174,61"/>
-<area shape="rect" id="Node000003" href="$select-data-file_8c.html#a8ef3786541c8c8e1aafed9f6b8c9f76b" title=" " alt="" coords="5,103,129,128"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="171,97,130,106,129,100,170,92"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="99,19,90,11,67,8,48,10,38,15,36,20,42,28,37,31,31,21,34,11,47,5,67,3,92,6,103,15"/>
-<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="99,92,90,84,67,81,48,83,38,88,36,94,42,101,37,104,31,94,34,85,47,78,67,76,92,80,103,88"/>
-</map>
