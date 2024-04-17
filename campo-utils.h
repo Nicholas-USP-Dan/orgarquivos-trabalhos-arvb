@@ -4,6 +4,9 @@
  * 
  * Este arquivo contém as declarações de várias utilidades para ler e escrever campos de um registro em um arquivo binário de dados.
  * 
+ * @note Quando uma função desta biblioteca no geral retorna -1, isso significa que houve um erro durante a execução de uma das funções
+ * nativas do stdio, logo é possível extrair o erro obtido através da variável errno.
+ * 
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
  * 
@@ -48,7 +51,7 @@ int64_t get_campo64(FILE *fp);
  * @brief Função que lê um campo de string (tamanho variável) na posição apontada pelo arquivo.
  * 
  * @details Todas as strings no arquivo binário possuem seu tamanho escrito antes delas, assim essa função
- * lê este tamanho, aloca dinamicamente um espaço com este tamanho+1 (para o caractere nulo) para a string, 
+ * lê este tamanho, aloca dinamicamente um espaço com tamanho+1 (para o caractere nulo) para a string, 
  * e escreve neste espaço a string na posição apontada no arquivo.
  * 
  * @param fp Ponteiro para o arquivo binário de dados
@@ -92,11 +95,11 @@ int set_campo64(const int64_t val, FILE *fp);
 /**
  * @brief Atribui uma string (de tamanho variável) no espaço apontado no arquivo.
  * 
- * @details Além de escrever a string em si, a função escreve o tamanho da string, assim tirando a necessidade
- * do caractere nulo no fim da string.
+ * @details Além de escrever a string em si, a função escreve o comprimento da string no arquivo, 
+ * assim tirando a necessidade do caractere nulo no fim da string.
  * 
  * @param str String a ser inserida no campo.
- * @param [out] campo_len Referência de uma variável para registrar o tamanho ocupado pelo campo.
+ * @param [out] campo_len Referência de uma variável para registrar o tamanho ocupado pelo campo (comprimento + string).
  * @param fp Ponteiro para o arquivo binário de dados.
  * 
  * @retval -1 Houve uma falha durante a atribuição do char no arquivo.

@@ -178,7 +178,7 @@ int filter_data_file(const int n, const char *input_filename){
 
             reg_count++;
 
-            // Caso o filtro tenha o campo id, quando o jogador com esse id for encontrado, terminar busca
+            // Caso o filtro tenha um campo id, quando o jogador com esse id for encontrado, terminar busca
             if(bitmask(mask, 0) && j_query.id == j.id){
                 break;
             }
