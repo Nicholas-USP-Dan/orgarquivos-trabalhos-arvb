@@ -178,7 +178,7 @@ int filter_data_file(const int n, const char *input_filename){
 
             reg_count++;
 
-            if(bitmask(mask, 0) && j_query.id == j.id)){
+            if(bitmask(mask, 0) && j_query.id == j.id){
                 break;
             }
         }
