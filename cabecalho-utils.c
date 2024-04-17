@@ -10,7 +10,6 @@
  */
 
 #include <stdio.h>
-#include <stdint.h>
 
 #include "cabecalho-utils.h"
 
