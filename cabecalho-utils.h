@@ -36,11 +36,11 @@
  * @details Como a função é composta unicamente pela função fwrite, é possível ler o 
  * stderr para a identificação de erro.
  * 
- * @param [in] status Valor a ser inserido no campo status.
- * @param [in] topo Valor a ser inserido no campo topo.
- * @param [in] prox_byte_offset Valor a ser inserido no campo proxByteOffset.
- * @param [in] nro_regarq Valor a ser inserido no campo nroRegArq.
- * @param [in] nro_regrem Valor a ser inserido no campo nroRegRem.
+ * @param status Valor a ser inserido no campo status.
+ * @param topo Valor a ser inserido no campo topo.
+ * @param prox_byte_offset Valor a ser inserido no campo proxByteOffset.
+ * @param nro_regarq Valor a ser inserido no campo nroRegArq.
+ * @param nro_regrem Valor a ser inserido no campo nroRegRem.
  * @param fp Ponteiro do arquivo binário de dados.
  * 
  * @retval 0 Operação realizada com sucesso.
