@@ -29,7 +29,11 @@ int main(){
             break;
         case '2':
             scanf("%s", input_filename);
-            select_data_file(input_filename);
+            ret = select_data_file(input_filename);
+
+            if(ret != 0){
+                fprintf(stdout, "Falha no processamento do arquivo.\n");
+            }
             break;
         case '3':
             scanf("%s", input_filename);
