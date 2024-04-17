@@ -17,11 +17,11 @@
 
 #include <stdint.h>
 
-#define COLUMN_NAMES "id,idade,nomeJogador,nacionalidade,nomeClube" /**< Nome das colunas como registrado no Trabalho Introdutório
-de Organização de Arquivos */
+#define COLUMN_NAMES "id,idade,nomeJogador,nacionalidade,nomeClube" /**< Nome das colunas como registrado nas 
+especificações do projeto */
 
 /**
- * @brief Estrutura que contém os dados de um jogador, pode representar um registro no arquivo de dados.
+ * @brief Estrutura que contém os dados de um jogador, representa um registro no arquivo de dados.
  * 
  * @note As strings contidas dentro da estrutura terminam com '\0' para compatibilidade do processamento pelas funções
  * da biblioteca string.h
@@ -36,41 +36,82 @@ struct _jogador {
 
 /**
  * @brief Tipo da estrutura representando os dados de um jogador
- * 
  */
 typedef struct _jogador JOGADOR;
 
 /**
- * Limpa a memria alocada por um jogador (strings) 
+ * @brief Função que limpa a memória alocada por um jogador (alocado pelos campos de string)
+ * 
+ * @param j Referência ao jogador a ter a memória limpa
  */
 void free_jogador(JOGADOR *j);
 
 /**
- * Funcao que imprime um jogador de acordo com os requisitos do projeto 
+ * @brief Função que imprime, conforme os requisitos do projeto, os dados de um jogador
+ * 
+ * @details É imprimido o nome do jogador, a nacionalidade dele e o seu clube, ou seja, todas as strings do jogador.
+ * 
+ * @verbatim
+    ----- EX DE SAÍDA -----
+    Nome do Jogador: A. SMITH
+    Nacionalidade do Jogador: ENGLAND
+    Clube do jogador: E. UNAL
+   @endverbatim
+ * 
+ * @param j Jogador a ser imprimido
  */
 void print_jogador(JOGADOR j);
 
 /**
- * Le um registro em fptr e atribui os valores na variavel JOGADOR
+ * @brief Função que lê um registro no arquivo binário e retorna um objeto do tipo JOGADOR 
+ * com os dados obtidos pela função.
+ * 
+ * @details Esta função considera que o ponteiro do arquivo está apontada para o campo id, logo os campos 
+ * "removido", "tamanhoRegistro" e "Prox" devem ser pulados antes desta função ser chamada.
+ * 
+ * @param fptr Ponteiro para o arquivo binário de dados.
  */
 JOGADOR read_jogador_data(FILE *fptr);
 
 /**
- * Funcao da funcionalidade 1 - Criar um arquivo binario de dados a partir de um arquivo de dados .csv
+ * @brief Chamada da funcionalidade 1 - Cria um arquivo binario de dados a partir de um arquivo .csv
  * 
- * RETORNA: Retorna 0 qundo o arquivo é criado com sucesso, caso nao retorna -1
+ * @param input_filename Nome do arquivo de entrada .csv.
+ * @param output_filename Nome do arquivo binário de saída.
+ * 
+ * @note A função retorna -1 quando o erro foi reportado por uma das funções de manipulação de arquivo, 
+ * .logo é possível ler a variável errno para extrair mais detalhes sobre o erro.
+ * 
+ * @retval -1 Houve uma falha interna durante a geração do arquivo binário.
+ * @retval 0 O arquivo binário foi criado com sucesso.
+ * @retval 1 Houve algum erro lógico durante a geração do arquivo binário.
  */
 int create_data_file_from_csv(const char *input_filename, const char *output_filename);
 
 /**
- * Funcao da funcionalidade 2 - Imprime todos os registros validos (nao removidos) de um arquivo binario de dados
+ * @brief Chamada da funcionalidade 2 - Imprime todos os registros válidos (não removidos) de um arquivo binário de dados
+ * 
+ * @details A função lê a quantidade de registros válidos do arquivo (campo nroRegArq) para que ela possa parar a execução uma
+ * vez que a quantidade de registros impressos for igual a quantidade de reg. válidos (útil para quando a quantidade de
+ * registros remvido por alta).
+ * 
+ * @param input_filename Nome do arquivo binário de dados.
+ * 
+ * @retval -1 Houve uma falha interna durante a impressão dos registros.
+ * @retval 0 Os registros foram impressos com sucesso.
+ * @retval 1 Houve algum erro lógico durante a impressão dos registros.
  */
 int select_data_file(const char *input_filename);
 
 /**
- * Funcao da funcionalidade 3 - Filtra os registros validos (nao removidos) de um arquivo binario de dados
+ * @brief Chamada da funcionalidade 3 - Filtra os registros válidos (não removidos) de um arquivo binário de dados
  * 
- * Se realiza n pesquisar, cada uma sendo rotulada como Busca x
+ * @param n Quantidade de buscas a serem realizadas.
+ * @param input_filename Nome do arquivo binário de dados.
+ * 
+ * @retval -1 Houve uma falha interna durante as filtragens do arquivo.
+ * @retval 0 Os registros foram impressos com sucesso.
+ * @retval 1 Houve algum erro lógico durante as filtragens do arquivo.
  */
 int filter_data_file(const int n, const char *input_filename);
 
