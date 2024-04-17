@@ -155,7 +155,7 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
     if(strcmp(columns, COLUMN_NAMES) != 0){
         fclose(csv_data_fptr);
         fclose(data_bfile_fptr);
-        return -1; // Posso retornar 1 para indicar um erro lógico, não de saída
+        return 1; // Erro lógico encontrado
     }
 
     // Contador da quantidade de registros
@@ -180,10 +180,10 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
         reg_count++;
     }
 
-    // Pega o valor do proxByteOffset (campo do cabecalho do arquivo)
+    // Lê o endereço do final do arquivo para ser escrito no campo proxByteOffset do cabeçalho
     int64_t prox_byte_offset = ftell(data_bfile_fptr);
     
-    // Atribuicao do cabecalho
+    // Atribuição/Inicialização do cabecalho
     fseek(data_bfile_fptr, 0, SEEK_SET);
     initialize_cabecalho('1', -1, prox_byte_offset, reg_count, 0, data_bfile_fptr);
 
