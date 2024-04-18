@@ -20,8 +20,11 @@
 
 #include <stdint.h>
 
-#define COLUMN_NAMES "id,idade,nomeJogador,nacionalidade,nomeClube" /**< Nome das colunas como registrado nas 
-especificações do projeto */
+/**
+ * @brief Nome das colunas como registrado nas especificações do projeto
+ * 
+ */
+#define COLUMN_NAMES "id,idade,nomeJogador,nacionalidade,nomeClube"
 
 /**
  * @brief Estrutura que contém os dados de um jogador, representa um registro no arquivo de dados.

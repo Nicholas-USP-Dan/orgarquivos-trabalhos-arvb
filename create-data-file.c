@@ -109,6 +109,7 @@ static JOGADOR process_jogador(char *line){
  * 
  * @param j Dados do registro a ser inserido.
  * @param data_bfile_fptr Ponteiro para o arquivo binário de dados
+ * 
  * @retval -1 Houve um erro durante a adição do registro no arquivo binário.
  * @retval 0 Registro adicionado no arquivo binário com sucesso.
  */

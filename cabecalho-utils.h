@@ -7,7 +7,10 @@
  * 
  * ESTRUTURA DO CABEÇALHO:
  * 
- * | status (1 byte) |  topo (8 bytes) | proxByteOffset (8 bytes) | nroRegArq (4 bytes) | nroRegRem (4 bytes) |
+   @verbatim
+    0                 1                 9                          17                    21                    25
+    | status (1 byte) |  topo (8 bytes) | proxByteOffset (8 bytes) | nroRegArq (4 bytes) | nroRegRem (4 bytes) |
+   @endverbatim
  * 
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
