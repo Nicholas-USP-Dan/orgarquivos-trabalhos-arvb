@@ -46,7 +46,8 @@ int select_data_file(const char *input_filename){
     // Pular o cabecalho
     fseek(fptr, HEADER_END_OFFSET, SEEK_SET);
 
-    while(reg_count < nro_reg){ // Le registros ate ler todos os registros validos
+    // Le registros ate ler todos os registros validos
+    while(reg_count < nro_reg){
         unsigned char rem = get_campoc(fptr);
 
         if(feof(fptr)){
