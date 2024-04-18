@@ -1,3 +1,14 @@
+/**
+ * @file programaTrab.c
+ * @brief Arquivo do programa principal do projeto.
+ * 
+ * @authors Nicholas Eiti Dan; N°USP: 14600749
+ * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ * 
+ * @version 1.0
+ * 
+ */
+
 #include <stdio.h>
 
 #include "data-file.h"
