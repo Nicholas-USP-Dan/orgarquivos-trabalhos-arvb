@@ -2,9 +2,9 @@
  * @file create-data-file.c
  * @brief Implementação da funcionalidade 1 do trabalho definido
  * 
- * 
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ * 
  * @version 1.0
  * 
  */
