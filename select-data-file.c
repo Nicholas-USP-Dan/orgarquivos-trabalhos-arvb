@@ -38,7 +38,7 @@ int select_data_file(const char *input_filename){
 
     int32_t reg_count = 0;
 
-    // Ler quantidade de registros existentes para parar de ler objetos removidos
+    // Ler quantidade de registros existentes
     fseek(fptr, NRO_REGARQ_OFFSET, SEEK_SET);
     int32_t nro_reg;
     fread(&nro_reg, 4, 1, fptr);
@@ -46,7 +46,7 @@ int select_data_file(const char *input_filename){
     // Pular o cabecalho
     fseek(fptr, HEADER_END_OFFSET, SEEK_SET);
 
-    // Le registros ate ler todos os registros validos
+    // Lê registros até ler todos os registros válidos
     while(reg_count < nro_reg){
         unsigned char rem = get_campoc(fptr);
 
