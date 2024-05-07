@@ -1,0 +1,9 @@
+SRCDIR=src
+SRCS=$(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/**/*.c)
+HEADERS=$(wildcard $(SRCDIR)/*.h) $(wildcard $(SRCDIR)/**/*.h)
+
+all: *.c $(SRCS) $(HEADERS)
+	gcc -o programaTrab *.c $(SRCS) -lm
+
+run: all
+	./programaTrab
