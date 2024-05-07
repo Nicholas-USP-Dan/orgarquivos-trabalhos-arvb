@@ -16,16 +16,24 @@ submit-%: $(SUBMITDIR)/%.zip
 clean:
 	rm $(wildcard $(OBJDIR)/*.o) $(wildcard $(BINDIR)/*) $(wildcard $(OBJDIR)/**/*.o)
 
+
+$(OBJDIR):
+	mkdir $@/
+	mkdir $@/utils
+
+$(BINDIR):
+	mkdir $@/
+
 # Gerar um object file
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	gcc $(FLAGS) -c -o $@ $^
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(OBJDIR)
+	gcc $(FLAGS) -c -o $@ $<
 
 # Gerar um executável
-$(BINDIR)/%: %.c $(OBJS) $(HEADERS)
+$(BINDIR)/%: %.c $(OBJS) $(HEADERS) $(BINDIR)
 	gcc $(FLAGS) -o $@ $< $(OBJS)
 
 # Gerar uma pasta compactada para envio
-$(SUBMITDIR)/%.zip: %.c
+$(SUBMITDIR)/%.zip: %.c $(SRCS)
 	zip -r $@ src/ $(SUBMITDIR)/makefile-entrega $< README.md 
 #	Renomear o makefile
 	printf "@ $(SUBMITDIR)/makefile-entrega\n@=makefile\n" | zipnote -w $@
