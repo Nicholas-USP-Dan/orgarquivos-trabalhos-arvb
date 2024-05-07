@@ -37,4 +37,5 @@ $(BINDIR)/%: %.c $(OBJS) $(HEADERS)
 # Gerar uma pasta compactada para envio
 $(SUBMITDIR)/%.zip: %.c
 	zip -r $@ src/ $(SUBMITDIR)/makefile-entrega $< README.md 
+#	Renomear o makefile
 	printf "@ $(SUBMITDIR)/makefile-entrega\n@=makefile\n" | zipnote -w $@
