@@ -1,17 +1,6 @@
-FLAGS=-g -Wall
+include def.mk
 
-SRCDIR=src
-OBJDIR=obj
-BINDIR=bin
-SUBMITDIR=entregas
-
-HEADERS=$(wildcard $(SRCDIR)/*.h) $(wildcard $(SRCDIR)/**/*.h)
-SRCS=$(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/**/*.c)
-OBJS=$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
-PROGS=$(wildcard *.c)
-BINS=$(patsubst %.c, $(BINDIR)/%, $(PROGS))
-
-.PHONY: all run compile submit* *.c *.h
+.PHONY: all run compile submit-* *.c *.h
 
 # Compilar todos os executáveis
 all: $(BINS)
@@ -40,3 +29,5 @@ $(SUBMITDIR)/%.zip: %.c
 	zip -r $@ src/ $(SUBMITDIR)/makefile-entrega $< README.md 
 #	Renomear o makefile
 	printf "@ $(SUBMITDIR)/makefile-entrega\n@=makefile\n" | zipnote -w $@
+
+include tests.mk
