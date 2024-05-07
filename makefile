@@ -14,7 +14,7 @@ submit-%: $(SUBMITDIR)/%.zip
 
 # Limpar todos os arquivos binários e .o
 clean:
-	rm $(wildcard $(OBJDIR)/*.o) $(wildcard $(BINDIR)/*) $(wildcard $(OBJDIR)/**/*.o)
+	rm -r $(OBJDIR)/ $(BINDIR)/
 
 setup: $(OBJDIR) $(BINDIR)
 
