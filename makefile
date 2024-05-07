@@ -25,11 +25,11 @@ $(BINDIR):
 	mkdir $@/
 
 # Gerar um object file
-$(OBJDIR)/%.o: $(SRCDIR)/%.c $(OBJDIR)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
 	gcc $(FLAGS) -c -o $@ $<
 
 # Gerar um executável
-$(BINDIR)/%: %.c $(OBJS) $(HEADERS) $(BINDIR)
+$(BINDIR)/%: %.c $(OBJS) $(HEADERS)
 	gcc $(FLAGS) -o $@ $< $(OBJS)
 
 # Gerar uma pasta compactada para envio
