@@ -21,6 +21,7 @@ compile: $(OBJS)
 
 # Gerar a pasta compactada para envio no run-codes
 submit-%: $(SUBMITDIR)/%.zip
+	@echo $<
 
 # Limpar todos os arquivos binários e .o
 clean:
