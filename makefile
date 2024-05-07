@@ -16,6 +16,7 @@ submit-%: $(SUBMITDIR)/%.zip
 clean:
 	rm $(wildcard $(OBJDIR)/*.o) $(wildcard $(BINDIR)/*) $(wildcard $(OBJDIR)/**/*.o)
 
+setup: $(OBJDIR) $(BINDIR)
 
 $(OBJDIR):
 	mkdir $@/
