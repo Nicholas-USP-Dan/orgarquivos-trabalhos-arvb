@@ -1,6 +1,7 @@
 include def.mk
 
-UTESTDIR=unit-tests
+UTEST_DIR=unit-tests
+UTEST_BIN_DIR=$(UTESTDIR)/bin
 CASOSDIR=test-cases
 
 .PHONY: test-all $(CASOSDIR)/*
@@ -10,12 +11,12 @@ test-all:
 	@echo hi
 
 # Compilar um teste unitário
-testc-%: $(OBJS) $(HEADERS)
-	@echo compiling $(UTESTDIR)/$*.c $(OBJS)
+$(UTEST_BIN_DIR)/%: $(OBJS) $(HEADERS)
+	@echo compiling $(UTEST_DIR)/$*.c $(OBJS)
 
 # Executar um teste unitário
-test-%: testc-%
-	# sh $(UTESTDIR)/$*
+test-%: $(UTEST_BIN_DIR)/%
+	# ./$(UTEST_DIR)/$*
 
 # Teste com os casos de teste
 test-cases-trab-int: $(BINDIR)/trab-int

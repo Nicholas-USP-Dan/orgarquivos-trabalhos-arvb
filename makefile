@@ -3,10 +3,10 @@ include def.mk
 .PHONY: all run compile submit-* *.c *.h
 
 # Compilar todos os executáveis
-all: $(BINS)
+all: $(OBJDIR) $(OBJDIR)/utils $(BINDIR) $(BINS)
 
 # Gerar os object files (.o) de todos os arquivos .c em src/
-compile: $(OBJS)
+compile: $(OBJDIR) $(OBJDIR)/utils $(OBJS)
 
 # Gerar a pasta compactada para envio no run-codes
 submit-%: $(SUBMITDIR)/%.zip
@@ -20,7 +20,9 @@ setup: $(OBJDIR) $(BINDIR)
 
 $(OBJDIR):
 	mkdir $@/
-	mkdir $@/utils
+
+$(OBJDIR)/utils:
+	mkdir $@
 
 $(BINDIR):
 	mkdir $@/
