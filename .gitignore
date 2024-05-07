@@ -1,4 +1,4 @@
 programaTrab
 doxygen/
-bin/*
-obj/*
+bin/
+obj/
