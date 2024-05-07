@@ -26,5 +26,7 @@ test-cases-trab-int: $(BINDIR)/trab-int
 
 	# Comparação de binários
 
+	rm temp.out *.bin
+
 # Executar o valgrind para verificar memory leakage
 test-valgnd-%: $(CASOSDIR)/%/*
