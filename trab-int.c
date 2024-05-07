@@ -50,10 +50,14 @@ int main(){
             scanf("%s", input_filename);
             scanf("%d", &n);
 
-            ret = filter_data_file(n, input_filename);
+            for(int i = 0; i < n; i++){
+                printf("Busca %d\n\n", i+1);
 
-            if(ret != 0){
-                fprintf(stdout, "Falha no processamento do arquivo.\n");
+                ret = filter_data_file(input_filename);
+                if(ret != 0){
+                    fprintf(stdout, "Falha no processamento do arquivo.\n");
+                    break;
+                }
             }
             break; 
         default:

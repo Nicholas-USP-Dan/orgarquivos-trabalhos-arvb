@@ -118,7 +118,7 @@ static JOGADOR read_query(unsigned int *mask){
     return j_query;
 }
 
-int filter_data_file(const int n, const char *input_filename){
+int filter_data_file(const char *input_filename){
     // Abra o arquivo no modo leitura binaria
     FILE *fptr = fopen(input_filename, "rb");
     if(fptr == NULL){
@@ -130,76 +130,71 @@ int filter_data_file(const int n, const char *input_filename){
         return -1;
     }
 
-    // Loop para fazer n buscas
-    for(int i = 0; i < n; i++){
-        unsigned int mask;
+    unsigned int mask;
 
-        // Leitura dos campos de busca
-        JOGADOR j_query = read_query(&mask);
+    // Leitura dos campos de busca
+    JOGADOR j_query = read_query(&mask);
 
-        printf("Busca %d\n\n", i+1);
+    int32_t reg_count = 0;
+    int32_t filter_count = 0;
 
-        int32_t reg_count = 0;
-        int32_t filter_count = 0;
+    // Ler quantidade de registros existentes
+    fseek(fptr, NRO_REGARQ_OFFSET, SEEK_SET);
+    int32_t nro_reg;
+    fread(&nro_reg, 4, 1, fptr);
 
-        // Ler quantidade de registros existentes
-        fseek(fptr, NRO_REGARQ_OFFSET, SEEK_SET);
-        int32_t nro_reg;
-        fread(&nro_reg, 4, 1, fptr);
+    // Pular o cabecalho
+    fseek(fptr, HEADER_END_OFFSET, SEEK_SET);
 
-        // Pular o cabecalho
-        fseek(fptr, HEADER_END_OFFSET, SEEK_SET);
+    // Lê registros até ler todos os registros válidos
+    while(reg_count < nro_reg){
+        unsigned char rem = get_campoc(fptr);
 
-        // Lê registros até ler todos os registros válidos
-        while(reg_count < nro_reg){
-            unsigned char rem = get_campoc(fptr);
-
-            if(feof(fptr)){
-                break;
-            }
-
-            // Registro esta removido, mover para o proximo
-            if(rem == '1'){
-                int32_t reg_size;
-                fread(&reg_size, 4, 1, fptr);
-                fseek(fptr, reg_size-5, SEEK_CUR);
-                continue;
-            }
-
-            // Pular tamanhoRegistro e Prox
-            fseek(fptr, 12, SEEK_CUR);
-
-            JOGADOR j = read_jogador_data(fptr);
-
-            // Guarda o resultado da filtragem
-            int filter = (!bitmask(mask, 0) || j_query.id == j.id) && 
-                         (!bitmask(mask, 1) || j_query.idade == j.idade) && 
-                         (!bitmask(mask, 2) || strcmp(j_query.nome, j.nome) == 0) && 
-                         (!bitmask(mask, 3) || strcmp(j_query.nac, j.nac) == 0) && 
-                         (!bitmask(mask, 4) || strcmp(j_query.clube, j.clube) == 0);
-
-            // Registro passou pelo filtro
-            if(filter){
-                filter_count++;
-
-                print_jogador(j);
-                printf("\n");
-            }
-
-            free_jogador(&j);
-
-            reg_count++;
-
-            // Caso o filtro tenha um campo id, quando o jogador com esse id for encontrado, terminar busca
-            if(bitmask(mask, 0) && j_query.id == j.id){
-                break;
-            }
+        if(feof(fptr)){
+            break;
         }
 
-        // Imprimir: "Registro inexistente." caso nenhum registro passar pelo filtro
-        if(filter_count <= 0){
-            printf("Registro inexistente.\n\n");
+        // Registro esta removido, mover para o proximo
+        if(rem == '1'){
+            int32_t reg_size;
+            fread(&reg_size, 4, 1, fptr);
+            fseek(fptr, reg_size-5, SEEK_CUR);
+            continue;
         }
+
+        // Pular tamanhoRegistro e Prox
+        fseek(fptr, 12, SEEK_CUR);
+
+        JOGADOR j = read_jogador_data(fptr);
+
+        // Guarda o resultado da filtragem
+        int filter = (!bitmask(mask, 0) || j_query.id == j.id) && 
+                        (!bitmask(mask, 1) || j_query.idade == j.idade) && 
+                        (!bitmask(mask, 2) || strcmp(j_query.nome, j.nome) == 0) && 
+                        (!bitmask(mask, 3) || strcmp(j_query.nac, j.nac) == 0) && 
+                        (!bitmask(mask, 4) || strcmp(j_query.clube, j.clube) == 0);
+
+        // Registro passou pelo filtro
+        if(filter){
+            filter_count++;
+
+            print_jogador(j);
+            printf("\n");
+        }
+
+        free_jogador(&j);
+
+        reg_count++;
+
+        // Caso o filtro tenha um campo id, quando o jogador com esse id for encontrado, terminar busca
+        if(bitmask(mask, 0) && j_query.id == j.id){
+            break;
+        }
+    }
+
+    // Imprimir: "Registro inexistente." caso nenhum registro passar pelo filtro
+    if(filter_count <= 0){
+        printf("Registro inexistente.\n\n");
     }
 
     //printf("\n");

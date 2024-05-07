@@ -72,6 +72,6 @@ int select_data_file(const char *input_filename);
  * @retval 0 Os registros foram impressos com sucesso.
  * @retval 1 Houve algum erro lógico durante as filtragens do arquivo.
  */
-int filter_data_file(const int n, const char *input_filename);
+int filter_data_file(const char *input_filename);
 
 #endif
