@@ -1,2 +1,4 @@
 programaTrab
 doxygen/
+bin/*
+obj/*

@@ -18,8 +18,6 @@
 #ifndef DATA_FILE_H
 #define DATA_FILE_H
 
-#include <stdint.h>
-#include <stdio.h>
 #include "utils/data-file-lib.h"
 
 /**
