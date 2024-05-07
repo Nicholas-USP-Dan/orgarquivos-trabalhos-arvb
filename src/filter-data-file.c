@@ -21,102 +21,10 @@
 
 #include "data-file.h"
 
+#include "utils/data-file-utils.h"
 #include "utils/funcoes_fornecidas.h"
 #include "utils/cabecalho-utils.h"
 #include "utils/campo-utils.h"
-
-/**
- * @brief Instância de um jogador vazio/nulo, representa uma busca "vazia"
- */
-static const JOGADOR jNil = {
-    .id = -1,
-    .idade = -1,
-    .nome = "",
-    .nac = "",
-    .clube = ""
-};
-
-/**
- * @brief Array com todos os nomes dde campos válidos para realizar a filtragem
- */
-static const char *CAMPO_LIST[5] = {
-    "id",
-    "idade",
-    "nomeJogador",
-    "nacionalidade",
-    "nomeClube"
-};
-
-/**
- * @brief Função para a extrair um bit em uma bitmask.
- * 
- * @param mask Mascara a ser operada.
- * @param nbit Posição do bit a ser extraído.
- * 
- * @return [int] Retorna o bit extraído pela função
- */
-static int bitmask(unsigned int mask, int nbit){
-    return (mask & (1 << nbit)) >> nbit;
-}
-
-/**
- * @brief Lê uma linha (do stdin) com os campos da busca e retorna um jogador guardando esses dados.
- * 
- * @param [out] mask Bitmask representando os campos para serem filtrados; esses campos têm 
- * seus bits representantes marcados como 1
- * 
- * @note Foi usado uma bitmask para otimizar o processo de filtragem.
- * 
- * @return [JOGADOR] Retorna um objeto do tipo JOGADOR guardando os dados dos campos a serem filtrados;
- * os campos não procurados são atribuídos com o mesmo valor do jogador nulo (jNil).
- */
-static JOGADOR read_query(unsigned int *mask){
-    JOGADOR j_query = jNil;
-
-    // Quantidade de campos a serem lidos
-    int m;
-    scanf("%d", &m);
-
-    (*mask) = 0;
-
-    // Ler o conjunto nomeCampo e valorCampo, atribuir o campo no jogador "filtro" junto com o bit da mascara correspondente
-    for(int i = 0; i < m; i++){
-        char campo[BUFFER_SIZE];
-        scanf("%s", campo);
-
-        if(strcmp(campo, CAMPO_LIST[0]) == 0){
-            scanf("%" PRId32, &j_query.id);
-            (*mask) |= 0x01;
-        }
-        else if(strcmp(campo, CAMPO_LIST[1]) == 0){
-            scanf("%" PRId32, &j_query.idade);
-            (*mask) |= 0x02;
-        }
-        else if(strcmp(campo, CAMPO_LIST[2]) == 0){
-            j_query.nome = malloc(sizeof(char) * BUFFER_SIZE);
-            scan_quote_string(j_query.nome);
-
-            (*mask) |= 0x04;
-        }
-        else if(strcmp(campo, CAMPO_LIST[3]) == 0){
-            j_query.nac = malloc(sizeof(char) * BUFFER_SIZE);
-            scan_quote_string(j_query.nac);
-
-            (*mask) |= 0x08;
-        }
-        else if(strcmp(campo, CAMPO_LIST[4]) == 0){
-            j_query.clube = malloc(sizeof(char) * BUFFER_SIZE);
-            scan_quote_string(j_query.clube);
-            
-            (*mask) |= 0x10;
-        }
-        else{
-            break;
-        }
-    }
-
-    return j_query;
-}
 
 int filter_data_file(const char *input_filename){
     // Abra o arquivo no modo leitura binaria
@@ -168,28 +76,29 @@ int filter_data_file(const char *input_filename){
         JOGADOR j = read_jogador_data(fptr);
 
         // Guarda o resultado da filtragem
-        int filter = (!bitmask(mask, 0) || j_query.id == j.id) && 
-                        (!bitmask(mask, 1) || j_query.idade == j.idade) && 
-                        (!bitmask(mask, 2) || strcmp(j_query.nome, j.nome) == 0) && 
-                        (!bitmask(mask, 3) || strcmp(j_query.nac, j.nac) == 0) && 
-                        (!bitmask(mask, 4) || strcmp(j_query.clube, j.clube) == 0);
+        int filter =    (!(mask & IDMASK) || j_query.id == j.id) && 
+                        (!(mask & IDADEMASK) || j_query.idade == j.idade) && 
+                        (!(mask & NOMEMASK) || strcmp(j_query.nome, j.nome) == 0) && 
+                        (!(mask & NACMASK) || strcmp(j_query.nac, j.nac) == 0) && 
+                        (!(mask & CLUBEMASK) || strcmp(j_query.clube, j.clube) == 0);
 
         // Registro passou pelo filtro
         if(filter){
             filter_count++;
 
+            // Chamar function pointer??
             print_jogador(j);
             printf("\n");
         }
 
         free_jogador(&j);
 
-        reg_count++;
-
         // Caso o filtro tenha um campo id, quando o jogador com esse id for encontrado, terminar busca
-        if(bitmask(mask, 0) && j_query.id == j.id){
+        if((mask & IDMASK) && j_query.id == j.id){
             break;
         }
+
+        reg_count++;
     }
 
     // Imprimir: "Registro inexistente." caso nenhum registro passar pelo filtro

@@ -15,10 +15,11 @@
 #include <stdint.h>
 #include <inttypes.h>
 
-#include "data-file.h"
-
+#include "utils/data-file-utils.h"
 #include "utils/cabecalho-utils.h"
 #include "utils/campo-utils.h"
+
+#include "data-file.h"
 
 /**
  * @brief Remove o caracter newline ('\n') ao fim de uma string
@@ -60,7 +61,7 @@ static char* get_token_str(char **start_ptr, const char delim){
  * @param line Linha (string) a ser processada.
  * @return [JOGADOR] Retorna um objeto do tipo JOGADOR com os dados obtidos pela função
  */
-static JOGADOR process_jogador(char *line){
+static JOGADOR process_csv_jogador(char *line){
     JOGADOR j_out;
     char *line_ptr = line;
     int32_t len;
@@ -113,7 +114,7 @@ static JOGADOR process_jogador(char *line){
  * @retval -1 Houve um erro durante a adição do registro no arquivo binário.
  * @retval 0 Registro adicionado no arquivo binário com sucesso.
  */
-static int add_reg_bfile(const JOGADOR j, FILE *data_bfile_fptr){
+static int append_reg(const JOGADOR j, FILE *data_bfile_fptr){
     int32_t reg_size = 0; // Variável que guarda o tamanho total do registro
 
     set_campoc('0', data_bfile_fptr); reg_size += 1; // Atribuição do campo removido como '0'
@@ -187,8 +188,8 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
         }
 
         // Processa a linha do csv e coloca o jogador no arquivo binario
-        JOGADOR j = process_jogador(line_buff);
-        add_reg_bfile(j, data_bfile_fptr);
+        JOGADOR j = process_csv_jogador(line_buff);
+        append_reg(j, data_bfile_fptr);
         free_jogador(&j);
 
         reg_count++;

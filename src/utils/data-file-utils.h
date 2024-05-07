@@ -4,6 +4,12 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#define IDMASK 0x01
+#define IDADEMASK 0x02
+#define NOMEMASK 0x04
+#define NACMASK 0x08
+#define CLUBEMASK 0x10
+
 /**
  * @brief Estrutura que contém os dados de um jogador, representa um registro no arquivo de dados.
  * 
@@ -22,6 +28,16 @@ struct _jogador {
  * @brief Tipo da estrutura representando os dados de um jogador
  */
 typedef struct _jogador JOGADOR;
+
+/**
+ * @brief Instância de um jogador vazio/nulo, representa uma busca "vazia"
+ */
+extern const JOGADOR jNil;
+
+/**
+ * @brief Array com todos os nomes dde campos válidos para realizar a filtragem
+ */
+extern const char *CAMPO_LIST[5];;
 
 /**
  * @brief Função que limpa a memória alocada por um jogador (alocado pelos campos de string)
@@ -56,5 +72,18 @@ void print_jogador(JOGADOR j);
  * "removido", "tamanhoRegistro" e "Prox" devem ser pulados antes desta função ser chamada.
  */
 JOGADOR read_jogador_data(FILE *fptr);
+
+/**
+ * @brief Lê uma linha (do stdin) com os campos da busca e retorna um jogador guardando esses dados.
+ * 
+ * @param [out] mask Bitmask representando os campos para serem filtrados; esses campos têm 
+ * seus bits representantes marcados como 1
+ * 
+ * @note Foi usado uma bitmask para otimizar o processo de filtragem.
+ * 
+ * @return [JOGADOR] Retorna um objeto do tipo JOGADOR guardando os dados dos campos a serem filtrados;
+ * os campos não procurados são atribuídos com o mesmo valor do jogador nulo (jNil).
+ */
+JOGADOR read_query(unsigned int *mask);
 
 #endif

@@ -20,6 +20,7 @@
 
 #include "data-file.h"
 
+#include "utils/data-file-utils.h"
 #include "utils/funcoes_fornecidas.h"
 #include "utils/cabecalho-utils.h"
 #include "utils/campo-utils.h"

@@ -18,8 +18,6 @@
 #ifndef DATA_FILE_H
 #define DATA_FILE_H
 
-#include "utils/data-file-lib.h"
-
 /**
  * @brief Nome das colunas como registrado nas especificações do projeto
  * 
@@ -29,14 +27,14 @@
 /**
  * @brief Chamada da funcionalidade 1 - Cria um arquivo binario de dados a partir de um arquivo .csv
  * 
- * @param input_filename Nome do arquivo de entrada .csv.
+ * @param csv_filename Nome do arquivo de entrada .csv.
  * @param output_filename Nome do arquivo binário de saída.
  * 
- * @retval -1 Houve uma falha interna durante a geração do arquivo binário.
- * @retval 0 O arquivo binário foi criado com sucesso.
- * @retval 1 Houve algum erro lógico durante a geração do arquivo binário.
+ * @retval -1 Houve uma falha interna durante a operação.
+ * @retval 0 O A operação foi realizada com sucesso.
+ * @retval 1 Houve algum erro lógico durante a operação.
  */
-int create_data_file_from_csv(const char *input_filename, const char *output_filename);
+int create_data_file_from_csv(const char *csv_filename, const char *output_filename);
 
 /**
  * @brief Chamada da funcionalidade 2 - Imprime todos os registros válidos (não removidos) de um arquivo binário de dados
@@ -45,13 +43,13 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
  * vez que a quantidade de registros impressos for igual a quantidade de reg. válidos (útil para quando a quantidade de
  * registros remvido por alta).
  * 
- * @param input_filename Nome do arquivo binário de dados.
+ * @param bin_filename Nome do arquivo binário de dados a ser lido.
  * 
- * @retval -1 Houve uma falha interna durante a impressão dos registros.
- * @retval 0 Os registros foram impressos com sucesso.
- * @retval 1 Houve algum erro lógico durante a impressão dos registros.
+ * @retval -1 Houve uma falha interna durante a operação.
+ * @retval 0 A operação foi realizada com sucesso.
+ * @retval 1 Houve algum erro lógico durante a operação.
  */
-int select_data_file(const char *input_filename);
+int select_data_file(const char *bin_filename);
 
 /**
  * @brief Chamada da funcionalidade 3 - Filtra os registros válidos (não removidos) de um arquivo binário de dados
@@ -63,15 +61,51 @@ int select_data_file(const char *input_filename);
   M nomeCampo1 valorCampo1 ... nomeCampoM valorCampoM (M pares de nome e valor)
    @endverbatim 
  * 
- * @param n Quantidade de buscas a serem realizadas.
- * @param input_filename Nome do arquivo binário de dados.
+ * @param bin_filename Nome do arquivo binário de dados a ser lido.
  * 
  * @note Caso a busca contenha um critério de id, quando a função encontrar um jogador com este id, ele termina a busca.
  * 
- * @retval -1 Houve uma falha interna durante as filtragens do arquivo.
- * @retval 0 Os registros foram impressos com sucesso.
- * @retval 1 Houve algum erro lógico durante as filtragens do arquivo.
+ * @retval -1 Houve uma falha interna durante a operação.
+ * @retval 0 A operação foi realizada com sucesso.
+ * @retval 1 Houve algum erro lógico durante a operação.
  */
-int filter_data_file(const char *input_filename);
+int filter_data_file(const char *bin_filename);
+
+/**
+ * @brief Chamada da funcionalidade 4 - Cria um arquivo de índice primário de um arquivo binário de dados.
+ * 
+ * @param bin_filename Nome do arquivo binário de dados a ser referenciado.
+ * @param index_filename Nome do arquivo de índice de saída.
+ * 
+ * @retval -1 Houve uma falha interna durante a operação.
+ * @retval 0 A operação foi realizada com sucesso.
+ * @retval 1 Houve algum erro lógico durante a operação.
+ */
+int create_index_file(const char *bin_filename, const char *index_filename);
+
+/**
+ * @brief Chamada da funcionalidade 5 - Remove registros no arquivo binário de dados que cumprem um critério.
+ * 
+ * @param bin_filename Nome do arquivo binário de dados a ser operado
+ * 
+ * @retval -1 Houve uma falha interna durante a operação.
+ * @retval 0 A operação foi realizada com sucesso.
+ * @retval 1 Houve algum erro lógico durante a operação.
+ */
+int delete_from_data_file(const char *bin_filename);
+
+/**
+ * @brief Chamada da funcionalidade 6 - Insere um registro em um arquivo binário de dados.
+ * 
+ * @details Essa função utiliza-se do método Best Fit para encontrar espaços para ocupar; No método Best Fit
+ * procura-se um espaço que tenha o menor espaço sobrando ao ser preenchido com o novo registro
+ * 
+ * @param bin_filename Nome do arquivo binário de dados a ser operado
+ * 
+ * @retval -1 Houve uma falha interna durante a operação.
+ * @retval 0 A operação foi realizada com sucesso.
+ * @retval 1 Houve algum erro lógico durante a operação.
+ */
+int insert_into_data_file(const char *bin_filename); // Seria legal se a entrada pudesse ser feita no programa principal
 
 #endif
