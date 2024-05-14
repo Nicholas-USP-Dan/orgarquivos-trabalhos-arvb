@@ -50,7 +50,7 @@
  * @retval 0 Operação realizada com sucesso.
  * @retval -1 Houve uma falha durante a execução da funcionalidade.
  */
-int initialize_cabecalho(const unsigned char status, const int64_t topo, const int64_t prox_byte_offset, 
+int initialize_data_cabecalho(const unsigned char status, const int64_t topo, const int64_t prox_byte_offset, 
 const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp);
 
 /**

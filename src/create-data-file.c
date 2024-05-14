@@ -200,7 +200,7 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
     
     // Atribuição/Inicialização do cabecalho
     fseek(data_bfile_fptr, 0, SEEK_SET);
-    initialize_cabecalho('1', -1, prox_byte_offset, reg_count, 0, data_bfile_fptr);
+    initialize_data_cabecalho('1', -1, prox_byte_offset, reg_count, 0, data_bfile_fptr);
 
     // Fechamento dos arquivos
     fclose(csv_data_fptr);
