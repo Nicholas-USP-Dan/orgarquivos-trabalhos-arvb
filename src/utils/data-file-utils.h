@@ -34,6 +34,13 @@ typedef struct _jogador JOGADOR;
  */
 extern const JOGADOR jNil;
 
+struct _index_reg {
+    int32_t index;
+    int64_t offset;
+};
+
+typedef struct _index_reg INDEX_REG;
+
 /**
  * @brief Array com todos os nomes dde campos válidos para realizar a filtragem
  */
