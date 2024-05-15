@@ -72,6 +72,7 @@ int main(){
                 binarioNaTela(output_filename);
                 //printf("\n");
             }
+            break;
         default:
             fprintf(stdout, "Funcionalidade invalida.\n");
             break;

@@ -82,6 +82,8 @@ int create_index_file(const char *bin_filename, const char *index_filename){
         set_campo64(reg.offset, index_file_fptr);
     }
 
+    clear_minheap(&heap);
+
     // Escrever o status do arquivo de índice como estável
     fseek(index_file_fptr, 0, SEEK_SET);
     set_campoc('1', index_file_fptr);
