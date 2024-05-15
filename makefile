@@ -6,7 +6,7 @@ include def.mk
 all: $(BINS)
 
 # Gerar os object files (.o) de todos os arquivos .c em src/
-compile: $(OBJDIR) $(OBJDIR)/utils $(OBJDIR)/adts $(HEADERS) $(OBJS)
+compile: setup $(HEADERS) $(OBJS)
 
 # Gerar a pasta compactada para envio no run-codes
 submit-%: $(SUBMITDIR)/%.zip
@@ -15,7 +15,7 @@ submit-%: $(SUBMITDIR)/%.zip
 clean:
 	rm -r $(OBJDIR)/ $(BINDIR)/
 
-setup: $(OBJDIR) $(BINDIR)
+setup: $(OBJDIR) $(OBJDIR)/utils $(OBJDIR)/adts $(BINDIR)
 
 $(OBJDIR):
 	mkdir $@/
@@ -34,8 +34,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	gcc $(FLAGS) -c -o $@ $<
 
 # Gerar um executável
-$(BINDIR)/%: %.c $(BINDIR) $(OBJS) $(HEADERS)
-	gcc $(FLAGS) -o $@ $< $(OBJS)
+$(BINDIR)/%: %.c $(OBJS) $(HEADERS)
+	gcc $(FLAGS) -o $@ $*.c $(OBJS)
 
 # Gerar uma pasta compactada para envio
 $(SUBMITDIR)/%.zip: %.c $(SRCS) README.md $(SUBMITDIR)/makefile-entrega
