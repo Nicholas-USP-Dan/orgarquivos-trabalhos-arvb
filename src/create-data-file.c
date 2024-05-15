@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <inttypes.h>
+#include <errno.h>
 
 #include "utils/data-file-utils.h"
 #include "utils/cabecalho-utils.h"
@@ -171,7 +172,8 @@ int create_data_file_from_csv(const char *input_filename, const char *output_fil
     if(strcmp(columns, COLUMN_NAMES) != 0){
         fclose(csv_data_fptr);
         fclose(data_bfile_fptr);
-        return 1; // Erro lógico encontrado
+        errno = 95;
+        return -1; // Operation not supported
     }
 
     // Contador da quantidade de registros
