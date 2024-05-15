@@ -3,7 +3,7 @@
 #include <inttypes.h>
 
 #include "../src/utils/data-file-utils.h"
-#include "../src/utils/min-heap.h"
+#include "../src/adts/min-heap.h"
 
 int main(){
     MIN_HEAP *heap = initialize_minheap();
