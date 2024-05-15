@@ -1,12 +1,12 @@
 include def.mk
 
-.PHONY: all run compile submit-* *.c *.h
+.PHONY: all compile submit-* clean setup
 
 # Compilar todos os executáveis
-all: $(OBJDIR) $(OBJDIR)/utils $(BINDIR) $(HEADERS) $(BINS)
+all: $(BINS)
 
 # Gerar os object files (.o) de todos os arquivos .c em src/
-compile: $(OBJDIR) $(OBJDIR)/utils  $(HEADERS) $(OBJS)
+compile: $(OBJDIR) $(OBJDIR)/utils $(HEADERS) $(OBJS)
 
 # Gerar a pasta compactada para envio no run-codes
 submit-%: $(SUBMITDIR)/%.zip
@@ -31,7 +31,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	gcc $(FLAGS) -c -o $@ $<
 
 # Gerar um executável
-$(BINDIR)/%: %.c $(OBJS) $(HEADERS)
+$(BINDIR)/%: %.c $(BINDIR) $(OBJS) $(HEADERS)
 	gcc $(FLAGS) -o $@ $< $(OBJS)
 
 # Gerar uma pasta compactada para envio

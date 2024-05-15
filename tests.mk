@@ -1,22 +1,29 @@
 include def.mk
 
+FLAGS=-ggdb3 -Wall -Werror
+
 UTEST_DIR=unit-tests
-UTEST_BIN_DIR=$(UTESTDIR)/bin
+UTEST_BIN_DIR=$(UTEST_DIR)/bin
+
+UTESTS=$(wildcard $(UTEST_DIR)/*.c)
+UTESTS_BINS=$(patsubst $(UTEST_DIR)/%.c, $(UTEST_BIN_DIR)/%, $(UTESTS))
+# UTEST_EXS=$(addprefix test-,$(patsubst $(UTEST_DIR)/%.c, %, $(UTESTS)))
+
 CASOSDIR=test-cases
 
-.PHONY: test-all $(CASOSDIR)/*
+.PHONY: test-all test-* test-cases-trab-int $(CASOSDIR)/*
 
 # Rodar todos os testes individuais
-test-all:
-	@echo hi
+test-all: $(UTESTS_BINS)
 
-# Compilar um teste unitário
-$(UTEST_BIN_DIR)/%: $(OBJS) $(HEADERS)
-	@echo compiling $(UTEST_DIR)/$*.c $(OBJS)
-
-# Executar um teste unitário
 test-%: $(UTEST_BIN_DIR)/%
-	# ./$(UTEST_DIR)/$*
+	./$(UTEST_BIN_DIR)/$*
+
+t-valgrind-%: $(UTEST_BIN_DIR)/%
+	valgrind -s ./$(UTEST_BIN_DIR)/$*
+
+t-clear:
+	rm -r $(UTEST_BIN_DIR)/*
 
 # Teste com os casos de teste
 test-cases-trab-int: $(BINDIR)/trab-int
@@ -29,5 +36,6 @@ test-cases-trab-int: $(BINDIR)/trab-int
 
 	rm temp.out *.bin
 
-# Executar o valgrind para verificar memory leakage
-test-valgnd-%: $(CASOSDIR)/%/*
+# Compilar um teste unitário
+$(UTEST_BIN_DIR)/%: $(UTEST_DIR)/%.c $(OBJS) $(HEADERS)
+	gcc $(FLAGS) -o $@ $(UTEST_DIR)/$*.c $(OBJS)
