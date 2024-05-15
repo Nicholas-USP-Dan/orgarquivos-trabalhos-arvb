@@ -1,7 +1,5 @@
 include def.mk
 
-FLAGS=-ggdb3 -Wall -Werror
-
 UTEST_DIR=unit-tests
 UTEST_BIN_DIR=$(UTEST_DIR)/bin
 
