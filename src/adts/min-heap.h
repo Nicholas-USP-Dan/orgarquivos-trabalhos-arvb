@@ -1,7 +1,7 @@
 #ifndef MINHEAP_H
 #define MINHEAP_H
 
-#include "data-file-utils.h"
+#include "../utils/data-file-utils.h"
 
 typedef struct _min_heap MIN_HEAP;
 

@@ -6,7 +6,7 @@ include def.mk
 all: $(BINS)
 
 # Gerar os object files (.o) de todos os arquivos .c em src/
-compile: $(OBJDIR) $(OBJDIR)/utils $(HEADERS) $(OBJS)
+compile: $(OBJDIR) $(OBJDIR)/utils $(OBJDIR)/adts $(HEADERS) $(OBJS)
 
 # Gerar a pasta compactada para envio no run-codes
 submit-%: $(SUBMITDIR)/%.zip
@@ -21,6 +21,9 @@ $(OBJDIR):
 	mkdir $@/
 
 $(OBJDIR)/utils:
+	mkdir $@
+
+$(OBJDIR)/adts:
 	mkdir $@
 
 $(BINDIR):
