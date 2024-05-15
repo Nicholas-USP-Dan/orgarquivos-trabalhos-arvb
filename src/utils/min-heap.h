@@ -3,16 +3,16 @@
 
 #include "data-file-utils.h"
 
-typedef struct _heap HEAP;
+typedef struct _min_heap MIN_HEAP;
 
-HEAP* initialize_minheap();
+MIN_HEAP* initialize_minheap();
 
-void clear_minheap(HEAP **heap);
+void clear_minheap(MIN_HEAP **heap);
 
-int insert_minheap(INDEX_REG index_reg, HEAP **heap);
+int insert_minheap(INDEX_REG index_reg, MIN_HEAP **heap);
 
-INDEX_REG pop_minheap(HEAP **heap);
+INDEX_REG pop_minheap(MIN_HEAP **heap);
 
-int empty_heap(HEAP **heap);
+int empty_heap(MIN_HEAP **heap);
 
 #endif

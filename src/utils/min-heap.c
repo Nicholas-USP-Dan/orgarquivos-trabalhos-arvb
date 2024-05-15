@@ -8,13 +8,13 @@
 #define LCHILD_INDEX(i) i*2+1
 #define RCHILD_INDEX(i) i*2+2
 
-struct _heap {
+struct _min_heap {
     int32_t last;
     int32_t max_size;
     INDEX_REG *arr;
 };
 
-static void bubble_up(HEAP **heap, int root){
+static void bubble_up(MIN_HEAP **heap, int root){
     if(root <= 0){
         return;
     }
@@ -28,7 +28,7 @@ static void bubble_up(HEAP **heap, int root){
     }
 }
 
-static void bubble_down(HEAP **heap, int root){
+static void bubble_down(MIN_HEAP **heap, int root){
     if(root*2 > (*heap)->last){
         return;
     }
@@ -58,8 +58,8 @@ static void bubble_down(HEAP **heap, int root){
     return;
 }
 
-HEAP* initialize_minheap(){
-    HEAP *heap = malloc(sizeof(HEAP));
+MIN_HEAP* initialize_minheap(){
+    MIN_HEAP *heap = malloc(sizeof(MIN_HEAP));
     heap->last = -1;
     heap->max_size = 1;
     heap->arr = malloc(sizeof(INDEX_REG));
@@ -67,7 +67,7 @@ HEAP* initialize_minheap(){
     return heap;
 }
 
-void clear_minheap(HEAP **heap){
+void clear_minheap(MIN_HEAP **heap){
     (*heap)->last = -1;
     (*heap)->max_size = 0;
     free((*heap)->arr);
@@ -75,7 +75,7 @@ void clear_minheap(HEAP **heap){
     (*heap) = NULL;
 }
 
-int insert_minheap(INDEX_REG index_reg, HEAP **heap){
+int insert_minheap(INDEX_REG index_reg, MIN_HEAP **heap){
     if((*heap)->last >= (*heap)->max_size-1){
         (*heap)->max_size = ((*heap)->max_size*2+1);
         (*heap)->arr = realloc((*heap)->arr, sizeof(INDEX_REG) * (*heap)->max_size);
@@ -88,7 +88,7 @@ int insert_minheap(INDEX_REG index_reg, HEAP **heap){
     return 100;
 }
 
-INDEX_REG pop_minheap(HEAP **heap){
+INDEX_REG pop_minheap(MIN_HEAP **heap){
     if(empty_heap(heap)){
         return (INDEX_REG){0,-1};
     }
@@ -99,10 +99,10 @@ INDEX_REG pop_minheap(HEAP **heap){
     return index_aux;
 }
 
-INDEX_REG top_heap(HEAP **heap){
+INDEX_REG top_heap(MIN_HEAP **heap){
     return empty_heap(heap) ? (INDEX_REG){0,-1} : (*heap)->arr[0];
 }
 
-int empty_heap(HEAP **heap){
+int empty_heap(MIN_HEAP **heap){
     return (*heap)->last < 0;
 }

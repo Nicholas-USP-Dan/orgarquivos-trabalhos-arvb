@@ -6,7 +6,7 @@
 #include "../src/utils/min-heap.h"
 
 int main(){
-    HEAP *heap = initialize_minheap();
+    MIN_HEAP *heap = initialize_minheap();
 
     insert_minheap((INDEX_REG){2,123}, &heap);
 
