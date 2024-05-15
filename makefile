@@ -21,10 +21,10 @@ $(OBJDIR):
 	mkdir $@/
 
 $(OBJDIR)/utils:
-	mkdir $@
+	mkdir $@/
 
 $(OBJDIR)/adts:
-	mkdir $@
+	mkdir $@/
 
 $(BINDIR):
 	mkdir $@/
@@ -38,8 +38,8 @@ $(BINDIR)/%: %.c $(BINDIR) $(OBJS) $(HEADERS)
 	gcc $(FLAGS) -o $@ $< $(OBJS)
 
 # Gerar uma pasta compactada para envio
-$(SUBMITDIR)/%.zip: %.c $(SRCS)
-	zip -r $@ src/ $(SUBMITDIR)/makefile-entrega $< README.md 
+$(SUBMITDIR)/%.zip: %.c $(SRCS) README.md $(SUBMITDIR)/makefile-entrega
+	zip -r $@ $< src/ $(SUBMITDIR)/makefile-entrega README.md 
 #	Renomear o makefile
 	printf "@ $(SUBMITDIR)/makefile-entrega\n@=makefile\n" | zipnote -w $@
 
