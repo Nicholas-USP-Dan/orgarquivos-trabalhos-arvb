@@ -4,3 +4,4 @@ bin/*
 obj/*
 .vscode/
 unit-tests/bin/*
+unit-tests/out/*
