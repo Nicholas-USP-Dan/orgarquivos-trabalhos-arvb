@@ -1,19 +1,40 @@
+/**
+ * @file min-heap.c
+ * @brief Source file da ADT de fila de prioridade mínima (min-heap) de registros de índice
+ * 
+ * @authors Nicholas Eiti Dan; N°USP: 14600749
+ * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ * 
+ * @version 1.0
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 
 #include "min-heap.h"
 
-#define PARENT_INDEX(i) (i-1)/2
-#define LCHILD_INDEX(i) i*2+1
-#define RCHILD_INDEX(i) i*2+2
+#define PARENT_INDEX(i) (i-1)/2 /**< @brief Índice do elemento pai do elemento em i*/
+#define LCHILD_INDEX(i) i*2+1 /**< @brief Índice do filho à esquerda do elemento em i*/
+#define RCHILD_INDEX(i) i*2+2 /**< @brief Índice do filho à direita do elemento em i*/
 
+/**
+ * @brief Estrutura de uma min-heap
+ */
 struct _min_heap {
-    int32_t last;
-    int32_t max_size;
-    INDEX_REG *arr;
+    int32_t last; /**< @brief Índice do último elemento (válido) da heap*/
+    int32_t max_size; /**< @brief Tamanho máximo de arr, aumenta em potências de 2*/
+    INDEX_REG *arr; /**< @brief Representação da heap como vetor*/
 };
 
+/**
+ * @brief Movimento de bubble-up da min-heap.
+ * 
+ * @details A função bubble_up leva elementos menores do que seus parentes para cima.
+ * 
+ * @param heap Referência do ponteiro em uma heap
+ * @param root Índice do elemento a ser movimentado
+ */
 static void bubble_up(MIN_HEAP **heap, int root){
     if(root <= 0){
         return;
@@ -28,6 +49,14 @@ static void bubble_up(MIN_HEAP **heap, int root){
     }
 }
 
+/**
+ * @brief Movimento de bubble-down da min-heap.
+ * 
+ * @details A função bubble_down leva elementos maiores do que seus filhos para baixo.
+ * 
+ * @param heap Referência do ponteiro em uma heap
+ * @param root Índice do elemento a ser movimentado
+ */
 static void bubble_down(MIN_HEAP **heap, int root){
     if(root*2 > (*heap)->last){
         return;
@@ -97,10 +126,6 @@ INDEX_REG pop_minheap(MIN_HEAP **heap){
     (*heap)->arr[0] = (*heap)->arr[(*heap)->last--];
     bubble_down(heap, 0);
     return index_aux;
-}
-
-INDEX_REG top_heap(MIN_HEAP **heap){
-    return empty_heap(heap) ? (INDEX_REG){0,-1} : (*heap)->arr[0];
 }
 
 int empty_heap(MIN_HEAP **heap){
