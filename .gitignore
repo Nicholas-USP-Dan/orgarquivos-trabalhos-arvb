@@ -3,3 +3,4 @@ doxygen/
 bin/*
 obj/*
 .vscode/
+unit-tests/bin/*
