@@ -2,3 +2,4 @@ programaTrab
 doxygen/
 bin/*
 obj/*
+.vscode/
