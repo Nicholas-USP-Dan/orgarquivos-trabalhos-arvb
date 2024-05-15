@@ -1,5 +1,5 @@
 /**
- * @file programaTrab.c
+ * @file trab-int.c
  * @brief Arquivo do programa principal do projeto.
  * 
  * @authors Nicholas Eiti Dan; N°USP: 14600749
