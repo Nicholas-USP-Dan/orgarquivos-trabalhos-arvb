@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "../src/data-file.h"
+#include "../src/index-file.h"
 
 int main(){
-    create_index_file("unit-tests/binario-test.bin", "unit-tests/out/index-test.bin");
+    create_index_file("unit-tests/binario-test.bin", "unit-tests/index-test.bin");
 }
