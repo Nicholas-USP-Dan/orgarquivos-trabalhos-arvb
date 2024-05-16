@@ -33,6 +33,7 @@ typedef struct _jogador JOGADOR;
  * @brief Instância de um jogador vazio/nulo, representa uma busca "vazia"
  */
 extern const JOGADOR jNil;
+
 /**
  * @brief Estrutura que contém os dados de um registro de índice
  */
