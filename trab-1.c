@@ -12,6 +12,7 @@
 #include <stdio.h>
 
 #include "src/data-file.h"
+#include "src/index-file.h"
 #include "src/utils/funcoes_fornecidas.h"
 
 int main(){
