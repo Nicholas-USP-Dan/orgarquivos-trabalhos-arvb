@@ -87,12 +87,13 @@ int create_index_file(const char *bin_filename, const char *index_filename);
  * @brief Chamada da funcionalidade 5 - Remove registros no arquivo binário de dados que cumprem um critério.
  * 
  * @param bin_filename Nome do arquivo binário de dados a ser operado
+ * @param index_filename Nome do arquivo de índice.
  * 
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 A operação foi realizada com sucesso.
  * @retval 1 Houve algum erro lógico durante a operação.
  */
-int delete_from_data_file(const char *bin_filename);
+int delete_from_data_file(const char *bin_filename, const char *index_filename);
 
 /**
  * @brief Chamada da funcionalidade 6 - Insere um registro em um arquivo binário de dados.
@@ -101,11 +102,12 @@ int delete_from_data_file(const char *bin_filename);
  * procura-se um espaço que tenha o menor espaço sobrando ao ser preenchido com o novo registro
  * 
  * @param bin_filename Nome do arquivo binário de dados a ser operado
+ * @param index_filename Nome do arquivo de índice de saída.
  * 
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 A operação foi realizada com sucesso.
  * @retval 1 Houve algum erro lógico durante a operação.
  */
-int insert_into_data_file(const char *bin_filename); // Seria legal se a entrada pudesse ser feita no programa principal
+int insert_into_data_file(const char *bin_filename, const char *index_filename); // Seria legal se a entrada pudesse ser feita no programa principal
 
 #endif
