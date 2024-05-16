@@ -23,7 +23,7 @@
  */
 struct _min_heap {
     int32_t last; /**< @brief Índice do último elemento (válido) da heap*/
-    int32_t max_size; /**< @brief Tamanho máximo de arr, aumenta em potências de 2*/
+    int64_t max_size; /**< @brief Tamanho máximo de arr, aumenta em potências de 2*/
     INDEX_REG *arr; /**< @brief Representação da heap como vetor*/
 };
 
@@ -114,7 +114,7 @@ int insert_minheap(INDEX_REG index_reg, MIN_HEAP **heap){
 
     bubble_up(heap, (*heap)->last);
 
-    return 100;
+    return 0;
 }
 
 INDEX_REG pop_minheap(MIN_HEAP **heap){
