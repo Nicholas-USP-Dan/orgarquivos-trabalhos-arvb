@@ -90,5 +90,6 @@ int create_index_file(const char *bin_filename, const char *index_filename){
     set_campoc('1', index_file_fptr);
     
     fclose(data_bfile_fptr);
+    fclose(index_file_fptr);
     return 0;
 }

@@ -23,19 +23,6 @@ t-valgrind-%: $(UTEST_BIN_DIR)/%
 t-clean:
 	rm -r $(UTEST_BIN_DIR)/* $(UTEST_DIR)/out/*
 
-# Teste com os casos de teste
-# Chamar script de teste dedicado
-test-cases-trab-int: $(BINDIR)/trab-int
-	@for input in $(wildcard $(CASOSDIR)/trab-int/in/*) ; do \
-		./$< < $$input > temp.out ; \
-		echo $(patsubst $(CASOSDIR)/trab-int/in/%.in, $(CASOSDIR)/trab-int/out/%.out, $(input)) ; \
-		# cmp $(patsubst $(CASOSDIR)/trab-int/in/%.in, $(CASOSDIR)/trab-int/out/%.out, $(input)) temp.out ; \
-	done
-
-	# Comparação de binários
-
-	rm temp.out *.bin
-
 # Compilar um teste unitário
 $(UTEST_BIN_DIR)/%: $(UTEST_DIR)/%.c $(OBJS) $(HEADERS)
 	gcc $(FLAGS) -o $@ $(UTEST_DIR)/$*.c $(OBJS)
