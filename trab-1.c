@@ -29,7 +29,7 @@ int main(){
         case '1':
             scanf("%s", input_filename);
             scanf("%s", output_filename);
-            ret = create_data_file_from_csv(input_filename, output_filename);
+            ret = create_data_file(input_filename, output_filename);
             
             if(ret != 0){
                 fprintf(stdout, "Falha no processamento do arquivo.\n");
@@ -41,7 +41,7 @@ int main(){
             break;
         case '2':
             scanf("%s", input_filename);
-            ret = select_data_file(input_filename);
+            ret = select_data(input_filename);
 
             if(ret != 0){
                 fprintf(stdout, "Falha no processamento do arquivo.\n");
@@ -54,7 +54,7 @@ int main(){
             for(int i = 0; i < n; i++){
                 printf("Busca %d\n\n", i+1);
 
-                ret = filter_data_file(input_filename);
+                ret = filter_data(input_filename);
                 if(ret != 0){
                     fprintf(stdout, "Falha no processamento do arquivo.\n");
                     break;

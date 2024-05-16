@@ -25,7 +25,7 @@
 #include "utils/cabecalho-utils.h"
 #include "utils/campo-utils.h"
 
-int select_data_file(const char *bin_filename){
+int select_data(const char *bin_filename){
     // Abra o arquivo no modo leitura binaria
     FILE *fptr = fopen(bin_filename, "rb");
     if(fptr == NULL){

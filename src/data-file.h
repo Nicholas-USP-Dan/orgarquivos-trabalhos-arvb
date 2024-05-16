@@ -34,7 +34,7 @@
  * @retval 0 O A operação foi realizada com sucesso.
  * @retval 1 Houve algum erro lógico durante a operação.
  */
-int create_data_file_from_csv(const char *csv_filename, const char *output_filename);
+int create_data_file(const char *csv_filename, const char *output_filename);
 
 /**
  * @brief Chamada da funcionalidade 2 - Imprime todos os registros válidos (não removidos) de um arquivo binário de dados
@@ -49,7 +49,7 @@ int create_data_file_from_csv(const char *csv_filename, const char *output_filen
  * @retval 0 A operação foi realizada com sucesso.
  * @retval 1 Houve algum erro lógico durante a operação.
  */
-int select_data_file(const char *bin_filename);
+int select_data(const char *bin_filename);
 
 /**
  * @brief Chamada da funcionalidade 3 - Filtra os registros válidos (não removidos) de um arquivo binário de dados
@@ -69,7 +69,7 @@ int select_data_file(const char *bin_filename);
  * @retval 0 A operação foi realizada com sucesso.
  * @retval 1 Houve algum erro lógico durante a operação.
  */
-int filter_data_file(const char *bin_filename);
+int filter_data(const char *bin_filename);
 
 /**
  * @brief Chamada da funcionalidade 5 - Remove registros no arquivo binário de dados que cumprem um critério.
@@ -81,7 +81,7 @@ int filter_data_file(const char *bin_filename);
  * @retval 0 A operação foi realizada com sucesso.
  * @retval 1 Houve algum erro lógico durante a operação.
  */
-int delete_from_data_file(const char *bin_filename, const char *index_filename);
+int delete_data(const char *bin_filename, const char *index_filename);
 
 /**
  * @brief Chamada da funcionalidade 6 - Insere um registro em um arquivo binário de dados.
@@ -96,6 +96,6 @@ int delete_from_data_file(const char *bin_filename, const char *index_filename);
  * @retval 0 A operação foi realizada com sucesso.
  * @retval 1 Houve algum erro lógico durante a operação.
  */
-int insert_into_data_file(const char *bin_filename, const char *index_filename); // Seria legal se a entrada pudesse ser feita no programa principal
+int insert_data(const char *bin_filename, const char *index_filename); // Seria legal se a entrada pudesse ser feita no programa principal
 
 #endif

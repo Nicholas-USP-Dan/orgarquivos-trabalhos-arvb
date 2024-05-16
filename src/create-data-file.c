@@ -143,7 +143,7 @@ static int append_reg(const JOGADOR j, FILE *data_bfile_fptr){
     return 0;
 }
 
-int create_data_file_from_csv(const char *input_filename, const char *output_filename){
+int create_data_file(const char *input_filename, const char *output_filename){
     // Abrir o arquivo .csv no modo leitura
     FILE *csv_data_fptr;
     if((csv_data_fptr = fopen(input_filename, "r")) == NULL){
