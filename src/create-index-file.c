@@ -76,6 +76,7 @@ int create_index_file(const char *bin_filename, const char *index_filename){
         reg_count++;
     }
 
+    // Colocar a heap no arquivo 
     while(!empty_heap(&heap)){
         INDEX_REG reg = pop_minheap(&heap);
         set_campo32(reg.index, index_file_fptr);
