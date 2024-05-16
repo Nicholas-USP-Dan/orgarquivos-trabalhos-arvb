@@ -13,10 +13,10 @@
  * @retval 0 A operação foi realizada com sucesso.
  * @retval 1 Houve algum erro lógico durante a operação.
  */
-int create_index_file(const char *bin_filename, const char *index_filename);
+int create_index(const char *bin_filename, const char *index_filename);
 
-DYN_SORTED_ARRAY* load_index_file(const char *index_filename);
+DYN_SORTED_ARRAY* load_index(const char *index_filename);
 
-int update_index_file(DYN_SORTED_ARRAY **index_array);
+int update_index(DYN_SORTED_ARRAY **index_array);
 
 #endif

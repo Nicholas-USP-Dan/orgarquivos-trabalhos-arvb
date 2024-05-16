@@ -11,7 +11,7 @@
 #include "utils/campo-utils.h"
 #include "adts/min-heap.h"
 
-int create_index_file(const char *bin_filename, const char *index_filename){
+int create_index(const char *bin_filename, const char *index_filename){
     // Abra o arquivo no modo leitura binaria
     FILE *data_bfile_fptr = fopen(bin_filename, "rb");
     if(data_bfile_fptr == NULL){

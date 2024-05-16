@@ -9,7 +9,7 @@
 
 int main(){
     DYN_SORTED_ARRAY* array;
-    array = load_index_file("unit-tests/index-test.bin");
+    array = load_index("unit-tests/index-test.bin");
 
     assert(array != NULL);
 

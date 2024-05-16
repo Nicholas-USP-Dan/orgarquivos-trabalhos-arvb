@@ -64,7 +64,7 @@ int main(){
         case '4':
             scanf("%s", input_filename);
             scanf("%s", output_filename);
-            ret = create_index_file(input_filename, output_filename);
+            ret = create_index(input_filename, output_filename);
             
             if(ret != 0){
                 fprintf(stdout, "Falha no processamento do arquivo.\n");

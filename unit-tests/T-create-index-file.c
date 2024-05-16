@@ -2,5 +2,5 @@
 #include "../src/index-file.h"
 
 int main(){
-    create_index_file("unit-tests/binario-test.bin", "unit-tests/index-test.bin");
+    create_index("unit-tests/binario-test.bin", "unit-tests/index-test.bin");
 }
