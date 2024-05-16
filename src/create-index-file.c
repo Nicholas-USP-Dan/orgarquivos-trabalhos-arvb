@@ -3,7 +3,7 @@
 #include <inttypes.h>
 #include <stdint.h>
 
-#include "data-file.h"
+#include "index-file.h"
 
 #include "utils/data-file-utils.h"
 #include "utils/funcoes_fornecidas.h"
@@ -12,11 +12,6 @@
 #include "adts/min-heap.h"
 
 int create_index_file(const char *bin_filename, const char *index_filename){
-    /**
-     * Seria legal passar uma função como parâmetro, mas como em C não há redução de argumentos,
-     * fazer isso iria requerer parâmetros globais, então achei melhor repetir código mesmo
-    */
-
     // Abra o arquivo no modo leitura binaria
     FILE *data_bfile_fptr = fopen(bin_filename, "rb");
     if(data_bfile_fptr == NULL){

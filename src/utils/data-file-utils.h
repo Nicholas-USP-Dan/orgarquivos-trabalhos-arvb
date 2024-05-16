@@ -34,6 +34,7 @@ typedef struct _jogador JOGADOR;
  */
 extern const JOGADOR jNil;
 
+// INDEX_REG ESTÁ EM UM LUGAR CONFUSO, SE POSSÍVEL MUDAR DE LUGAR
 /**
  * @brief Estrutura que contém os dados de um registro de índice
  */

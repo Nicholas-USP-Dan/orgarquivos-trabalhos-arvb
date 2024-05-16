@@ -92,3 +92,7 @@ int remove_dyn_array(int32_t index, DYN_SORTED_ARRAY **array){
     (*array)->arr[i].removed = 1;
     return 0;
 }
+
+int64_t length_dyn_array(DYN_SORTED_ARRAY **array){
+    return (*array)->last+1;
+}
