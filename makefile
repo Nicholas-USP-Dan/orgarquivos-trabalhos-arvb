@@ -3,7 +3,7 @@ include def.mk
 .PHONY: all compile submit-* clean setup
 
 # Compilar todos os executáveis
-all: $(BINS)
+all: setup $(BINS)
 
 # Gerar os object files (.o) de todos os arquivos .c em src/
 compile: setup $(HEADERS) $(OBJS)
