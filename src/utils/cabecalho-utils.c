@@ -10,6 +10,7 @@
  */
 
 #include <stdio.h>
+#include <errno.h>
 
 #include "cabecalho-utils.h"
 
@@ -32,5 +33,6 @@ const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp){
 int check_status(FILE *fp){
     char status;
     fread(&status, 1, 1, fp);
+    if(status != '1') errno = 5;
     return status == '1';
 }
