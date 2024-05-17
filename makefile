@@ -8,9 +8,6 @@ all: setup $(BINS)
 # Gerar os object files (.o) de todos os arquivos .c em src/
 compile: setup $(HEADERS) $(OBJS)
 
-# Gerar a pasta compactada para envio no run-codes
-submit-%: $(SUBMITDIR)/%.zip
-
 # Limpar todos os arquivos binários e .o
 clean:
 	rm -r $(OBJDIR)/ $(BINDIR)/
