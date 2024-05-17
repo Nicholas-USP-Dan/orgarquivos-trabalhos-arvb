@@ -27,8 +27,8 @@
 /**
  * @brief Chamada da funcionalidade 1 - Cria um arquivo binario de dados a partir de um arquivo .csv
  * 
- * @param csv_filename Nome do arquivo de entrada .csv.
- * @param output_filename Nome do arquivo binário de saída.
+ * @param csv_fptr Ponteiro para o arquivo de entrada csv
+ * @param data_fptr Ponteiro para o arquivo binário de saída
  * 
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 O A operação foi realizada com sucesso.
@@ -42,13 +42,12 @@ int create_data_file(FILE *csv_fptr, FILE *data_fptr);
  * vez que a quantidade de registros impressos for igual a quantidade de reg. válidos (útil para quando a quantidade de
  * registros remvido por alta).
  * 
- * @param bin_filename Nome do arquivo binário de dados a ser lido.
+ * @param data_fptr Ponteiro para o arquivo binário a ser lido.
  * 
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 A operação foi realizada com sucesso.
- * @retval 1 Houve algum erro lógico durante a operação.
  */
-int select_data(const char *bin_filename);
+int select_data(FILE *data_fptr);
 
 /**
  * @brief Chamada da funcionalidade 3 - Filtra os registros válidos (não removidos) de um arquivo binário de dados
@@ -66,7 +65,6 @@ int select_data(const char *bin_filename);
  * 
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 A operação foi realizada com sucesso.
- * @retval 1 Houve algum erro lógico durante a operação.
  */
 int filter_data(const char *bin_filename);
 
@@ -78,7 +76,6 @@ int filter_data(const char *bin_filename);
  * 
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 A operação foi realizada com sucesso.
- * @retval 1 Houve algum erro lógico durante a operação.
  */
 int delete_data(const char *bin_filename, const char *index_filename);
 
@@ -93,7 +90,6 @@ int delete_data(const char *bin_filename, const char *index_filename);
  * 
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 A operação foi realizada com sucesso.
- * @retval 1 Houve algum erro lógico durante a operação.
  */
 int insert_data(const char *bin_filename, const char *index_filename); // Seria legal se a entrada pudesse ser feita no programa principal
 

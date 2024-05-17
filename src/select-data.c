@@ -25,13 +25,7 @@
 #include "utils/cabecalho-utils.h"
 #include "utils/campo-utils.h"
 
-int select_data(const char *bin_filename){
-    // Abra o arquivo no modo leitura binaria
-    FILE *data_fptr = fopen(bin_filename, "rb");
-    if(data_fptr == NULL){
-        return -1;
-    }
-
+int select_data(FILE *data_fptr){
     // Check de status valido
     if(!check_status(data_fptr)){
         return -1;
@@ -81,6 +75,5 @@ int select_data(const char *bin_filename){
         printf("Registro inexistente.\n\n");
     }
     
-    fclose(data_fptr);
     return 0;
 }

@@ -62,7 +62,13 @@ int main(){
             break;
         case '2':
             scanf("%s", input_filename);
-            ret = select_data(input_filename);
+            FILE *data_fptr = fopen(input_filename, "rb");
+            if(!data_fptr){
+                ret = -1;
+                break;
+            }
+
+            ret = select_data(data_fptr);
 
             if(ret != 0){
                 fprintf(stdout, "Falha no processamento do arquivo.\n");
