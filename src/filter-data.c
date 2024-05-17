@@ -1,5 +1,5 @@
 /**
- * @file filter-data-file.c
+ * @file filter-data.c
  * @brief Implementação da funcionalidade 3 como definido no projeto
  * 
  * O tipo de jogador é utilizado para representar uma busca filtrada (a estrutura contém todos os campos de um registro);
@@ -21,27 +21,12 @@
 
 #include "data-file.h"
 
-#include "utils/data-file-utils.h"
-#include "utils/funcoes_fornecidas.h"
-#include "utils/cabecalho-utils.h"
+#include "utils/data-utils.h"
 #include "utils/campo-utils.h"
+#include "utils/cabecalho-utils.h"
 
-int filter_data(const char *bin_filename){
-    // Abra o arquivo no modo leitura binaria
-    FILE *data_fptr = fopen(bin_filename, "rb");
-    if(data_fptr == NULL){
-        return -1;
-    }
-
-    // Check de status válido
-    if(!check_status(data_fptr)){
-        return -1;
-    }
-
-    unsigned int mask;
-
-    // Leitura dos campos de busca
-    JOGADOR j_query = read_query(&mask);
+int filter_data(FILE *data_fptr, JOGADOR j_query){
+    unsigned int mask = get_mask(j_query);
 
     int reg_count = 0;
     int filter_count = 0;
@@ -49,10 +34,10 @@ int filter_data(const char *bin_filename){
     // Ler quantidade de registros existentes
     fseek(data_fptr, NRO_REGARQ_OFFSET, SEEK_SET);
     int32_t nro_reg = get_campo32(data_fptr);
-    // fread(&nro_reg, 4, 1, data_fptr);
 
     // Pular o cabecalho
-    fseek(data_fptr, HEADER_END_OFFSET, SEEK_SET);
+    // fseek(data_fptr, HEADER_END_OFFSET, SEEK_SET);
+    fseek(data_fptr, HEADER_END_OFFSET-NRO_REGARQ_OFFSET, SEEK_CUR);
 
     // Lê registros até ler todos os registros válidos
     while(reg_count < nro_reg){
@@ -65,7 +50,6 @@ int filter_data(const char *bin_filename){
         // Registro esta removido, mover para o proximo
         if(rem == '1'){
             int32_t reg_size = get_campo32(data_fptr);
-            // fread(&reg_size, 4, 1, data_fptr);
             fseek(data_fptr, reg_size-5, SEEK_CUR);
             continue;
         }
@@ -107,6 +91,5 @@ int filter_data(const char *bin_filename){
     }
 
     //printf("\n");
-    fclose(data_fptr);
     return 0;
 }

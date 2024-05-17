@@ -18,11 +18,26 @@
 #ifndef DATA_FILE_H
 #define DATA_FILE_H
 
+#include "adts/dyn-array.h"
+
 /**
- * @brief Nome das colunas como registrado nas especificações do projeto
+ * @brief Estrutura que contém os dados de um jogador, representa um registro no arquivo de dados.
  * 
+ * @note As strings contidas dentro da estrutura terminam com '\0' para compatibilidade do processamento pelas funções
+ * da biblioteca string.h
  */
-#define COLUMN_NAMES "id,idade,nomeJogador,nacionalidade,nomeClube"
+struct _jogador {
+    int32_t id; /**< id do jogador (32 bits ou 4 bytes) */
+    int32_t idade; /**< idade do jogador (32 bits ou 4 bytes) */
+    char *nome; /**< nome do jogador (string terminada em char nulo de tamanho variável)*/
+    char *nac; /**< nacionalidade do jogador (string terminada em char nulo de tamanho variável)*/
+    char *clube; /**< clube do jogador (string terminada em char nulo de tamanho variável)*/
+};
+
+/**
+ * @brief Tipo da estrutura representando os dados de um jogador
+ */
+typedef struct _jogador JOGADOR;
 
 /**
  * @brief Chamada da funcionalidade 1 - Cria um arquivo binario de dados a partir de um arquivo .csv
@@ -56,7 +71,7 @@ int select_data(FILE *data_fptr);
  * realizada.
  * A função lê uma linha de busca com vários campos e realiza a busca conforme os critérios. Formado de uma linha de busca:
    @verbatim
-  M nomeCampo1 valorCampo1 ... nomeCampoM valorCampoM (M pares de nome e valor)
+   M nomeCampo1 valorCampo1 ... nomeCampoM valorCampoM (M pares de nome e valor)
    @endverbatim 
  * 
  * @param bin_filename Nome do arquivo binário de dados a ser lido.
@@ -66,7 +81,7 @@ int select_data(FILE *data_fptr);
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 A operação foi realizada com sucesso.
  */
-int filter_data(const char *bin_filename);
+int filter_data(FILE *data_fptr, JOGADOR j_query);
 
 /**
  * @brief Chamada da funcionalidade 5 - Remove registros no arquivo binário de dados que cumprem um critério.
