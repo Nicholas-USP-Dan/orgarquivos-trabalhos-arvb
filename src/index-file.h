@@ -1,7 +1,7 @@
 #ifndef INDEX_FILE_H
 #define INDEX_FILE_H
 
-#include "adts/dyn-sorted-array.h"
+#include "adts/dyn-array.h"
 
 /**
  * @brief Chamada da funcionalidade 4 - Cria um arquivo de índice primário de um arquivo binário de dados.

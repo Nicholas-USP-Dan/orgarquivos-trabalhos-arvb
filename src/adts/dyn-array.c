@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#include "dyn-sorted-array.h"
+#include "dyn-array.h"
 
 /**
  * @brief Estrutura de um array dinâmico

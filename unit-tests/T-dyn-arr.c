@@ -2,7 +2,7 @@
 #include <inttypes.h>
 #include <assert.h>
 
-#include "../src/adts/dyn-sorted-array.h"
+#include "../src/adts/dyn-array.h"
 
 int main(){
     DYN_SORTED_ARRAY *array = initialize_dyn_array();
