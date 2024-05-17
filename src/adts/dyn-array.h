@@ -2,7 +2,8 @@
 #define DYNAMIC_ARR_H
 
 #include <stdint.h>
-#include "../utils/data-file-utils.h"
+
+#include "../utils/index-types.h"
 
 struct _arr_el {
     INDEX_REG el;
