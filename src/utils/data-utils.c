@@ -14,8 +14,9 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
+#include "data-utils.h"
+
 #include "campo-utils.h"
-#include "data-file-utils.h"
 #include "funcoes_fornecidas.h"
 
 /**
@@ -73,14 +74,12 @@ JOGADOR read_jogador_data(FILE *fptr){
     return j;
 }
 
-JOGADOR read_query(unsigned int *mask){
+JOGADOR read_query(){
     JOGADOR j_query = jNil;
 
     // Quantidade de campos a serem lidos
     int m;
     scanf("%d", &m);
-
-    (*mask) = 0;
 
     // Ler o conjunto nomeCampo e valorCampo, atribuir o campo no jogador "filtro" junto com o bit da mascara correspondente
     for(int i = 0; i < m; i++){
@@ -89,29 +88,21 @@ JOGADOR read_query(unsigned int *mask){
 
         if(strcmp(campo, CAMPO_LIST[0]) == 0){
             scanf("%" PRId32, &j_query.id);
-            (*mask) |= IDMASK;
         }
         else if(strcmp(campo, CAMPO_LIST[1]) == 0){
             scanf("%" PRId32, &j_query.idade);
-            (*mask) |= IDADEMASK;
         }
         else if(strcmp(campo, CAMPO_LIST[2]) == 0){
             j_query.nome = malloc(sizeof(char) * BUFFER_SIZE);
             scan_quote_string(j_query.nome);
-
-            (*mask) |= NOMEMASK;
         }
         else if(strcmp(campo, CAMPO_LIST[3]) == 0){
             j_query.nac = malloc(sizeof(char) * BUFFER_SIZE);
             scan_quote_string(j_query.nac);
-
-            (*mask) |= NACMASK;
         }
         else if(strcmp(campo, CAMPO_LIST[4]) == 0){
             j_query.clube = malloc(sizeof(char) * BUFFER_SIZE);
             scan_quote_string(j_query.clube);
-            
-            (*mask) |= CLUBEMASK;
         }
         else{
             break;
@@ -119,4 +110,25 @@ JOGADOR read_query(unsigned int *mask){
     }
 
     return j_query;
+}
+
+unsigned int get_mask(JOGADOR j_query){
+    unsigned int mask = 0;
+    if(j_query.id != jNil.id){
+        mask |= IDMASK;
+    }
+    if(j_query.idade != jNil.idade){
+        mask |= IDADEMASK;
+    }
+    if(strcmp(j_query.nome, jNil.nome) != 0){
+        mask |= NOMEMASK;
+    }
+    if(strcmp(j_query.nac, jNil.nac) != 0){
+        mask |= NACMASK;
+    }
+    if(strcmp(j_query.clube, jNil.clube) != 0){
+        mask |= CLUBEMASK;
+    }
+
+    return mask;
 }
