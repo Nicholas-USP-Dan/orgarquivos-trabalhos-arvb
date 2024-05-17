@@ -10,6 +10,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "src/data-file.h"
 #include "src/index-file.h"
@@ -20,24 +21,44 @@ int main(){
     char op;
     scanf("%c", &op);
 
+    char input_filename[200];
+    char output_filename[200];
+    int n;
+    int ret;
+    // int update_delete;
+    // int update_index;
+
+    FILE *data_fptr = NULL;
+    FILE *csv_fptr = NULL;
+    // FILE *index_fptr = NULL;
+
     // Ramificacao para cada operacao
     switch(op){
-        char input_filename[200];
-        char output_filename[200];
-        int n;
-        int ret;
         case '1':
             scanf("%s", input_filename);
             scanf("%s", output_filename);
-            ret = create_data_file(input_filename, output_filename);
+
+            // Abertura dos arquivos
+            if(!(csv_fptr = fopen(input_filename, "r")) || !(data_fptr = fopen(output_filename, "wb"))){
+                if(csv_fptr) fclose(csv_fptr);
+                if(data_fptr) fclose(data_fptr);
+                fprintf(stdout, "Falha no processamento do arquivo.\n");
+
+                break;
+            }
+
+            ret = create_data_file(csv_fptr, data_fptr);
             
+            fclose(csv_fptr);
+            fclose(data_fptr);
+
             if(ret != 0){
                 fprintf(stdout, "Falha no processamento do arquivo.\n");
             }
             else{
                 binarioNaTela(output_filename);
-                //printf("\n");
             }
+
             break;
         case '2':
             scanf("%s", input_filename);
@@ -76,6 +97,9 @@ int main(){
             break;
         default:
             fprintf(stdout, "Funcionalidade invalida.\n");
+            ret = -1;
             break;
     }
+
+    return ret == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }

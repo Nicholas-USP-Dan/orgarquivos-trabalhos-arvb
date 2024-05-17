@@ -32,9 +32,8 @@
  * 
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 O A operação foi realizada com sucesso.
- * @retval 1 Houve algum erro lógico durante a operação.
  */
-int create_data_file(const char *csv_filename, const char *output_filename);
+int create_data_file(FILE *csv_fptr, FILE *data_fptr);
 
 /**
  * @brief Chamada da funcionalidade 2 - Imprime todos os registros válidos (não removidos) de um arquivo binário de dados
