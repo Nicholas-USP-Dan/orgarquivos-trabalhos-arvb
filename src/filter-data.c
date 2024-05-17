@@ -28,13 +28,13 @@
 
 int filter_data(const char *bin_filename){
     // Abra o arquivo no modo leitura binaria
-    FILE *fptr = fopen(bin_filename, "rb");
-    if(fptr == NULL){
+    FILE *data_fptr = fopen(bin_filename, "rb");
+    if(data_fptr == NULL){
         return -1;
     }
 
     // Check de status válido
-    if(!check_status(fptr)){
+    if(!check_status(data_fptr)){
         return -1;
     }
 
@@ -47,33 +47,33 @@ int filter_data(const char *bin_filename){
     int filter_count = 0;
 
     // Ler quantidade de registros existentes
-    fseek(fptr, NRO_REGARQ_OFFSET, SEEK_SET);
-    int32_t nro_reg = get_campo32(fptr);
-    // fread(&nro_reg, 4, 1, fptr);
+    fseek(data_fptr, NRO_REGARQ_OFFSET, SEEK_SET);
+    int32_t nro_reg = get_campo32(data_fptr);
+    // fread(&nro_reg, 4, 1, data_fptr);
 
     // Pular o cabecalho
-    fseek(fptr, HEADER_END_OFFSET, SEEK_SET);
+    fseek(data_fptr, HEADER_END_OFFSET, SEEK_SET);
 
     // Lê registros até ler todos os registros válidos
     while(reg_count < nro_reg){
-        unsigned char rem = get_campoc(fptr);
+        unsigned char rem = get_campoc(data_fptr);
 
-        if(feof(fptr)){
+        if(feof(data_fptr)){
             break;
         }
 
         // Registro esta removido, mover para o proximo
         if(rem == '1'){
-            int32_t reg_size = get_campo32(fptr);
-            // fread(&reg_size, 4, 1, fptr);
-            fseek(fptr, reg_size-5, SEEK_CUR);
+            int32_t reg_size = get_campo32(data_fptr);
+            // fread(&reg_size, 4, 1, data_fptr);
+            fseek(data_fptr, reg_size-5, SEEK_CUR);
             continue;
         }
 
         // Pular tamanhoRegistro e Prox
-        fseek(fptr, 12, SEEK_CUR);
+        fseek(data_fptr, 12, SEEK_CUR);
 
-        JOGADOR j = read_jogador_data(fptr);
+        JOGADOR j = read_jogador_data(data_fptr);
 
         // Guarda o resultado da filtragem
         int filter =    (!(mask & IDMASK) || j_query.id == j.id) && 
@@ -107,6 +107,6 @@ int filter_data(const char *bin_filename){
     }
 
     //printf("\n");
-    fclose(fptr);
+    fclose(data_fptr);
     return 0;
 }
