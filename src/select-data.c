@@ -20,17 +20,11 @@
 
 #include "data-file.h"
 
-#include "utils/data-file-utils.h"
-#include "utils/funcoes_fornecidas.h"
-#include "utils/cabecalho-utils.h"
+#include "utils/data-utils.h"
 #include "utils/campo-utils.h"
+#include "utils/cabecalho-utils.h"
 
 int select_data(FILE *data_fptr){
-    // Check de status valido
-    if(!check_status(data_fptr)){
-        return -1;
-    }
-
     int reg_count = 0;
 
     // Ler quantidade de registros existentes

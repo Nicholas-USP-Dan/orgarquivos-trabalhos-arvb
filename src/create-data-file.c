@@ -16,11 +16,11 @@
 #include <inttypes.h>
 #include <errno.h>
 
-#include "utils/data-file-utils.h"
-#include "utils/cabecalho-utils.h"
-#include "utils/campo-utils.h"
-
 #include "data-file.h"
+
+#include "utils/data-utils.h"
+#include "utils/campo-utils.h"
+#include "utils/cabecalho-utils.h"
 
 /**
  * @brief Remove o caracter newline ('\n') ao fim de uma string
