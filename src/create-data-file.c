@@ -172,8 +172,8 @@ int create_data_file(const char *input_filename, const char *output_filename){
     if(strcmp(columns, COLUMN_NAMES) != 0){
         fclose(csv_data_fptr);
         fclose(data_bfile_fptr);
-        errno = 95;
-        return -1; // Operation not supported
+        errno = 95; // Operation not supported
+        return -1;
     }
 
     // Contador da quantidade de registros
