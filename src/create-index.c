@@ -9,7 +9,11 @@
 #include "utils/funcoes_fornecidas.h"
 #include "utils/cabecalho-utils.h"
 #include "utils/campo-utils.h"
-#include "adts/min-heap.h"
+#include "adts/dyn-array.h"
+
+static int comparator(const void* a, const void* b){
+    return ((ARR_EL*)a)->el.index - ((ARR_EL*)b)->el.index;
+}
 
 int create_index(const char *bin_filename, const char *index_filename){
     // Abra o arquivo no modo leitura binaria
@@ -40,7 +44,7 @@ int create_index(const char *bin_filename, const char *index_filename){
     // Pular o cabecalho
     fseek(data_bfile_fptr, HEADER_END_OFFSET, SEEK_SET);
 
-    MIN_HEAP *heap = initialize_minheap();
+    DYN_ARRAY *dyarr = initialize_dynarr();
 
     // Lê registros até ler todos os registros válidos
     while(reg_count < nro_reg){
@@ -64,21 +68,27 @@ int create_index(const char *bin_filename, const char *index_filename){
 
         JOGADOR j = read_jogador_data(data_bfile_fptr);
 
-        insert_minheap((INDEX_REG){j.id, offset}, &heap);
+        insert_last_dynarr((INDEX_REG){j.id, offset}, &dyarr);
 
         free_jogador(&j);
 
         reg_count++;
     }
 
-    // Colocar a heap no arquivo 
-    while(!empty_heap(&heap)){
-        INDEX_REG reg = pop_minheap(&heap);
+    qsort(get_raw_dyarr(&dyarr), get_len_dynarr(&dyarr), sizeof(ARR_EL), &comparator);
+
+    for(int i = 0; i < get_len_dynarr(&dyarr); i++){
+        INDEX_REG reg = get_dynarr(i, &dyarr);
         set_campo32(reg.index, index_file_fptr);
         set_campo64(reg.offset, index_file_fptr);
     }
+    // while(!empty_heap(&heap)){
+    //     INDEX_REG reg = pop_minheap(&heap);
+    //     set_campo32(reg.index, index_file_fptr);
+    //     set_campo64(reg.offset, index_file_fptr);
+    // }
 
-    clear_minheap(&heap);
+    clear_dynarr(&dyarr);
 
     // Escrever o status do arquivo de índice como estável
     fseek(index_file_fptr, 0, SEEK_SET);

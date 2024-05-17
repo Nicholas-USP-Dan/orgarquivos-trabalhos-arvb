@@ -8,16 +8,16 @@
 // #include "../src/adts/dyn-sorted-array.h"
 
 int main(){
-    DYN_SORTED_ARRAY* array;
+    DYN_ARRAY* array;
     array = load_index("unit-tests/index-test.bin");
 
     assert(array != NULL);
 
-    int64_t len = length_dyn_array(&array);
+    int64_t len = get_len_dynarr(&array);
     for(int64_t i = 0; i < len; i++){
-        INDEX_REG reg = get_dyn_array(i, &array);
-        printf("index: %" PRId32 "; offset: %" PRId64 "\n", reg.index, reg.offset);
+        INDEX_REG reg = get_dynarr(i, &array);
+        printf("index: %" PRId32 "; offset: 0x%" PRIX64 "\n", reg.index, reg.offset);
     }
 
-    clear_dyn_array(&array);
+    clear_dynarr(&array);
 }

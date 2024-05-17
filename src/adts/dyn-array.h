@@ -4,20 +4,31 @@
 #include <stdint.h>
 #include "../utils/data-file-utils.h"
 
-typedef struct _dyn_sorted_array DYN_SORTED_ARRAY;
+struct _arr_el {
+    INDEX_REG el;
+    int removed;
+};
 
-DYN_SORTED_ARRAY* initialize_dyn_array();
+typedef struct _arr_el ARR_EL;
 
-void clear_dyn_array(DYN_SORTED_ARRAY **array);
+typedef struct _dyn_array DYN_ARRAY;
 
-INDEX_REG get_dyn_array(int64_t i, DYN_SORTED_ARRAY **array);
+DYN_ARRAY* initialize_dynarr();
 
-int64_t find_pos_dyn_array(int32_t index, DYN_SORTED_ARRAY **array);
+void clear_dynarr(DYN_ARRAY **array);
 
-int insert_dyn_array(INDEX_REG reg, DYN_SORTED_ARRAY **array);
+int64_t get_len_dynarr(DYN_ARRAY **array);
 
-int remove_dyn_array(int32_t index, DYN_SORTED_ARRAY **array);
+ARR_EL *get_raw_dyarr(DYN_ARRAY **array);
 
-int64_t length_dyn_array(DYN_SORTED_ARRAY **array);
+INDEX_REG get_dynarr(int64_t i, DYN_ARRAY **array);
+
+int64_t find_pos_dynarr(int32_t index, DYN_ARRAY **array);
+
+int insert_last_dynarr(INDEX_REG reg, DYN_ARRAY **array);
+
+int insert_ord_dynarr(INDEX_REG reg, DYN_ARRAY **array);
+
+int remove_dynarr(int32_t index, DYN_ARRAY **array);
 
 #endif

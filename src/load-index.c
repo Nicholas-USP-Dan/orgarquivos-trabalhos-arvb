@@ -9,7 +9,7 @@
 #include "utils/cabecalho-utils.h"
 #include "utils/campo-utils.h"
 
-DYN_SORTED_ARRAY* load_index(const char *index_filename){
+DYN_ARRAY* load_index(const char *index_filename){
     FILE *index_file_fptr = fopen(index_filename, "rb");
     if(index_file_fptr == NULL){
         return NULL;
@@ -20,7 +20,7 @@ DYN_SORTED_ARRAY* load_index(const char *index_filename){
         return NULL;
     }
 
-    DYN_SORTED_ARRAY *array = initialize_dyn_array();
+    DYN_ARRAY *array = initialize_dynarr();
 
     while(1){
         INDEX_REG reg;
@@ -32,7 +32,7 @@ DYN_SORTED_ARRAY* load_index(const char *index_filename){
             break;
         }
 
-        insert_dyn_array(reg, &array);
+        insert_last_dynarr(reg, &array);
     }
 
     fclose(index_file_fptr);

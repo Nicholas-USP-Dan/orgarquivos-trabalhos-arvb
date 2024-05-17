@@ -15,8 +15,8 @@
  */
 int create_index(const char *bin_filename, const char *index_filename);
 
-DYN_SORTED_ARRAY* load_index(const char *index_filename);
+DYN_ARRAY* load_index(const char *index_filename);
 
-int update_index(DYN_SORTED_ARRAY **index_array);
+int update_index(DYN_ARRAY **index_array);
 
 #endif
