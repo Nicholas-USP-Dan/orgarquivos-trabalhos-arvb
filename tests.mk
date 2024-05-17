@@ -17,7 +17,7 @@ test-all: $(UTESTS_BINS)
 test-%: $(UTEST_BIN_DIR)/T-%
 	./$<
 
-t-valgrind-%: $(UTEST_BIN_DIR)/T-%
+t-valgr-%: $(UTEST_BIN_DIR)/T-%
 	valgrind --leak-check=full --show-leak-kinds=all -s ./$<
 
 t-clean:

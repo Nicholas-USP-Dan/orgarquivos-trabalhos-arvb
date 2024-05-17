@@ -82,11 +82,6 @@ int create_index(const char *bin_filename, const char *index_filename){
         set_campo32(reg.index, index_file_fptr);
         set_campo64(reg.offset, index_file_fptr);
     }
-    // while(!empty_heap(&heap)){
-    //     INDEX_REG reg = pop_minheap(&heap);
-    //     set_campo32(reg.index, index_file_fptr);
-    //     set_campo64(reg.offset, index_file_fptr);
-    // }
 
     clear_dynarr(&dyarr);
 
