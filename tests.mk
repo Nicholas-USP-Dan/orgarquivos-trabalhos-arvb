@@ -5,7 +5,7 @@ UTEST_BIN_DIR=$(UTEST_DIR)/bin
 
 UTESTS=$(wildcard $(UTEST_DIR)/*.c)
 UTESTS_BINS=$(patsubst $(UTEST_DIR)/%.c, $(UTEST_BIN_DIR)/%, $(UTESTS))
-# UTEST_EXS=$(addprefix test-,$(patsubst $(UTEST_DIR)/%.c, %, $(UTESTS)))
+UTEST_EXS=$(addprefix test-,$(patsubst $(UTEST_DIR)/T-%.c, %, $(UTESTS)))
 
 CASOSDIR=test-cases
 
@@ -15,6 +15,9 @@ CASOSDIR=test-cases
 test-all: $(UTESTS_BINS)
 
 test-%: $(UTEST_BIN_DIR)/T-%
+	./$<
+
+f-test-%: $(UTEST_BIN_DIR)/F-%
 	./$<
 
 t-valgr-%: $(UTEST_BIN_DIR)/T-%
