@@ -25,4 +25,6 @@ int main(){
     write_index(&index_arr, index_fptr);
 
     clear_dynarr(&index_arr);
+
+    fclose(index_fptr);
 }
