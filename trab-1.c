@@ -12,94 +12,152 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "src/utils/data-utils.h"
+#include "src/utils/cabecalho-utils.h"
+#include "src/utils/funcoes_fornecidas.h"
+
 #include "src/data-file.h"
 #include "src/index-file.h"
-#include "src/utils/funcoes_fornecidas.h"
+
+static inline int func1(){
+    char input_filename[200];
+    char output_filename[200];
+    int ret;
+
+    FILE *data_fptr = NULL;
+    FILE *csv_fptr = NULL;
+
+    scanf("%s", input_filename);
+    scanf("%s", output_filename);
+
+    // Abertura dos arquivos
+    if(!(csv_fptr = fopen(input_filename, "r")) || !(data_fptr = fopen(output_filename, "wb"))){
+        if(csv_fptr) fclose(csv_fptr);
+        if(data_fptr) fclose(data_fptr);
+
+        fprintf(stdout, "Falha no processamento do arquivo.\n");
+        return -1;
+    }
+
+    ret = create_data_file(csv_fptr, data_fptr);
+    
+    fclose(csv_fptr);
+    fclose(data_fptr);
+
+    ret == 0 ? binarioNaTela(output_filename) : fprintf(stdout, "Falha no processamento do arquivo.\n");
+
+    return ret;
+}
+
+static inline int func2(){
+    char input_filename[200];
+    int ret;
+
+    FILE *data_fptr = NULL;
+
+    scanf("%s", input_filename);
+
+    if(!(data_fptr = fopen(input_filename, "rb")) || !check_status(data_fptr)){
+        fprintf(stdout, "Falha no processamento do arquivo.\n");
+        return -1;
+    }
+
+    ret = select_data(data_fptr);
+
+    fclose(data_fptr);
+
+    if(ret != 0) fprintf(stdout, "Falha no processamento do arquivo.\n");
+
+    return ret;
+}
+
+int static inline func3(){
+    char input_filename[200];
+    int n;
+    int ret;
+
+    FILE *data_fptr = NULL;
+
+    scanf("%s", input_filename);
+    scanf("%d", &n);
+
+    if(!(data_fptr = fopen(input_filename, "rb")) || !check_status(data_fptr)){
+        fprintf(stdout, "Falha no processamento do arquivo.\n");
+        return -1;
+    }
+
+    for(int i = 0; i < n; i++){
+        JOGADOR j_query = read_query();
+        printf("Busca %d\n\n", i+1);
+
+        ret = filter_data(data_fptr, j_query);
+
+        if(ret != 0) fprintf(stdout, "Falha no processamento do arquivo.\n");
+
+        fseek(data_fptr, 0, SEEK_SET);
+    }
+
+    fclose(data_fptr);
+
+    return 0;
+}
+
+int static inline func4(){
+    char input_filename[200];
+    char output_filename[200];
+    int ret;
+
+    FILE *data_fptr = NULL;
+    FILE *index_fptr = NULL;
+
+    scanf("%s", input_filename);
+    scanf("%s", output_filename);
+
+    if(!(data_fptr = fopen(input_filename, "rb")) || !check_status(data_fptr)){
+        fprintf(stdout, "Falha no processamento do arquivo.\n");
+        return -1;
+    }
+
+    DYN_ARRAY *index_arr = generate_index(data_fptr);
+
+    fclose(data_fptr);
+
+    if(!index_arr) return -1;
+    
+    if(!(index_fptr = fopen(output_filename, "wb"))){
+        fprintf(stdout, "Falha no processamento do arquivo.\n");
+        return -1;
+    }
+
+    ret = write_index(&index_arr, index_fptr);
+
+    clear_dynarr(&index_arr);
+
+    fclose(index_fptr);
+
+    return ret;
+}
 
 int main(){
     // Le um caractere no stdin para verificar qual operacao realizar
     char op;
     scanf("%c", &op);
 
-    char input_filename[200];
-    char output_filename[200];
-    int n;
     int ret;
-    // int update_delete;
-    // int update_index;
-
-    FILE *data_fptr = NULL;
-    FILE *csv_fptr = NULL;
-    // FILE *index_fptr = NULL;
 
     // Ramificacao para cada operacao
     switch(op){
         case '1':
-            scanf("%s", input_filename);
-            scanf("%s", output_filename);
-
-            // Abertura dos arquivos
-            if(!(csv_fptr = fopen(input_filename, "r")) || !(data_fptr = fopen(output_filename, "wb"))){
-                if(csv_fptr) fclose(csv_fptr);
-                if(data_fptr) fclose(data_fptr);
-                fprintf(stdout, "Falha no processamento do arquivo.\n");
-
-                break;
-            }
-
-            ret = create_data_file(csv_fptr, data_fptr);
-            
-            fclose(csv_fptr);
-            fclose(data_fptr);
-
-            if(ret != 0){
-                fprintf(stdout, "Falha no processamento do arquivo.\n");
-            }
-            else{
-                binarioNaTela(output_filename);
-            }
-
+            ret = func1();
             break;
         case '2':
-            scanf("%s", input_filename);
-            FILE *data_fptr = fopen(input_filename, "rb");
-            if(!data_fptr){
-                ret = -1;
-                break;
-            }
-
-            ret = select_data(data_fptr);
-
-            if(ret != 0){
-                fprintf(stdout, "Falha no processamento do arquivo.\n");
-            }
+            ret = func2();
             break;
         case '3':
-            scanf("%s", input_filename);
-            scanf("%d", &n);
-
-            for(int i = 0; i < n; i++){
-                printf("Busca %d\n\n", i+1);
-
-                ret = filter_data(input_filename);
-                if(ret != 0){
-                    fprintf(stdout, "Falha no processamento do arquivo.\n");
-                    break;
-                }
-            }
+            ret = func3();
             break; 
         case '4':
-            scanf("%s", input_filename);
-            scanf("%s", output_filename);
-            ret = create_index(input_filename, output_filename);
-            
-            if(ret != 0){
-                fprintf(stdout, "Falha no processamento do arquivo.\n");
-            }
-            else{
-                binarioNaTela(output_filename);
-                //printf("\n");
-            }
+            ret = func4();
             break;
         default:
             fprintf(stdout, "Funcionalidade invalida.\n");
