@@ -59,8 +59,8 @@ int64_t find_pos_dynarr(int64_t index, DYN_ARRAY **array){
 
         int64_t mid_index = (*(*array)->f_index)((*array)->arr[mid].el);
 
-        if(mid_index == index){
-            return (*array)->arr[mid].removed ? -1 : mid;
+        if(mid_index == index && !(*array)->arr[mid].removed){
+            return mid;
         }
         else if(index > mid_index){
             beg = mid+1;
