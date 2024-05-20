@@ -113,7 +113,7 @@ int static inline func4(){
     scanf("%s", input_filename);
     scanf("%s", output_filename);
 
-    if(!(data_fptr = fopen(input_filename, "rb")) || !check_status(data_fptr) && 
+    if(( !(data_fptr = fopen(input_filename, "rb")) || !check_status(data_fptr) ) && 
     !(index_fptr = fopen(output_filename, "wb"))){
         fprintf(stdout, "Falha no processamento do arquivo.\n");
         

@@ -10,13 +10,18 @@
 #include "utils/data-utils.h"
 #include "utils/campo-utils.h"
 #include "utils/cabecalho-utils.h"
+#include "utils/index-types.h"
 
 static int index_compare(const void* a, const void* b){
-    return ((ARR_EL*)a)->el.index - ((ARR_EL*)b)->el.index;
+    return ((INDEX_REG*)((ARR_EL*)a)->el)->index - ((INDEX_REG*)((ARR_EL*)b)->el)->index;
+}
+
+int64_t get_index(const void *index_reg){
+    return (int64_t)((INDEX_REG*)index_reg)->index;
 }
 
 DYN_ARRAY* generate_index(FILE *data_fptr){
-    DYN_ARRAY *index_arr = initialize_dynarr();
+    DYN_ARRAY *index_arr = initialize_dynarr(&get_index);
 
     int32_t reg_count = 0;
 
@@ -49,7 +54,11 @@ DYN_ARRAY* generate_index(FILE *data_fptr){
 
         JOGADOR j = read_jogador_data(data_fptr);
 
-        insert_last_dynarr((INDEX_REG){j.id, offset}, &index_arr);
+        INDEX_REG *aux_temp = malloc(sizeof(INDEX_REG));
+        aux_temp->index = j.id;
+        aux_temp->offset = offset;
+
+        insert_last_dynarr(aux_temp, &index_arr);
 
         free_jogador(&j);
 
@@ -66,9 +75,9 @@ int write_index(DYN_ARRAY **index_arr, FILE *index_fptr){
     set_campoc('0', index_fptr);
 
     for(int i = 0; i < get_len_dynarr(index_arr); i++){
-        INDEX_REG reg = get_dynarr(i, index_arr);
-        set_campo32(reg.index, index_fptr);
-        set_campo64(reg.offset, index_fptr);
+        INDEX_REG *reg = (INDEX_REG*)get_dynarr(i, index_arr);
+        set_campo32(reg->index, index_fptr);
+        set_campo64(reg->offset, index_fptr);
     }
 
     // Escrever o status do arquivo de índice como estável
@@ -79,13 +88,13 @@ int write_index(DYN_ARRAY **index_arr, FILE *index_fptr){
 }
 
 DYN_ARRAY* load_index(FILE *index_fptr){
-    DYN_ARRAY *array = initialize_dynarr();
+    DYN_ARRAY *array = initialize_dynarr(&get_index);
 
     while(1){
-        INDEX_REG reg;
+        INDEX_REG *reg = malloc(sizeof(INDEX_REG));
 
-        reg.index = get_campo32(index_fptr);
-        reg.offset = get_campo64(index_fptr);
+        reg->index = get_campo32(index_fptr);
+        reg->offset = get_campo64(index_fptr);
 
         if(feof(index_fptr)){
             break;

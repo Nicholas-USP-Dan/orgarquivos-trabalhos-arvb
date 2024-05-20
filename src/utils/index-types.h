@@ -1,5 +1,5 @@
-#ifndef INDEX_UTILS
-#define INDEX_UTILS
+#ifndef INDEX_TYPES_H
+#define INDEX_TYPES_H
 
 #include <stdint.h>
 

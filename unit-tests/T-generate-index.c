@@ -26,8 +26,8 @@ int main(){
 
     int64_t len = get_len_dynarr(&index_arr);
     for(int64_t i = 0; i < len; i++){
-        INDEX_REG reg = get_dynarr(i, &index_arr);
-        printf("index: %" PRId32 "; offset: 0x%" PRIX64 "\n", reg.index, reg.offset);
+        INDEX_REG *reg = (INDEX_REG*)get_dynarr(i, &index_arr);
+        printf("index: %" PRId32 "; offset: 0x%" PRIX64 "\n", reg->index, reg->offset);
     }
 
     clear_dynarr(&index_arr);
