@@ -113,8 +113,12 @@ int static inline func4(){
     scanf("%s", input_filename);
     scanf("%s", output_filename);
 
-    if(!(data_fptr = fopen(input_filename, "rb")) || !check_status(data_fptr)){
+    if(!(data_fptr = fopen(input_filename, "rb")) || !check_status(data_fptr) && 
+    !(index_fptr = fopen(output_filename, "wb"))){
         fprintf(stdout, "Falha no processamento do arquivo.\n");
+        
+        if(data_fptr) fclose(data_fptr);
+        if(index_fptr) fclose(index_fptr);
         return -1;
     }
 
@@ -123,11 +127,6 @@ int static inline func4(){
     fclose(data_fptr);
 
     if(!index_arr) return -1;
-    
-    if(!(index_fptr = fopen(output_filename, "wb"))){
-        fprintf(stdout, "Falha no processamento do arquivo.\n");
-        return -1;
-    }
 
     ret = write_index(&index_arr, index_fptr);
 
