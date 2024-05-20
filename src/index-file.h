@@ -1,6 +1,8 @@
 #ifndef INDEX_FILE_H
 #define INDEX_FILE_H
 
+#include <stdio.h>
+
 #include "adts/dyn-array.h"
 
 DYN_ARRAY* generate_index(FILE *data_fptr);

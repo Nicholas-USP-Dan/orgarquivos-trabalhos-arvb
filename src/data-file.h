@@ -18,6 +18,8 @@
 #ifndef DATA_FILE_H
 #define DATA_FILE_H
 
+#include <stdio.h>
+
 #include "adts/dyn-array.h"
 
 /**
