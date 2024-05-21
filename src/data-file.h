@@ -53,21 +53,8 @@ typedef struct _jogador JOGADOR;
 int create_data_file(FILE *csv_fptr, FILE *data_fptr);
 
 /**
- * @brief Chamada da funcionalidade 2 - Imprime todos os registros válidos (não removidos) de um arquivo binário de dados
- * 
- * @details A função lê a quantidade de registros válidos do arquivo (campo nroRegArq) para que ela possa parar a execução uma
- * vez que a quantidade de registros impressos for igual a quantidade de reg. válidos (útil para quando a quantidade de
- * registros remvido por alta).
- * 
- * @param data_fptr Ponteiro para o arquivo binário a ser lido.
- * 
- * @retval -1 Houve uma falha interna durante a operação.
- * @retval 0 A operação foi realizada com sucesso.
- */
-int select_data(FILE *data_fptr);
-
-/**
- * @brief Chamada da funcionalidade 3 - Filtra os registros válidos (não removidos) de um arquivo binário de dados
+ * @brief Chamada da funcionalidade 2 & 3 - Filtra os registros válidos (não removidos) de um arquivo binário de dados
+ * e imprime eles
  * 
  * @details Esta função realiza n buscas, sendo que cada busca é identificada como "Busca X", onde X é a X° busca
  * realizada.
@@ -83,7 +70,7 @@ int select_data(FILE *data_fptr);
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 A operação foi realizada com sucesso.
  */
-int filter_data(FILE *data_fptr, JOGADOR j_query);
+int select_data(FILE *data_fptr, JOGADOR where);
 
 /**
  * @brief Chamada da funcionalidade 5 - Remove registros no arquivo binário de dados que cumprem um critério.

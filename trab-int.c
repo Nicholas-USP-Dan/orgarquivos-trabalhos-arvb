@@ -17,7 +17,6 @@
 #include "src/utils/funcoes_fornecidas.h"
 
 #include "src/data-file.h"
-#include "src/index-file.h"
 
 static inline int func1(){
     char input_filename[200];
@@ -62,7 +61,7 @@ static inline int func2(){
         return -1;
     }
 
-    ret = select_data(data_fptr);
+    ret = select_data(data_fptr, jNil);
 
     fclose(data_fptr);
 
@@ -90,7 +89,7 @@ int static inline func3(){
         JOGADOR j_query = read_query();
         printf("Busca %d\n\n", i+1);
 
-        ret = filter_data(data_fptr, j_query);
+        ret = select_data(data_fptr, j_query);
 
         if(ret != 0) fprintf(stdout, "Falha no processamento do arquivo.\n");
 
