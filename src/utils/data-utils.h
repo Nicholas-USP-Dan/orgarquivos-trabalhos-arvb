@@ -60,7 +60,7 @@ void free_jogador(JOGADOR *j);
  * 
  * @param j Jogador a ser imprimido
  */
-void print_jogador(JOGADOR j);
+void print_jogador(const JOGADOR j);
 
 /**
  * @brief Função que lê um registro no arquivo binário e retorna um objeto do tipo JOGADOR 
@@ -89,6 +89,6 @@ JOGADOR read_query();
  * @param j_query 
  * @return unsigned int 
  */
-unsigned int get_mask(JOGADOR j_query);
+unsigned int get_mask(const JOGADOR j_query);
 
 #endif

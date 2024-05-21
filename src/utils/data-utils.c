@@ -47,7 +47,7 @@ void free_jogador(JOGADOR *j){
     free(j->clube);
 }
 
-void print_jogador(JOGADOR j){
+void print_jogador(const JOGADOR j){
     // printf("ID do Jogador: %" PRId32 "\n", j.id);
 
     // printf("Idade do Jogador: %" PRId32 "\n", j.idade);
@@ -112,7 +112,7 @@ JOGADOR read_query(){
     return j_query;
 }
 
-unsigned int get_mask(JOGADOR j_query){
+unsigned int get_mask(const JOGADOR j_query){
     unsigned int mask = 0;
     if(j_query.id != jNil.id){
         mask |= IDMASK;
