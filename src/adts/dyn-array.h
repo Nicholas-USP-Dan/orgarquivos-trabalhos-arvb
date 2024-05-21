@@ -98,7 +98,7 @@ int64_t find_pos_dynarr(int64_t index, DYN_ARRAY **array);
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 A operação foi realizada com sucesso.
  */
-int insert_last_dynarr(void* el, DYN_ARRAY **array);
+int insert_back_dynarr(void* el, DYN_ARRAY **array);
 
 /**
  * @brief Insere um novo elemento (não removido) e ordena ele

@@ -58,7 +58,7 @@ DYN_ARRAY* generate_index(FILE *data_fptr){
         aux_temp->index = j.id;
         aux_temp->offset = offset;
 
-        insert_last_dynarr(aux_temp, &index_arr);
+        insert_back_dynarr(aux_temp, &index_arr);
 
         free_jogador(&j);
 
@@ -100,7 +100,7 @@ DYN_ARRAY* load_index(FILE *index_fptr){
             break;
         }
 
-        insert_last_dynarr(reg, &array);
+        insert_back_dynarr(reg, &array);
     }
 
     return array;

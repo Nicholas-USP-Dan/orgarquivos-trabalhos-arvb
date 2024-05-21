@@ -73,7 +73,7 @@ int64_t find_pos_dynarr(int64_t index, DYN_ARRAY **array){
     return -1;
 }
 
-int insert_last_dynarr(void* el, DYN_ARRAY **array){
+int insert_back_dynarr(void* el, DYN_ARRAY **array){
     if((*array)->last >= (*array)->max_size-1){
         (*array)->max_size = ((*array)->max_size*2);
         (*array)->arr = realloc((*array)->arr, sizeof(ARR_EL) * (*array)->max_size);
