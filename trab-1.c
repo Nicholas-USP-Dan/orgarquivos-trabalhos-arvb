@@ -32,10 +32,11 @@ static inline int func1(){
 
     // Abertura dos arquivos
     if(!(csv_fptr = fopen(input_filename, "r")) || !(data_fptr = fopen(output_filename, "wb"))){
+        fprintf(stdout, "Falha no processamento do arquivo.\n");
+        
         if(csv_fptr) fclose(csv_fptr);
         if(data_fptr) fclose(data_fptr);
 
-        fprintf(stdout, "Falha no processamento do arquivo.\n");
         return -1;
     }
 
@@ -59,6 +60,9 @@ static inline int func2(){
 
     if(!(data_fptr = fopen(input_filename, "rb")) || !check_status(data_fptr)){
         fprintf(stdout, "Falha no processamento do arquivo.\n");
+
+        if(data_fptr) fclose(data_fptr);
+
         return -1;
     }
 
@@ -83,6 +87,9 @@ int static inline func3(){
 
     if(!(data_fptr = fopen(input_filename, "rb")) || !check_status(data_fptr)){
         fprintf(stdout, "Falha no processamento do arquivo.\n");
+
+        if(data_fptr) fclose(data_fptr);
+
         return -1;
     }
 
@@ -119,6 +126,7 @@ int static inline func4(){
         
         if(data_fptr) fclose(data_fptr);
         if(index_fptr) fclose(index_fptr);
+
         return -1;
     }
 
