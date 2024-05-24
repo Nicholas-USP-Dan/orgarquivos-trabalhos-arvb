@@ -1,9 +1,10 @@
 #ifndef REMOVED_LIST_H
 #define REMOVED_LIST_H
 
-#include "../adts/dyn-array.h"
 #include <stdio.h>
 #include <stdint.h>
+
+#include "../adts/dyn-array.h"
 
 struct _rem_el {
     int64_t offset;
