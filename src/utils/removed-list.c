@@ -82,7 +82,7 @@ int write_rem_list(FILE *data_fptr, REM_LIST **list){
     REM_EL *el = get_dynarr(i++, &(*list)->arr);
     // set_campo64(el->offset, data_fptr);
 
-    while(!el){
+    while(el){
         set_campo64(el->offset, data_fptr);
         // Seek para o registro e pular para o campo prox
         fseek(data_fptr, el->offset+1+4, SEEK_SET);
