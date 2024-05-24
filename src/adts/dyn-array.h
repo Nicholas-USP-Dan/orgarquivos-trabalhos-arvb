@@ -16,8 +16,6 @@
 
 #include <stdint.h>
 
-#include "../utils/index-types.h"
-
 /**
  * @brief Estrutura de um elemento do array (genérico)
  */

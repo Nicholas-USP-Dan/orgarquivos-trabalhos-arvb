@@ -4,7 +4,6 @@
 #include <assert.h>
 
 #include "../src/index-file.h"
-#include "../src/utils/index-types.h"
 
 int main(){
     DYN_ARRAY* index_arr = initialize_dynarr(&get_index);

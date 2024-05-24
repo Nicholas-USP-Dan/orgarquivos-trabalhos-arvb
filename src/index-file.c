@@ -10,7 +10,6 @@
 #include "utils/data-utils.h"
 #include "utils/campo-utils.h"
 #include "utils/cabecalho-utils.h"
-#include "utils/index-types.h"
 
 static int index_compare(const void* a, const void* b){
     return ((INDEX_REG*)((ARR_EL*)a)->el)->index - ((INDEX_REG*)((ARR_EL*)b)->el)->index;

@@ -33,9 +33,7 @@ REM_LIST* load_rem_list(FILE *data_fptr, const enum alloc_met met){
     int64_t offset = get_campo64(data_fptr);
 
     while(offset != -1){
-        fseek(data_fptr, offset, SEEK_SET);
-        // Pular flag removido
-        fseek(data_fptr, 1, SEEK_CUR);
+        fseek(data_fptr, offset+1, SEEK_SET);
 
         REM_EL *el = malloc(sizeof(REM_EL));
         el->offset = offset;
@@ -78,7 +76,20 @@ int64_t find_space(const int32_t tam, REM_LIST **list){
 }
 
 int write_rem_list(FILE *data_fptr, REM_LIST **list){
-    // fseek(data_fptr, PROXBYTE_OFFSET, SEEK_SET);
+    fseek(data_fptr, TOPO_OFFSET, SEEK_SET);
+    
+    int i = 0;
+    REM_EL *el = get_dynarr(i++, &(*list)->arr);
+    // set_campo64(el->offset, data_fptr);
+
+    while(!el){
+        set_campo64(el->offset, data_fptr);
+        // Seek para o registro e pular para o campo prox
+        fseek(data_fptr, el->offset+1+4, SEEK_SET);
+        el = get_dynarr(i++, &(*list)->arr);
+    }
+
+    set_campo64(-1, data_fptr);
     return 0;
 }
 
