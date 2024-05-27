@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "src/adts/dyn-array.h"
 #include "src/utils/data-utils.h"
 #include "src/utils/cabecalho-utils.h"
 #include "src/utils/funcoes_fornecidas.h"
