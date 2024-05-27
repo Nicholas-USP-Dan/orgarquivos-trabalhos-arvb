@@ -89,6 +89,8 @@ JOGADOR read_query();
  * @param j_query 
  * @return unsigned int 
  */
-unsigned int get_mask(const JOGADOR j_query);
+// unsigned int get_mask(const JOGADOR where);
+
+int pass_where(const JOGADOR j, const JOGADOR where);
 
 #endif

@@ -112,23 +112,32 @@ JOGADOR read_query(){
     return j_query;
 }
 
-unsigned int get_mask(const JOGADOR j_query){
+static unsigned int get_mask(const JOGADOR where){
     unsigned int mask = 0;
-    if(j_query.id != jNil.id){
+    if(where.id != jNil.id){
         mask |= IDMASK;
     }
-    if(j_query.idade != jNil.idade){
+    if(where.idade != jNil.idade){
         mask |= IDADEMASK;
     }
-    if(strcmp(j_query.nome, jNil.nome) != 0){
+    if(strcmp(where.nome, jNil.nome) != 0){
         mask |= NOMEMASK;
     }
-    if(strcmp(j_query.nac, jNil.nac) != 0){
+    if(strcmp(where.nac, jNil.nac) != 0){
         mask |= NACMASK;
     }
-    if(strcmp(j_query.clube, jNil.clube) != 0){
+    if(strcmp(where.clube, jNil.clube) != 0){
         mask |= CLUBEMASK;
     }
 
     return mask;
+}
+
+int pass_where(const JOGADOR j, const JOGADOR where){
+    unsigned int mask = get_mask(where);
+    return  (!(mask & IDMASK) || where.id == j.id) && 
+            (!(mask & IDADEMASK) || where.idade == j.idade) && 
+            (!(mask & NOMEMASK) || strcmp(where.nome, j.nome) == 0) && 
+            (!(mask & NACMASK) || strcmp(where.nac, j.nac) == 0) && 
+            (!(mask & CLUBEMASK) || strcmp(where.clube, j.clube) == 0);
 }

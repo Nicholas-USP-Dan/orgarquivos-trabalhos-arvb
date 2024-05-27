@@ -21,6 +21,7 @@
 #include <stdio.h>
 
 #include "adts/dyn-array.h"
+#include "utils/removed-list.h"
 
 /**
  * @brief Estrutura que contém os dados de um jogador, representa um registro no arquivo de dados.
@@ -75,13 +76,13 @@ int select_data(FILE *data_fptr, JOGADOR where);
 /**
  * @brief Chamada da funcionalidade 5 - Remove registros no arquivo binário de dados que cumprem um critério.
  * 
- * @param bin_filename Nome do arquivo binário de dados a ser operado
+ * @param data_fptr Ponteiro para o arquivo binário de saída
  * @param index_filename Nome do arquivo de índice.
  * 
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 A operação foi realizada com sucesso.
  */
-int delete_data(const char *bin_filename, const char *index_filename);
+int delete_data(FILE *data_fptr, JOGADOR where, REM_LIST **rem_list, DYN_ARRAY **index_arr);
 
 /**
  * @brief Chamada da funcionalidade 6 - Insere um registro em um arquivo binário de dados.

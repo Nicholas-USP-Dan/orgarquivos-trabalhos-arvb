@@ -14,7 +14,6 @@
  */
 
 #include <stdio.h>
-#include <string.h>
 #include <inttypes.h>
 #include <stdint.h>
 
@@ -25,8 +24,6 @@
 #include "utils/cabecalho-utils.h"
 
 int select_data(FILE *data_fptr, JOGADOR where){
-    unsigned int mask = get_mask(where);
-
     int reg_count = 0;
     int filter_count = 0;
 
@@ -35,8 +32,8 @@ int select_data(FILE *data_fptr, JOGADOR where){
     int32_t nro_reg = get_campo32(data_fptr);
 
     // Pular o cabecalho
-    // fseek(data_fptr, HEADER_END_OFFSET, SEEK_SET);
-    fseek(data_fptr, HEADER_END_OFFSET-NRO_REGARQ_OFFSET, SEEK_CUR);
+    fseek(data_fptr, HEADER_END_OFFSET, SEEK_SET);
+    // fseek(data_fptr, HEADER_END_OFFSET-NRO_REGARQ_OFFSET, SEEK_CUR);
 
     // Lê registros até ler todos os registros válidos
     while(reg_count < nro_reg){
@@ -58,15 +55,8 @@ int select_data(FILE *data_fptr, JOGADOR where){
 
         JOGADOR j = read_jogador_data(data_fptr);
 
-        // Guarda o resultado da filtragem
-        int filter =    (!(mask & IDMASK) || where.id == j.id) && 
-                        (!(mask & IDADEMASK) || where.idade == j.idade) && 
-                        (!(mask & NOMEMASK) || strcmp(where.nome, j.nome) == 0) && 
-                        (!(mask & NACMASK) || strcmp(where.nac, j.nac) == 0) && 
-                        (!(mask & CLUBEMASK) || strcmp(where.clube, j.clube) == 0);
-
         // Registro passou pelo filtro
-        if(filter){
+        if(pass_where(j, where)){
             filter_count++;
 
             // Chamar function pointer??
@@ -77,7 +67,7 @@ int select_data(FILE *data_fptr, JOGADOR where){
         free_jogador(&j);
 
         // Caso o filtro tenha um campo id, quando o jogador com esse id for encontrado, terminar busca
-        if((mask & IDMASK) && where.id == j.id){
+        if(where.id == j.id){
             break;
         }
 
