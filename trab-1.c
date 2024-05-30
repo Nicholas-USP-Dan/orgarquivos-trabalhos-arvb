@@ -148,6 +148,14 @@ int static inline func4(){
     return ret;
 }
 
+int static inline func5(){
+
+}
+
+int static inline func6(){
+    
+}
+
 int main(){
     // Le um caractere no stdin para verificar qual operacao realizar
     char op;
@@ -168,6 +176,12 @@ int main(){
             break; 
         case '4':
             ret = func4();
+            break;
+        case '5':
+            ret = func5();
+            break;
+        case '6':
+            ret = func6();
             break;
         default:
             fprintf(stdout, "Funcionalidade invalida.\n");
