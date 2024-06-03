@@ -149,7 +149,28 @@ int static inline func4(){
 }
 
 int static inline func5(){
+    char input_filename[200];
+    char index_filename[200];
+    int n;
+    int ret;
 
+    FILE *data_fptr = NULL;
+    FILE *index_fptr = NULL;
+
+    scanf("%s", input_filename);
+    scanf("%s", index_filename);
+
+    if(!(data_fptr = fopen(input_filename, "r+b")) || !check_status(data_fptr) || 
+    !(index_fptr = fopen(output_filename, "r+b")) || !check_status(index_fptr)){
+        fprintf(stdout, "Falha no processamento do arquivo.\n");
+        
+        if(data_fptr) fclose(data_fptr);
+        if(index_fptr) fclose(index_fptr);
+
+        return -1;
+    }
+
+    
 }
 
 int static inline func6(){
