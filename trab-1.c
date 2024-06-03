@@ -175,17 +175,8 @@ int static inline func5(){
 
         ret = delete_data(data_fptr, index_fptr, j_query);
 
-    }
-
-    for(int i = 0; i < n; i++){
-        JOGADOR j_query = read_query();
-        printf("Busca %d\n\n", i+1);
-
-        ret = select_data(data_fptr, j_query);
-
         if(ret != 0) fprintf(stdout, "Falha no processamento do arquivo.\n");
 
-        fseek(data_fptr, 0, SEEK_SET);
     }
 
     fclose(data_fptr)

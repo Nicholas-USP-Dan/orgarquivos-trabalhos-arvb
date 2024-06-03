@@ -13,8 +13,74 @@
 
 
 
-static int delete_data(const void* a, const void* b){
-    return ((INDEX_REG*)((ARR_EL*)a)->el)->index - ((INDEX_REG*)((ARR_EL*)b)->el)->index;
+int delete_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_search){
+    
+    if(j_search.id != jNil.id){
+        //buscar por meio da funcionalidade 4 (suponho que por meio de indice)
+    }else{
+        //buscar pela funcionalidade 3 (busca normal)
+    }
+
+}
+
+int select_data(FILE *data_fptr, JOGADOR where){
+    int reg_count = 0;
+    int filter_count = 0;
+
+    // Ler quantidade de registros existentes
+    fseek(data_fptr, NRO_REGARQ_OFFSET, SEEK_SET);
+    int32_t nro_reg = get_campo32(data_fptr);
+
+    // Pular o cabecalho
+    fseek(data_fptr, HEADER_END_OFFSET, SEEK_SET);
+    // fseek(data_fptr, HEADER_END_OFFSET-NRO_REGARQ_OFFSET, SEEK_CUR);
+
+    // Lê registros até ler todos os registros válidos
+    while(reg_count < nro_reg){
+        unsigned char rem = get_campoc(data_fptr);
+
+        if(feof(data_fptr)){
+            break;
+        }
+
+        // Registro esta removido, mover para o proximo
+        if(rem == '1'){
+            int32_t reg_size = get_campo32(data_fptr);
+            fseek(data_fptr, reg_size-5, SEEK_CUR);
+            continue;
+        }
+
+        // Pular tamanhoRegistro e Prox
+        fseek(data_fptr, 12, SEEK_CUR);
+
+        JOGADOR j = read_jogador_data(data_fptr);
+
+        // Registro passou pelo filtro
+        if(pass_where(j, where)){
+            filter_count++;
+
+            // Chamar function pointer??
+            print_jogador(j);
+            printf("\n");
+        }
+
+        free_jogador(&j);
+
+        // Caso o filtro tenha um campo id, quando o jogador com esse id for encontrado, terminar busca
+        if(where.id == j.id){
+            break;
+        }
+
+        reg_count++;
+    }
+
+    // Imprimir: "Registro inexistente." caso nenhum registro passar pelo filtro
+    if(filter_count <= 0){
+        printf("Registro inexistente.\n\n");
+    }
+
+    //printf("\n");
+    return 0;
 }
 
 int64_t get_index(const void *index_reg){
