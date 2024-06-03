@@ -33,6 +33,7 @@
 #define NRO_REGARQ_OFFSET 17
 #define NRO_REGREM_OFFSET 21
 #define HEADER_END_OFFSET 25
+#define INDEX_HEADER_END_OFFSET 1
 
 /**
  * @brief Inicializa um novo cabecalho em um arquivo de dados binario.
