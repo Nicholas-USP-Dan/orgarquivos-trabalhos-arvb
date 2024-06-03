@@ -161,7 +161,7 @@ int static inline func5(){
     scanf("%s", index_filename);
 
     if(!(data_fptr = fopen(input_filename, "r+b")) || !check_status(data_fptr) || 
-    !(index_fptr = fopen(output_filename, "r+b")) || !check_status(index_fptr)){
+    !(index_fptr = fopen(index_filename, "r+b")) || !check_status(index_fptr)){
         fprintf(stdout, "Falha no processamento do arquivo.\n");
         
         if(data_fptr) fclose(data_fptr);
@@ -170,7 +170,31 @@ int static inline func5(){
         return -1;
     }
 
-    
+    for (int i=0; i<n; i++){
+        JOGADOR j_query = read_query();
+
+        ret = delete_data(data_fptr, index_fptr, j_query);
+
+    }
+
+    for(int i = 0; i < n; i++){
+        JOGADOR j_query = read_query();
+        printf("Busca %d\n\n", i+1);
+
+        ret = select_data(data_fptr, j_query);
+
+        if(ret != 0) fprintf(stdout, "Falha no processamento do arquivo.\n");
+
+        fseek(data_fptr, 0, SEEK_SET);
+    }
+
+    fclose(data_fptr)
+    fclose(index_fptr)
+
+    //ret = 
+    return 0; //return ret
+
+
 }
 
 int static inline func6(){
