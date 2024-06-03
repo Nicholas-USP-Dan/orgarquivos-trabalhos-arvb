@@ -179,8 +179,8 @@ int static inline func5(){
 
     }
 
-    fclose(data_fptr)
-    fclose(index_fptr)
+    fclose(data_fptr);
+    fclose(index_fptr);
 
     //ret = 
     return 0; //return ret

@@ -104,3 +104,7 @@ DYN_ARRAY* load_index(FILE *index_fptr){
 
     return array;
 }
+
+int select_index(FILE *index_fptr, int32_t id){
+    
+}
