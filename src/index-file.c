@@ -126,38 +126,50 @@ int select_index(FILE *data_fptr, FILE *index_fptr, int32_t id){
     fseek(index_fptr, INDEX_HEADER_END_OFFSET, SEEK_SET);
     // fseek(data_fptr, HEADER_END_OFFSET-NRO_REGARQ_OFFSET, SEEK_CUR);
 
-    int64_t offset_beg = (ftell(index_fptr)-1)/(4+8);
-    INDEX_REG index_beg = read_index(index_fptr);
+    // Lê registros até ler todos os registros válidos
+    while(reg_count < nro_reg){
+        unsigned char rem = get_campoc(data_fptr);
 
-    fseek(index_fptr, -(4+8), SEEK_END);
-    int64_t offset_end = (ftell(index_fptr)-1)/(4+8);
-    INDEX_REG index_end = read_index(index_fptr);
-
-    int64_t beg = index_beg.index;
-    int64_t end = index_end.index;
-
-    while(beg <= end){
-        int64_t offset_mid = offset_beg + (offset_end-offset_beg)/2;
-
-        fseek(index_fptr, offset_mid*(4+8), SEEK_CUR);
-        INDEX_REG index_mid = read_index(index_fptr);
-        if(index_mid.index == id){
-            return index_mid.offset;
+        if(feof(data_fptr)){
+            break;
         }
-        else if(id > index_mid.index){
-            offset_beg = (ftell(index_fptr)-1)/(4+8);
-            index_beg = read_index(index_fptr);
-            beg = index_beg.index;
+
+        // Registro esta removido, mover para o proximo
+        if(rem == '1'){
+            int32_t reg_size = get_campo32(data_fptr);
+            fseek(data_fptr, reg_size-5, SEEK_CUR);
+            continue;
         }
-        else{
-            end = mid-1;
-            fseek(index_fptr, -(2*(4+8)), SEEK_CUR);
-            offset_end = (ftell(index_fptr)-1)/(4+8);
-            index_end = read_index(index_fptr);
-            end = index_end.index;
+
+        // Pular tamanhoRegistro e Prox
+        fseek(data_fptr, 12, SEEK_CUR);
+
+        JOGADOR j = read_jogador_data(data_fptr);
+
+        // Registro passou pelo filtro
+        if(pass_where(j, where)){
+            filter_count++;
+
+            // Chamar function pointer??
+            print_jogador(j);
+            printf("\n");
         }
+
+        free_jogador(&j);
+
+        // Caso o filtro tenha um campo id, quando o jogador com esse id for encontrado, terminar busca
+        if(where.id == j.id){
+            break;
+        }
+
+        reg_count++;
     }
 
-    return -1;
+    // Imprimir: "Registro inexistente." caso nenhum registro passar pelo filtro
+    if(filter_count <= 0){
+        printf("Registro inexistente.\n\n");
+    }
 
+    //printf("\n");
+    return 0;
 }
