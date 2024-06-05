@@ -108,19 +108,18 @@ DYN_ARRAY* load_index(FILE *index_fptr){
 INDEX_REG read_index(FILE *fptr){
     INDEX_REG index;
 
-    index.id = get_campo32(fptr);
-    index.idade = get_campo64(fptr);
+    index.index = get_campo32(fptr);
+    index.offset = get_campo64(fptr);
 
     return index;
 }
 
 int select_index(FILE *data_fptr, FILE *index_fptr, int32_t id){
-    int reg_count = 0;
-    int filter_count = 0;
+    //int reg_count = 0;
 
     // Ler quantidade de registros existentes no arquivo de dados
     fseek(data_fptr, NRO_REGARQ_OFFSET, SEEK_SET);
-    int32_t nro_reg = get_campo32(data_fptr);
+    //int32_t nro_reg = get_campo32(data_fptr);
 
     // Pular o cabecalho do arquivo de índice
     fseek(index_fptr, INDEX_HEADER_END_OFFSET, SEEK_SET);
@@ -150,7 +149,6 @@ int select_index(FILE *data_fptr, FILE *index_fptr, int32_t id){
             beg = index_beg.index;
         }
         else{
-            end = mid-1;
             fseek(index_fptr, -(2*(4+8)), SEEK_CUR);
             offset_end = (ftell(index_fptr)-1)/(4+8);
             index_end = read_index(index_fptr);
