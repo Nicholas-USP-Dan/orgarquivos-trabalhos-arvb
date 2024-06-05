@@ -175,16 +175,13 @@ int static inline func5(){
 
     scanf("%d", &n);
 
+    //array com a lista de registros removidos
+    REM_LIST *rem_list = load_rem_list(data_fptr, BEST_FIT);
+
     for (int i=0; i<n; i++){
         JOGADOR j_query = read_query();
 
-        if(j_query.id != jNil.id){
-            //buscar por meio da funcionalidade 4 (suponho que por meio de indice)
-            ret = delete_index(index_arr, data_fptr, index_fptr, j_query);
-        }else{
-            //buscar pela funcionalidade 3 (busca normal)
-            ret = func3();
-        }
+        ret = delete_data(data_fptr, j_query, rem_list, index_arr)
         
 
         if(ret != 0) fprintf(stdout, "Falha no processamento do arquivo.\n");

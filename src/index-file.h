@@ -27,6 +27,6 @@ int write_index(DYN_ARRAY **index_arr, FILE *index_fptr);
 
 DYN_ARRAY* load_index(FILE *index_fptr);
 
-int delete_index(DYN_ARRAY **index_arr, FILE *data_fptr, FILE *index_fptr, JOGADOR j_search);
+int delete_index(DYN_ARRAY **index_arr, REM_LIST **rem_arr, FILE *data_fptr, FILE *index_fptr, JOGADOR j_search);
 
 #endif

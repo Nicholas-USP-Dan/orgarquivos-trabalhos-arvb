@@ -105,11 +105,17 @@ DYN_ARRAY* load_index(FILE *index_fptr){
     return array;
 }
 
-int delete_index(DYN_ARRAY **index_arr, FILE *data_fptr, FILE *index_fptr, JOGADOR j_search){
+int delete_index(DYN_ARRAY **index_arr, REM_LIST **rem_list, FILE *data_fptr, FILE *index_fptr, JOGADOR j_search){
+    //3 - remover o registro do arq de dados
+    //4 - remover o registro do arq de indice
+    //5 - adicionar na lista de removidos
+
     int pos = find_pos_dynarr(j_search.id, index_arr);
-
-    int offset = index_arr[pos].offset
-
+    int offset = index_arr[pos].offset;
+    j_search = select_data(data_fptr, j_search);
+    int ret = delete_data(data_fptr, j_search, REM_LIST **rem_list, DYN_ARRAY **index_arr);
     
+
+
 
 }

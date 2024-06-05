@@ -141,3 +141,7 @@ int pass_where(const JOGADOR j, const JOGADOR where){
             (!(mask & NACMASK) || strcmp(where.nac, j.nac) == 0) && 
             (!(mask & CLUBEMASK) || strcmp(where.clube, j.clube) == 0);
 }
+
+int delete_reg(FILE *data_fptr, JOGADOR where, REM_LIST **rem_list, DYN_ARRAY **index_arr, int offset){
+    fseek(data_fptr, offset, SEEK_SET);
+}

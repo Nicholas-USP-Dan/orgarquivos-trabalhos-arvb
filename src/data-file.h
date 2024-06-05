@@ -22,6 +22,7 @@
 
 #include "adts/dyn-array.h"
 #include "utils/removed-list.h"
+#include "index-file.h"
 
 /**
  * @brief Estrutura que contém os dados de um jogador, representa um registro no arquivo de dados.
