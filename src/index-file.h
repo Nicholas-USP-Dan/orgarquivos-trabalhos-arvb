@@ -27,6 +27,6 @@ int write_index(DYN_ARRAY **index_arr, FILE *index_fptr);
 
 DYN_ARRAY* load_index(FILE *index_fptr);
 
-
+INDEX_REG read_index(FILE *fptr);
 
 #endif

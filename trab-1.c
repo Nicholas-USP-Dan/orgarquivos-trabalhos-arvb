@@ -216,9 +216,9 @@ int main(){
         case '5':
             ret = func5();
             break;
-        case '6':
-            ret = func6();
-            break;
+        // case '6':
+        //     ret = func6();
+        //     break;
         default:
             fprintf(stdout, "Funcionalidade invalida.\n");
             ret = -1;
