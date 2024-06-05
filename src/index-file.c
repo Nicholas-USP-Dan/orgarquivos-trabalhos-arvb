@@ -104,12 +104,3 @@ DYN_ARRAY* load_index(FILE *index_fptr){
 
     return array;
 }
-
-INDEX_REG read_index(FILE *fptr){
-    INDEX_REG index;
-
-    index.id = get_campo32(fptr);
-    index.idade = get_campo64(fptr);
-
-    return index;
-}
