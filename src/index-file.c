@@ -104,3 +104,12 @@ DYN_ARRAY* load_index(FILE *index_fptr){
 
     return array;
 }
+
+int delete_index(DYN_ARRAY **index_arr, FILE *data_fptr, FILE *index_fptr, JOGADOR j_search){
+    int pos = find_pos_dynarr(j_search.id, index_arr);
+
+    int offset = index_arr[pos].offset
+
+    
+
+}
