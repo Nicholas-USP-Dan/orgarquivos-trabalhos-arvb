@@ -40,5 +40,8 @@ int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
         //inserir no final
     }
     
+    //se tiver id, atualizar arq de indice, inserindo ordenado de preferencia, escrever arquivo
+
+    //lembrar de liberar arrays
 
 }

@@ -225,10 +225,11 @@ int static inline func6(){
 
         ret = insert_data(data_fptr, index_fptr, j_query);
         
-
         if(ret != 0) fprintf(stdout, "Falha no processamento do arquivo.\n");
 
     }
+
+    //lembrar de dar fclose nos arquivos
     
 }
 
