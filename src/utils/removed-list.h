@@ -31,7 +31,7 @@ REM_LIST* initialize_rem_list(const enum alloc_met met);
 void clear_rem_list(REM_LIST **list);
 
 /**
- * @brief Carrega a lista de removidos de um arquivo de dados
+ * @brief Carrega a lista de removidos a partir de um arquivo de dados
  * 
  * @param data_fptr Arquivo de dados da lista
  * @param met Metodo de reaproveitamento de espaço
