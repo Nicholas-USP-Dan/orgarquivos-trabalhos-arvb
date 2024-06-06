@@ -84,6 +84,7 @@ void* get_dynarr(int64_t i, DYN_ARRAY **array);
  * @param index Índice do valor a ser procurado
  * @param array Referência para o ponteiro do array dinâmico
  * @return [int64_t] Posição do valor encontrado
+ * @retval -1 Índice não existe
  */
 int64_t find_pos_dynarr(int64_t index, DYN_ARRAY **array);
 
@@ -118,12 +119,12 @@ int insert_ord_dynarr(void* el, DYN_ARRAY **array);
  * @details O elemento não é removido fisicamente, ele é somente atribuído com flag de remoção, isso permite economizar 
  * processamento ao não requerir shifts
  * 
- * @param index Índice do valor a ser removido
+ * @param i Posição do valor a ser removido
  * @param array Referência para o ponteiro do array dinâmico
  * 
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 A operação foi realizada com sucesso.
  */
-int remove_dynarr(int64_t index, DYN_ARRAY **array);
+int remove_dynarr(int64_t i, DYN_ARRAY **array);
 
 #endif

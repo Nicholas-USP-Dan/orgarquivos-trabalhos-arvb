@@ -111,13 +111,8 @@ int insert_ord_dynarr(void* el, DYN_ARRAY **array){
     return 0;
 }
 
-int remove_dynarr(int64_t index, DYN_ARRAY **array){
-    int64_t i = find_pos_dynarr(index, array);
-    
-    if(i < 0){
-        return -1;
-    }
 
+int remove_dynarr(int64_t i, DYN_ARRAY **array){
     (*array)->arr[i].removed = 1;
     return 0;
 }
