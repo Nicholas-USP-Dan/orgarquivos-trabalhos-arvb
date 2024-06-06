@@ -24,19 +24,14 @@
 #include "utils/cabecalho-utils.h"
 
 int select_data(FILE *data_fptr, JOGADOR where){
-    int reg_count = 0;
     int filter_count = 0;
-
-    // Ler quantidade de registros existentes
-    fseek(data_fptr, NRO_REGARQ_OFFSET, SEEK_SET);
-    int32_t nro_reg = get_campo32(data_fptr);
 
     // Pular o cabecalho
     fseek(data_fptr, HEADER_END_OFFSET, SEEK_SET);
     // fseek(data_fptr, HEADER_END_OFFSET-NRO_REGARQ_OFFSET, SEEK_CUR);
 
     // Lê registros até ler todos os registros válidos
-    while(reg_count < nro_reg){
+    while(1){
         unsigned char rem = get_campoc(data_fptr);
 
         if(feof(data_fptr)){
@@ -70,8 +65,6 @@ int select_data(FILE *data_fptr, JOGADOR where){
         if(where.id == j.id){
             break;
         }
-
-        reg_count++;
     }
 
     // Imprimir: "Registro inexistente." caso nenhum registro passar pelo filtro

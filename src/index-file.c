@@ -28,17 +28,11 @@ DYN_ARRAY* generate_index(FILE *data_fptr){
 
     fseek(data_fptr, HEADER_END_OFFSET, SEEK_SET);
 
-    int32_t reg_count = 0;
-
-    // Ler quantidade de registros existentes
-    fseek(data_fptr, NRO_REGARQ_OFFSET, SEEK_SET);
-    int32_t nro_reg = get_campo32(data_fptr);
-
     // Pular o cabecalho
     fseek(data_fptr, HEADER_END_OFFSET, SEEK_SET);
 
     // Lê registros até ler todos os registros válidos
-    while(reg_count < nro_reg){
+    while(1){
         unsigned char rem = get_campoc(data_fptr);
 
         if(feof(data_fptr)){
@@ -66,8 +60,6 @@ DYN_ARRAY* generate_index(FILE *data_fptr){
         insert_back_dynarr(aux_temp, &index_arr);
 
         free_jogador(&j);
-
-        reg_count++;
     }
 
     qsort(get_raw_dyarr(&index_arr), get_len_dynarr(&index_arr), sizeof(ARR_EL), &index_compare);
