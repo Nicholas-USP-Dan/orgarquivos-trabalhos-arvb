@@ -144,9 +144,6 @@ static int append_reg(const JOGADOR j, FILE *data_fptr){
 }
 
 int create_data_file(FILE *csv_fptr, FILE *data_fptr){
-    // Atribuição do campo 'status'
-    set_campoc('0', data_fptr);
-
     // Pular cabecalho
     fseek(data_fptr, HEADER_END_OFFSET, SEEK_SET);
 
