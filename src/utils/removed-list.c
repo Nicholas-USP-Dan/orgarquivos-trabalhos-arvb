@@ -75,7 +75,7 @@ int64_t find_space(const int32_t tam, REM_LIST **list){
     return out;
 }
 
-int write_rem_list(FILE *data_fptr, REM_LIST **list){
+int write_rem_list(REM_LIST **list, FILE *data_fptr){
     fseek(data_fptr, TOPO_OFFSET, SEEK_SET);
     
     int i = 0;

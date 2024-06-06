@@ -51,7 +51,7 @@ REM_LIST* load_rem_list(FILE *data_fptr, const enum alloc_met met);
 */
 int64_t find_space(const int32_t tam, REM_LIST **list);
 
-int write_rem_list(FILE *data_fptr, REM_LIST **list);
+int write_rem_list(REM_LIST **list, FILE *data_fptr);
 
 void sort_rem_list(REM_LIST **list);
 
