@@ -3,6 +3,8 @@
     "files.associations": {
         "compare": "c",
         "cstdint": "c",
-        "campo-utils.h": "c"
+        "campo-utils.h": "c",
+        "dyn-array.h": "c",
+        "cabecalho-utils.h": "c"
     }
 }

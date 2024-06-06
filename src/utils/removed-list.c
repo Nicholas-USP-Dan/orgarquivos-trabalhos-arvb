@@ -100,3 +100,7 @@ static int compare_rem_el(const void* a, const void* b){
 void sort_rem_list(REM_LIST **list){
     qsort(get_raw_dyarr(&(*list)->arr), get_len_dynarr(&(*list)->arr), sizeof(ARR_EL), &compare_rem_el);
 }
+
+int add_rem_list(FILE *data_fptr, JOGADOR where, REM_LIST **rem_list, int offset){
+    
+}
