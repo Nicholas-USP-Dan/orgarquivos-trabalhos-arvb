@@ -142,20 +142,20 @@ int pass_where(const JOGADOR j, const JOGADOR where){
             (!(mask & CLUBEMASK) || strcmp(where.clube, j.clube) == 0);
 }
 
-int delete_reg(FILE *data_fptr, REM_LIST **rem_list, int offset){
-    fseek(data_fptr, offset, SEEK_SET);
-    int rem = 1;
-    fwrite(&rem, 1, 1, data_fptr);
+// int delete_reg(FILE *data_fptr, REM_LIST **rem_list, int offset){
+//     fseek(data_fptr, offset, SEEK_SET);
+//     int rem = 1;
+//     fwrite(&rem, 1, 1, data_fptr);
 
-    fseek(data_fptr, offset, SEEK_SET);
-    fread(&rem, 1, 1, fp);
+//     fseek(data_fptr, offset, SEEK_SET);
+//     fread(&rem, 1, 1, fp);
 
-    if (rem != '1'){
-        return EXIT_FAILURE;
-    }
+//     if (rem != '1'){
+//         return EXIT_FAILURE;
+//     }
 
-    add_rem_list(FILE *data_fptr, REM_LIST **rem_list, int offset);
+//     add_rem_list(FILE *data_fptr, REM_LIST **rem_list, int offset);
 
 
-    return rem == '1';
-}
+//     return rem == '1';
+// }

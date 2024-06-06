@@ -83,16 +83,8 @@ JOGADOR read_jogador_data(FILE *fptr);
  */
 JOGADOR read_query();
 
-/**
- * @brief Gerar uma bitmask de uma query
- * 
- * @param j_query 
- * @return unsigned int 
- */
-// unsigned int get_mask(const JOGADOR where);
-
 int pass_where(const JOGADOR j, const JOGADOR where);
 
-int delete_reg(FILE *data_fptr, REM_LIST **rem_list, DYN_ARRAY **index_arr);
+// int delete_reg(FILE *data_fptr, REM_LIST **rem_list, DYN_ARRAY **index_arr);
 
 #endif
