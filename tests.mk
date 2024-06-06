@@ -11,7 +11,6 @@ CASOSDIR=test-cases
 
 .PHONY: test-all test-* test-cases-trab-int $(CASOSDIR)/*
 
-# Rodar todos os testes individuais
 test-all: $(UTESTS_BINS)
 
 test-%: $(UTEST_BIN_DIR)/T-%
