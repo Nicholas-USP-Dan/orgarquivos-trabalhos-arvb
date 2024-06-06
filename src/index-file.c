@@ -11,15 +11,19 @@
 #include "utils/campo-utils.h"
 #include "utils/cabecalho-utils.h"
 
-// Função para comparar dois registros de índice (INDEX_REG)
-// Ela é usada para ordenar a lista de índices
+/**
+ * @brief Função para comparar dois registros de índice (INDEX_REG);
+ * Ela é usada para ordenar a lista de índices
+ * 
+ * @param a Primeiro ponteiro
+ * @param b Segundo ponteiro
+ * @return [int] Retorna positivo se a > b, ou negativo se a < b
+ */
 static int index_compare(const void* a, const void* b){
     return ((INDEX_REG*)((ARR_EL*)a)->el)->index - ((INDEX_REG*)((ARR_EL*)b)->el)->index;
 }
 
-// Função para que o dyn_array possa adquirir o índice do registro;
-// É utilizado somente para a criação do array
-static int64_t get_index(const void *index_reg){
+int64_t get_index(const void *index_reg){
     return (int64_t)((INDEX_REG*)index_reg)->index;
 }
 
@@ -68,8 +72,8 @@ DYN_ARRAY* generate_index(FILE *data_fptr){
 }
 
 int write_index(DYN_ARRAY **index_arr, FILE *index_fptr){
-    // Escrever o status do arquivo de índice como instável
-    set_campoc('0', index_fptr);
+    // Volta para o começo e pula o campo status
+    fseek(index_fptr, 1, SEEK_SET);
 
     for(int i = 0; i < get_len_dynarr(index_arr); i++){
         INDEX_REG *reg = (INDEX_REG*)get_dynarr(i, index_arr);

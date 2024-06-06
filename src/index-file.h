@@ -20,6 +20,15 @@ struct _index_reg {
 typedef struct _index_reg INDEX_REG;
 
 /**
+ * @brief Função para que o dyn_array possa adquirir o índice do registro;
+ * É utilizado somente para a criação do array
+ * 
+ * @param index_reg 
+ * @return [int64_t] 
+ */
+int64_t get_index(const void *index_reg);
+
+/**
  * @brief Função que a partir de um arquivo de dados gera um array de índice
  * 
  * @param data_fptr Ponteiro para o arquivo de dados a ser lido
