@@ -150,5 +150,12 @@ int delete_reg(FILE *data_fptr, JOGADOR where, REM_LIST **rem_list, int offset){
     fseek(data_fptr, offset, SEEK_SET);
     fread(&rem, 1, 1, fp);
 
+    if (rem != '1'){
+        return EXIT_FAILURE;
+    }
+
+    add_rem_list(FILE *data_fptr, REM_LIST **rem_list, int offset);
+
+
     return rem == '1';
 }

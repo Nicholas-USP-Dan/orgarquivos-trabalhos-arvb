@@ -55,4 +55,6 @@ int write_rem_list(FILE *data_fptr, REM_LIST **list);
 
 void sort_rem_list(REM_LIST **list);
 
+int add_rem_list(FILE *data_fptr, REM_LIST **rem_list, int offset);
+
 #endif
