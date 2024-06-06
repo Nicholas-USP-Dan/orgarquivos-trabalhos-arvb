@@ -102,7 +102,7 @@ void sort_rem_list(REM_LIST **list){
 }
 
 int add_rem_list(FILE *data_fptr, REM_LIST **rem_list, int offset){
-    fseek(data_fptr, offset, SEEK_SET);
+    fseek(data_fptr, offset+1, SEEK_SET);
     REM_EL *el = malloc(sizeof(REM_EL));
     el->offset = offset;
     el->tam = get_campo32(data_fptr);

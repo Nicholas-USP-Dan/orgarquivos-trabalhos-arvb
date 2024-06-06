@@ -108,11 +108,16 @@ DYN_ARRAY* load_index(FILE *index_fptr){
 int delete_index(DYN_ARRAY **index_arr, REM_LIST **rem_list, FILE *data_fptr, FILE *index_fptr, JOGADOR j_search){
     //4 - remover o registro do arq de indice
 
+    //encontra a posicao do id no array de indices
     int pos = find_pos_dynarr(j_search.id, index_arr);
+    //guarda o byteoffset do reg
     int offset = index_arr[pos].offset;
+    //procura pelo jogador no arquivo de
     j_search = select_data(data_fptr, j_search);
+    //deleta logicamente o jogador do arquivo de dados e add na lista de removidos
     delete_reg(data_fptr, rem_list, offset);
-    
+    //deleta o índice da lista de índices
+    //ta faltando
 
 
 
