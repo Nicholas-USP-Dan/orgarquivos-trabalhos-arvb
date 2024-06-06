@@ -31,6 +31,11 @@ int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
 
     if (offset != -1){
         //inserir no espaço encontrado, lembrando de escrever $ no lixo que sobrar
+
+        //setar status do cabeçalho pra inconsistente (0)
+
+        //ir para o offset encontrado, verificar o tam, escrever o novo registro e escrever $ no lixo
+        fseek(data_fptr, offset, SEEK_CUR);
     }else{
         //inserir no final
     }
