@@ -220,13 +220,10 @@ int static inline func6(){
         return -1;
     }
 
-    //array contendo os índices do arquivo de dados
-    DYN_ARRAY *index_arr = generate_index(data_fptr);
-
     for (int i=0; i<n; i++){
         JOGADOR j_query = read_query();
 
-        ret = insert_data(data_fptr, index_fptr);
+        ret = insert_data(data_fptr, index_fptr, j_query);
         
 
         if(ret != 0) fprintf(stdout, "Falha no processamento do arquivo.\n");
