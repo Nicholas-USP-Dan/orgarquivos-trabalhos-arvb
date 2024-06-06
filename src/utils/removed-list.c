@@ -101,15 +101,15 @@ void sort_rem_list(REM_LIST **list){
     qsort(get_raw_dyarr(&(*list)->arr), get_len_dynarr(&(*list)->arr), sizeof(ARR_EL), &compare_rem_el);
 }
 
-int add_rem_list(FILE *data_fptr, REM_LIST **rem_list, int offset){
-    fseek(data_fptr, offset+1, SEEK_SET);
-    REM_EL *el = malloc(sizeof(REM_EL));
-    el->offset = offset;
-    el->tam = get_campo32(data_fptr);
+// int add_rem_list(FILE *data_fptr, REM_LIST **rem_list, int offset){
+//     fseek(data_fptr, offset+1, SEEK_SET);
+//     REM_EL *el = malloc(sizeof(REM_EL));
+//     el->offset = offset;
+//     el->tam = get_campo32(data_fptr);
 
-    insert_back_dynarr(el, rem_list);
+//     insert_back_dynarr(el, &(*rem_list)->arr);
 
-    sort_rem_list(rem_list);
+//     sort_rem_list(rem_list);
 
-    return 0;
-}
+//     return 0;
+// }
