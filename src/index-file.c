@@ -11,16 +11,22 @@
 #include "utils/campo-utils.h"
 #include "utils/cabecalho-utils.h"
 
+// Função para comparar dois registros de índice (INDEX_REG)
+// Ela é usada para ordenar a lista de índices
 static int index_compare(const void* a, const void* b){
     return ((INDEX_REG*)((ARR_EL*)a)->el)->index - ((INDEX_REG*)((ARR_EL*)b)->el)->index;
 }
 
-int64_t get_index(const void *index_reg){
+// Função para que o dyn_array possa adquirir o índice do registro;
+// É utilizado somente para a criação do array
+static int64_t get_index(const void *index_reg){
     return (int64_t)((INDEX_REG*)index_reg)->index;
 }
 
 DYN_ARRAY* generate_index(FILE *data_fptr){
     DYN_ARRAY *index_arr = initialize_dynarr(&get_index);
+
+    fseek(data_fptr, HEADER_END_OFFSET, SEEK_SET);
 
     int32_t reg_count = 0;
 
@@ -105,20 +111,20 @@ DYN_ARRAY* load_index(FILE *index_fptr){
     return array;
 }
 
-int delete_index(DYN_ARRAY **index_arr, REM_LIST **rem_list, FILE *data_fptr, FILE *index_fptr, JOGADOR j_search){
-    //4 - remover o registro do arq de indice
+// int delete_index(DYN_ARRAY **index_arr, REM_LIST **rem_list, FILE *data_fptr, FILE *index_fptr, JOGADOR j_search){
+//     //4 - remover o registro do arq de indice
 
-    //encontra a posicao do id no array de indices
-    int pos = find_pos_dynarr(j_search.id, index_arr);
-    //guarda o byteoffset do reg
-    int offset = index_arr[pos].offset;
-    //procura pelo jogador no arquivo de
-    j_search = select_data(data_fptr, j_search);
-    //deleta logicamente o jogador do arquivo de dados e add na lista de removidos
-    delete_reg(data_fptr, rem_list, offset);
-    //deleta o índice da lista de índices
-    //ta faltando
+//     //encontra a posicao do id no array de indices
+//     int pos = find_pos_dynarr(j_search.id, index_arr);
+//     //guarda o byteoffset do reg
+//     int offset = index_arr[pos].offset;
+//     //procura pelo jogador no arquivo de
+//     j_search = select_data(data_fptr, j_search);
+//     //deleta logicamente o jogador do arquivo de dados e add na lista de removidos
+//     delete_reg(data_fptr, rem_list, offset);
+//     //deleta o índice da lista de índices
+//     //ta faltando
 
 
 
-}
+// }
