@@ -83,7 +83,7 @@ int select_data(FILE *data_fptr, JOGADOR where);
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 A operação foi realizada com sucesso.
  */
-int delete_data(FILE *data_fptr, JOGADOR where, REM_LIST **rem_list, DYN_ARRAY **index_arr);
+int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST **rem_list, DYN_ARRAY **index_arr);
 
 /**
  * @brief Chamada da funcionalidade 6 - Insere um registro em um arquivo binário de dados.

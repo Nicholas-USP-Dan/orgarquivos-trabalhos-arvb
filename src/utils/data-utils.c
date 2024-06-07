@@ -43,8 +43,11 @@ const char *CAMPO_LIST[5] = {
 
 void free_jogador(JOGADOR *j){
     free(j->nome);
+    j->nome = NULL;
     free(j->nac);
+    j->nac = NULL;
     free(j->clube);
+    j->clube = NULL;
 }
 
 void print_jogador(const JOGADOR j){
@@ -81,6 +84,10 @@ JOGADOR read_query(){
     int m;
     scanf("%d", &m);
 
+    j_query.nome = calloc(sizeof(char), BUFFER_SIZE);
+    j_query.nac = calloc(sizeof(char), BUFFER_SIZE);
+    j_query.clube = calloc(sizeof(char), BUFFER_SIZE);
+
     // Ler o conjunto nomeCampo e valorCampo, atribuir o campo no jogador "filtro" junto com o bit da mascara correspondente
     for(int i = 0; i < m; i++){
         char campo[BUFFER_SIZE];
@@ -93,19 +100,14 @@ JOGADOR read_query(){
             scanf("%" PRId32, &j_query.idade);
         }
         else if(strcmp(campo, CAMPO_LIST[2]) == 0){
-            j_query.nome = malloc(sizeof(char) * BUFFER_SIZE);
             scan_quote_string(j_query.nome);
         }
         else if(strcmp(campo, CAMPO_LIST[3]) == 0){
-            j_query.nac = malloc(sizeof(char) * BUFFER_SIZE);
             scan_quote_string(j_query.nac);
+            printf("passou pela nacionalidade; %s\n", j_query.nac);
         }
         else if(strcmp(campo, CAMPO_LIST[4]) == 0){
-            j_query.clube = malloc(sizeof(char) * BUFFER_SIZE);
             scan_quote_string(j_query.clube);
-        }
-        else{
-            break;
         }
     }
 

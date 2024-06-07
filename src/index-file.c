@@ -30,8 +30,6 @@ int64_t get_index(const void *index_reg){
 DYN_ARRAY* generate_index(FILE *data_fptr){
     DYN_ARRAY *index_arr = initialize_dynarr(&get_index);
 
-    fseek(data_fptr, HEADER_END_OFFSET, SEEK_SET);
-
     // Pular o cabecalho
     fseek(data_fptr, HEADER_END_OFFSET, SEEK_SET);
 
@@ -77,6 +75,8 @@ int write_index(DYN_ARRAY **index_arr, FILE *index_fptr){
 
     for(int i = 0; i < get_len_dynarr(index_arr); i++){
         INDEX_REG *reg = (INDEX_REG*)get_dynarr(i, index_arr);
+        if(!reg) continue;
+        
         set_campo32(reg->index, index_fptr);
         set_campo64(reg->offset, index_fptr);
     }

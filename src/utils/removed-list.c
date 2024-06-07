@@ -77,19 +77,18 @@ int64_t find_space(const int32_t tam, REM_LIST **list){
 
 int write_rem_list(REM_LIST **list, FILE *data_fptr){
     fseek(data_fptr, TOPO_OFFSET, SEEK_SET);
-    
-    int i = 0;
-    REM_EL *el = get_dynarr(i++, &(*list)->arr);
-    // set_campo64(el->offset, data_fptr);
 
-    while(el){
-        set_campo64(el->offset, data_fptr);
-        // Seek para o registro e pular para o campo prox
-        fseek(data_fptr, el->offset+1+4, SEEK_SET);
-        el = get_dynarr(i++, &(*list)->arr);
+    for(int i = 0; i < get_len_dynarr(&(*list)->arr); i++){
+        REM_EL *el = get_dynarr(i, &(*list)->arr);
+        if(el){
+            set_campo64(el->offset, data_fptr);
+            // Seek para o registro e pular para o campo prox
+            fseek(data_fptr, el->offset+1+4, SEEK_SET);
+        }
     }
 
     set_campo64(-1, data_fptr);
+
     return 0;
 }
 
@@ -100,16 +99,3 @@ static int compare_rem_el(const void* a, const void* b){
 void sort_rem_list(REM_LIST **list){
     qsort(get_raw_dyarr(&(*list)->arr), get_len_dynarr(&(*list)->arr), sizeof(ARR_EL), &compare_rem_el);
 }
-
-// int add_rem_list(FILE *data_fptr, REM_LIST **rem_list, int offset){
-//     fseek(data_fptr, offset+1, SEEK_SET);
-//     REM_EL *el = malloc(sizeof(REM_EL));
-//     el->offset = offset;
-//     el->tam = get_campo32(data_fptr);
-
-//     insert_back_dynarr(el, &(*rem_list)->arr);
-
-//     sort_rem_list(rem_list);
-
-//     return 0;
-// }

@@ -9,16 +9,19 @@
  * 
  */
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "src/adts/dyn-array.h"
+#include "src/utils/campo-utils.h"
 #include "src/utils/data-utils.h"
 #include "src/utils/cabecalho-utils.h"
 #include "src/utils/funcoes_fornecidas.h"
 
 #include "src/data-file.h"
 #include "src/index-file.h"
+#include "src/utils/removed-list.h"
 
 static inline int func1(){
     char input_filename[200];
@@ -145,6 +148,8 @@ int static inline func4(){
 
     fclose(index_fptr);
 
+    binarioNaTela(output_filename);
+
     return ret;
 }
 
@@ -161,7 +166,7 @@ int static inline func5(){
     scanf("%s", index_filename);
 
     if(!(data_fptr = fopen(input_filename, "r+b")) || !check_status(data_fptr) || 
-    !(index_fptr = fopen(index_filename, "r+b")) || !check_status(index_fptr)){
+    !(index_fptr = fopen(index_filename, "wb"))){
         fprintf(stdout, "Falha no processamento do arquivo.\n");
         
         if(data_fptr) fclose(data_fptr);
@@ -170,36 +175,53 @@ int static inline func5(){
         return -1;
     }
 
-    //array contendo os índices do arquivo de dados
-    DYN_ARRAY *index_arr = generate_index(data_fptr);
-
     scanf("%d", &n);
 
-    //array com a lista de registros removidos
+    // Array contendo os índices do arquivo de dados
+    DYN_ARRAY *index_arr = generate_index(data_fptr);
+
+    // Array com a lista de registros removidos
     REM_LIST *rem_list = load_rem_list(data_fptr, BEST_FIT);
+
+    int quant_rem = 0;
 
     for (int i=0; i<n; i++){
         JOGADOR j_query = read_query();
 
-        ret = delete_data(data_fptr, j_query, rem_list, index_arr)
+        ret = delete_data(data_fptr, j_query, &quant_rem, &rem_list, &index_arr);
         
-
         if(ret != 0) fprintf(stdout, "Falha no processamento do arquivo.\n");
 
+        free_jogador(&j_query);
     }
+
+    // Escrever as estruturas em memória secundária
+    write_index(&index_arr, index_fptr);
+    write_rem_list(&rem_list, data_fptr);
+
+    // Atualizar as quantidades de registro
+    fseek(data_fptr, NRO_REGARQ_OFFSET, SEEK_SET);
+    int32_t nro_regarq = get_campo32(data_fptr);
+    int32_t nro_regrem = get_campo32(data_fptr);
+    fseek(data_fptr, NRO_REGARQ_OFFSET, SEEK_SET);
+    set_campo32(nro_regarq-quant_rem, data_fptr);
+    set_campo32(nro_regrem+quant_rem, data_fptr);
+
+    clear_dynarr(&index_arr);
+    clear_rem_list(&rem_list);
 
     fclose(data_fptr);
     fclose(index_fptr);
 
-    //ret = 
-    return 0; //return ret
+    binarioNaTela(input_filename);
+    binarioNaTela(index_filename);
 
-
+    return 0;
 }
 
-int static inline func6(){
+// int static inline func6(){
     
-}
+// }
 
 int main(){
     // Le um caractere no stdin para verificar qual operacao realizar
