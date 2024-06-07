@@ -47,8 +47,6 @@ int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
         fseek(data_fptr, offset, SEEK_CUR);
         append_reg(j_query, data_fptr);
 
-        //PRECISO VERIFICAR SE O TAMANHO DO REGISTRO DEVE PERMANECER O ANTIGO OU ATUALIZO PARA O NOVO
-
         //se o reg_size for de tam diferente do antigo, escreve $ no lixo
         if(reg_size != rem_size){
             int diff = rem_size - reg_size;
@@ -60,14 +58,68 @@ int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
             }
         }
 
+        //PRECISO VERIFICAR SE O TAMANHO DO REGISTRO DEVE PERMANECER O ANTIGO OU ATUALIZO PARA O NOVO
+        
+        //alterando o tamanho do registro para manter o antigo (do registro removido)
+        fseek(data_fptr, offset+1, SEEK_CUR);
+        fwrite(&rem_size, 4, 1, data_fptr);
+
+        // ----- !!!!
+
+        //OUTRO PROBLEMA PRA VERIFICAR - o byteoffset  do proximo registro logicamente removível
+        //possivelmente eu tenha que ligar o byteoffset do proximo reg ao reg anterior
+        // ----- !!!!
 
     }else{ //inserir no final
+        fseek(data_fptr, 0, SEEK_END);
+
+        //escrevendo o novo registro
+        fseek(data_fptr, offset, SEEK_CUR);
+        append_reg(j_query, data_fptr);
         
     }
 
     //atualizar cabeçalho nroRegArq e nroRegRem, setar status pra consistente
+
+    //status consistente
+    fseek(data_fptr, 0, SEEK_SET);
+    char status = '0';
+    fwrite(&status, 1, 1, data_fptr);
+
+    //altera nroRegArq e nroRegRem
+
+    int64_t aux_8bytes;
+    int32_t aux_4bytes;
+    int32_t nro_regarq;
+    int32_t nro_regrem;
+
+    //lendo auxiliares pra nao dar outro fseek
+    fread(&aux_8bytes, 8, 1, data_fptr); // lendo o topo
+    fread(&aux_8bytes, 8, 1, data_fptr); // lendo o prox_byte_offset
+
+    //guardando valores de regArq e regRem para editá-los
+    fread(&nro_regarq, 4, 1, data_fptr); // lendo o nro_regarq
+    fread(&nro_regrem, 4, 1, data_fptr); // lendo o nro_regrem
+
+    size_t currOffset = ftell(data_fptr);
+
+    fseek(data_fptr, currOffset-8, SEEK_CUR);
+
+    nro_regarq = nro_regarq + 1;
+    nro_regrem = nro_regrem - 1;
+
+    fwrite(&nro_regarq, 4, 1, data_fptr);
+    fwrite(&nro_regrem, 4, 1, data_fptr);
+
+    if(ftell(fp) != HEADER_END_OFFSET){ // Verifica se todos os bytes foram escritos
+        return -1;
+    }
     
     //se tiver id, atualizar arq de indice, inserindo ordenado de preferencia, escrever arquivo
+
+    // if (j_query.id != jNil.id){
+        
+    // }
 
     //lembrar de liberar arrays
 
