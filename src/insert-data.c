@@ -74,7 +74,7 @@ int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
         fseek(data_fptr, 0, SEEK_END);
 
         //escrevendo o novo registro
-        fseek(data_fptr, offset, SEEK_CUR);
+        offset = ftell(data_fptr);
         append_reg(j_query, data_fptr);
         
     }
@@ -111,16 +111,24 @@ int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
     fwrite(&nro_regarq, 4, 1, data_fptr);
     fwrite(&nro_regrem, 4, 1, data_fptr);
 
-    if(ftell(fp) != HEADER_END_OFFSET){ // Verifica se todos os bytes foram escritos
+    if(ftell(data_fptr) != HEADER_END_OFFSET){ // Verifica se todos os bytes foram escritos
         return -1;
     }
     
-    //se tiver id, atualizar arq de indice, inserindo ordenado de preferencia, escrever arquivo
+    //se tiver id, atualizar arq de indice, inserindo ordenado + escrever arquivo
 
-    // if (j_query.id != jNil.id){
-        
-    // }
+    if (j_query.id != jNil.id){
 
-    //lembrar de liberar arrays
+        //adicionando indice novo no array
+        INDEX_REG *aux_temp = malloc(sizeof(INDEX_REG));
+        aux_temp->index = j.id;
+        aux_temp->offset = offset;
 
+        insert_ord_dynarr(aux_temp, &index_arr);
+
+        write_index(DYN_ARRAY **index_arr, FILE *index_fptr);
+    }
+
+    //lembrar de liberar arrays: index_arr, rem_list
+    
 }
