@@ -91,12 +91,12 @@ int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST *
  * @details Essa função utiliza-se do método Best Fit para encontrar espaços para ocupar; No método Best Fit
  * procura-se um espaço que tenha o menor espaço sobrando ao ser preenchido com o novo registro
  * 
- * @param bin_filename Nome do arquivo binário de dados a ser operado
- * @param index_filename Nome do arquivo de índice de saída.
+ * @param data_fptr Ponteiro para o arquivo binário de saída
+ * @param index_fptr Ponteiro para o arquivo de índice.
  * 
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 A operação foi realizada com sucesso.
  */
-int insert_data(const char *bin_filename, const char *index_filename); // Seria legal se a entrada pudesse ser feita no programa principal
+int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR where); // Seria legal se a entrada pudesse ser feita no programa principal
 
 #endif

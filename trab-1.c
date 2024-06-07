@@ -219,10 +219,43 @@ int static inline func5(){
     return 0;
 }
 
-// int static inline func6(){
-    
-// }
+int static inline func6(){
+    char input_filename[200];
+    char index_filename[200];
+    int n;
+    int ret;
 
+    FILE *data_fptr = NULL;
+    FILE *index_fptr = NULL;
+
+    scanf("%s", input_filename);
+    scanf("%s", index_filename);
+    scanf("%d", &n);
+
+    if(!(data_fptr = fopen(input_filename, "r+b")) || !check_status(data_fptr) || 
+    !(index_fptr = fopen(index_filename, "wb")) || !check_status(index_fptr)){
+        fprintf(stdout, "Falha no processamento do arquivo.\n");
+        
+        if(data_fptr) fclose(data_fptr);
+        if(index_fptr) fclose(index_fptr);
+
+        return -1;
+    }
+
+    for (int i=0; i<n; i++){
+        JOGADOR j_query = read_query();
+
+        ret = insert_data(data_fptr, index_fptr, j_query);
+        
+        if(ret != 0) fprintf(stdout, "Falha no processamento do arquivo.\n");
+
+        free_jogador(&j_query);
+
+    }
+
+    fclose(data_fptr);
+    fclose(index_fptr);
+}
 int main(){
     // Le um caractere no stdin para verificar qual operacao realizar
     char op;
@@ -247,9 +280,9 @@ int main(){
         case '5':
             ret = func5();
             break;
-        // case '6':
-        //     ret = func6();
-        //     break;
+        case '6':
+            ret = func6();
+            break;
         default:
             fprintf(stdout, "Funcionalidade invalida.\n");
             ret = -1;

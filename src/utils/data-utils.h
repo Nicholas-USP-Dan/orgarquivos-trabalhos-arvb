@@ -85,6 +85,8 @@ JOGADOR read_query();
 
 int pass_where(const JOGADOR j, const JOGADOR where);
 
+static int append_reg(const JOGADOR j, FILE *data_fptr);
+
 // int delete_reg(FILE *data_fptr, REM_LIST **rem_list, DYN_ARRAY **index_arr);
 
 #endif
