@@ -47,11 +47,16 @@ int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
         fseek(data_fptr, offset, SEEK_CUR);
         append_reg(j_query, data_fptr);
 
+        //PRECISO VERIFICAR SE O TAMANHO DO REGISTRO DEVE PERMANECER O ANTIGO OU ATUALIZO PARA O NOVO
+
         //se o reg_size for de tam diferente do antigo, escreve $ no lixo
         if(reg_size != rem_size){
             int diff = rem_size - reg_size;
+            char trash = '$';
+            
             for(int i=0; i < diff; i++){
-                fwrite()
+                int32_t size_aux = 0; // Variável auxiliar para guardar o espaço ocupado pelos campos de string
+                set_campo_str(trash, &size_aux, data_fptr);
             }
         }
 
