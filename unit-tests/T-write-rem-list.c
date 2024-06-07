@@ -20,7 +20,7 @@ int main(){
 
     REM_LIST *rem_list = load_rem_list(data_fptr, BEST_FIT);
 
-    write_rem_list(rem_fptr, &rem_list);    
+    write_rem_list(&rem_list,rem_fptr);    
 
     clear_rem_list(&rem_list);
 }
