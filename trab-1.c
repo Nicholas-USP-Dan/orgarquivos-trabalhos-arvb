@@ -211,7 +211,7 @@ int static inline func6(){
     scanf("%d", &n);
 
     if(!(data_fptr = fopen(input_filename, "r+b")) || !check_status(data_fptr) || 
-    !(index_fptr = fopen(index_filename, "r+b")) || !check_status(index_fptr)){
+    !(index_fptr = fopen(index_filename, "wb")) || !check_status(index_fptr)){
         fprintf(stdout, "Falha no processamento do arquivo.\n");
         
         if(data_fptr) fclose(data_fptr);

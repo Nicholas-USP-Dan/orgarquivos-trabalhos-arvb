@@ -29,16 +29,21 @@ int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
         offset = find_space(reg_size, rem_list);
     }
 
+    //setar status do cabeçalho pra inconsistente (0)
+    fseek(data_fptr, 0, SEEK_SET);
+    char status = '0';
+    fwrite(&status, 1, 1, data_fptr);
+
     if (offset != -1){
         //inserir no espaço encontrado, lembrando de escrever $ no lixo que sobrar
-
-        //setar status do cabeçalho pra inconsistente (0)
 
         //ir para o offset encontrado, verificar o tam, escrever o novo registro e escrever $ no lixo
         fseek(data_fptr, offset, SEEK_CUR);
     }else{
         //inserir no final
     }
+
+    //atualizar cabeçalho nroRegArq e nroRegRem, setar status pra consistente
     
     //se tiver id, atualizar arq de indice, inserindo ordenado de preferencia, escrever arquivo
 
