@@ -227,11 +227,12 @@ int static inline func6(){
         
         if(ret != 0) fprintf(stdout, "Falha no processamento do arquivo.\n");
 
-        //lembrar de liberar jogador
+        free_jogador(&j_query);
 
     }
 
-    //lembrar de dar fclose nos arquivos
+    fclose(data_fptr);
+    fclose(index_fptr);
     
 }
 

@@ -29,6 +29,8 @@ int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
         offset = find_space(reg_size, rem_list);
     }
 
+    int ret = -1;
+
     //setar status do cabeçalho pra inconsistente (0)
     fseek(data_fptr, 0, SEEK_SET);
     char status = '0';
@@ -126,9 +128,16 @@ int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
 
         insert_ord_dynarr(aux_temp, &index_arr);
 
-        write_index(DYN_ARRAY **index_arr, FILE *index_fptr);
+        write_index(&index_arr, index_fptr);
+
     }
 
-    //lembrar de liberar arrays: index_arr, rem_list
+    //lembrar de liberar arrays
+    clear_dynarr(&index_arr);
+    clear_rem_list(&rem_list);
+
+    ret = 0;
     
+    return ret;
+
 }
