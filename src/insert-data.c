@@ -34,13 +34,30 @@ int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
     char status = '0';
     fwrite(&status, 1, 1, data_fptr);
 
-    if (offset != -1){
-        //inserir no espaço encontrado, lembrando de escrever $ no lixo que sobrar
+    if (offset != -1){ //inserir no espaço encontrado
+        
+        //--ir para o offset encontrado, verificar o tam, escrever o novo registro e escrever $ no lixo
 
-        //ir para o offset encontrado, verificar o tam, escrever o novo registro e escrever $ no lixo
+        //ir para o offset encontrado, pulando o char de removido
+        fseek(data_fptr, offset+1, SEEK_CUR);
+        int32_t rem_size = 0;
+        fread(&rem_size, 4, 1, data_fptr);
+
+        //escrevendo o novo registro
         fseek(data_fptr, offset, SEEK_CUR);
-    }else{
-        //inserir no final
+        append_reg(j_query, data_fptr);
+
+        //se o reg_size for de tam diferente do antigo, escreve $ no lixo
+        if(reg_size != rem_size){
+            int diff = rem_size - reg_size;
+            for(int i=0; i < diff; i++){
+                fwrite()
+            }
+        }
+
+
+    }else{ //inserir no final
+        
     }
 
     //atualizar cabeçalho nroRegArq e nroRegRem, setar status pra consistente

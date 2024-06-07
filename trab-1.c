@@ -227,6 +227,8 @@ int static inline func6(){
         
         if(ret != 0) fprintf(stdout, "Falha no processamento do arquivo.\n");
 
+        //lembrar de liberar jogador
+
     }
 
     //lembrar de dar fclose nos arquivos
