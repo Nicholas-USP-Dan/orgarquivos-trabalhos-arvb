@@ -1,3 +1,14 @@
+/**
+ * @file index-file.c
+ * @brief Source file para as funcionalidades relacionadas ao arquivo de índice.
+ * 
+ * @authors Nicholas Eiti Dan; N°USP: 14600749
+ * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ * 
+ * @version 2.0
+ * 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <inttypes.h>
@@ -48,6 +59,7 @@ DYN_ARRAY* generate_index(FILE *data_fptr){
             continue;
         }
 
+        // Pega o offset do registro
         int64_t offset = ftell(data_fptr)-1;
 
         // Pular tamanhoRegistro e Prox
@@ -55,15 +67,16 @@ DYN_ARRAY* generate_index(FILE *data_fptr){
 
         JOGADOR j = read_jogador_data(data_fptr);
 
+        // Cria o registro do índice e insere ele na lista de índices
         INDEX_REG *aux_temp = malloc(sizeof(INDEX_REG));
         aux_temp->index = j.id;
         aux_temp->offset = offset;
-
         insert_back_dynarr(aux_temp, &index_arr);
 
         free_jogador(&j);
     }
 
+    // Ordenação da lista de índices
     qsort(get_raw_dyarr(&index_arr), get_len_dynarr(&index_arr), sizeof(ARR_EL), &index_compare);
 
     return index_arr;
@@ -73,17 +86,23 @@ int write_index(DYN_ARRAY **index_arr, FILE *index_fptr){
     // Volta para o começo e pula o campo status
     fseek(index_fptr, 1, SEEK_SET);
 
+    // Passa por todos os itens da lista de índices e escreve eles no arquivo
     for(int i = 0; i < get_len_dynarr(index_arr); i++){
         INDEX_REG *reg = (INDEX_REG*)get_dynarr(i, index_arr);
-        if(!reg) continue;
+        if(!reg) continue; // Verifica se o item não está removido
         
-        set_campo32(reg->index, index_fptr);
-        set_campo64(reg->offset, index_fptr);
+        // Atribui o registro no arquivo
+        if(set_campo32(reg->index, index_fptr) == -1 ||
+        set_campo64(reg->offset, index_fptr) == -1){
+            return -1;
+        }
     }
 
     // Escrever o status do arquivo de índice como estável
     fseek(index_fptr, 0, SEEK_SET);
-    set_campoc('1', index_fptr);
+    if(set_campoc('1', index_fptr) == -1){
+        return -1;
+    }
 
     return 0;
 }
@@ -91,9 +110,10 @@ int write_index(DYN_ARRAY **index_arr, FILE *index_fptr){
 DYN_ARRAY* load_index(FILE *index_fptr){
     DYN_ARRAY *array = initialize_dynarr(&get_index);
 
+    // Lê registros até o fim do arquivo
     while(1){
-        INDEX_REG *reg = malloc(sizeof(INDEX_REG));
-
+        // Inicializa e atribui um item de índice
+        INDEX_REG *reg = (INDEX_REG*)malloc(sizeof(INDEX_REG));
         reg->index = get_campo32(index_fptr);
         reg->offset = get_campo64(index_fptr);
 
@@ -101,26 +121,9 @@ DYN_ARRAY* load_index(FILE *index_fptr){
             break;
         }
 
+        // Insere o registro na lista de índices
         insert_back_dynarr(reg, &array);
     }
 
     return array;
 }
-
-// int delete_index(DYN_ARRAY **index_arr, REM_LIST **rem_list, FILE *data_fptr, FILE *index_fptr, JOGADOR j_search){
-//     //4 - remover o registro do arq de indice
-
-//     //encontra a posicao do id no array de indices
-//     int pos = find_pos_dynarr(j_search.id, index_arr);
-//     //guarda o byteoffset do reg
-//     int offset = index_arr[pos].offset;
-//     //procura pelo jogador no arquivo de
-//     j_search = select_data(data_fptr, j_search);
-//     //deleta logicamente o jogador do arquivo de dados e add na lista de removidos
-//     delete_reg(data_fptr, rem_list, offset);
-//     //deleta o índice da lista de índices
-//     //ta faltando
-
-
-
-// }

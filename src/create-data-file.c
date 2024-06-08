@@ -1,11 +1,11 @@
 /**
  * @file create-data-file.c
- * @brief Implementação da funcionalidade 1 do trabalho definido
+ * @brief Source file para a criação de um arquivo de dados a partir de um arquivo csv
  * 
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
  * 
- * @version 1.0
+ * @version 2.0
  * 
  */
 
@@ -46,10 +46,12 @@ static char* get_token_str(char **start_ptr, const char delim){
     char *end_token = strchr((*start_ptr), delim);
     if(end_token != NULL){
         strncpy(token, (*start_ptr), end_token-(*start_ptr));
+        token[BUFFER_SIZE/2-1] = '\0'; // Asserção para garantir que token termine com '\0'
         (*start_ptr) = end_token+1;
     }
     else{
-        strcpy(token, (*start_ptr));
+        strncpy(token, (*start_ptr), BUFFER_SIZE/2);
+        token[BUFFER_SIZE/2-1] = '\0'; // Asserção para garantir que token termine com '\0'
         (*start_ptr) = NULL;
     }
 
@@ -86,21 +88,21 @@ static JOGADOR process_csv_jogador(char *line){
     char *nome_str = get_token_str(&line_ptr, ',');
     len = strlen(nome_str);
     j_out.nome = (char *)malloc(len+1);
-    strcpy(j_out.nome, nome_str);
+    strncpy(j_out.nome, nome_str, len+1);
     free(nome_str);
 
     // Ler a nacionalidade do jogador
     char *nac_str = get_token_str(&line_ptr, ',');
     len = strlen(nac_str);
     j_out.nac = (char *)malloc(len+1);
-    strcpy(j_out.nac, nac_str);
+    strncpy(j_out.nac, nac_str, len+1);
     free(nac_str);
 
     // Ler o clube do jogador
     char *clube_str = get_token_str(&line_ptr, ',');
     len = strlen(clube_str);
     j_out.clube = (char *)malloc(len+1);
-    strcpy(j_out.clube, clube_str);
+    strncpy(j_out.clube, clube_str, len+1);
     free(clube_str);
 
     return j_out;

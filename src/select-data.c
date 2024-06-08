@@ -9,7 +9,7 @@
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
  * 
- * @version 1.0
+ * @version 2.0
  * 
  */
 
@@ -23,7 +23,7 @@
 #include "utils/campo-utils.h"
 #include "utils/cabecalho-utils.h"
 
-int select_data(FILE *data_fptr, JOGADOR where){
+int select_data(FILE *data_fptr, JOGADOR where){ // Seria legal se essa função retornasse algo como um JSON para ser impresso depois 
     int filter_count = 0;
 
     // Pular o cabecalho
@@ -54,7 +54,6 @@ int select_data(FILE *data_fptr, JOGADOR where){
         if(pass_where(j, where)){
             filter_count++;
 
-            // Chamar function pointer??
             print_jogador(j);
             printf("\n");
         }
@@ -72,6 +71,5 @@ int select_data(FILE *data_fptr, JOGADOR where){
         printf("Registro inexistente.\n\n");
     }
 
-    //printf("\n");
     return 0;
 }

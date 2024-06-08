@@ -1,12 +1,24 @@
+/**
+ * @file delete-data.c
+ * @brief Source file para a remoção de registros em um arquivo de dados
+ * 
+ * @authors Nicholas Eiti Dan; N°USP: 14600749
+ * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ * 
+ * @version 2.0
+ * 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <inttypes.h>
 #include <stdint.h>
 
-#include "adts/dyn-array.h"
 #include "data-file.h"
-
 #include "index-file.h"
+
+#include "adts/dyn-array.h"
+
 #include "utils/data-utils.h"
 #include "utils/campo-utils.h"
 #include "utils/cabecalho-utils.h"
@@ -16,7 +28,7 @@ int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST *
     // Pular o cabecalho
     fseek(data_fptr, HEADER_END_OFFSET, SEEK_SET);
 
-    // O campo id é pesquisado
+    // Pesquisar pela lista de índices quando o critério de filtragem (where) possuir um id
     if(where.id != jNil.id){
         int64_t id_index;
 
@@ -29,13 +41,13 @@ int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST *
         INDEX_REG *reg = (INDEX_REG*)get_dynarr(id_index, index_arr);
         int64_t offset = reg->offset;
 
-        // Ir até o registro do índice e pular o campo removido
+        // Ir até o registro do índice e pular o campo "removido"
         fseek(data_fptr, reg->offset+1, SEEK_SET);
 
         // Ler o tamanho do registro
         int32_t tam = get_campo32(data_fptr);
 
-        // Pular o campo Prox
+        // Pular o campo "Prox"
         fseek(data_fptr, 8, SEEK_CUR);
 
         JOGADOR j = read_jogador_data(data_fptr);
@@ -43,6 +55,7 @@ int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST *
         // Registro passou pelo filtro
         if(pass_where(j, where)){
             (*quant_rem)++;
+
             // Cria e coloca o registro na lista de removidos
             REM_EL *el = (REM_EL*)malloc(sizeof(REM_EL));
             el->offset = offset; el->tam = tam;
@@ -51,10 +64,12 @@ int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST *
             // Remove o elemento na lista de índice
             remove_dynarr(id_index, index_arr);
 
-            // Volta e atribui o campo removido como '1' (registro está removido)
+            // Volta e atribui o campo removido como '1' (remover o registro)
             long curr_offset = ftell(data_fptr);
             fseek(data_fptr, curr_offset-tam, SEEK_SET);
             set_campoc('1', data_fptr);
+
+            // Retorna para o final do registro
             fseek(data_fptr, curr_offset, SEEK_CUR);
         }
 
@@ -64,6 +79,7 @@ int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST *
     }
 
     while(1){
+        // Marca o offset do começo do registro
         int64_t offset = ftell(data_fptr);
         unsigned char rem = get_campoc(data_fptr);
 
@@ -71,24 +87,27 @@ int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST *
             break;
         }
 
+        // Lê o tamanho do registro
         int32_t reg_size = get_campo32(data_fptr);
 
-        // Registro esta removido, mover para o proximo
+        // Registro está removido, mover para o proximo
         if(rem == '1'){
             fseek(data_fptr, reg_size-5, SEEK_CUR);
             continue;
         }
 
-        // Pular Prox
+        // Pular campo "Prox"
         fseek(data_fptr, 8, SEEK_CUR);
-
+        
         JOGADOR j = read_jogador_data(data_fptr);
         
         // Registro passou pelo filtro
         if(pass_where(j, where)){
             (*quant_rem)++;
+
             // Cria e coloca na lista de removidos o elemento
             REM_EL *el = (REM_EL*)malloc(sizeof(REM_EL));
+            
             el->offset = offset; el->tam = reg_size;
             insert_ord_dynarr(el, &(*rem_list)->arr);
 
@@ -107,6 +126,5 @@ int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST *
         free_jogador(&j);
     }
 
-    //printf("\n");
     return 0;
 }
