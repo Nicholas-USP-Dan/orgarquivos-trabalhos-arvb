@@ -14,7 +14,6 @@
 #include <stdlib.h>
 
 #include "src/adts/dyn-array.h"
-#include "src/utils/campo-utils.h"
 #include "src/utils/data-utils.h"
 #include "src/utils/cabecalho-utils.h"
 #include "src/utils/funcoes_fornecidas.h"
@@ -199,13 +198,7 @@ int static inline func5(){
     write_index(&index_arr, index_fptr);
     write_rem_list(&rem_list, data_fptr);
 
-    // Atualizar as quantidades de registro
-    fseek(data_fptr, NRO_REGARQ_OFFSET, SEEK_SET);
-    int32_t nro_regarq = get_campo32(data_fptr);
-    int32_t nro_regrem = get_campo32(data_fptr);
-    fseek(data_fptr, NRO_REGARQ_OFFSET, SEEK_SET);
-    set_campo32(nro_regarq-quant_rem, data_fptr);
-    set_campo32(nro_regrem+quant_rem, data_fptr);
+    update_nro_reg(-quant_rem, data_fptr);
 
     clear_dynarr(&index_arr);
     clear_rem_list(&rem_list);
@@ -255,6 +248,8 @@ int static inline func6(){
 
     fclose(data_fptr);
     fclose(index_fptr);
+
+    return 0;
 }
 int main(){
     // Le um caractere no stdin para verificar qual operacao realizar

@@ -51,7 +51,8 @@ int main(){
         .clube = ""
     };
 
-    delete_data(data_fptr, where, &rem_list, &index_arr);
+    int rem_count = 0;
+    delete_data(data_fptr, where, &rem_count, &rem_list, &index_arr);
 
     printf("\n");
     printf("========== Removed list after operation ==========\n");
