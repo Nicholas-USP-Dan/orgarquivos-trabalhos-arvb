@@ -118,6 +118,7 @@ DYN_ARRAY* load_index(FILE *index_fptr){
         reg->offset = get_campo64(index_fptr);
 
         if(feof(index_fptr)){
+            free(reg);
             break;
         }
 
