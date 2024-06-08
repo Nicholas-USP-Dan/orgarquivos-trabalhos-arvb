@@ -106,6 +106,16 @@ JOGADOR read_query(){
     return j_query;
 }
 
+int32_t get_reg_size(const JOGADOR j){
+    // soma de bytes para a formação do registro
+    int32_t lenNomeJog = strlen(j.nome);
+    int32_t lenNac = strlen(j.nac);
+    int32_t lenNomeClube = strlen(j.clube);
+
+    // removido = 1 | tamReg = 4 | prox = 8 | id = 4 | idade = 4 | tamNomeJog = 4 | nomeJog = var | tamNac = 4 | nac = var | tamNomeClube = 4 | nomeClube = var
+    return 1 + 4 + 8 + 4 + 4 + 4 + lenNomeJog + 4 + lenNac + 4 + lenNomeClube;
+}
+
 /**
  * @brief Adquire uma máscara de busca a partir de um critério de busca; Ela é usada para
  * ignorar os elementos vazios do critério
@@ -153,47 +163,17 @@ int pass_where(const JOGADOR j, const JOGADOR where){
  * @retval 0 Registro adicionado no arquivo binário com sucesso.
  */
 int append_reg(const JOGADOR j, FILE *data_fptr){
-    int32_t reg_size = 0; // Variável que guarda o tamanho total do registro
+    set_campoc('0', data_fptr); // Atribuição do campo removido como '0'
 
-    set_campoc('0', data_fptr); reg_size += 1; // Atribuição do campo removido como '0'
+    set_campo32(get_reg_size(j), data_fptr); // Atribuição do campo "tamReg"
 
-    // Pular o campo tamanhoReg
-    fseek(data_fptr, 4, SEEK_CUR); reg_size += 4;
+    set_campo64(-1, data_fptr); // Atribuicao do campo Prox
 
-    set_campo64(-1, data_fptr); reg_size += 8; // Atribuicao do campo Prox
-
-    int32_t size_aux = 0; // Variável auxiliar para guardar o espaço ocupado pelos campos de string
-
-    set_campo32(j.id, data_fptr); reg_size += 4; // Atribuicao do campo id
-    set_campo32(j.idade, data_fptr); reg_size += 4; // Atribuicao do campo idade
-    set_campo_str(j.nome, &size_aux, data_fptr); reg_size += size_aux; // Atribuicao do campo tamNomeJog e nomeJogador
-    set_campo_str(j.nac, &size_aux, data_fptr); reg_size += size_aux; // Atribuicao do campo tamNacionalidade e nacionalidade
-    set_campo_str(j.clube, &size_aux, data_fptr); reg_size += size_aux; // Atribuicao do campo tamNomeClube e nomeClube
-    
-    // Voltar no campo tamanhoRegistro e atribuir o valor correto no campo
-    fseek(data_fptr, -(reg_size-1), SEEK_CUR);
-    fwrite(&reg_size, 4, 1, data_fptr);
-
-    // Voltar para o fim do registro
-    fseek(data_fptr, reg_size-5, SEEK_CUR);
+    set_campo32(j.id, data_fptr); // Atribuicao do campo id
+    set_campo32(j.idade, data_fptr); // Atribuicao do campo idade
+    set_campo_str(j.nome, data_fptr); // Atribuicao do campo tamNomeJog e nomeJogador
+    set_campo_str(j.nac, data_fptr); // Atribuicao do campo tamNacionalidade e nacionalidade
+    set_campo_str(j.clube, data_fptr); // Atribuicao do campo tamNomeClube e nomeClube
 
     return 0;
 }
-
-// int delete_reg(FILE *data_fptr, REM_LIST **rem_list, int offset){
-//     fseek(data_fptr, offset, SEEK_SET);
-//     int rem = 1;
-//     fwrite(&rem, 1, 1, data_fptr);
-
-//     fseek(data_fptr, offset, SEEK_SET);
-//     fread(&rem, 1, 1, fp);
-
-//     if (rem != '1'){
-//         return EXIT_FAILURE;
-//     }
-
-//     add_rem_list(FILE *data_fptr, REM_LIST **rem_list, int offset);
-
-
-//     return rem == '1';
-// }

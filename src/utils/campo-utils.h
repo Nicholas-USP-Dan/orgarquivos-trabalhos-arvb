@@ -111,13 +111,11 @@ int set_campo64(const int64_t val, FILE *fp);
  * string.
  *
  * @param str String a ser inserida no campo.
- * @param [out] campo_len Referência de uma variável para registrar o tamanho
- * ocupado pelo campo (comprimento + string).
  * @param fp Ponteiro para o arquivo binário de dados.
  *
  * @retval -1 Houve uma falha durante a atribuição do char no arquivo.
  * @retval 0 Atribuição realizada com sucesso.
  */
-int set_campo_str(const char *str, int32_t *campo_len, FILE *fp);
+int set_campo_str(const char *str, FILE *fp);
 
 #endif

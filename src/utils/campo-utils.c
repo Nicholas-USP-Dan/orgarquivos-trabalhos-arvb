@@ -72,22 +72,19 @@ int set_campo64(const int64_t val, FILE *fp){
     return 0;
 }
 
-int set_campo_str(const char *str, int32_t *campo_len, FILE *fp){
+int set_campo_str(const char *str, FILE *fp){
     // Escrita do tamanho da string no arquivo binário
     int32_t len = strlen(str);
     if(fwrite(&len, 4, 1, fp) != 1){ // Verifica se todos os valores foram escritos
-        (*campo_len) = 0;
         return -1;
     }
     
     // Se o tamanho for maior que 0 (string diferente de "\0"), escrever a string no arquivo
     if(len > 0){
         if(fwrite(str, sizeof(char), len, fp) != len){ // Verifica se todos os bytes foram escritos
-            (*campo_len) = 0;
             return -1;
         }
     }
 
-    (*campo_len) = 4 + len;
     return 0;
 }

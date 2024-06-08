@@ -90,6 +90,14 @@ JOGADOR read_jogador_data(FILE *fptr);
 JOGADOR read_query();
 
 /**
+ * @brief Calcula o tamanho que um registro jogador ocupa
+ * 
+ * @param j Jogador a ter o tamanho calculado
+ * @return [int32_t] Retorna o tamnanho ocupado por um registro jogador
+ */
+int32_t get_reg_size(const JOGADOR j);
+
+/**
  * @brief Verifica se um jogador passa pelo filtro (query)
  * 
  * @param j Jogador a ser testado
