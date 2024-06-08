@@ -5,7 +5,7 @@
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
  * 
- * @version 1.0
+ * @version 2.0
  * 
  */
 
@@ -33,6 +33,30 @@ const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp){
 int check_status(FILE *fp){
     char status;
     fread(&status, 1, 1, fp);
-    if(status != '1') errno = 5;
+    if(status != '1') errno = 5; // Atribui errno como EIO 5 Input/output error
     return status == '1';
+}
+
+int update_nro_reg(const int diff, FILE *fp){
+    int32_t nro_regarq;
+    int32_t nro_regrem;
+
+    fseek(fp, NRO_REGARQ_OFFSET, SEEK_SET);
+
+    if(fread(&nro_regarq, 4, 1, fp) != 1 ||
+    fread(&nro_regrem, 4, 1, fp) != 1){
+        return -1;
+    }
+
+    nro_regarq += diff;
+    nro_regrem -= diff;
+
+    fseek(fp, NRO_REGARQ_OFFSET, SEEK_SET);
+
+    if(fwrite(&nro_regarq, 4, 1, fp) != 1 ||
+    fwrite(&nro_regrem, 4, 1, fp) != 1){
+        return -1;
+    }
+
+    return 0;
 }

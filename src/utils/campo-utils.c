@@ -2,12 +2,10 @@
  * @file campo-utils.c
  * @brief Source file para as funcionalidades dos campos de um registro
  * 
- * Alguma descrição específica sobre o arquivo...
- * 
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
  * 
- * @version 1.0
+ * @version 2.0
  * 
  */
 

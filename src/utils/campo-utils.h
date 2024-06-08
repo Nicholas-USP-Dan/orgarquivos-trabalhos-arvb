@@ -12,7 +12,7 @@
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
  *
- * @version 1.0
+ * @version 2.0
  */
 
 #ifndef CAMP_UTILS_H
@@ -28,7 +28,7 @@
 #define BUFFER_SIZE 200
 
 /**
- * @brief Função lê um campo de char (string de 1 byte) na posição apontada no
+ * @brief Função que lê um campo de char (string de 1 byte) na posição apontada no
  * arquivo.
  *
  * @param fp Ponteiro para o arquivo binário de dados.

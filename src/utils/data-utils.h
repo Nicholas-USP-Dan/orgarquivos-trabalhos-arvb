@@ -1,11 +1,11 @@
 /**
  * @file data-utils.h
- * @author your name (you@domain.com)
- * @brief 
- * @version 0.1
- * @date 2024-05-17
+ * @brief Header file de algumas utilidades gerais do arquivo binário de dados
  * 
- * @copyright Copyright (c) 2024
+ * @authors Nicholas Eiti Dan; N°USP: 14600749
+ * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ * 
+ * @version 2.0
  * 
  */
 
@@ -16,6 +16,13 @@
 #include <stdio.h>
 
 #include "../data-file.h"
+
+/**
+ * Máscara de filtragem (representação em bits):
+ * 
+ * IDMASK   IDADEMASK   NOMEMASK    NACMASK   CLUBEMASK
+ * 0        0           0           0         0
+ */
 
 #define IDMASK 0x01
 #define IDADEMASK 0x02
@@ -31,6 +38,7 @@
 
 /**
  * @brief Instância de um jogador vazio/nulo, representa uma busca "vazia"
+ * 
  */
 extern const JOGADOR jNil;
 
@@ -74,19 +82,33 @@ void print_jogador(const JOGADOR j);
 JOGADOR read_jogador_data(FILE *fptr);
 
 /**
- * @brief Lê uma linha (do stdin) com os campos da busca e retorna um jogador guardando esses dados.
- * 
- * @note Foi usado uma bitmask para otimizar o processo de filtragem.
+ * @brief Lê uma linha (do stdin) com os campos de um jogador e retorna uma estrutura com todos os dados inseridos
  * 
  * @return [JOGADOR] Retorna um objeto do tipo JOGADOR guardando os dados dos campos a serem filtrados;
  * os campos não procurados são atribuídos com o mesmo valor do jogador nulo (jNil).
  */
 JOGADOR read_query();
 
+/**
+ * @brief Verifica se um jogador passa pelo filtro (query)
+ * 
+ * @param j Jogador a ser testado
+ * @param where Critério de filtragem
+ * 
+ * @retval 1 O jogador passou pela filtragem
+ * @retval 0 O jogador não passou pela filtragem
+ */
 int pass_where(const JOGADOR j, const JOGADOR where);
 
-static int append_reg(const JOGADOR j, FILE *data_fptr);
-
-// int delete_reg(FILE *data_fptr, REM_LIST **rem_list, DYN_ARRAY **index_arr);
+/**
+ * @brief Insere um registro em um arquivo binári na posição apontada pelo ponteiro do arquivo
+ * 
+ * @param j Jogador a ser inserido
+ * @param data_fptr Ponteiro para o arquivo binário
+ * 
+ * @retval -1 Houve uma falha durante a inserção.
+ * @retval 0 Inserção feita com sucesso.
+ */
+int append_reg(const JOGADOR j, FILE *data_fptr);
 
 #endif

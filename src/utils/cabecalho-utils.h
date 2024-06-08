@@ -15,7 +15,7 @@
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
  * 
- * @version 1.0
+ * @version 2.0
  * 
  */
 
@@ -54,7 +54,7 @@ int initialize_data_cabecalho(const unsigned char status, const int64_t topo, co
 const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp);
 
 /**
- * @brief Funcao que verifica o status de um arquivo de dados binario
+ * @brief Funcao que verifica o status de um arquivo binario
  * 
  * @param fp Ponteiro do arquivo binário de dados.
  * 
@@ -65,5 +65,17 @@ const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp);
  * deve estar na posição correta (STATUS_OFFSET).
  */
 int check_status(FILE *fp);
+
+/**
+ * @brief Atualiza os campos nro_regarq e nro_regrem
+ * 
+ * @param diff Diferença da quantidade final pela inicial ((>0): mais registros; 
+ * (<0): menos registros)
+ * @param fp Ponteiro do arquivo binário de dados
+ * 
+ * @retval 0 Operação realizada com sucesso.
+ * @retval -1 Houve uma falha durante a execução da funcionalidade.
+ */
+int update_nro_reg(const int diff, FILE *fp);
 
 #endif

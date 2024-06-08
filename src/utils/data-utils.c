@@ -1,11 +1,11 @@
 /**
- * @file data-file-utils.c
+ * @file data-utils.c
  * @brief Source file de algumas utilidades gerais do arquivo binário de dados
  * 
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
  * 
- * @version 1.0
+ * @version 2.0
  * 
  */
 
@@ -19,42 +19,29 @@
 #include "campo-utils.h"
 #include "funcoes_fornecidas.h"
 
-/**
- * @brief Instância de um jogador vazio/nulo, representa uma busca "vazia"
- */
 const JOGADOR jNil = {
     .id = -1,
     .idade = -1,
     .nome = "",
     .nac = "",
     .clube = ""
-};
+}; // Definição externa
 
-/**
- * @brief Array com todos os nomes dde campos válidos para realizar a filtragem
- */
 const char *CAMPO_LIST[5] = {
     "id",
     "idade",
     "nomeJogador",
     "nacionalidade",
     "nomeClube"
-};
+}; // Definição externa
 
 void free_jogador(JOGADOR *j){
     free(j->nome);
-    j->nome = NULL;
     free(j->nac);
-    j->nac = NULL;
     free(j->clube);
-    j->clube = NULL;
 }
 
 void print_jogador(const JOGADOR j){
-    // printf("ID do Jogador: %" PRId32 "\n", j.id);
-
-    // printf("Idade do Jogador: %" PRId32 "\n", j.idade);
-
     char *nome = strcmp(j.nome, "") != 0 ? j.nome : "SEM DADO";
     printf("Nome do Jogador: %s\n", nome);
 
@@ -84,15 +71,18 @@ JOGADOR read_query(){
     int m;
     scanf("%d", &m);
 
+    // Alocação e atribuição inicial dos campos de texto de um jogador (nome, nac e clube)
     j_query.nome = calloc(sizeof(char), BUFFER_SIZE);
     j_query.nac = calloc(sizeof(char), BUFFER_SIZE);
     j_query.clube = calloc(sizeof(char), BUFFER_SIZE);
 
-    // Ler o conjunto nomeCampo e valorCampo, atribuir o campo no jogador "filtro" junto com o bit da mascara correspondente
+    // Lê o conjunto nomeCampo e valorCampo, atribuir o escolhido campo com o valor correspondente n vezes
     for(int i = 0; i < m; i++){
+        // Lê nomeCampo
         char campo[BUFFER_SIZE];
         scanf("%s", campo);
 
+        // "Switch com os diferentes nomes dos campos"
         if(strcmp(campo, CAMPO_LIST[0]) == 0){
             scanf("%" PRId32, &j_query.id);
         }
@@ -104,16 +94,25 @@ JOGADOR read_query(){
         }
         else if(strcmp(campo, CAMPO_LIST[3]) == 0){
             scan_quote_string(j_query.nac);
-            printf("passou pela nacionalidade; %s\n", j_query.nac);
         }
         else if(strcmp(campo, CAMPO_LIST[4]) == 0){
             scan_quote_string(j_query.clube);
+        }
+        else{
+            break;
         }
     }
 
     return j_query;
 }
 
+/**
+ * @brief Adquire uma máscara de busca a partir de um critério de busca; Ela é usada para
+ * ignorar os elementos vazios do critério
+ * 
+ * @param where 
+ * @return [unsigned int] 
+ */
 static unsigned int get_mask(const JOGADOR where){
     unsigned int mask = 0;
     if(where.id != jNil.id){
@@ -153,7 +152,7 @@ int pass_where(const JOGADOR j, const JOGADOR where){
  * @retval -1 Houve um erro durante a adição do registro no arquivo binário.
  * @retval 0 Registro adicionado no arquivo binário com sucesso.
  */
-static int append_reg(const JOGADOR j, FILE *data_fptr){
+int append_reg(const JOGADOR j, FILE *data_fptr){
     int32_t reg_size = 0; // Variável que guarda o tamanho total do registro
 
     set_campoc('0', data_fptr); reg_size += 1; // Atribuição do campo removido como '0'
