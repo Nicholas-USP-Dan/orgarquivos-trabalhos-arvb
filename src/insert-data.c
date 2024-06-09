@@ -60,14 +60,11 @@ int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
             }
         }
 
-        //PRECISO VERIFICAR SE O TAMANHO DO REGISTRO DEVE PERMANECER O ANTIGO OU ATUALIZO PARA O NOVO
-        
         //alterando o tamanho do registro para manter o antigo (do registro removido)
         fseek(data_fptr, offset+1, SEEK_CUR);
         fwrite(&rem_size, 4, 1, data_fptr);
 
         // ----- !!!!
-
         //OUTRO PROBLEMA PRA VERIFICAR - o byteoffset  do proximo registro logicamente removível
         //possivelmente eu tenha que ligar o byteoffset do proximo reg ao reg anterior
         // ----- !!!!
