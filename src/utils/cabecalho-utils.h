@@ -45,18 +45,18 @@
  * @param prox_byte_offset Valor a ser inserido no campo proxByteOffset.
  * @param nro_regarq Valor a ser inserido no campo nroRegArq.
  * @param nro_regrem Valor a ser inserido no campo nroRegRem.
- * @param fp Ponteiro do arquivo binário de dados.
+ * @param data_fptr Ponteiro do arquivo binário de dados.
  * 
  * @retval 0 Operação realizada com sucesso.
  * @retval -1 Houve uma falha durante a execução da funcionalidade.
  */
-int initialize_data_cabecalho(const unsigned char status, const int64_t topo, const int64_t prox_byte_offset, 
-const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp);
+int initialize_data_cabecalho(unsigned char status, int64_t topo, int64_t prox_byte_offset, 
+int32_t nro_regarq, int32_t nro_regrem, FILE *data_fptr);
 
 /**
  * @brief Funcao que verifica o status de um arquivo binario
  * 
- * @param fp Ponteiro do arquivo binário de dados.
+ * @param data_fptr Ponteiro do arquivo binário de dados.
  * 
  * @retval 1 Status do arquivo é válido (status = '1')
  * @retval 0 Status do arquivo não é válido
@@ -64,18 +64,18 @@ const int32_t nro_regarq, const int32_t nro_regrem, FILE *fp);
  * @note A função não reposiciona o ponteiro para o offset do status, então o ponteiro 
  * deve estar na posição correta (STATUS_OFFSET).
  */
-int check_status(FILE *fp);
+int check_status(FILE *data_fptr);
 
 /**
  * @brief Atualiza os campos nro_regarq e nro_regrem
  * 
  * @param diff Diferença da quantidade final pela inicial ((>0): mais registros; 
  * (<0): menos registros)
- * @param fp Ponteiro do arquivo binário de dados
+ * @param data_fptr Ponteiro do arquivo binário de dados
  * 
  * @retval 0 Operação realizada com sucesso.
  * @retval -1 Houve uma falha durante a execução da funcionalidade.
  */
-int update_nro_reg(const int diff, FILE *fp);
+int update_nro_reg(int diff, FILE *data_fptr);
 
 #endif
