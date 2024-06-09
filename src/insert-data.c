@@ -41,12 +41,12 @@ int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
         //--ir para o offset encontrado, verificar o tam, escrever o novo registro e escrever $ no lixo
 
         //ir para o offset encontrado, pulando o char de removido
-        fseek(data_fptr, offset+1, SEEK_CUR);
+        fseek(data_fptr, offset+1, SEEK_SET);
         int32_t rem_size = 0;
         fread(&rem_size, 4, 1, data_fptr);
 
         //escrevendo o novo registro
-        fseek(data_fptr, offset, SEEK_CUR);
+        fseek(data_fptr, offset, SEEK_SET);
         append_reg(j_query, data_fptr);
 
         //se o reg_size for de tam diferente do antigo, escreve $ no lixo
@@ -61,7 +61,7 @@ int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
         }
 
         //alterando o tamanho do registro para manter o antigo (do registro removido)
-        fseek(data_fptr, offset+1, SEEK_CUR);
+        fseek(data_fptr, offset+1, SEEK_SET);
         fwrite(&rem_size, 4, 1, data_fptr);
 
         // ----- !!!!
