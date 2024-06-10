@@ -42,6 +42,16 @@ void free_jogador(JOGADOR *j){
 }
 
 void print_jogador(const JOGADOR j){
+    // printf("ID: %" PRId32 "\n", j.id);
+
+    // printf("Idade: ");
+    // if(j.id != -1){
+    //     printf("SEM DADO\n");
+    // }
+    // else{
+    //     printf("%" PRId32 "\n", j.idade);
+    // }
+
     char *nome = strcmp(j.nome, "") != 0 ? j.nome : "SEM DADO";
     printf("Nome do Jogador: %s\n", nome);
 
@@ -104,6 +114,41 @@ JOGADOR read_query(){
     }
 
     return j_query;
+}
+
+JOGADOR read_new_jogador(){
+    JOGADOR j_out;
+
+    // Alocação e atribuição inicial dos campos de texto de um jogador (nome, nac e clube)
+    j_out.nome = calloc(sizeof(char), BUFFER_SIZE);
+    j_out.nac = calloc(sizeof(char), BUFFER_SIZE);
+    j_out.clube = calloc(sizeof(char), BUFFER_SIZE);
+
+    scanf("%" PRId32, &j_out.id);
+
+    char buffer[BUFFER_SIZE];
+    scanf("%s", buffer);
+    if(strcmp(buffer, "NULO") == 0){
+        j_out.idade = -1;
+    }
+    else{
+        sscanf(buffer, "%" PRId32, &j_out.idade);
+    }
+
+    scan_quote_string(j_out.nome);
+    if(strcmp(j_out.nome, "NULO") == 0){
+        strcpy(j_out.nome, "");
+    }
+    scan_quote_string(j_out.nac);
+    if(strcmp(j_out.nac, "NULO") == 0){
+        strcpy(j_out.nac, "");
+    }
+    scan_quote_string(j_out.clube);
+    if(strcmp(j_out.clube, "NULO") == 0){
+        strcpy(j_out.clube, "");
+    }
+
+    return j_out;
 }
 
 int32_t get_reg_size(const JOGADOR j){

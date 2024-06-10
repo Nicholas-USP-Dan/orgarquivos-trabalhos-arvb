@@ -99,6 +99,6 @@ int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST *
  * @retval -1 Houve uma falha interna durante a operação.
  * @retval 0 A operação foi realizada com sucesso.
  */
-int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR where);
+int insert_data(FILE *data_fptr, const JOGADOR where, int *quant_ins, REM_LIST **rem_list, DYN_ARRAY **index_arr);
 
 #endif

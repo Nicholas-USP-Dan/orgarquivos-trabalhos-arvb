@@ -80,11 +80,11 @@ int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST *
     }
 
     while(1){
-        int64_t offset, id_index;
-        int32_t tam;
+        int64_t reg_offset, id_index;
+        int32_t reg_size;
 
         // Marca o offset do começo do registro
-        offset = ftell(data_fptr);
+        reg_offset = ftell(data_fptr);
         unsigned char rem = get_campoc(data_fptr);
 
         if(feof(data_fptr)){
@@ -92,11 +92,11 @@ int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST *
         }
 
         // Lê o tamanho do registro
-        tam = get_campo32(data_fptr);
+        reg_size = get_campo32(data_fptr);
 
         // Registro está removido, mover para o proximo
         if(rem == '1'){
-            fseek(data_fptr, tam-5, SEEK_CUR);
+            fseek(data_fptr, reg_size-5, SEEK_CUR);
             continue;
         }
 
@@ -114,7 +114,7 @@ int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST *
             // Cria e coloca na lista de removidos o elemento
             REM_EL *el = (REM_EL*)malloc(sizeof(REM_EL));
             
-            el->offset = offset; el->tam = tam;
+            el->offset = reg_offset; el->tam = reg_size;
             insert_ord_dynarr(el, &(*rem_list)->arr);
 
             // Remove o elemento na lista de índice
@@ -122,7 +122,7 @@ int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST *
 
             // Volta e atribui o campo removido como '1' (registro está removido)
             long curr_offset = ftell(data_fptr);
-            fseek(data_fptr, curr_offset-tam, SEEK_SET);
+            fseek(data_fptr, curr_offset-reg_size, SEEK_SET);
             set_campoc('1', data_fptr);
 
             // Retorna para o final do registro
@@ -130,6 +130,8 @@ int delete_data(FILE *data_fptr, const JOGADOR where, int *quant_rem, REM_LIST *
         }
 
         free_jogador(&j);
+
+        fseek(data_fptr, reg_offset + reg_size, SEEK_SET);
     }
 
     return 0;

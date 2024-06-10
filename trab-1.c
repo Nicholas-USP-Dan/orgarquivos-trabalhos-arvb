@@ -294,10 +294,11 @@ int static inline func6(){
     FILE *data_fptr = NULL;
     FILE *index_fptr = NULL;
 
+    // Leitura de input do usuário
     scanf("%s", input_filename);
     scanf("%s", index_filename);
-    scanf("%d", &n);
 
+    // Abre os arquivos, se algum erro for detectado, retorna
     if(!(data_fptr = fopen(input_filename, "r+b")) || !check_status(data_fptr) || 
     !(index_fptr = fopen(index_filename, "wb"))){
         fprintf(stdout, "Falha no processamento do arquivo.\n");
@@ -308,24 +309,58 @@ int static inline func6(){
         return -1;
     }
 
+    // Leitura da quantidade de remoções a serem realizadas
+    scanf("%d", &n);
+
+    // Setta os status do arquivo de dados e de índice como '0' (instável)
+    fseek(data_fptr, STATUS_OFFSET, SEEK_SET);
+    set_campoc('0', data_fptr);
+    fseek(index_fptr, 0, SEEK_SET);
+    set_campoc('0', index_fptr);
+
     // Array contendo os índices do arquivo de dados
     DYN_ARRAY *index_arr = generate_index(data_fptr);
 
     // Array com a lista de registros removidos
     REM_LIST *rem_list = load_rem_list(data_fptr, BEST_FIT);
 
-    for (int i = 0; i < n; i++){
-        JOGADOR j_query = read_query();
+    // Variável que mantém a quantidade de elementos removidos na operação
+    int quant_ins = 0;
 
-        ret = insert_data(data_fptr, index_fptr, j_query, &rem_list, &index_arr);
+    for (int i = 0; i < n; i++){
+        // JOGADOR j_query = read_query();
+        JOGADOR j_query = read_new_jogador();
         
+        ret = insert_data(data_fptr, j_query, &quant_ins, &rem_list, &index_arr);
         if(ret != 0) fprintf(stdout, "Falha no processamento do arquivo.\n");
 
         free_jogador(&j_query);
     }
 
+    // Escrever as estruturas em memória secundária
+    write_index(&index_arr, index_fptr);
+    write_rem_list(&rem_list, data_fptr);
+
+    // Atualiza os campos com a quantidade de registros no cabeçalho do arquivo de dados
+    update_nro_reg(quant_ins, data_fptr);
+
+    // Setta os status do arquivo de dados e de índice como '1' (estável)
+    fseek(data_fptr, STATUS_OFFSET, SEEK_SET);
+    set_campoc('1', data_fptr);
+    fseek(index_fptr, 0, SEEK_SET);
+    set_campoc('1', index_fptr);
+
+    // Limpeza de memória das estruturas utilizadas (lista de índices e de removidos)
+    clear_dynarr(&index_arr);
+    clear_rem_list(&rem_list);
+
+    // Fecha os arquivos
     fclose(data_fptr);
     fclose(index_fptr);
+
+    // Imprime os bináriosNaTela dos arquivos
+    binarioNaTela(input_filename);
+    binarioNaTela(index_filename);
 
     return 0;
 }

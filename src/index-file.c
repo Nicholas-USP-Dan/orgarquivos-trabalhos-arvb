@@ -46,34 +46,35 @@ DYN_ARRAY* generate_index(FILE *data_fptr){
 
     // Lê registros até ler todos os registros válidos
     while(1){
+        int64_t reg_offset = ftell(data_fptr);
         unsigned char rem = get_campoc(data_fptr);
 
         if(feof(data_fptr)){
             break;
         }
 
+        int32_t reg_size = get_campo32(data_fptr);
+
         // Registro esta removido, mover para o proximo
         if(rem == '1'){
-            int32_t reg_size = get_campo32(data_fptr);
             fseek(data_fptr, reg_size-5, SEEK_CUR);
             continue;
         }
 
-        // Pega o offset do registro
-        int64_t offset = ftell(data_fptr)-1;
-
         // Pular tamanhoRegistro e Prox
-        fseek(data_fptr, 12, SEEK_CUR);
+        fseek(data_fptr, 8, SEEK_CUR);
 
         JOGADOR j = read_jogador_data(data_fptr);
 
         // Cria o registro do índice e insere ele na lista de índices
-        INDEX_REG *aux_temp = malloc(sizeof(INDEX_REG));
-        aux_temp->index = j.id;
-        aux_temp->offset = offset;
-        insert_back_dynarr(aux_temp, &index_arr);
+        INDEX_REG *reg_temp = malloc(sizeof(INDEX_REG));
+        reg_temp->index = j.id;
+        reg_temp->offset = reg_offset;
+        insert_back_dynarr(reg_temp, &index_arr);
 
         free_jogador(&j);
+
+        fseek(data_fptr, reg_offset + reg_size, SEEK_SET);
     }
 
     // Ordenação da lista de índices

@@ -90,6 +90,13 @@ JOGADOR read_jogador_data(FILE *fptr);
 JOGADOR read_query();
 
 /**
+ * @brief 
+ * 
+ * @return [JOGADOR] 
+ */
+JOGADOR read_new_jogador();
+
+/**
  * @brief Calcula o tamanho que um registro jogador ocupa
  * 
  * @param j Jogador a ter o tamanho calculado
@@ -107,6 +114,13 @@ int32_t get_reg_size(const JOGADOR j);
  * @retval 0 O jogador não passou pela filtragem
  */
 int pass_where(const JOGADOR j, const JOGADOR where);
+
+/**
+ * @brief Adiciona um jogador em um arquivo de dados (ignorando os campos "removido", "tamanhoRegistro" e "Prox")
+ * 
+ * @return [int] 
+ */
+int add_jogador_reg(const JOGADOR j);
 
 /**
  * @brief Insere um registro em um arquivo binári na posição apontada pelo ponteiro do arquivo

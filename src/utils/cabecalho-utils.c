@@ -51,6 +51,9 @@ int update_nro_reg(const int diff, FILE *data_fptr){
 
     nro_regarq += diff;
     nro_regrem -= diff;
+    if(nro_regrem < 0){
+        nro_regrem = 0;
+    }
 
     fseek(data_fptr, NRO_REGARQ_OFFSET, SEEK_SET);
 
