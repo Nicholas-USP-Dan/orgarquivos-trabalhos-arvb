@@ -1,143 +1,93 @@
+/**
+ * @file insert-data.c
+ * @brief Implementação da funcionalidade 2 & 3 como definido no projeto
+ * 
+ * O tipo de jogador é utilizado para representar uma busca filtrada (a estrutura contém todos os campos de um registro);
+ * Como definido nas especificações do projeto, o id de cada jogador é único, assim, em buscas que filtram o id de um jogador,
+ * É possível sair da busca assim que achar-se um registro com o mesmo id que o filtrado
+ * 
+ * @authors Nicholas Eiti Dan; N°USP: 14600749
+ * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ * 
+ * @version 2.0
+ * 
+ */
+
 #include <stdio.h>
 #include <inttypes.h>
 #include <stdint.h>
+#include <stdlib.h>
 
+#include "adts/dyn-array.h"
 #include "data-file.h"
 
+#include "index-file.h"
 #include "utils/data-utils.h"
 #include "utils/campo-utils.h"
 #include "utils/cabecalho-utils.h"
+#include "utils/removed-list.h"
 
-int insert_data(FILE *data_fptr, FILE *index_fptr, JOGADOR j_query){
-    //array contendo os índices do arquivo de dados
-    DYN_ARRAY *index_arr = generate_index(data_fptr);
-
-    //lista de registros removidos
-    REM_LIST *rem_list = load_rem_list(data_fptr, BEST_FIT);
-
-    int64_t offset = -1;
-
-    // soma de bytes para a formação do registro
-    int32_t lenNomeJog = strlen(j_query.nome);
-    int32_t lenNac = strlen(j_query.nac);
-    int32_t lenNomeClube = strlen(j_query.clube);
-
-    // id = 1 | tamReg = 4 | prox = 8 | id = 4 | idade = 4 | tamNomeJog = 4 | nomeJog = var | tamNac = 4 | nac = var | tamNomeClube = 4 | nomeClube = var
-    int32_t reg_size = 1 + 4 + 8 + 4 + 4 + 4 + lenNomeJog + 4 + lenNac + 4 + lenNomeClube;
-
-    if (j_query.id != jNil.id){
-        offset = find_space(reg_size, rem_list);
-    }
-
+int insert_data(FILE *data_fptr, const JOGADOR j, int *quant_ins, REM_LIST **rem_list, DYN_ARRAY **index_arr){
     int ret = -1;
 
-    //setar status do cabeçalho pra inconsistente (0)
-    fseek(data_fptr, 0, SEEK_SET);
-    char status = '0';
-    fwrite(&status, 1, 1, data_fptr);
+    // Settar status do cabeçalho pra inconsistente (0)
+    fseek(data_fptr, STATUS_OFFSET, SEEK_SET);
+    // char status = '0';
+    // fwrite(&status, 1, 1, data_fptr);
+    set_campoc('0', data_fptr);
 
-    if (offset != -1){ //inserir no espaço encontrado
-        
-        //--ir para o offset encontrado, verificar o tam, escrever o novo registro e escrever $ no lixo
+    // Ler o campo "proxByteOffset"
+    fseek(data_fptr, PROXBYTE_OFFSET, SEEK_SET);
+    int64_t proxbyte_offset = get_campo64(data_fptr);
 
-        //ir para o offset encontrado, pulando o char de removido
-        fseek(data_fptr, offset+1, SEEK_CUR);
-        int32_t rem_size = 0;
-        fread(&rem_size, 4, 1, data_fptr);
+    int32_t reg_size = get_reg_size(j);
+    REM_EL rem_el = find_space(reg_size, rem_list);
 
-        //escrevendo o novo registro
-        fseek(data_fptr, offset, SEEK_CUR);
-        append_reg(j_query, data_fptr);
+    int64_t offset = rem_el.offset != -1 ? rem_el.offset : proxbyte_offset;
 
-        //se o reg_size for de tam diferente do antigo, escreve $ no lixo
-        if(reg_size != rem_size){
-            int diff = rem_size - reg_size;
+    if(rem_el.offset == -1){
+        fseek(data_fptr, proxbyte_offset, SEEK_SET);
+
+        // Escrevendo o novo registro
+        append_reg(j, data_fptr);
+
+        // Atualizar o valor do proxbyte_offset
+        proxbyte_offset = ftell(data_fptr);
+        fseek(data_fptr, PROXBYTE_OFFSET, SEEK_SET);
+        set_campo64(proxbyte_offset, data_fptr);
+    }
+    else { // Inserir no espaço encontrado
+        // Ir para o offset encontrado, verificar o tam, escrever o novo registro e escrever $ no lixo
+
+        // Ir para o offset encontrado, pulando o char de removido
+        fseek(data_fptr, rem_el.offset+1, SEEK_SET);
+        int32_t rem_size = get_campo32(data_fptr);
+
+        // Escrevendo o novo registro
+        fseek(data_fptr, rem_el.offset, SEEK_SET);
+        append_reg(j, data_fptr);
+
+        int32_t aux_size = reg_size;
+        while(aux_size < rem_size){
             char trash = '$';
-            
-            for(int i=0; i < diff; i++){
-                int32_t size_aux = 0; // Variável auxiliar para guardar o espaço ocupado pelos campos de string
-                set_campo_str(trash, &size_aux, data_fptr);
-            }
+            set_campoc(trash, data_fptr);
+            aux_size++;
         }
-
-        //PRECISO VERIFICAR SE O TAMANHO DO REGISTRO DEVE PERMANECER O ANTIGO OU ATUALIZO PARA O NOVO
         
-        //alterando o tamanho do registro para manter o antigo (do registro removido)
-        fseek(data_fptr, offset+1, SEEK_CUR);
-        fwrite(&rem_size, 4, 1, data_fptr);
-
-        // ----- !!!!
-
-        //OUTRO PROBLEMA PRA VERIFICAR - o byteoffset  do proximo registro logicamente removível
-        //possivelmente eu tenha que ligar o byteoffset do proximo reg ao reg anterior
-        // ----- !!!!
-
-    }else{ //inserir no final
-        fseek(data_fptr, 0, SEEK_END);
-
-        //escrevendo o novo registro
-        offset = ftell(data_fptr);
-        append_reg(j_query, data_fptr);
-        
+        // Alterando o tamanho do registro para manter o antigo (do registro removido)
+        fseek(data_fptr, rem_el.offset+1, SEEK_SET);
+        // fwrite(&rem_size, 4, 1, data_fptr);
+        set_campo32(rem_size, data_fptr);
     }
 
-    //atualizar cabeçalho nroRegArq e nroRegRem, setar status pra consistente
+    INDEX_REG *reg = (INDEX_REG*)malloc(sizeof(INDEX_REG));
+    reg->index = j.id;
+    reg->offset = offset;
+    insert_ord_dynarr(reg, index_arr);
 
-    //status consistente
-    fseek(data_fptr, 0, SEEK_SET);
-    char status = '0';
-    fwrite(&status, 1, 1, data_fptr);
-
-    //altera nroRegArq e nroRegRem
-
-    int64_t aux_8bytes;
-    int32_t aux_4bytes;
-    int32_t nro_regarq;
-    int32_t nro_regrem;
-
-    //lendo auxiliares pra nao dar outro fseek
-    fread(&aux_8bytes, 8, 1, data_fptr); // lendo o topo
-    fread(&aux_8bytes, 8, 1, data_fptr); // lendo o prox_byte_offset
-
-    //guardando valores de regArq e regRem para editá-los
-    fread(&nro_regarq, 4, 1, data_fptr); // lendo o nro_regarq
-    fread(&nro_regrem, 4, 1, data_fptr); // lendo o nro_regrem
-
-    size_t currOffset = ftell(data_fptr);
-
-    fseek(data_fptr, currOffset-8, SEEK_CUR);
-
-    nro_regarq = nro_regarq + 1;
-    nro_regrem = nro_regrem - 1;
-
-    fwrite(&nro_regarq, 4, 1, data_fptr);
-    fwrite(&nro_regrem, 4, 1, data_fptr);
-
-    if(ftell(data_fptr) != HEADER_END_OFFSET){ // Verifica se todos os bytes foram escritos
-        return -1;
-    }
-    
-    //se tiver id, atualizar arq de indice, inserindo ordenado + escrever arquivo
-
-    if (j_query.id != jNil.id){
-
-        //adicionando indice novo no array
-        INDEX_REG *aux_temp = malloc(sizeof(INDEX_REG));
-        aux_temp->index = j.id;
-        aux_temp->offset = offset;
-
-        insert_ord_dynarr(aux_temp, &index_arr);
-
-        write_index(&index_arr, index_fptr);
-
-    }
-
-    //lembrar de liberar arrays
-    clear_dynarr(&index_arr);
-    clear_rem_list(&rem_list);
+    (*quant_ins)++;
 
     ret = 0;
     
     return ret;
-
 }

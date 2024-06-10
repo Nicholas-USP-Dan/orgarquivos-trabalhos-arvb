@@ -69,33 +69,39 @@ REM_LIST* load_rem_list(FILE *data_fptr, const enum alloc_met met){
     return list;
 }
 
-int64_t find_space(const int32_t tam, REM_LIST **list){
-    REM_EL el;
-    int64_t out = -1;
+REM_EL find_space(const int32_t tam, REM_LIST **list){
+    REM_EL el = {-1,0}, *el_aux = NULL;
 
     switch ((*list)->met) {
         case FIRST_FIT: // Array não precisa estar ordenado
         case BEST_FIT: // Array deve estar ordenado
             // Iterar pela lista até achar um elemento válido
             for(int i = 0; i < get_len_dynarr(&(*list)->arr); i++){
-                el = (*(REM_EL*)get_dynarr(i, &(*list)->arr));
-                if(el.tam >= tam){
-                    out = el.offset;
+                el_aux = (REM_EL*)get_dynarr(i, &(*list)->arr);
+                if(!el_aux) continue;
+
+                if(tam <= el_aux->tam){
+                    el = *el_aux;
+                    remove_dynarr(i, &(*list)->arr);
                     break;
                 }
             }
             break;
         case WORST_FIT:
             // Pega o maior valor (array ordenado decrescente) e verifica se o tamanho é válido
-            el = (*(REM_EL*)get_dynarr(0, &(*list)->arr));
-            out = el.tam >= tam ? el.offset : -1;
+            while(!el_aux){
+                el_aux = (REM_EL*)get_dynarr(0, &(*list)->arr);
+            }
+            if(tam <= el_aux->tam){
+                el = *el_aux;
+                remove_dynarr(0, &(*list)->arr);
+            }
             break;
         default:
-            out = -1;
             break;
     }
 
-    return out;
+    return el;
 }
 
 int write_rem_list(REM_LIST **list, FILE *data_fptr){

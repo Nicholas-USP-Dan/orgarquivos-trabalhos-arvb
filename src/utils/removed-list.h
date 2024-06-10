@@ -97,9 +97,10 @@ REM_LIST* load_rem_list(FILE *data_fptr, const enum alloc_met met);
  * @param tam Tamanho do registro procurado
  * @param list Referência para o ponteiro da lista de remoção
  * 
- * @return [int64_t] Offset do espaço livre disponível; caso não haja, retorna -1
+ * @return [REM_EL] Retorna o elemento com o tamanho válido, caso não tenha espaço retorna o registro
+ 
 */
-int64_t find_space(const int32_t tam, REM_LIST **list);
+REM_EL find_space(const int32_t tam, REM_LIST **list);
 
 /**
  * @brief Escreve a lista de registros removidos no arquivo de dados
