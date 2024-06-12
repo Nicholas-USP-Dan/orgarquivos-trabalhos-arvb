@@ -40,21 +40,10 @@ int insert_data(FILE *data_fptr, const JOGADOR j, int *quant_ins, REM_LIST **rem
     fseek(data_fptr, PROXBYTE_OFFSET, SEEK_SET);
     int64_t proxbyte_offset = get_campo64(data_fptr);
 
-<<<<<<< HEAD
-        //ir para o offset encontrado, pulando o char de removido
-        fseek(data_fptr, offset+1, SEEK_SET);
-        int32_t rem_size = 0;
-        fread(&rem_size, 4, 1, data_fptr);
-
-        //escrevendo o novo registro
-        fseek(data_fptr, offset, SEEK_SET);
-        append_reg(j_query, data_fptr);
-=======
     int32_t reg_size = get_reg_size(j);
     REM_EL rem_el = find_space(reg_size, rem_list);
 
     int64_t offset = rem_el.offset != -1 ? rem_el.offset : proxbyte_offset;
->>>>>>> f65cc85a7fc4cce87597a5687d1f01f923e38399
 
     if(rem_el.offset == -1){
         fseek(data_fptr, proxbyte_offset, SEEK_SET);
@@ -84,25 +73,6 @@ int insert_data(FILE *data_fptr, const JOGADOR j, int *quant_ins, REM_LIST **rem
             set_campoc(trash, data_fptr);
             aux_size++;
         }
-<<<<<<< HEAD
-
-        //alterando o tamanho do registro para manter o antigo (do registro removido)
-        fseek(data_fptr, offset+1, SEEK_SET);
-        fwrite(&rem_size, 4, 1, data_fptr);
-
-        // ----- !!!!
-        //OUTRO PROBLEMA PRA VERIFICAR - o byteoffset  do proximo registro logicamente removível
-        //possivelmente eu tenha que ligar o byteoffset do proximo reg ao reg anterior
-        // ----- !!!!
-
-    }else{ //inserir no final
-        fseek(data_fptr, 0, SEEK_END);
-
-        //escrevendo o novo registro
-        offset = ftell(data_fptr);
-        append_reg(j_query, data_fptr);
-=======
->>>>>>> f65cc85a7fc4cce87597a5687d1f01f923e38399
         
         // Alterando o tamanho do registro para manter o antigo (do registro removido)
         fseek(data_fptr, rem_el.offset+1, SEEK_SET);
