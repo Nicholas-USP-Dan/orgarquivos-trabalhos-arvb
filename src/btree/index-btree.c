@@ -142,8 +142,6 @@ int read_btree_cabecalho(BTREE **btree, FILE *btree_fptr){
 int dump_btree_cache(BTREE **btree, FILE *btree_fptr){
     CACHE_NODE *aux_node = (*btree)->cache->head->next;
     while(aux_node != (*btree)->cache->tail){
-        BTREE_PAGE page = aux_node->value;
-
         if(update_disk_page(aux_node->rrn, &aux_node->value, btree_fptr) == -1){
             // Houve algum erro guardando os valores da página em memória secundária
             return -1;
