@@ -12,7 +12,7 @@ compile: setup $(HEADERS) $(OBJS)
 clean:
 	rm -r $(OBJDIR)/ $(BINDIR)/
 
-setup: $(OBJDIR) $(OBJDIR)/utils $(OBJDIR)/adts $(BINDIR)
+setup: $(OBJDIR) $(OBJDIR)/utils $(OBJDIR)/adts $(OBJDIR)/btree $(BINDIR)
 
 $(OBJDIR):
 	mkdir $@/
@@ -21,6 +21,9 @@ $(OBJDIR)/utils:
 	mkdir $@/
 
 $(OBJDIR)/adts:
+	mkdir $@/
+
+$(OBJDIR)/btree:
 	mkdir $@/
 
 $(BINDIR):
