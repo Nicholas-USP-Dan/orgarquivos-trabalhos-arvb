@@ -136,7 +136,7 @@ static int64_t search_btree_rec(const int32_t index, const int32_t rrn, BTREE **
 
     BTREE_PAGE *page;
 
-    if(!(page = get_page(rrn, btree, btree_fptr))){
+    if(!(page = get_page_readonly(rrn, btree, btree_fptr))){
         // Erro durante a leitura da página
         return -1;
     }
