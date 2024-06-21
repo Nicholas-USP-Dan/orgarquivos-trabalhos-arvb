@@ -183,7 +183,7 @@ static int64_t page_search(const int32_t index, int* pos, const BTREE_PAGE *page
 }
 
 /**
- * @brief Procura por um elemento na árvore-b por meio de um cirtério
+ * @brief Componente recursivo da função search_btree
  *
  * @param index Índice a ser procurado
  * @param rrn RRN da página a ser procurada
@@ -193,7 +193,7 @@ static int64_t page_search(const int32_t index, int* pos, const BTREE_PAGE *page
  * @return [int64_t] Retorna o offset do registro no arquivo de dados que contenha o índice procurado
  * @retval -1 O índice não foi achado na página
  */
-int64_t search_btree(const int32_t index, const int32_t rrn, BTREE **btree, FILE *btree_fptr){
+static int64_t search_btree_rec(const int32_t index, const int32_t rrn, BTREE **btree, FILE *btree_fptr){
     // Caso base
     if(rrn == -1){
         return -1;
@@ -214,7 +214,11 @@ int64_t search_btree(const int32_t index, const int32_t rrn, BTREE **btree, FILE
         return res;
     }
 
-    return search_btree(index, page->rrn_filhos[pos], btree, btree_fptr);
+    return search_btree_rec(index, page->rrn_filhos[pos], btree, btree_fptr);
+}
+
+int64_t search_btree(const int32_t index, BTREE **btree, FILE *btree_fptr){
+    return search_btree_rec(index, (*btree)->rrn_root, btree, btree_fptr);
 }
 
 /**
@@ -258,13 +262,13 @@ static void insert_page_nonfull(const INDEX_REG reg, const int pos, BTREE_PAGE *
  * @param pos Posição onde o registro deveria ficar (se não causasse overflow)
  * @param rrn_root RRN da página a ser dividida
  * @param [out] promo_reg Referência para o registro a ser promovido
- * @param alt Altura do nó a ser criado
- * @param btree
- * @param btree_fptr
+ * @param btree Referência para o ponteiro da árvore-b
+ * @param btree_fptr Ponteiro para o arquivo da árvore-b
+ * 
  * @return [int] Retorna o RRN da página criada
  * @retval -1 Houve algum erro durante a operação
  */
-static int32_t split_page(const INDEX_REG reg, const int rrn_child, const int pos, const int32_t rrn_root, INDEX_REG *promo_reg, const int32_t alt, BTREE **btree, FILE *btree_fptr){
+static int32_t split_page(const INDEX_REG reg, const int rrn_child, const int pos, const int32_t rrn_root, INDEX_REG *promo_reg, BTREE **btree, FILE *btree_fptr){
     BTREE_PAGE *root_page;
     if(!(root_page = get_page(rrn_root, btree, btree_fptr))){
         return -1;
@@ -275,11 +279,13 @@ static int32_t split_page(const INDEX_REG reg, const int rrn_child, const int po
     if(!(new_page = create_newpage_cache((*btree)->rrn_prox++, btree, btree_fptr))){
         return -1;
     }
-    new_page->alt = alt;
+    new_page->alt = root_page->alt;
 
     INDEX_REG temp_keys[BTREE_ORDER];
     int32_t temp_rrn_filhos[BTREE_ORDER+1];
 
+    // NOTE: a forma com memcpy requer uma cópia inteira, depois uma inserção, ou 2 memcpy's fragmentadas,
+    // Assim essa forma é tanto mais performática quanto mais simples
     int reg_i = BTREE_ORDER-1;
     if(reg_i == pos){
         temp_keys[reg_i--] = reg;
@@ -292,12 +298,12 @@ static int32_t split_page(const INDEX_REG reg, const int rrn_child, const int po
     }
 
     int child_i = BTREE_ORDER;
-    if(child_i == pos){
+    if(child_i == pos+1){
         temp_rrn_filhos[child_i--] = rrn_child;
     }
     for(int i = BTREE_ORDER-1; i >= 0; i--){
         temp_rrn_filhos[child_i--] = root_page->rrn_filhos[i];
-        if(i == pos){
+        if(i == pos+1){
             temp_rrn_filhos[child_i--] = rrn_child;
         }
     }
@@ -307,7 +313,7 @@ static int32_t split_page(const INDEX_REG reg, const int rrn_child, const int po
 
     new_page->nro_chaves = BTREE_ORDER - (mid+1);
     memcpy(new_page->chaves, &temp_keys[mid+1], sizeof(INDEX_REG) * new_page->nro_chaves);
-    memcpy(new_page->rrn_filhos, &temp_rrn_filhos[mid+1], sizeof(int32_t) * new_page->nro_chaves+1);
+    memcpy(new_page->rrn_filhos, &temp_rrn_filhos[mid+1], sizeof(int32_t) * (new_page->nro_chaves+1));
 
     for(int i = BTREE_ORDER - 2; i >= 0; i--){
         if(i >= mid){
@@ -341,6 +347,7 @@ static int insert_btree_rec(const INDEX_REG reg, const int32_t rrn_root, INDEX_R
 
     BTREE_PAGE *page;
     if(!(page = get_page(rrn_root, btree, btree_fptr))){
+        fprintf(stderr, "Problema ao ler a página no arquivo da árvore-b\n");
         return -1;
     }
 
@@ -368,7 +375,7 @@ static int insert_btree_rec(const INDEX_REG reg, const int32_t rrn_root, INDEX_R
 
     // Split
 
-    *rrn_promo = split_page(reg_promo_buff, rrn_promo_buff, pos, rrn_root, promo_reg, alt_buff+1, btree, btree_fptr);
+    *rrn_promo = split_page(reg_promo_buff, rrn_promo_buff, pos, rrn_root, promo_reg, btree, btree_fptr);
     return HAS_PROMO_KEY;
 }
 
@@ -389,9 +396,9 @@ int insert_btree(const INDEX_REG reg, BTREE **btree, FILE *btree_fptr){
 
         new_page->alt = alt_buff+1;
         new_page->rrn_filhos[0] = (*btree)->rrn_root;
-        (*btree)->rrn_root = (*btree)->rrn_prox;
-        (*btree)->rrn_prox++;
+        (*btree)->rrn_root = (*btree)->rrn_prox++;
+        // (*btree)->rrn_prox++;
     }
 
-    return 0;
+    return ret;
 }

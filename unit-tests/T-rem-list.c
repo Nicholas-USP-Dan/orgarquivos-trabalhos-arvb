@@ -43,15 +43,15 @@ int main(){
         }
     }
 
-    int64_t space;
+    REM_EL space;
     space = find_space(21, &rem_list);
-    assert(space == 4);
+    assert(space.offset == 4);
 
     space = find_space(5, &rem_list);
-    assert(space == 6);
+    assert(space.offset == 6);
 
     space = find_space(45, &rem_list);
-    assert(space == -1);
+    assert(space.offset == -1);
     
     clear_rem_list(&rem_list);
 

@@ -15,6 +15,7 @@
 #include <inttypes.h>
 
 #include "index-btree.h"
+#include "index-btree-cache.h"
 
 #include "index-btree-internals.h"
 
@@ -104,8 +105,10 @@ static void gen_visual_rec(const int32_t rrn, BTREE **btree, FILE *btree_fptr, F
     for(int i = 0; i < page->nro_chaves; i++){
         fprintf(output_fptr, "| %" PRId32 " | <C%" PRId32 "> ", page->chaves[i].index, i+1);
     }
+    fprintf(output_fptr, "\", ");
+    fprintf(output_fptr, "xlabel=\"%" PRId32 "; h=%" PRId32 "\"", rrn, page->alt);
+    fprintf(output_fptr, "]\n");
 
-    fprintf(output_fptr, "\"]\n");
 
     // Salva o array dos filhos pois a página pode não existir na cache quando ela for chamada
     int32_t child_buffer[BTREE_ORDER];

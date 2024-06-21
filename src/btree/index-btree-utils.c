@@ -56,6 +56,7 @@ int update_disk_page(const int32_t rrn, const BTREE_PAGE *page, FILE *btree_fptr
     // Escrita do buffer no arquivo
     if(fwrite(buffer, sizeof(unsigned char), BTREE_PAGE_SIZE, btree_fptr) != BTREE_PAGE_SIZE){
         // Houve algum erro durante a escrita do bloco
+        perror("Erro de escrita: ");
         return -1;
     }
 

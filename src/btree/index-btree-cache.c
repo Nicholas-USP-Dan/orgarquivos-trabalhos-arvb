@@ -58,10 +58,12 @@ BTREE_PAGE* put_page_cache(const int32_t rrn, const BTREE_PAGE *page, BTREE **bt
     
     // Cache atingiu tamanho máximo => remover último elemento
     if((*btree)->cache->count >= CACHE_LEN){
-
         // Pega último elemento da cache e escreve seu valor no disco
+
+        // printf("Remove last element in cache\n");
         CACHE_NODE *aux_node = (*btree)->cache->tail->prev;
         if(update_disk_page(aux_node->rrn, &aux_node->value, btree_fptr) == -1){
+            printf("Erro ao dar update\n");
             return NULL;
         }
 
@@ -116,7 +118,7 @@ BTREE_PAGE* get_page(const int32_t rrn, BTREE **btree, FILE *btree_fptr){
     BTREE_PAGE page;
     if(read_disk_page(&page, rrn, btree_fptr) == -1){
         // Erro na leitura da página da árvore-b
-
+        printf("oioi\n");
         return NULL;
     }
 
