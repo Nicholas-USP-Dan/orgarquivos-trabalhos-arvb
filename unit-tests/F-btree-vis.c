@@ -13,7 +13,7 @@ int main(){
     scanf("%s", input_filename);
     scanf("%s", output_filename);
 
-    FILE *btree_fptr = fopen(input_filename, "rb+");
+    FILE *btree_fptr = fopen(input_filename, "rb");
     FILE *btree_output = fopen(output_filename, "w");
     if(!btree_fptr || !btree_output){
         if(btree_fptr) fclose(btree_fptr);

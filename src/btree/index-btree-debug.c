@@ -93,7 +93,7 @@ static void gen_visual_rec(const int32_t rrn, BTREE **btree, FILE *btree_fptr, F
     // Recupera a página endereçada em rrn
     BTREE_PAGE *page;
 
-    if(!(page = get_page(rrn, btree, btree_fptr))){
+    if(!(page = get_page_readonly(rrn, btree, btree_fptr))){
         fprintf(stderr, "Erro ao acessar a página %" PRId32 "!\n", rrn);
         return;
     }

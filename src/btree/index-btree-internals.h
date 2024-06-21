@@ -1,10 +1,13 @@
 /**
  * @file index-btree-internals.h
- * @author your name (you@domain.com)
  * @brief Header que contém as definições internas da árvore-b; Qualquer arquivo com utilizando esse header tem acesso à todas
  * as definições das estruturas de dados, junto com declarações de tipos internos (como as estruturas de cache)
+ *
+ * @authors Nicholas Eiti Dan; N°USP: 14600749
+ * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ *
  * @version 3.0
- * 
+ *  
  */
 
 #ifndef INDEX_BTREE_INTERNALS_H

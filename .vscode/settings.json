@@ -6,5 +6,6 @@
         "campo-utils.h": "c",
         "dyn-array.h": "c",
         "cabecalho-utils.h": "c"
-    }
+    },
+    "todo-tree.tree.showBadges": true
 }

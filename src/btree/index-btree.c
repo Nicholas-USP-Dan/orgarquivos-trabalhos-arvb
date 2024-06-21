@@ -6,7 +6,6 @@
 
 #include "index-btree.h"
 
-#include "index-btree-utils.h"
 #include "index-btree-internals.h"
 #include "index-btree-cache.h"
 #include "index-types.h"
@@ -14,35 +13,6 @@
 #define NO_PROMO_KEY 0
 #define HAS_PROMO_KEY 1
 
-/**
- * @brief Cria uma nova página (que não existe no arquivo) na cache
- *
- * @note Esta função é basicamente uma macro que chama put_page_cache com uma página vazia
- *
- * @param rrn RRN de onde a página se localizaria
- * @param btree Referência ao ponteiro da árvore-B
- * @param btree_fptr Ponteiro para o arquivo da árvore-B
- *
- * @return [BTREE_PAGE*] Retorna o ponteiro da nova página criada na cache
- */
-static BTREE_PAGE* create_newpage_cache(const int32_t rrn, BTREE **btree, FILE *btree_fptr){
-    BTREE_PAGE newpage;
-    newpage.alt = 0;
-    newpage.nro_chaves = 0;
-    newpage.rrn_filhos[0] = -1;
-    for(int i = 0; i < BTREE_ORDER-1; i++){
-        newpage.chaves[i] = (INDEX_REG){-1,-1};
-        newpage.rrn_filhos[i+1] = -1;
-    }
-
-    return put_page_cache(rrn, &newpage, btree, btree_fptr);
-}
-
-/**
- * @brief Inicializa a árvore-b
- *
- * @return [BTREE*] Retorna o ponteiro da árvore alocada
- */
 BTREE* initialize_btree(){
     BTREE *btree = (BTREE*)malloc(sizeof(BTREE));
     btree->cache = initialize_cache();
@@ -53,27 +23,12 @@ BTREE* initialize_btree(){
     return btree;
 }
 
-/**
- * @brief Limpa a memória alocada pela árvore-b
- *
- * @param btree Referência ao ponteiro da árvore-b
- */
 void clear_btree(BTREE **btree){
     clear_cache(&(*btree)->cache);
     free(*btree);
     *btree = NULL;
 }
 
-/**
- * @brief Atribui valores ao cabeçalho
- *
- * @param status Status do arquivo ('0' => instável; '1' => estável)
- * @param btree Referência para o ponteiro da árvore-b
- * @param btree_fptr Ponteiro para o arquivo da árvore-b
- *
- * @retval 0 A escrita da página foi feita com sucesso
- * @retval -1 Houve um erro durante a escrita da página
- */
 int set_btree_cabecalho(const char status, BTREE **btree, FILE *btree_fptr){
     fseek(btree_fptr, 0, SEEK_SET);
 
@@ -96,15 +51,6 @@ int set_btree_cabecalho(const char status, BTREE **btree, FILE *btree_fptr){
     return 0;
 }
 
-/**
- * @brief Lê o cabeçalho de uma árvore-b de um arquivo
- *
- * @param btree Referência ao ponteiro da árvore-b
- * @param btree_fptr Ponteiro para o arquivo da árvore-b
- *
- * @retval 0 A escrita da página foi feita com sucesso
- * @retval -1 Houve um erro durante a escrita da página ou árvore-b está marcado como instável
- */
 int read_btree_cabecalho(BTREE **btree, FILE *btree_fptr){
     fseek(btree_fptr, 0, SEEK_SET);
     unsigned char buffer[BTREE_PAGE_SIZE];
@@ -128,17 +74,6 @@ int read_btree_cabecalho(BTREE **btree, FILE *btree_fptr){
     return 0;
 }
 
-/**
- * @brief Escreve todas as páginas armazenadas na cache no arquivo da árvore-b
- *
- * @details Esta função remove todos os registros da cache, sem limpar a cache em si
- *
- * @param btree Referência ao ponteiro da árvore-b
- * @param btree_fptr Referência para o arquivo da árvore-b
- *
- * @retval 0 A escrita da página foi feita com sucesso
- * @retval -1 Houve um erro durante a escrita da página
- */
 int dump_btree_cache(BTREE **btree, FILE *btree_fptr){
     CACHE_NODE *aux_node = (*btree)->cache->head->next;
     while(aux_node != (*btree)->cache->tail){
@@ -320,13 +255,7 @@ static int32_t split_page(const INDEX_REG reg, const int rrn_child, const int po
             root_page->chaves[i] = (INDEX_REG){-1,-1};
             root_page->rrn_filhos[i+1] = -1;
         }
-        // else{
-        //     root_page->chaves[i] = temp_keys[i];
-        //     root_page->rrn_filhos[i+1] = temp_rrn_filhos[i+1];
-        // }
     }
-
-    // root_page->rrn_filhos[0] = temp_rrn_filhos[0];
 
     memcpy(root_page->chaves, temp_keys, sizeof(INDEX_REG) * mid);
     memcpy(root_page->rrn_filhos, temp_rrn_filhos, sizeof(int32_t) * (mid+1));
