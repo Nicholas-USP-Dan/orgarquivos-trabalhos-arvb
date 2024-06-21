@@ -11,7 +11,6 @@
 #include "utils/campo-utils.h"
 #include "utils/cabecalho-utils.h"
 
-// FIXME: O número de nós e a raíz estão diferentes
 int create_btree_file(FILE *data_fptr, FILE *btree_fptr){
     BTREE *btree = initialize_btree();
 
