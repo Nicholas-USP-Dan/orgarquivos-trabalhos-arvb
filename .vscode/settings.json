@@ -5,7 +5,9 @@
         "cstdint": "c",
         "campo-utils.h": "c",
         "dyn-array.h": "c",
-        "cabecalho-utils.h": "c"
+        "cabecalho-utils.h": "c",
+        "removed-list.h": "c",
+        "stdint.h": "c"
     },
     "todo-tree.tree.showBadges": true
 }

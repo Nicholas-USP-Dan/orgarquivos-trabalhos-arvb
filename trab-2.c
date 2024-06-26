@@ -481,6 +481,111 @@ int static inline func8(){
     return 0;
 }
 
+int static inline func9(){
+    char input_filename[200];
+    char output_filename[200];
+    int n;
+    int ret;
+
+    FILE *data_fptr = NULL;
+    FILE *btree_fptr = NULL;
+
+    // Input do usuário
+    scanf("%s", input_filename);
+    scanf("%s", output_filename);
+
+    scanf("%d", &n);
+
+    // Abre os arquivos, se algum erro for encontrado, retorna
+    if(!(data_fptr = fopen(input_filename, "rb")) || !check_status(data_fptr) ||
+    !(btree_fptr = fopen(output_filename, "rb")) || !check_status(btree_fptr)){
+
+        fprintf(stdout, "Falha no processamento do arquivo.\n");
+
+        if(data_fptr) fclose(data_fptr);
+        if(btree_fptr) fclose(btree_fptr);
+
+        return -1;
+    }
+
+    BTREE *btree = initialize_btree();
+    if(read_btree_cabecalho(&btree, btree_fptr) == -1){
+        fprintf(stdout, "Falha no processamento do arquivo.\n");
+
+        fclose(data_fptr);
+        fclose(btree_fptr);
+
+        return -1;
+    }
+
+    // Faz n buscas
+    for(int i = 0; i < n; i++){
+        // Lê a qtd de pares de nomeCampo e valorCampo vão aparecer para busca
+        int m;
+        scanf("%d", &m);
+
+        JOGADOR j_query = read_query();
+
+        printf("Busca %d\n\n", i+1);
+        
+        ret = select_btree_data(data_fptr, &btree, btree_fptr, j_query);
+        
+    }
+    clear_btree(&btree);
+
+    // Fecha o arquivo
+    fclose(data_fptr);
+    fclose(btree_fptr);
+
+    ret == 0 ? binarioNaTela(output_filename) : 
+                fprintf(stdout, "Falha no processamento do arquivo.\n");
+
+    return 0;
+}
+
+int static inline func10(){
+    char input_filename[200];
+    char output_filename[200];
+    int n;
+
+    FILE *data_fptr = NULL;
+    FILE *btree_fptr = NULL;
+
+    // Input do usuário
+    scanf("%s", input_filename);
+    scanf("%s", output_filename);
+
+    scanf("%d", &n);
+
+    // Abre os arquivos, se algum erro for encontrado, retorna
+    if(!(data_fptr = fopen(input_filename, "rb")) || !check_status(data_fptr) ||
+    !(btree_fptr = fopen(output_filename, "rb")) || !check_status(btree_fptr)){
+
+        fprintf(stdout, "Falha no processamento do arquivo.\n");
+
+        if(data_fptr) fclose(data_fptr);
+        if(btree_fptr) fclose(btree_fptr);
+
+        return -1;
+    }
+
+    BTREE *btree = initialize_btree();
+    if(read_btree_cabecalho(&btree, btree_fptr) == -1){
+        fprintf(stdout, "Falha no processamento do arquivo.\n");
+
+        fclose(data_fptr);
+        fclose(btree_fptr);
+
+        return -1;
+    }
+
+    for (int i=0; i<n; i++){
+        //JOGADOR j = read_jogador_data(data_fptr);
+    }
+
+    return 0;
+}
+
 int main(){
     // Le um caractere no stdin para verificar qual operacao realizar
     char op;
@@ -515,6 +620,8 @@ int main(){
         case '8':
             ret = func8();
             break;
+        case '9':
+            ret = func9();
         default:
             fprintf(stdout, "Funcionalidade invalida.\n");
             ret = -1;
