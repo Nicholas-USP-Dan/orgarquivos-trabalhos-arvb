@@ -188,9 +188,6 @@ int static inline func9(){
     fclose(data_fptr);
     fclose(btree_fptr);
 
-    // ret == 0 ? binarioNaTela(output_filename) : 
-    //             fprintf(stdout, "Falha no processamento do arquivo.\n");
-
     return 0;
 }
 
