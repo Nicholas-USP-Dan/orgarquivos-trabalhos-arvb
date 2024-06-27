@@ -35,7 +35,7 @@ void traverse_btree(BTREE **btree, FILE *btree_fptr);
  * @brief Gera uma visualização da árvore-b como um arquivo .dot
  * 
  * @details Possuindo o arquivo .dot, é necessário rodar um programa que interprete o .dot e gere
- * a visualização da árvore-b, recomenda-se utilizar o programa dot com o tipo de arquivo de saída .svg
+ * a visualização da árvore-b; Recomenda-se utilizar o programa dot com o tipo de arquivo de saída .svg
  * 
  * @param btree Referência para a árvore-b a ser visualizada
  * @param btree_fptr Ponteiro para o arquivo da árvore-b

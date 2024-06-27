@@ -9,7 +9,7 @@
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
  * 
- * @version 2.0
+ * @version 3.0
  * 
  */
 

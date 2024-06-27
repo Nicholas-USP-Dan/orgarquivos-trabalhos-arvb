@@ -34,7 +34,7 @@ CACHE* initialize_cache();
 void clear_cache(CACHE **cache);
 
 /**
- * @brief Lê uma página no disco e coloca os valores lidos em uma estrutura
+ * @brief Lê uma página no disco e coloca os valores lidos em uma estrutura BTREE_PAGE
  * 
  * @param [out] page Referência da variável que receberá os dados lidos na página
  * @param rrn RRN da página a ser lida
@@ -46,7 +46,7 @@ void clear_cache(CACHE **cache);
 int read_disk_page(BTREE_PAGE *const page, const int32_t rrn, FILE *btree_fptr);
 
 /**
- * @brief Escreve uma página da árvore-b (representada como estrutura) no arquivo da árvore-b
+ * @brief Escreve uma página da árvore-b (representada como a estrutura BTREE_PAGE) no arquivo da árvore-b
  * 
  * @param rrn RRN da página a ser escrita
  * @param page Referência à página a ser escrita
@@ -89,6 +89,19 @@ BTREE_PAGE* put_page_cache(const int32_t rrn, const BTREE_PAGE *page, BTREE **bt
 BTREE_PAGE* put_page_cache_readonly(const int32_t rrn, const BTREE_PAGE *page, BTREE **btree, FILE *btree_fptr);
 
 /**
+ * @brief Cria uma nova página (que não existe no arquivo) na cache
+ *
+ * @note Esta função é basicamente uma macro que chama put_page_cache com uma página vazia (ao invés de usar get_page)
+ *
+ * @param rrn RRN de onde a página se localizaria
+ * @param btree Referência ao ponteiro da árvore-B
+ * @param btree_fptr Ponteiro para o arquivo da árvore-B
+ *
+ * @return [BTREE_PAGE*] Retorna o ponteiro da nova página criada na cache
+ */
+BTREE_PAGE* create_newpage_cache(const int32_t rrn, BTREE **btree, FILE *btree_fptr);
+
+/**
  * @brief Recupera uma página da árvore-B
  * 
  * @details A função primeiramente verifica se a página está na cache, se ela não estiver na cache
@@ -116,18 +129,5 @@ BTREE_PAGE* get_page(const int32_t rrn, BTREE **btree, FILE *btree_fptr);
  * refletidas na cache
  */
 BTREE_PAGE* get_page_readonly(const int32_t rrn, BTREE **btree, FILE *btree_fptr);
-
-/**
- * @brief Cria uma nova página (que não existe no arquivo) na cache
- *
- * @note Esta função é basicamente uma macro que chama put_page_cache com uma página vazia
- *
- * @param rrn RRN de onde a página se localizaria
- * @param btree Referência ao ponteiro da árvore-B
- * @param btree_fptr Ponteiro para o arquivo da árvore-B
- *
- * @return [BTREE_PAGE*] Retorna o ponteiro da nova página criada na cache
- */
-BTREE_PAGE* create_newpage_cache(const int32_t rrn, BTREE **btree, FILE *btree_fptr);
 
 #endif

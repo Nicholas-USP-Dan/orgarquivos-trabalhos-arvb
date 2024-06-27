@@ -5,7 +5,7 @@
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
  * 
- * @version 2.0
+ * @version 3.0
  * 
  */
 
@@ -25,6 +25,12 @@
 #include "src/utils/removed-list.h"
 #include "src/btree-func.h"
 
+/**
+ * @brief Implementação da funcionalidade 7 - Cria um arquivo de árvore-b a partir de um arquivo de dados
+ * 
+ * @retval -1 A funcionalidade terminou com erro
+ * @retval 0 A funcionalidade terminou com sucesso
+ */
 static int func7(){
     char input_filename[200];
     char output_filename[200];
@@ -48,7 +54,6 @@ static int func7(){
         return -1;
     }
 
-    // ret = create_data_file(data_fptr, btree_fptr);
     ret = create_btree_file(data_fptr, btree_fptr);
     
     // Fecha os arquivos
@@ -63,6 +68,12 @@ static int func7(){
     return ret;
 }
 
+/**
+ * @brief Implementação da funcionalidade 8 - Busca por meio de ids na árvore-b (estrutura de indexação) de um arquivo de dados
+ * 
+ * @retval -1 A funcionalidade terminou com erro
+ * @retval 0 A funcionalidade terminou com sucesso
+ */
 int static inline func8(){
     char input_filename[200];
     char output_filename[200];
@@ -75,6 +86,7 @@ int static inline func8(){
     scanf("%s", input_filename);
     scanf("%s", output_filename);
 
+    // Leitura da quantidade de buscas a serem feitas
     scanf("%d", &n);
 
     // Abre os arquivos, se algum erro for encontrado, retorna
@@ -89,6 +101,7 @@ int static inline func8(){
         return -1;
     }
 
+    // Inicialização da árvore-b e leitura do cabeçalho
     BTREE *btree = initialize_btree();
     if(read_btree_cabecalho(&btree, btree_fptr) == -1){
         fprintf(stdout, "Falha no processamento do arquivo.\n");
@@ -101,26 +114,25 @@ int static inline func8(){
 
     // Faz n buscas
     for(int i = 0; i < n; i++){
-        // Lê o id escrito pelo usuário
+        // Nome do campo ("id")
         char buffer[200];
-        scanf("%s", buffer);
-
-        // if(strcmp("id", buffer) != 0){
-        //     break;
-        // }
-
+        // Id a ser buscado
         int32_t id;
+        scanf("%s", buffer);
         scanf("%" PRId32, &id);
 
         printf("BUSCA %d\n\n", i+1);
 
+        // Busca pelo id na árvore-b
         int64_t offset = search_btree(id, &btree, btree_fptr);
 
         if(offset == -1){
+            // Registro com índice inserido não encontrado
             printf("Registro inexistente.\n\n");
             continue;
         }
 
+        // Leitura e impressão do registro encontrado no offset
         fseek(data_fptr, offset + 13, SEEK_SET);
         JOGADOR j = read_jogador_data(data_fptr);
 
@@ -128,6 +140,7 @@ int static inline func8(){
         printf("\n");
     }
 
+    // Limpa a memória alocada da árvore-b
     clear_btree(&btree);
 
     // Fecha o arquivo
@@ -137,11 +150,16 @@ int static inline func8(){
     return 0;
 }
 
+/**
+ * @brief Implementação da funcionalidade 9 - Realizar buscas no arquivo de dados por meio de critérios de busca
+ * 
+ * @retval -1 A funcionalidade terminou com erro
+ * @retval 0 A funcionalidade terminou com sucesso
+ */
 int static inline func9(){
     char input_filename[200];
     char output_filename[200];
     int n;
-    // int ret;
 
     FILE *data_fptr = NULL;
     FILE *btree_fptr = NULL;
@@ -150,6 +168,7 @@ int static inline func9(){
     scanf("%s", input_filename);
     scanf("%s", output_filename);
 
+    // Leitura da quantidade de buscas a serem feitas
     scanf("%d", &n);
 
     // Abre os arquivos, se algum erro for encontrado, retorna
@@ -164,6 +183,7 @@ int static inline func9(){
         return -1;
     }
 
+    // Inicialização e leitura do cabeçalho da árvore-b
     BTREE *btree = initialize_btree();
     if(read_btree_cabecalho(&btree, btree_fptr) == -1){
         fprintf(stdout, "Falha no processamento do arquivo.\n");
@@ -182,6 +202,8 @@ int static inline func9(){
         
         select_btree_data(data_fptr, &btree, btree_fptr, j_query);
     }
+
+    // Limpa a memória alocada da árvore-b
     clear_btree(&btree);
 
     // Fecha o arquivo
@@ -191,6 +213,12 @@ int static inline func9(){
     return 0;
 }
 
+/**
+ * @brief Implementação da funcionalidade 10 - Inserção de novos registros na árvore-b
+ * 
+ * @retval -1 A funcionalidade terminou com erro
+ * @retval 0 A funcionalidade terminou com sucesso
+ */
 int static inline func10(){
     char input_filename[200];
     char btree_filename[200];
@@ -205,6 +233,9 @@ int static inline func10(){
     scanf("%s", input_filename);
     scanf("%s", btree_filename);
 
+    // Leitura da quantidade de remoções a serem realizadas
+    scanf("%d", &n);
+
     // Abre os arquivos, se algum erro for detectado, retorna
     if(!(data_fptr = fopen(input_filename, "r+b")) || !check_status(data_fptr) || 
     !(btree_fptr = fopen(btree_filename, "r+b")) || !check_status(btree_fptr)){
@@ -215,9 +246,6 @@ int static inline func10(){
 
         return -1;
     }
-
-    // Leitura da quantidade de remoções a serem realizadas
-    scanf("%d", &n);
 
     // Setta os status do arquivo de dados e de índice como '0' (instável)
     fseek(data_fptr, STATUS_OFFSET, SEEK_SET);
@@ -235,7 +263,7 @@ int static inline func10(){
     }
 
     /* Atribui o status da árvore-b como '0'; 
-    Os outros dados do cabecalho da arvore-b Não muda, então seria possível atribuir 
+    Os outros dados do cabecalho da arvore-b não mudam, então seria possível atribuir 
     somente o campo de status, mas como a atribuição é feita por páginas, não há 
     diferença na quantidade de seeks realiazdos */
     set_btree_cabecalho('0', &btree, btree_fptr);
@@ -246,8 +274,7 @@ int static inline func10(){
     // Variável que mantém a quantidade de elementos removidos na operação
     int quant_ins = 0;
 
-    for (int i = 0; i < n; i++){
-        // JOGADOR j_query = read_query();
+    for (int i = 0; i < n; i++) {
         JOGADOR j_query = read_new_jogador();
         
         ret = insert_data_btree(data_fptr, j_query, &quant_ins, &rem_list, &btree, btree_fptr);
@@ -287,7 +314,6 @@ int static inline func10(){
 
 int main(){
     // Le uma string no stdin para verificar qual operacao realizar
-
     char op[50];
     scanf("%49s", op);
 
@@ -307,6 +333,5 @@ int main(){
         fprintf(stdout, "Funcionalidade invalida.\n");
     }
 
-    // return ret == 0 ? EXIT_SUCCESS : EXIT_FAILURE; -- Não pode retornar erro no programa
     return 0;
 }

@@ -51,6 +51,7 @@ static void traverse_btree_rec(int32_t rrn, BTREE **btree, FILE *btree_fptr){
     }
 
     // Recupera a página endereçada em rrn
+
     BTREE_PAGE *page;
 
     if(!(page = get_page(rrn, btree, btree_fptr))){
@@ -98,7 +99,7 @@ static void gen_visual_rec(const int32_t rrn, BTREE **btree, FILE *btree_fptr, F
         return;
     }
 
-    // Estrutura da página
+    // Declaração da página e seus elementos
     fprintf(output_fptr, "\tpage_%" PRId32 " [label=\"", rrn);
     fprintf(output_fptr, " <C0> ");
 
@@ -123,7 +124,7 @@ static void gen_visual_rec(const int32_t rrn, BTREE **btree, FILE *btree_fptr, F
         fprintf(output_fptr, "\tpage_%" PRId32 ":C%" PRId32 " -- page_%" PRId32 "\n", rrn, i, child_buffer[i]);
     }
 
-    // Chamada da recursão para os filhos
+    // Chamada recursiva para os filhos
     for(int i = 0; i < BTREE_ORDER; i++){
         gen_visual_rec(child_buffer[i], btree, btree_fptr, output_fptr);
     }

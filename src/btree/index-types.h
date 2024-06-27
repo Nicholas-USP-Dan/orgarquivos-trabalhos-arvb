@@ -1,3 +1,14 @@
+/**
+ * @file index-types.h
+ * @brief Header file para as declarações dos tipos envolvendo índices
+ *
+ * @authors Nicholas Eiti Dan; N°USP: 14600749
+ * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ *
+ * @version 3.0
+ * 
+ */
+
 #ifndef INDEX_TYPES_H
 #define INDEX_TYPES_H
 

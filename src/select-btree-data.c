@@ -1,22 +1,25 @@
+/**
+ * @file select-btree-data.c
+ * @brief Implementação da funcionalidade 9 - Busca pelos registros em um arquivo de dados por meio de um critério de busca
+ * utilizando árvore-b
+ *
+ * @authors Nicholas Eiti Dan; N°USP: 14600749
+ * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ * 
+ * @version 3.0
+ * 
+ */
+
 #include <stdio.h>
 #include <inttypes.h>
 #include <stdint.h>
-#include <stdlib.h>
 
-#include "adts/dyn-array.h"
 #include "data-file.h"
 
-//#include "index-file.h"
 #include "utils/data-utils.h"
-#include "utils/campo-utils.h"
-#include "utils/cabecalho-utils.h"
-#include "utils/removed-list.h"
 
 #include "btree-func.h"
 #include "btree/index-btree.h"
-#include "btree/index-btree-internals.h"
-#include "btree/index-btree-cache.h"
-#include "btree/index-types.h"
 
 int select_btree_data(FILE *data_fptr, BTREE **btree, FILE *btree_fptr, const JOGADOR where){
     //caso tenhamos o campo id, procuraremos o registro pelo índice na arvore-b

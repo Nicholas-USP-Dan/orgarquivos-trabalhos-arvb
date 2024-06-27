@@ -1,15 +1,11 @@
 /**
  * @file insert-data.c
- * @brief Implementação da funcionalidade 2 & 3 como definido no projeto
- * 
- * O tipo de jogador é utilizado para representar uma busca filtrada (a estrutura contém todos os campos de um registro);
- * Como definido nas especificações do projeto, o id de cada jogador é único, assim, em buscas que filtram o id de um jogador,
- * É possível sair da busca assim que achar-se um registro com o mesmo id que o filtrado
+ * @brief Implementação da funcionalidade 10 - Inserção de um registro em um arquivo de dados e uma árvore-b (estrutura de indexação)
  * 
  * @authors Nicholas Eiti Dan; N°USP: 14600749
  * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
  * 
- * @version 2.0
+ * @version 3.0
  * 
  */
 

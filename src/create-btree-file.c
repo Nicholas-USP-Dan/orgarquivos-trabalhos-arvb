@@ -1,3 +1,14 @@
+/**
+ * @file create-btree-file.c
+ * @brief Source file para a criação do arquivo de uma árvore-b
+ *
+ * @authors Nicholas Eiti Dan; N°USP: 14600749
+ * @authors Laura Neri Thomaz da Silva; N°USP: 13673221
+ *
+ * @version 3.0
+ * 
+ */
+
 #include <stdio.h>
 #include <stdint.h>
 #include <inttypes.h>
